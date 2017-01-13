@@ -7,6 +7,13 @@ public class Robot extends IterativeRobot {
 		
 	}
 	
+	/*
+	 * The four primary functions below (autonomousInit(), autonomousPeriodic(),
+	 * teleopInit(), and teleopPeriodic()) should not be altered. Code should be
+	 * altered in its respective class (Auto or Teleop).
+	 * This change will help shorten the Robot class and make it easier to navigate.
+	 */
+	
 	public void autonomousInit() {
 		Auto.init(this);
 	}
