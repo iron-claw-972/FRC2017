@@ -1,6 +1,6 @@
 package org.usfirst.frc.team972.robot;
 
-public class Auto {
+public class Autonomous {
 	/*
 	 * init() and periodic() are functions that will be called in Robot.java.
 	 * All autonomous code should be placed in those two functions in order to
