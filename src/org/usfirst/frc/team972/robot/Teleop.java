@@ -1,5 +1,7 @@
 package org.usfirst.frc.team972.robot;
 
+import edu.wpi.first.wpilibj.*;
+
 public class Teleop {
 	/*
 	 * init() and periodic() are functions that will be called in Robot.java.
