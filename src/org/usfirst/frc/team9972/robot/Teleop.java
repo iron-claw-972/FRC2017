@@ -18,14 +18,14 @@ public class Teleop {
 	static double rightDriveSpeed = 0;
 	
 	public static void init(Robot r) {
-		
+		Robot.updateSmartDashboard();
 	}
 	
 	public static void periodic(Robot r) {
 		leftDriveSpeed = Robot.leftJoystick.getY();
 		rightDriveSpeed = Robot.rightJoystick.getY();
 		Drive.tankDrive(leftDriveSpeed, rightDriveSpeed);
-		updateSmartDashboardTeleop();
+		Robot.updateSmartDashboard();
 	}
 	
 	public static void updateSmartDashboardTeleop() {

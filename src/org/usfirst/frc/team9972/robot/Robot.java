@@ -23,6 +23,7 @@ public class Robot extends IterativeRobot {
 	
 	public void robotInit() {
 		Autonomous.createChooser();
+		updateSmartDashboard();
 	}
 	
 	/*
@@ -34,18 +35,27 @@ public class Robot extends IterativeRobot {
 	
 	public void autonomousInit() {
 		Autonomous.init(this);
+		updateSmartDashboard();
 	}
 	
 	public void autonomousPeriodic() {
 		Autonomous.periodic(this);
+		updateSmartDashboard();
 	}
 	
 	public void teleopInit() {
 		Teleop.init(this);
+		updateSmartDashboard();
 	}
 	
 	public void teleopPeriodic() {
 		Teleop.periodic(this);
+		updateSmartDashboard();
+	}
+	
+	public static void updateSmartDashboard() {
+		Autonomous.updateSmartDashboardAutonomous();
+		Teleop.updateSmartDashboardTeleop();
 	}
 	
 }

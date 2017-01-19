@@ -23,11 +23,11 @@ public class Autonomous {
 	}
 	
 	public static void init(Robot r) {
-		updateSmartDashboardAutonomous();
+		Robot.updateSmartDashboard();
 	}
 	
 	public static void periodic(Robot r) {
-		updateSmartDashboardAutonomous();
+		Robot.updateSmartDashboard();
 	}
 	
 	public static void updateSmartDashboardAutonomous() {
