@@ -22,7 +22,7 @@ public class Robot extends IterativeRobot {
 	static Encoder rightDriveEncoder = new Encoder(Constants.RIGHT_DRIVE_ENCODER_PORT_A, Constants.RIGHT_DRIVE_ENCODER_PORT_B);
 	
 	public void robotInit() {
-		
+		Autonomous.createChooser();
 	}
 	
 	/*
