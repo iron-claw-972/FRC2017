@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 
 public class Autonomous {
 	
-	static SendableChooser autoChooser= new SendableChooser();
+	static SendableChooser autoChooser = new SendableChooser();
 	
 	public static void createChooser() {
 		autoChooser.addDefault("Do Nothing", new Integer(Constants.DO_NOTHING_AUTONOMOUS_MODE));
