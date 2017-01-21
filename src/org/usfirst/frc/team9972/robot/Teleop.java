@@ -16,6 +16,7 @@ public class Teleop {
 	
 	static double leftDriveSpeed = 0;
 	static double rightDriveSpeed = 0;
+	static double pressureSensorVoltage;
 	
 	public static void init(Robot r) {
 		Robot.updateSmartDashboard();
@@ -25,6 +26,7 @@ public class Teleop {
 		leftDriveSpeed = Robot.leftJoystick.getY();
 		rightDriveSpeed = Robot.rightJoystick.getY();
 		Drive.tankDrive(leftDriveSpeed, rightDriveSpeed);
+		pressureSensorVoltage = Robot.pressureSensor.getVoltage();
 		Robot.updateSmartDashboard();
 	}
 	
@@ -33,6 +35,7 @@ public class Teleop {
 		SmartDashboard.putNumber("Right Drive Speed", rightDriveSpeed);
 		SmartDashboard.putNumber("Left Encoder", Robot.leftDriveEncoder.get());
 		SmartDashboard.putNumber("Right Encoder", Robot.rightDriveEncoder.get());
+		SmartDashboard.putNumber("Pressure Sensor Voltage", pressureSensorVoltage);
 	}
 	
 }
