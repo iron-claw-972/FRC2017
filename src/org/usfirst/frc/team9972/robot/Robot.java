@@ -24,6 +24,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		Autonomous.createChooser();
 		updateSmartDashboard();
+		
+		
+		frontLeftDriveMotor.setInverted(true);
+		frontRightDriveMotor.setInverted(true);
+		backLeftDriveMotor.setInverted(true);
+		backRightDriveMotor.setInverted(true);
+		
 	}
 	
 	/*
