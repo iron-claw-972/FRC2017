@@ -16,10 +16,12 @@ public class Teleop {
 	
 	static double leftDriveSpeed = 0;
 	static double rightDriveSpeed = 0;
-	
+
 	static boolean inverseDriveMode = false;
 	static boolean inverseDriveButtonPressed = false;
 	static boolean inverseDriveButtonLastPressed = false;
+	
+	static boolean stopDriveButton = false;
 	
 	public static void init(Robot r) {
 		Robot.updateSmartDashboard();
@@ -40,6 +42,11 @@ public class Teleop {
 		} else {
 			Drive.tankDrive(leftDriveSpeed, rightDriveSpeed);
 		}
+		
+		if (Robot.leftJoystick.getRawButton(Constants.STOP_DRIVE_JOYSTICK_BUTTON)) {
+			Drive.stopDrive();
+		}
+		
 		Robot.updateSmartDashboard();
 	}
 	
