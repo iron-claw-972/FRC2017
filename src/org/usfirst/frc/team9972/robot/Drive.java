@@ -8,5 +8,7 @@ public class Drive {
 		Robot.robotDrive.tankDrive(driveSpeedLeft, driveSpeedRight);
 	}
 	
-	
+	public static void inverseDrive(double driveSpeedLeft, double driveSpeedRight) {
+		Robot.robotDrive.tankDrive(-driveSpeedRight, -driveSpeedLeft);
+	}
 }
