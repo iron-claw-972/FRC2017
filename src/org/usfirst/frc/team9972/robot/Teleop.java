@@ -35,11 +35,23 @@ public class Teleop {
 		}
 		inverseDriveButtonLastPressed = inverseDriveButtonPressed;
 		
-		if(inverseDriveMode) {
-			Drive.inverseDrive(leftDriveSpeed, rightDriveSpeed);
+		if (Robot.leftJoystick.getRawButton(Constants.STOP_DRIVE_BUTTON)) {
+			Drive.stopDrive();
 		} else {
-			Drive.tankDrive(leftDriveSpeed, rightDriveSpeed);
+			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) {
+				// Taking absolute value of one preserves the positive or negative result (normally squaring makes it positive)
+				
+				leftDriveSpeed = Math.abs(leftDriveSpeed) * leftDriveSpeed;
+				rightDriveSpeed = Math.abs(rightDriveSpeed) * rightDriveSpeed;
+			}
+			
+			if(inverseDriveMode) {
+				Drive.inverseDrive(leftDriveSpeed, rightDriveSpeed);
+			} else {
+				Drive.tankDrive(leftDriveSpeed, rightDriveSpeed);
+			}
 		}
+	
 		Robot.updateSmartDashboard();
 	}
 	
