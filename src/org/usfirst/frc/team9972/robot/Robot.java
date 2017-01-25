@@ -29,7 +29,6 @@ public class Robot extends IterativeRobot {
 		frontRightDriveMotor.setInverted(true);
 		backLeftDriveMotor.setInverted(true);
 		backRightDriveMotor.setInverted(true);
-		
 	}
 	
 	/*
