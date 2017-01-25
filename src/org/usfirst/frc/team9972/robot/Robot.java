@@ -11,7 +11,7 @@ public class Robot extends IterativeRobot {
 	static Victor backRightDriveMotor = new Victor(Constants.BACK_RIGHT_DRIVE_MOTOR_PWM_PORT);
 	
 	static RobotDrive robotDrive = new RobotDrive(frontLeftDriveMotor, backLeftDriveMotor, frontRightDriveMotor, backRightDriveMotor);
-	
+
 	// Joysticks
 	static Joystick leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_INPUT_PORT);
 	static Joystick rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_INPUT_PORT);
