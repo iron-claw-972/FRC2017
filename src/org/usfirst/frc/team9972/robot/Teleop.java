@@ -48,6 +48,7 @@ public class Teleop {
 		} else {
 			Drive.tankDrive(leftDriveSpeed, rightDriveSpeed);
 		}
+		inputSquaredMode = false;
 		Robot.updateSmartDashboard();
 	}
 	
