@@ -29,4 +29,5 @@ public class Constants {
 	
 	// Left Joystick
 	public static final int INVERSE_DRIVE_TOGGLE_BUTTON = 1;
+	public static final int SQUARED_DRIVE_HOLD_BUTTON = 3;
 }
