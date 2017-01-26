@@ -40,7 +40,6 @@ public class Teleop {
 		} else {
 			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) {
 				// Taking absolute value of one preserves the positive or negative result (normally squaring makes it positive)
-				
 				leftDriveSpeed = Math.abs(leftDriveSpeed) * leftDriveSpeed;
 				rightDriveSpeed = Math.abs(rightDriveSpeed) * rightDriveSpeed;
 			}
