@@ -15,4 +15,11 @@ public class Drive {
 	public static void stopDrive() {
 		Robot.robotDrive.tankDrive(0, 0);
 	}
+	
+	public static void toggleBrakeMode(boolean brakeStatus) {
+		Robot.frontLeftDriveMotor.enableBrakeMode(brakeStatus);
+		Robot.frontRightDriveMotor.enableBrakeMode(brakeStatus);
+		Robot.backLeftDriveMotor.enableBrakeMode(brakeStatus);
+		Robot.backRightDriveMotor.enableBrakeMode(brakeStatus);
+	}
 }
