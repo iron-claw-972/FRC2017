@@ -6,33 +6,29 @@ import com.ctre.*;
 public class Robot extends IterativeRobot {
 	
 	// Motor Objects
-	static CANTalon frontLeftDriveMotor = new CANTalon(Constants.FRONT_LEFT_DRIVE_MOTOR_PWM_PORT);
-	static CANTalon frontRightDriveMotor = new CANTalon(Constants.FRONT_RIGHT_DRIVE_MOTOR_PWM_PORT);
-	static CANTalon backLeftDriveMotor = new CANTalon(Constants.BACK_LEFT_DRIVE_MOTOR_PWM_PORT);
-	static CANTalon backRightDriveMotor = new CANTalon(Constants.BACK_RIGHT_DRIVE_MOTOR_PWM_PORT);
+	static CANTalon frontLeftDriveMotor = new CANTalon(Constants.FRONT_LEFT_DRIVE_MOTOR_CAN_ID_PORT);
+	static CANTalon frontRightDriveMotor = new CANTalon(Constants.FRONT_RIGHT_DRIVE_MOTOR_CAN_ID_PORT);
+	static CANTalon backLeftDriveMotor = new CANTalon(Constants.BACK_LEFT_DRIVE_MOTOR_CAN_ID_PORT);
+	static CANTalon backRightDriveMotor = new CANTalon(Constants.BACK_RIGHT_DRIVE_MOTOR_CAN_ID_PORT);
+	static CANTalon winchMotor = new CANTalon(Constants.WINCH_MOTOR_CAN_ID_PORT);
+	static CANTalon leftFlywheelMotor = new CANTalon(Constants.LEFT_FLYWHEEL_MOTOR_CAN_ID_PORT);
+	static CANTalon rightFlywheelMotor = new CANTalon(Constants.RIGHT_FLYWHEEL_MOTOR_CAN_ID_PORT);
+	static CANTalon intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_CAN_ID_PORT);
+	static CANTalon leftLoaderMotor = new CANTalon(Constants.LEFT_LOADER_MOTOR_CAN_ID_PORT);
+	static CANTalon rightLoaderMotor = new CANTalon(Constants.RIGHT_LOADER_MOTOR_CAN_ID_PORT);
 	
-	static CANTalon winchMotor = new CANTalon(Constants.WINCH_MOTOR_PORT);
-	
-	static CANTalon leftFlywheelMotor = new CANTalon(Constants.LEFT_FLYWHEEL_MOTOR_PORT);
-	static CANTalon rightFlywheelMotor = new CANTalon(Constants.RIGHT_FLYWHEEL_MOTOR_PORT);
-	
-	static CANTalon intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_PORT);
-	
-	static CANTalon leftLoaderMotor = new CANTalon(Constants.LEFT_LOADER_MOTOR_PORT);
-	static CANTalon rightLoaderMotor = new CANTalon(Constants.RIGHT_LOADER_MOTOR_PORT);
-	
-	static CANTalon leftHoodMotor = new CANTalon(Constants.LEFT_HOOD_MOTOR_PORT);
-	static CANTalon rightHoodMotor = new CANTalon(Constants.RIGHT_HOOD_MOTOR_PORT);
-	
-	static CANTalon leftSwivelMotor = new CANTalon(Constants.LEFT_SWIVEL_MOTOR_PORT);
-	static CANTalon rightSwivelMotor = new CANTalon(Constants.RIGHT_SWIVEL_MOTOR_PORT);
+	// PWM IDs
+	static Servo leftHoodServo = new Servo(Constants.LEFT_HOOD_SERVO_PWM_PORT);
+	static Servo rightHoodServo = new Servo(Constants.RIGHT_HOOD_SERVO_PWM_PORT);
+	static Servo leftSwivelServo = new Servo(Constants.LEFT_SWIVEL_SERVO_PWM_PORT);
+	static Servo rightSwivelServo = new Servo(Constants.RIGHT_SWIVEL_SERVO_PWM_PORT);
 	
 	static RobotDrive robotDrive = new RobotDrive(frontLeftDriveMotor, backLeftDriveMotor, frontRightDriveMotor, backRightDriveMotor);
 	
 	// Joysticks
-	static Joystick leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_INPUT_PORT);
-	static Joystick rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_INPUT_PORT);
-	static Joystick operatorJoystick = new Joystick(Constants.OPERATOR_JOYSTICK_INPUT_PORT);
+	static Joystick leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_INPUT_USB_PORT);
+	static Joystick rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_INPUT_USB_PORT);
+	static Joystick operatorJoystick = new Joystick(Constants.OPERATOR_JOYSTICK_INPUT_USB_PORT);
 	
 	// Encoders
 	static Encoder leftDriveEncoder = new Encoder(Constants.LEFT_DRIVE_ENCODER_PORT_A, Constants.LEFT_DRIVE_ENCODER_PORT_B);
@@ -42,11 +38,11 @@ public class Robot extends IterativeRobot {
 	static PIDController leftDrivePID = new PIDController(0,0,0,leftDriveEncoder,frontLeftDriveMotor);
 	static PIDController rightDrivePID = new PIDController(0,0,0,rightDriveEncoder,frontRightDriveMotor);
 	
-	static PIDController leftSwivelPID = new PIDController(0,0,0,leftSwivelMotor,leftSwivelMotor);
-	static PIDController rightSwivelPID = new PIDController(0,0,0,rightSwivelMotor,rightSwivelMotor);
-	
-	static PIDController leftHoodPID = new PIDController(0,0,0,leftHoodMotor,leftHoodMotor);
-	static PIDController rightHoodPID = new PIDController(0,0,0,rightHoodMotor,rightHoodMotor);
+//	static PIDController leftSwivelPID = new PIDController(0,0,0,leftSwivelServo,leftSwivelServo);
+//	static PIDController rightSwivelPID = new PIDController(0,0,0,rightSwivelServo,rightSwivelServo);
+//	TODO	
+//	static PIDController leftHoodPID = new PIDController(0,0,0,leftHoodServo,leftHoodServo);
+//	static PIDController rightHoodPID = new PIDController(0,0,0,rightHoodServo,rightHoodServo);
 	
 	static PIDController leftFlywheelPID = new PIDController(0,0,0,leftFlywheelMotor,leftFlywheelMotor);
 	static PIDController rightFlywheelPID = new PIDController(0,0,0,rightFlywheelMotor,rightFlywheelMotor);
