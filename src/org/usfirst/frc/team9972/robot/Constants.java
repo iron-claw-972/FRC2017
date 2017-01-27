@@ -33,5 +33,27 @@ public class Constants {
 	
 	// Right Joystick
 	public static final int SQUARED_DRIVE_BUTTON = 4;
+	public static final int BRAKE_MODE_TOGGLE_BUTTON = 0;
 
+	// Winch Motor
+	public static final int WINCH_MOTOR_PORT = 0;
+
+	// Flywheel Motors
+	public static final int LEFT_FLYWHEEL_MOTOR_PORT = 0;
+	public static final int RIGHT_FLYWHEEL_MOTOR_PORT = 0;
+	
+	// Intake Motor
+	public static final int INTAKE_MOTOR_PORT = 0;
+	
+	// Loader Motors
+	public static final int LEFT_LOADER_MOTOR_PORT = 0;
+	public static final int RIGHT_LOADER_MOTOR_PORT = 0;
+
+	// Hood Motors
+	public static final int LEFT_HOOD_MOTOR_PORT = 0;
+	public static final int RIGHT_HOOD_MOTOR_PORT = 0;
+	
+	// Swivel Motors
+	public static final int LEFT_SWIVEL_MOTOR_PORT = 0;
+	public static final int RIGHT_SWIVEL_MOTOR_PORT = 0;
 }

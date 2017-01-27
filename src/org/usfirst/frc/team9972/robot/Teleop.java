@@ -21,6 +21,10 @@ public class Teleop {
 	static boolean inverseDriveButtonPressed = false;
 	static boolean inverseDriveButtonLastPressed = false;
 	
+	static boolean brakeMode = false;
+	static boolean brakeModeButtonPressed = false;
+	static boolean brakeModeButtonLastPressed = false;
+	
 	public static void init(Robot r) {
 		Robot.updateSmartDashboard();
 	}
@@ -50,7 +54,15 @@ public class Teleop {
 				Drive.tankDrive(leftDriveSpeed, rightDriveSpeed);
 			}
 		}
-	
+		
+		brakeModeButtonPressed = Robot.rightJoystick.getRawButton(Constants.BRAKE_MODE_TOGGLE_BUTTON);
+		if(brakeModeButtonPressed && !brakeModeButtonLastPressed) {
+			brakeMode = !brakeMode;
+		}
+		brakeModeButtonLastPressed = brakeModeButtonPressed;
+		
+		Drive.toggleBrakeMode(brakeMode);
+		
 		Robot.updateSmartDashboard();
 	}
 	
