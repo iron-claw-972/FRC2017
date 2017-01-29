@@ -1,6 +1,10 @@
-package org.usfirst.frc.team9972.robot;
+package org.usfirst.frc.team972.robot;
 
 public class Winch {
+	
+	public static void init() {
+		Robot.winchMotor.enableBrakeMode(true);
+	}
 	
 	public static void start() {
 		Robot.winchMotor.set(Constants.WINCH_MOTOR_SPEED);
