@@ -1,4 +1,4 @@
-package org.usfirst.frc.team9972.robot;
+package org.usfirst.frc.team972.robot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
@@ -30,7 +30,7 @@ public class Autonomous {
 		Robot.updateSmartDashboard();
 	}
 	
-	public static void updateSmartDashboardAutonomous() {
+	public static void updateSmartDashboard() {
 		SmartDashboard.putString("Autonomous Routine", autoChooser.getSelected().toString());
 	}
 }

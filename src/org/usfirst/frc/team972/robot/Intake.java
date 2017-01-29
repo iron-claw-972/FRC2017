@@ -1,6 +1,11 @@
-package org.usfirst.frc.team9972.robot;
+package org.usfirst.frc.team972.robot;
 
 public class Intake {
+	
+	public static void init() {
+		Robot.intakeMotor.enableBrakeMode(true);
+	}
+	
 	public static void start() {
 		Robot.intakeMotor.set(Constants.INTAKE_MOTOR_SPEED);
 	}
