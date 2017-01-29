@@ -63,6 +63,13 @@ public class Teleop {
 		
 		Drive.toggleBrakeMode(brakeMode);
 		
+		// Winch
+		if (Robot.operatorJoystick.getRawButton(Constants.WINCH_MOTOR_BUTTON)) {
+			Winch.start(Robot.winchMotor);
+		} else {
+			Winch.stop(Robot.winchMotor);
+		}
+		
 		Robot.updateSmartDashboard();
 	}
 	
