@@ -20,10 +20,8 @@ public class Robot extends IterativeRobot {
 	static CANTalon rightLoaderMotor = new CANTalon(Constants.RIGHT_LOADER_MOTOR_CAN_ID);
 	
 	// PWM IDs
-	static Servo leftHoodServo = new Servo(Constants.LEFT_HOOD_SERVO_PWM_PORT);
-	static Servo rightHoodServo = new Servo(Constants.RIGHT_HOOD_SERVO_PWM_PORT);
-	
-	static RobotDrive robotDrive = new RobotDrive(frontLeftDriveMotor, backLeftDriveMotor, frontRightDriveMotor, backRightDriveMotor);
+	static Servo leftHoodLinearActuator = new Servo(Constants.LEFT_HOOD_LINEAR_ACTUATOR_PWM_PORT);
+	static Servo rightHoodLinearActuator = new Servo(Constants.RIGHT_HOOD_LINEAR_ACTUATOR_PWM_PORT);
 	
 	// Joysticks
 	static Joystick leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_INPUT_USB_PORT);
@@ -37,12 +35,13 @@ public class Robot extends IterativeRobot {
 	// PID Controllers
 	static PIDController leftDrivePID = new PIDController(0,0,0,leftDriveEncoder,frontLeftDriveMotor);
 	static PIDController rightDrivePID = new PIDController(0,0,0,rightDriveEncoder,frontRightDriveMotor);
-	
 	static PIDController leftAzimuthPID = new PIDController(0,0,0,leftAzimuthMotor,leftAzimuthMotor);
 	static PIDController rightAzimuthPID = new PIDController(0,0,0,rightAzimuthMotor,rightAzimuthMotor);
-
 	static PIDController leftFlywheelPID = new PIDController(0,0,0,leftFlywheelMotor,leftFlywheelMotor);
 	static PIDController rightFlywheelPID = new PIDController(0,0,0,rightFlywheelMotor,rightFlywheelMotor);
+	
+	static RobotDrive robotDrive = new RobotDrive(frontLeftDriveMotor, backLeftDriveMotor, frontRightDriveMotor, backRightDriveMotor);
+
 	
 	public void robotInit() {
 		Autonomous.createChooser();
