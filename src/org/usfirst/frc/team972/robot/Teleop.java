@@ -18,13 +18,13 @@ public class Teleop {
 	static boolean intakeButtonPressedLastTime = false;
 
 	public static void init(Robot r) {
-		Robot.updateSmartDashboard();
-
 		Drive.init();
 		Winch.init();
 		Shooter.init();
 		ShooterAlignment.init();
 		Intake.init();
+			
+		Robot.updateSmartDashboard();
 	}
 
 	public static void periodic(Robot r) {
