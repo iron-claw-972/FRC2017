@@ -55,5 +55,7 @@ public class Constants {
 	public static final int RIGHT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
 	public static final int LEFT_SHOOTER_FLYWHEEL_SETPOINT = 500;
 	public static final int RIGHT_SHOOTER_FLYWHEEL_SETPOINT = 500;
+	
+	// Constants
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 }
