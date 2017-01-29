@@ -36,8 +36,8 @@ public class Constants {
 	public static final int RIGHT_LOADER_MOTOR_CAN_ID = 12;
 	
 	// PWM IDs
-	public static final int LEFT_HOOD_SERVO_PWM_PORT = 0;
-	public static final int RIGHT_HOOD_SERVO_PWM_PORT = 0;
+	public static final int LEFT_HOOD_LINEAR_ACTUATOR_PWM_PORT = 0;
+	public static final int RIGHT_HOOD_LINEAR_ACTUATOR_PWM_PORT = 0;
 	
 	// Joystick IDs
 	public static final int LEFT_JOYSTICK_INPUT_USB_PORT = 0;
