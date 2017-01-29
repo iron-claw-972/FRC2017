@@ -13,8 +13,8 @@ public class Robot extends IterativeRobot {
 	static CANTalon winchMotor = new CANTalon(Constants.WINCH_MOTOR_CAN_ID);
 	static CANTalon leftFlywheelMotor = new CANTalon(Constants.LEFT_FLYWHEEL_MOTOR_CAN_ID);
 	static CANTalon rightFlywheelMotor = new CANTalon(Constants.RIGHT_FLYWHEEL_MOTOR_CAN_ID);
-	static CANTalon leftSwivelMotor = new CANTalon(Constants.LEFT_SWIVEL_MOTOR_CAN_ID);
-	static CANTalon rightSwivelMotor = new CANTalon(Constants.RIGHT_SWIVEL_MOTOR_CAN_ID);
+	static CANTalon leftAzimuthMotor = new CANTalon(Constants.LEFT_AZIMUTH_MOTOR_CAN_ID);
+	static CANTalon rightAzimuthMotor = new CANTalon(Constants.RIGHT_AZIMUTH_MOTOR_CAN_ID);
 	static CANTalon intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_CAN_ID);
 	static CANTalon leftLoaderMotor = new CANTalon(Constants.LEFT_LOADER_MOTOR_CAN_ID);
 	static CANTalon rightLoaderMotor = new CANTalon(Constants.RIGHT_LOADER_MOTOR_CAN_ID);
@@ -38,8 +38,8 @@ public class Robot extends IterativeRobot {
 	static PIDController leftDrivePID = new PIDController(0,0,0,leftDriveEncoder,frontLeftDriveMotor);
 	static PIDController rightDrivePID = new PIDController(0,0,0,rightDriveEncoder,frontRightDriveMotor);
 	
-	static PIDController leftSwivelPID = new PIDController(0,0,0,leftSwivelMotor,leftSwivelMotor);
-	static PIDController rightSwivelPID = new PIDController(0,0,0,rightSwivelMotor,rightSwivelMotor);
+	static PIDController leftAzimuthPID = new PIDController(0,0,0,leftAzimuthMotor,leftAzimuthMotor);
+	static PIDController rightAzimuthPID = new PIDController(0,0,0,rightAzimuthMotor,rightAzimuthMotor);
 
 	static PIDController leftFlywheelPID = new PIDController(0,0,0,leftFlywheelMotor,leftFlywheelMotor);
 	static PIDController rightFlywheelPID = new PIDController(0,0,0,rightFlywheelMotor,rightFlywheelMotor);
