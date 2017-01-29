@@ -20,6 +20,7 @@ public class Constants {
 	
 	// Operator Joystick
 	public static final int WINCH_MOTOR_BUTTON = 1;
+	public static final int INTAKE_MOTOR_BUTTON = 2;
 	
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
@@ -58,4 +59,6 @@ public class Constants {
 	
 	// Constants
 	public static final double WINCH_MOTOR_SPEED = 0.7;
+	public static final double INTAKE_MOTOR_SPEED = 0.5;
+
 }

@@ -25,6 +25,9 @@ public class Teleop {
 	static boolean brakeModeButtonPressed = false;
 	static boolean brakeModeButtonLastPressed = false;
 	
+	static boolean winchButtonPressedLastTime = false;
+	static boolean intakeButtonPressedLastTime = false;
+	
 	public static void init(Robot r) {
 		Robot.updateSmartDashboard();
 	}
@@ -64,11 +67,22 @@ public class Teleop {
 		Drive.toggleBrakeMode(brakeMode);
 		
 		// Winch
-		if (Robot.operatorJoystick.getRawButton(Constants.WINCH_MOTOR_BUTTON)) {
-			Winch.start(Robot.winchMotor);
+		boolean winchMotorButton = Robot.operatorJoystick.getRawButton(Constants.WINCH_MOTOR_BUTTON);
+		if (winchMotorButton && !winchButtonPressedLastTime) {
+			Winch.start();
 		} else {
-			Winch.stop(Robot.winchMotor);
+			Winch.stop();
 		}
+		winchButtonPressedLastTime = winchMotorButton;
+		
+		// Intake
+		boolean intakeMotorButton = Robot.operatorJoystick.getRawButton(Constants.INTAKE_MOTOR_BUTTON);
+		if (intakeMotorButton && !intakeButtonPressedLastTime) {
+			Intake.start();
+		} else {
+			Intake.stop();
+		}
+		intakeButtonPressedLastTime = intakeMotorButton;
 		
 		Robot.updateSmartDashboard();
 	}
