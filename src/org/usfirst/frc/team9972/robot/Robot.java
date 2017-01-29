@@ -85,6 +85,10 @@ public class Robot extends IterativeRobot {
 		updateSmartDashboard();
 	}
 	
+	public void disabledPeriodtic() {
+		
+	}
+	
 	public static void updateSmartDashboard() {
 		Autonomous.updateSmartDashboardAutonomous();
 		Teleop.updateSmartDashboardTeleop();
