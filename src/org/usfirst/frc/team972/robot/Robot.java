@@ -38,6 +38,12 @@ public class Robot extends IterativeRobot {
 	static Encoder rightDriveEncoderB = new Encoder(Constants.RIGHT_DRIVE_ENCODER_B_PORT_A,
 			Constants.RIGHT_DRIVE_ENCODER_B_PORT_B);
 
+	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
+	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
+			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
+	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
+			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
+
 	// TODO: Deal with the PIDSource for Drive
 	static PIDController leftDrivePID = new PIDController(0, 0, 0, leftDriveEncoderA, frontLeftDriveMotor);
 	static PIDController rightDrivePID = new PIDController(0, 0, 0, rightDriveEncoderA, frontRightDriveMotor);
@@ -84,7 +90,7 @@ public class Robot extends IterativeRobot {
 		updateSmartDashboard();
 	}
 
-	public void disabledPeriodic() {
+	public void disabledInit() {
 
 	}
 
