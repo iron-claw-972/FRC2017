@@ -15,7 +15,7 @@ public class Constants {
 
 	// Right Joystick
 	public static final int SQUARED_DRIVE_BUTTON = 4;
-	public static final int BRAKE_MODE_TOGGLE_BUTTON = 0;
+	public static final int BRAKE_MODE_TOGGLE_BUTTON = 0; // TODO: find an appropriate button
 
 	// Operator Joystick
 	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 1;
@@ -72,7 +72,7 @@ public class Constants {
 	public static final int RIGHT_SHOOTER_FLYWHEEL_SETPOINT = 500;
 
 	// Constants
-	public static final double WINCH_MOTOR_SPEED = 0.7;
+	public static final double WINCH_MOTOR_SPEED = 0.7; // TODO: test the speed
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
 
 }
