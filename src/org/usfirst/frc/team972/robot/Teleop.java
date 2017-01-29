@@ -6,29 +6,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Teleop {
 	/*
 	 * init() and periodic() are functions that will be called in Robot.java.
-	 * All teleop code should be placed in those two functions in order to
-	 * make Robot.java easier to navigate (by shortening its length).
+	 * All teleop code should be placed in those two functions in order to make
+	 * Robot.java easier to navigate (by shortening its length).
 	 * 
-	 * If you need to reference a non-static variable or function from Robot.java,
-	 * such as isEnabled() or isAutonomous(), use the r Robot object.
-	 * Example: if(r.isEnabled())
+	 * If you need to reference a non-static variable or function from
+	 * Robot.java, such as isEnabled() or isAutonomous(), use the r Robot
+	 * object. Example: if(r.isEnabled())
 	 */
-	
+
 	static boolean winchButtonPressedLastTime = false;
 	static boolean intakeButtonPressedLastTime = false;
-	
+
 	public static void init(Robot r) {
 		Robot.updateSmartDashboard();
-		
+
 		Drive.init();
 		Winch.init();
 		Shooter.init();
 		ShooterAlignment.init();
 		Intake.init();
 	}
-	
+
 	public static void periodic(Robot r) {
-		
+
 		// Winch
 		boolean winchMotorButton = Robot.operatorJoystick.getRawButton(Constants.WINCH_MOTOR_TOGGLE_BUTTON);
 		if (winchMotorButton && !winchButtonPressedLastTime) {
@@ -37,7 +37,7 @@ public class Teleop {
 			Winch.stop();
 		}
 		winchButtonPressedLastTime = winchMotorButton;
-		
+
 		// Intake
 		boolean intakeMotorButton = Robot.operatorJoystick.getRawButton(Constants.INTAKE_MOTOR_TOGGLE_BUTTON);
 		if (intakeMotorButton && !intakeButtonPressedLastTime) {
@@ -46,12 +46,12 @@ public class Teleop {
 			Intake.stop();
 		}
 		intakeButtonPressedLastTime = intakeMotorButton;
-		
+
 		Robot.updateSmartDashboard();
 	}
-	
+
 	public static void updateSmartDashboard() {
 		Drive.updateSmartDashboard();
 	}
-	
+
 }

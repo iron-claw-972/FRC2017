@@ -9,15 +9,15 @@ public class Drive {
 
 	static double leftDriveSpeed = 0;
 	static double rightDriveSpeed = 0;
-	
+
 	static boolean inverseDriveMode = false;
 	static boolean inverseDriveButtonPressed = false;
 	static boolean inverseDriveButtonLastPressed = false;
-	
+
 	static boolean brakeMode = false;
 	static boolean brakeModeButtonPressed = false;
 	static boolean brakeModeButtonLastPressed = false;
-	
+
 	public static void init() {
 		Robot.frontLeftDriveMotor.setInverted(true);
 		Robot.frontRightDriveMotor.setInverted(true);
@@ -63,42 +63,43 @@ public class Drive {
 		Robot.backLeftDriveMotor.enableBrakeMode(brakeStatus);
 		Robot.backRightDriveMotor.enableBrakeMode(brakeStatus);
 	}
-	
+
 	public static void checkInverseToggle() {
 		inverseDriveButtonPressed = Robot.leftJoystick.getRawButton(Constants.INVERSE_DRIVE_TOGGLE_BUTTON);
-		if(inverseDriveButtonPressed && !inverseDriveButtonLastPressed) {
+		if (inverseDriveButtonPressed && !inverseDriveButtonLastPressed) {
 			inverseDriveMode = !inverseDriveMode;
 		}
 		inverseDriveButtonLastPressed = inverseDriveButtonPressed;
 	}
-	
+
 	public static void checkBrakeToggle() {
 		brakeModeButtonPressed = Robot.rightJoystick.getRawButton(Constants.BRAKE_MODE_TOGGLE_BUTTON);
-		if(brakeModeButtonPressed && !brakeModeButtonLastPressed) {
+		if (brakeModeButtonPressed && !brakeModeButtonLastPressed) {
 			brakeMode = !brakeMode;
 		}
 		brakeModeButtonLastPressed = brakeModeButtonPressed;
-		
+
 		Drive.toggleBrakeMode(brakeMode);
 	}
-	
+
 	public static void run() {
 		leftDriveSpeed = Robot.leftJoystick.getY();
 		rightDriveSpeed = Robot.rightJoystick.getY();
-		
+
 		checkInverseToggle();
 		checkBrakeToggle();
-		
+
 		if (Robot.leftJoystick.getRawButton(Constants.STOP_DRIVE_BUTTON)) {
 			stopDrive();
 		} else {
 			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) {
-				// Taking absolute value of one preserves the positive or negative result (normally squaring makes it positive)
+				// Taking absolute value of one preserves the positive or
+				// negative result (normally squaring makes it positive)
 				leftDriveSpeed = Math.abs(leftDriveSpeed) * leftDriveSpeed;
 				rightDriveSpeed = Math.abs(rightDriveSpeed) * rightDriveSpeed;
 			}
-			
-			if(inverseDriveMode) {
+
+			if (inverseDriveMode) {
 				inverseDrive(leftDriveSpeed, rightDriveSpeed);
 			} else {
 				tankDrive(leftDriveSpeed, rightDriveSpeed);
