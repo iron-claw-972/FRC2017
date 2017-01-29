@@ -52,6 +52,19 @@ public class Robot extends IterativeRobot {
 		backLeftDriveMotor.setInverted(true);
 		backRightDriveMotor.setInverted(true);
 		
+		frontLeftDriveMotor.enableBrakeMode(true);
+		frontRightDriveMotor.enableBrakeMode(true);
+		backLeftDriveMotor.enableBrakeMode(true);
+		backRightDriveMotor.enableBrakeMode(true);
+		winchMotor.enableBrakeMode(true);
+		leftFlywheelMotor.enableBrakeMode(true);
+		rightFlywheelMotor.enableBrakeMode(true);
+		leftAzimuthMotor.enableBrakeMode(true);
+		rightAzimuthMotor.enableBrakeMode(true);
+		intakeMotor.enableBrakeMode(true);
+		leftLoaderMotor.enableBrakeMode(true);
+		rightLoaderMotor.enableBrakeMode(true);
+		
 		leftFlywheelPID.setAbsoluteTolerance(5);
 		rightFlywheelPID.setAbsoluteTolerance(5);
 		leftFlywheelMotor.setPIDSourceType(PIDSourceType.kRate);
