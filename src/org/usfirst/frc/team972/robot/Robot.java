@@ -12,10 +12,10 @@ public class Robot extends IterativeRobot {
 	static CANTalon backLeftDriveMotor = new CANTalon(Constants.BACK_LEFT_DRIVE_MOTOR_CAN_ID);
 	static CANTalon backRightDriveMotor = new CANTalon(Constants.BACK_RIGHT_DRIVE_MOTOR_CAN_ID);
 	static CANTalon winchMotor = new CANTalon(Constants.WINCH_MOTOR_CAN_ID);
-	static CANTalon leftFlywheelMotorA = new CANTalon(Constants.LEFT_FLYWHEEL_MOTOR_A_CAN_ID);
-	static CANTalon leftFlywheelMotorB = new CANTalon(Constants.LEFT_FLYWHEEL_MOTOR_B_CAN_ID);
-	static CANTalon rightFlywheelMotorA = new CANTalon(Constants.RIGHT_FLYWHEEL_MOTOR_A_CAN_ID);
-	static CANTalon rightFlywheelMotorB = new CANTalon(Constants.RIGHT_FLYWHEEL_MOTOR_B_CAN_ID);
+	static CANTalon leftShooterMotorA = new CANTalon(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
+	static CANTalon leftShooterMotorB = new CANTalon(Constants.LEFT_SHOOTER_MOTOR_B_CAN_ID);
+	static CANTalon rightShooterMotorA = new CANTalon(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
+	static CANTalon rightShooterMotorB = new CANTalon(Constants.RIGHT_SHOOTER_MOTOR_B_CAN_ID);
 	static CANTalon leftAzimuthMotor = new CANTalon(Constants.LEFT_AZIMUTH_MOTOR_CAN_ID);
 	static CANTalon rightAzimuthMotor = new CANTalon(Constants.RIGHT_AZIMUTH_MOTOR_CAN_ID);
 	static CANTalon intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_CAN_ID);
@@ -43,8 +43,8 @@ public class Robot extends IterativeRobot {
 	static PIDController rightDrivePID = new PIDController(0, 0, 0, rightDriveEncoderA, frontRightDriveMotor);
 	static PIDController leftAzimuthPID = new PIDController(0, 0, 0, leftAzimuthMotor, leftAzimuthMotor);
 	static PIDController rightAzimuthPID = new PIDController(0, 0, 0, rightAzimuthMotor, rightAzimuthMotor);
-	static PIDController leftFlywheelPID = new PIDController(0, 0, 0, leftFlywheelMotorA, leftFlywheelMotorA);
-	static PIDController rightFlywheelPID = new PIDController(0, 0, 0, rightFlywheelMotorA, rightFlywheelMotorA);
+	static PIDController leftShooterPID = new PIDController(0, 0, 0, leftShooterMotorA, leftShooterMotorA);
+	static PIDController rightShooterPID = new PIDController(0, 0, 0, rightShooterMotorA, rightShooterMotorA);
 
 	public void robotInit() {
 		Autonomous.createChooser();
