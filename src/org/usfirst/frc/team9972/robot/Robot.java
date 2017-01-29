@@ -6,22 +6,22 @@ import com.ctre.*;
 public class Robot extends IterativeRobot {
 	
 	// Motor Objects
-	static CANTalon frontLeftDriveMotor = new CANTalon(Constants.FRONT_LEFT_DRIVE_MOTOR_CAN_ID_PORT);
-	static CANTalon frontRightDriveMotor = new CANTalon(Constants.FRONT_RIGHT_DRIVE_MOTOR_CAN_ID_PORT);
-	static CANTalon backLeftDriveMotor = new CANTalon(Constants.BACK_LEFT_DRIVE_MOTOR_CAN_ID_PORT);
-	static CANTalon backRightDriveMotor = new CANTalon(Constants.BACK_RIGHT_DRIVE_MOTOR_CAN_ID_PORT);
-	static CANTalon winchMotor = new CANTalon(Constants.WINCH_MOTOR_CAN_ID_PORT);
-	static CANTalon leftFlywheelMotor = new CANTalon(Constants.LEFT_FLYWHEEL_MOTOR_CAN_ID_PORT);
-	static CANTalon rightFlywheelMotor = new CANTalon(Constants.RIGHT_FLYWHEEL_MOTOR_CAN_ID_PORT);
-	static CANTalon intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_CAN_ID_PORT);
-	static CANTalon leftLoaderMotor = new CANTalon(Constants.LEFT_LOADER_MOTOR_CAN_ID_PORT);
-	static CANTalon rightLoaderMotor = new CANTalon(Constants.RIGHT_LOADER_MOTOR_CAN_ID_PORT);
+	static CANTalon frontLeftDriveMotor = new CANTalon(Constants.FRONT_LEFT_DRIVE_MOTOR_CAN_ID);
+	static CANTalon frontRightDriveMotor = new CANTalon(Constants.FRONT_RIGHT_DRIVE_MOTOR_CAN_ID);
+	static CANTalon backLeftDriveMotor = new CANTalon(Constants.BACK_LEFT_DRIVE_MOTOR_CAN_ID);
+	static CANTalon backRightDriveMotor = new CANTalon(Constants.BACK_RIGHT_DRIVE_MOTOR_CAN_ID);
+	static CANTalon winchMotor = new CANTalon(Constants.WINCH_MOTOR_CAN_ID);
+	static CANTalon leftFlywheelMotor = new CANTalon(Constants.LEFT_FLYWHEEL_MOTOR_CAN_ID);
+	static CANTalon rightFlywheelMotor = new CANTalon(Constants.RIGHT_FLYWHEEL_MOTOR_CAN_ID);
+	static CANTalon leftSwivelMotor = new CANTalon(Constants.LEFT_SWIVEL_MOTOR_CAN_ID);
+	static CANTalon rightSwivelMotor = new CANTalon(Constants.RIGHT_SWIVEL_MOTOR_CAN_ID);
+	static CANTalon intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_CAN_ID);
+	static CANTalon leftLoaderMotor = new CANTalon(Constants.LEFT_LOADER_MOTOR_CAN_ID);
+	static CANTalon rightLoaderMotor = new CANTalon(Constants.RIGHT_LOADER_MOTOR_CAN_ID);
 	
 	// PWM IDs
 	static Servo leftHoodServo = new Servo(Constants.LEFT_HOOD_SERVO_PWM_PORT);
 	static Servo rightHoodServo = new Servo(Constants.RIGHT_HOOD_SERVO_PWM_PORT);
-	static Servo leftSwivelServo = new Servo(Constants.LEFT_SWIVEL_SERVO_PWM_PORT);
-	static Servo rightSwivelServo = new Servo(Constants.RIGHT_SWIVEL_SERVO_PWM_PORT);
 	
 	static RobotDrive robotDrive = new RobotDrive(frontLeftDriveMotor, backLeftDriveMotor, frontRightDriveMotor, backRightDriveMotor);
 	
@@ -38,12 +38,9 @@ public class Robot extends IterativeRobot {
 	static PIDController leftDrivePID = new PIDController(0,0,0,leftDriveEncoder,frontLeftDriveMotor);
 	static PIDController rightDrivePID = new PIDController(0,0,0,rightDriveEncoder,frontRightDriveMotor);
 	
-//	static PIDController leftSwivelPID = new PIDController(0,0,0,leftSwivelServo,leftSwivelServo);
-//	static PIDController rightSwivelPID = new PIDController(0,0,0,rightSwivelServo,rightSwivelServo);
-//	TODO	
-//	static PIDController leftHoodPID = new PIDController(0,0,0,leftHoodServo,leftHoodServo);
-//	static PIDController rightHoodPID = new PIDController(0,0,0,rightHoodServo,rightHoodServo);
-	
+	static PIDController leftSwivelPID = new PIDController(0,0,0,leftSwivelMotor,leftSwivelMotor);
+	static PIDController rightSwivelPID = new PIDController(0,0,0,rightSwivelMotor,rightSwivelMotor);
+
 	static PIDController leftFlywheelPID = new PIDController(0,0,0,leftFlywheelMotor,leftFlywheelMotor);
 	static PIDController rightFlywheelPID = new PIDController(0,0,0,rightFlywheelMotor,rightFlywheelMotor);
 	
@@ -55,6 +52,11 @@ public class Robot extends IterativeRobot {
 		frontRightDriveMotor.setInverted(true);
 		backLeftDriveMotor.setInverted(true);
 		backRightDriveMotor.setInverted(true);
+		
+		leftFlywheelPID.setAbsoluteTolerance(5);
+		rightFlywheelPID.setAbsoluteTolerance(5);
+		leftFlywheelMotor.setPIDSourceType(PIDSourceType.kRate);
+		rightFlywheelMotor.setPIDSourceType(PIDSourceType.kRate);
 	}
 	
 	/*
