@@ -58,6 +58,13 @@ public class Constants {
 	public static final int RIGHT_DRIVE_ENCODER_B_PORT_A = 6;
 	public static final int RIGHT_DRIVE_ENCODER_B_PORT_B = 7;
 
+	// PCM Ports
+	public static final int COMPRESSOR_PCM_PORT = 0; // TODO: Change to the port of the PCM
+	public static final int GEAR_PEG_PISTON_FORWARD_PCM_PORT = 1;
+	public static final int GEAR_PEG_PISTON_REVERSE_PCM_PORT = 2;
+	public static final int GEAR_PUSHER_PISTON_FORWARD_PCM_PORT = 3;
+	public static final int GEAR_PUSHER_PISTON_REVERSE_PCM_PORT = 4;
+	
 	// PID Constants
 	public static final int LEFT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
 	public static final int RIGHT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
