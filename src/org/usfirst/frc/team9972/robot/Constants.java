@@ -49,9 +49,11 @@ public class Constants {
 	public static final int LEFT_DRIVE_ENCODER_PORT_B = 1;
 	public static final int RIGHT_DRIVE_ENCODER_PORT_A = 2;
 	public static final int RIGHT_DRIVE_ENCODER_PORT_B = 3;
-  
-	// Constants
+	
+	// PID Constants
 	public static final int LEFT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
 	public static final int RIGHT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
+	public static final int LEFT_SHOOTER_FLYWHEEL_SETPOINT = 500;
+	public static final int RIGHT_SHOOTER_FLYWHEEL_SETPOINT = 500;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 }
