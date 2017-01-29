@@ -22,22 +22,22 @@ public class Constants {
 	public static final int WINCH_MOTOR_BUTTON = 1;
 	
 	// Motor IDs
-	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID_PORT = 1;
-	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID_PORT = 2;
-	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID_PORT = 3;
-	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID_PORT = 4;
-	public static final int WINCH_MOTOR_CAN_ID_PORT = 0;
-	public static final int LEFT_FLYWHEEL_MOTOR_CAN_ID_PORT = 0;
-	public static final int RIGHT_FLYWHEEL_MOTOR_CAN_ID_PORT = 0;	
-	public static final int INTAKE_MOTOR_CAN_ID_PORT = 0;	
-	public static final int LEFT_LOADER_MOTOR_CAN_ID_PORT = 0;
-	public static final int RIGHT_LOADER_MOTOR_CAN_ID_PORT = 0;
+	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
+	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
+	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 3;
+	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 4;
+	public static final int WINCH_MOTOR_CAN_ID = 5;
+	public static final int LEFT_FLYWHEEL_MOTOR_CAN_ID = 6;
+	public static final int RIGHT_FLYWHEEL_MOTOR_CAN_ID = 7;
+	public static final int LEFT_SWIVEL_MOTOR_CAN_ID = 8;
+	public static final int RIGHT_SWIVEL_MOTOR_CAN_ID = 9;	
+	public static final int INTAKE_MOTOR_CAN_ID = 10;
+	public static final int LEFT_LOADER_MOTOR_CAN_ID = 11;
+	public static final int RIGHT_LOADER_MOTOR_CAN_ID = 12;
 	
 	// PWM IDs
 	public static final int LEFT_HOOD_SERVO_PWM_PORT = 0;
 	public static final int RIGHT_HOOD_SERVO_PWM_PORT = 0;
-	public static final int LEFT_SWIVEL_SERVO_PWM_PORT = 0;
-	public static final int RIGHT_SWIVEL_SERVO_PWM_PORT = 0;
 	
 	// Joystick IDs
 	public static final int LEFT_JOYSTICK_INPUT_USB_PORT = 0;
@@ -49,7 +49,9 @@ public class Constants {
 	public static final int LEFT_DRIVE_ENCODER_PORT_B = 1;
 	public static final int RIGHT_DRIVE_ENCODER_PORT_A = 2;
 	public static final int RIGHT_DRIVE_ENCODER_PORT_B = 3;
-	
-	// Motor Speeds
+  
+	// Constants
+	public static final int LEFT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
+	public static final int RIGHT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 }
