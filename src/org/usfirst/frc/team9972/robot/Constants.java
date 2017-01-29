@@ -18,6 +18,9 @@ public class Constants {
 	public static final int SQUARED_DRIVE_BUTTON = 4;
 	public static final int BRAKE_MODE_TOGGLE_BUTTON = 0;
 	
+	// Operator Joystick
+	public static final int WINCH_MOTOR_BUTTON = 1;
+	
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
 	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
@@ -52,4 +55,5 @@ public class Constants {
 	public static final int RIGHT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
 	public static final int LEFT_SHOOTER_FLYWHEEL_SETPOINT = 500;
 	public static final int RIGHT_SHOOTER_FLYWHEEL_SETPOINT = 500;
+	public static final double WINCH_MOTOR_SPEED = 0.7;
 }
