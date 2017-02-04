@@ -17,10 +17,6 @@ public class Drive {
 	static boolean brakeMode = false;
 	static boolean brakeModeButtonPressed = false;
 	static boolean brakeModeButtonLastPressed = false;
-
-	static double[] leftModel = new double[3]; //x_k, v_k, a_k
-	static double[] rightModel = new double[3]; //x_k, v_k, a_k
-	static double[] systemModel = new double[4]; //x_k, y_k, v_k, theta_k
 	
 	public static void init() {
 		Robot.frontLeftDriveMotor.setInverted(true);
@@ -110,6 +106,13 @@ public class Drive {
 			}
 		}
 	}
+	
+	// TODO: Pass values
+	public static void updateModel() {
+//		LeftModel.update(powerToLeft, dT, frontEncoderDistance, backEncoderDistance);
+//		RightModel.update(powerToRight, dT, frontEncoderDistance, backEncoderDistance);
+//		SystemModel.update(theta, dT);
+	}
 
 	public static void updateSmartDashboard() {
 		SmartDashboard.putNumber("Left Drive Speed", leftDriveSpeed);
@@ -118,42 +121,5 @@ public class Drive {
 		SmartDashboard.putNumber("Right Encoder A", Robot.rightDriveEncoderA.get());
 		SmartDashboard.putNumber("Left Encoder B", Robot.leftDriveEncoderB.get());
 		SmartDashboard.putNumber("Right Encoder B", Robot.rightDriveEncoderB.get());
-	}
-	
-	public static void updateLeftModel(double powerToLeft, double loopTime, double frontEncoderDistance, double backEncoderDistance) {
-		double[] newState = new double[3];
-		newState[0] = leftModel[0] + loopTime * leftModel[1] + Math.pow(loopTime, 2) * leftModel[2] / 2;
-		newState[1] = leftModel[1] + loopTime * leftModel[2];
-		newState[2] = powerToLeft;
-
-		double r_k = ((frontEncoderDistance + backEncoderDistance) / 2) - newState[0];
-		newState[0] = newState[0] + Constants.SYSTEM_MODEL_CONSTANTS[0] * r_k;
-		newState[1] = newState[1] + (Constants.SYSTEM_MODEL_CONSTANTS[1] / loopTime) * r_k;
-		
-		leftModel = newState;
-	}
-	
-	public static void updateRightModel(double powerToRight, double loopTime, double frontEncoderDistance, double backEncoderDistance) {
-		double[] newState = new double[3];
-		newState[0] = rightModel[0] + loopTime * rightModel[1] + Math.pow(loopTime, 2) * rightModel[2] / 2;
-		newState[1] = rightModel[1] + loopTime * rightModel[2];
-		newState[2] = powerToRight;
-
-		double r_k = ((frontEncoderDistance + backEncoderDistance) / 2) - newState[0];
-		newState[0] = newState[0] + Constants.SYSTEM_MODEL_CONSTANTS[0] * r_k;
-		newState[1] = newState[1] + (Constants.SYSTEM_MODEL_CONSTANTS[1] / loopTime) * r_k;
-		
-		rightModel = newState;
-	}
-	
-	public static void updateSystemModel(double gyroAngle, double robotWidth, double loopTime) { //TODO: put robotWidth into Constants
-		double[] newState = new double[4];
-		newState[0] = systemModel[0] + loopTime * systemModel[2] * Math.sin(systemModel[3]);
-		newState[1] = systemModel[1] + loopTime * systemModel[2] * Math.cos(systemModel[3]);
-		newState[2] = (leftModel[1] + rightModel[1]) / 2;
-		newState[3] = (1 - Constants.SYSTEM_MODEL_CONSTANTS[2]) * (Math.PI * robotWidth / 4) * (leftModel[0] - rightModel[0])
-				+ Constants.SYSTEM_MODEL_CONSTANTS[2] * gyroAngle;
-		
-		systemModel = newState;
 	}
 }
