@@ -17,7 +17,7 @@ public class Drive {
 	static boolean brakeMode = false;
 	static boolean brakeModeButtonPressed = false;
 	static boolean brakeModeButtonLastPressed = false;
-
+	
 	public static void init() {
 		Robot.frontLeftDriveMotor.setInverted(true);
 		Robot.frontRightDriveMotor.setInverted(true);
@@ -105,6 +105,13 @@ public class Drive {
 				tankDrive(leftDriveSpeed, rightDriveSpeed);
 			}
 		}
+	}
+	
+	// TODO: Pass values
+	public static void updateModel() {
+//		LeftModel.update(powerToLeft, dT, frontEncoderDistance, backEncoderDistance);
+//		RightModel.update(powerToRight, dT, frontEncoderDistance, backEncoderDistance);
+//		SystemModel.update(theta, dT);
 	}
 
 	public static void updateSmartDashboard() {

@@ -15,7 +15,7 @@ public class Constants {
 
 	// Right Joystick
 	public static final int SQUARED_DRIVE_BUTTON = 4;
-	public static final int BRAKE_MODE_TOGGLE_BUTTON = 0; // TODO: find an appropriate button
+	public static final int BRAKE_MODE_TOGGLE_BUTTON = 1;
 
 	// Operator Joystick
 	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 1;
@@ -59,20 +59,27 @@ public class Constants {
 	public static final int RIGHT_DRIVE_ENCODER_B_PORT_B = 7;
 
 	// PCM Ports
-	public static final int COMPRESSOR_PCM_PORT = 0; // TODO: Change to the port of the PCM
+	// TODO: Change to the port of the PCM
+	public static final int COMPRESSOR_PCM_PORT = 0;
 	public static final int GEAR_PEG_PISTON_FORWARD_PCM_PORT = 1;
 	public static final int GEAR_PEG_PISTON_REVERSE_PCM_PORT = 2;
 	public static final int GEAR_PUSHER_PISTON_FORWARD_PCM_PORT = 3;
 	public static final int GEAR_PUSHER_PISTON_REVERSE_PCM_PORT = 4;
-	
+
 	// PID Constants
 	public static final int LEFT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
 	public static final int RIGHT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
 	public static final int LEFT_SHOOTER_FLYWHEEL_SETPOINT = 500;
 	public static final int RIGHT_SHOOTER_FLYWHEEL_SETPOINT = 500;
 
-	// Constants
-	public static final double WINCH_MOTOR_SPEED = 0.7; // TODO: test the speed
-	public static final double INTAKE_MOTOR_SPEED = 0.5;
+	// System Model
+	public static final double ROBOT_WIDTH = 1; // TODO: determine
+	// Constants for system modeling (all between 0 and 1) TODO: determine
+	public static final double ALPHA = 0.5;
+	public static final double BETA = 0.5;
+	public static final double PHI = 0.5;
 
+	// Constants
+	public static final double WINCH_MOTOR_SPEED = 0.7;
+	public static final double INTAKE_MOTOR_SPEED = 0.5;
 }
