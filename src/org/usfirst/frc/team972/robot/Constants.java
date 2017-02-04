@@ -74,5 +74,6 @@ public class Constants {
 	// Constants
 	public static final double WINCH_MOTOR_SPEED = 0.7; // TODO: test the speed
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
-
+	public static final double[] SYSTEM_MODEL_CONSTANTS = {0.5, 0.5, 0.5}; //alpha, beta, phi constants for system modeling (all between 0 and 1)
+																		   //TODO: determine 
 }
