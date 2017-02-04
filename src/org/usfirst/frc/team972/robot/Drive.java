@@ -18,8 +18,8 @@ public class Drive {
 	static boolean brakeModeButtonPressed = false;
 	static boolean brakeModeButtonLastPressed = false;
 
-	static double[] leftModel = new double[4]; //x_k, v_k, a_k
-	static double[] rightModel = new double[4]; //x_k, v_k, a_k
+	static double[] leftModel = new double[3]; //x_k, v_k, a_k
+	static double[] rightModel = new double[3]; //x_k, v_k, a_k
 	static double[] systemModel = new double[4]; //x_k, y_k, v_k, theta_k
 	
 	public static void init() {
@@ -148,8 +148,8 @@ public class Drive {
 	
 	public static void updateSystemModel(double gyroAngle, double robotWidth, double loopTime) { //TODO: put robotWidth into Constants
 		double[] newState = new double[4];
-		newState[0] = systemModel[0] + loopTime * systemModel[3] * Math.sin(systemModel[4]);
-		newState[1] = systemModel[1] + loopTime * systemModel[3] * Math.cos(systemModel[4]);
+		newState[0] = systemModel[0] + loopTime * systemModel[2] * Math.sin(systemModel[3]);
+		newState[1] = systemModel[1] + loopTime * systemModel[2] * Math.cos(systemModel[3]);
 		newState[2] = (leftModel[1] + rightModel[1]) / 2;
 		newState[3] = (1 - Constants.SYSTEM_MODEL_CONSTANTS[2]) * (Math.PI * robotWidth / 4) * (leftModel[0] - rightModel[0])
 				+ Constants.SYSTEM_MODEL_CONSTANTS[2] * gyroAngle;
