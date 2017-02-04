@@ -1,6 +1,6 @@
 package org.usfirst.frc.team972.robot;
 
-import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.CANTalon.*;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -107,11 +107,8 @@ public class Drive {
 		}
 	}
 	
-	// TODO: Pass values
-	public static void updateModel() {
-//		LeftModel.update(powerToLeft, dT, frontEncoderDistance, backEncoderDistance);
-//		RightModel.update(powerToRight, dT, frontEncoderDistance, backEncoderDistance);
-//		SystemModel.update(theta, dT);
+	public static void updateModel() { //TODO put values
+		//MotionProfiling.update(dT, gyro, frontLeftEncoderDistance, backLeftEncoderDistance, frontRightEncoderDistance, backRightEncoderDistance, powerToLeft, powerToRight);
 	}
 
 	public static void updateSmartDashboard() {
