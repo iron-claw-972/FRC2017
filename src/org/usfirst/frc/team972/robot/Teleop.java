@@ -47,6 +47,7 @@ public class Teleop {
 		}
 		intakeButtonPressedLastTime = intakeMotorButton;
 
+		Drive.updateModel();
 		Robot.updateSmartDashboard();
 	}
 

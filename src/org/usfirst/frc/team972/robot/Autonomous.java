@@ -27,6 +27,7 @@ public class Autonomous {
 	}
 
 	public static void periodic(Robot r) {
+		Drive.updateModel();
 		Robot.updateSmartDashboard();
 	}
 
