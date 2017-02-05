@@ -1,6 +1,6 @@
 package org.usfirst.frc.team972.robot;
 
-import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.CANTalon.*;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -92,9 +92,8 @@ public class Drive {
 		if (Robot.leftJoystick.getRawButton(Constants.STOP_DRIVE_BUTTON)) {
 			stopDrive();
 		} else {
-			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) {
-				// Taking absolute value of one preserves the positive or
-				// negative result (normally squaring makes it positive)
+			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) { //TODO Squared drive is the worst
+				// Taking absolute value of one preserves the positive or negative result (normally squaring makes it positive)
 				leftDriveSpeed = Math.abs(leftDriveSpeed) * leftDriveSpeed;
 				rightDriveSpeed = Math.abs(rightDriveSpeed) * rightDriveSpeed;
 			}
@@ -107,17 +106,14 @@ public class Drive {
 		}
 	}
 	
-	// TODO: Pass values
-	public static void updateModel() {
-//		LeftModel.update(powerToLeft, dT, frontEncoderDistance, backEncoderDistance);
-//		RightModel.update(powerToRight, dT, frontEncoderDistance, backEncoderDistance);
-//		SystemModel.update(theta, dT);
+	public static void updateModel() { //TODO put values
+		//MotionProfiling.update(dT, gyro, frontLeftEncoderDistance, backLeftEncoderDistance, frontRightEncoderDistance, backRightEncoderDistance, powerToLeft, powerToRight);
 	}
 
 	public static void updateSmartDashboard() {
 		SmartDashboard.putNumber("Left Drive Speed", leftDriveSpeed);
 		SmartDashboard.putNumber("Right Drive Speed", rightDriveSpeed);
-		SmartDashboard.putNumber("Left Encoder A", Robot.leftDriveEncoderA.get());
+		SmartDashboard.putNumber("Left Encoder A", Robot.leftDriveEncoderA.get()); //TODO change to Left Encoder Front, etc.
 		SmartDashboard.putNumber("Right Encoder A", Robot.rightDriveEncoderA.get());
 		SmartDashboard.putNumber("Left Encoder B", Robot.leftDriveEncoderB.get());
 		SmartDashboard.putNumber("Right Encoder B", Robot.rightDriveEncoderB.get());

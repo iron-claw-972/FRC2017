@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
 	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
 			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
 
-	// TODO: Deal with the PIDSource for Drive
+	// TODO: Drive isn't going to use PID
 	static PIDController leftDrivePID = new PIDController(0, 0, 0, leftDriveEncoderA, frontLeftDriveMotor);
 	static PIDController rightDrivePID = new PIDController(0, 0, 0, rightDriveEncoderA, frontRightDriveMotor);
 	static PIDController leftAzimuthPID = new PIDController(0, 0, 0, leftAzimuthMotor, leftAzimuthMotor);
@@ -54,13 +54,10 @@ public class Robot extends IterativeRobot {
 
 	public void robotInit() {
 		Autonomous.createChooser();
-		updateSmartDashboard();
-
-		Drive.init();
-		Winch.init();
-		Shooter.init();
-		ShooterAlignment.init();
-		Intake.init();
+		Autonomous.updateSmartDashboard();
+		Teleop.updateSmartDashboard();
+		
+		init();
 	}
 
 	/*
@@ -72,22 +69,18 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		Autonomous.init(this);
-		updateSmartDashboard();
 	}
 
 	public void autonomousPeriodic() {
 		Autonomous.periodic(this);
-		updateSmartDashboard();
 	}
 
 	public void teleopInit() {
 		Teleop.init(this);
-		updateSmartDashboard();
 	}
 
 	public void teleopPeriodic() {
 		Teleop.periodic(this);
-		updateSmartDashboard();
 	}
 
 	public void disabledInit() {
@@ -95,13 +88,19 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void testPeriodic() {
-		
 		Tester.run();
 	}
 
 	public static void updateSmartDashboard() {
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
+  }
+  
+	public void init() {
+		Drive.init();
+		Winch.init();
+		Shooter.init();
+		ShooterAlignment.init();
+		Intake.init();
 	}
-
 }
