@@ -57,7 +57,7 @@ public class Drive {
 		tankDrive(0, 0);
 	}
 
-	public static void toggleBrakeMode(boolean brakeStatus) {
+	public static void setBrakeMode(boolean brakeStatus) {
 		Robot.frontLeftDriveMotor.enableBrakeMode(brakeStatus);
 		Robot.frontRightDriveMotor.enableBrakeMode(brakeStatus);
 		Robot.backLeftDriveMotor.enableBrakeMode(brakeStatus);
@@ -79,10 +79,10 @@ public class Drive {
 		}
 		brakeModeButtonLastPressed = brakeModeButtonPressed;
 
-		Drive.toggleBrakeMode(brakeMode);
+		setBrakeMode(brakeMode);
 	}
 
-	public static void run() {
+	public static void teleopDrive() {
 		leftDriveSpeed = Robot.leftJoystick.getY();
 		rightDriveSpeed = Robot.rightJoystick.getY();
 
@@ -104,6 +104,47 @@ public class Drive {
 				tankDrive(leftDriveSpeed, rightDriveSpeed);
 			}
 		}
+	}
+	
+	public static void autoDrive(double x_desired, double y_desired, double theta_desired, double dT, double prev_v, double prev_theta) {
+		double curr_x = MotionProfiling.getX();
+		double curr_y = MotionProfiling.getY();
+		double curr_v = MotionProfiling.getV();
+		double curr_theta = MotionProfiling.getTheta();
+		
+		setBrakeMode(true);
+		
+		//distance from robot to desired point using Pythagorean theorem
+		double distance = Math.pow((Math.pow((x_desired - curr_x), 2) + Math.pow((y_desired - curr_y), 2)), 0.5);
+		
+		//get desired angle of robot to get to in degrees using arctan from -180 to +180
+		double trajectory_angle = Math.atan2((x_desired - curr_x), (y_desired - curr_y)) + (Math.PI / 2);
+		if (trajectory_angle > Math.PI) {
+			trajectory_angle = Math.toDegrees(trajectory_angle - (2 * Math.PI));
+		} else if (trajectory_angle < -Math.PI) {
+			trajectory_angle = Math.toDegrees((2 * Math.PI) + trajectory_angle);
+		} else {
+			trajectory_angle = Math.toDegrees(trajectory_angle);
+		}
+		
+		//determine which direction the robot needs to turn
+		boolean isReverseDrive = false;
+		double theta_error = trajectory_angle - curr_theta;
+		if (theta_error > 90.0) {
+			isReverseDrive = true;
+			theta_error = theta_error - 180;
+		} else if (theta_error < -90.0) {
+			isReverseDrive = true;
+			theta_error = 180 + theta_error;
+		}
+		
+		double v_error = Constants.ROBOT_MAX_VELOCITY - curr_v;
+		if (distance < Constants.AUTON_STOPPING_DISTANCE_2) {
+			v_error = (Constants.AUTON_STOPPING_DISTANCE_2 - distance) * 
+		}
+		
+		double dVdT = (curr_v - prev_v) / dT;
+		double dThetadT = (curr_theta - prev_theta) / dT;
 	}
 	
 	public static void updateModel() { //TODO put values

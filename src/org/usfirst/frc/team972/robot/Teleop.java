@@ -41,7 +41,7 @@ public class Teleop {
 		}
 		intakeButtonPressedLastTime = intakeMotorButton;
 
-		Drive.run();
+		Drive.teleopDrive();
 		
 		Drive.updateModel();
 		updateSmartDashboard();
