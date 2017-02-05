@@ -20,8 +20,32 @@ public class SystemModel {
 		x_k1 = x_k + (dT * v_k * Math.sin(theta_k));
 		y_k1 = y_k + (dT * v_k * Math.cos(theta_k));
 		v_k1 = (LeftModel.v_k + RightModel.v_k) / 2;
-		theta_k1 = ((1 - PHI) * (360 / (Math.PI * Constants.ROBOT_WIDTH)) * (LeftModel.x_k - RightModel.x_k)) + (PHI * gyro); //TODO fix theta for angles greater than +180 or less than -180
-
+		
+		double angle_from_encoders = ((360 / (Math.PI * Constants.ROBOT_WIDTH)) * (LeftModel.x_k - RightModel.x_k)) % 360.0;
+		if (angle_from_encoders > 180) {
+			angle_from_encoders = -360 + angle_from_encoders;
+		} else if (angle_from_encoders < -180) {
+			angle_from_encoders = 360 + angle_from_encoders;
+		}
+		double angle_from_gyro = gyro % 360.0;
+		if (angle_from_gyro > 180) {
+			angle_from_gyro = -360 + angle_from_gyro;
+		} else if (angle_from_gyro < -180) {
+			angle_from_gyro = 360 + angle_from_gyro;
+		}
+		if (angle_from_encoders < -90 && angle_from_gyro > 90) {
+			theta_k1 = ((1 - Constants.PHI) * (360 + angle_from_encoders)) + (Constants.PHI * angle_from_gyro);
+		} else if (angle_from_encoders > 90 && angle_from_gyro < -90) {
+			theta_k1 = ((1 - Constants.PHI) * (-360 + angle_from_encoders)) + (Constants.PHI * angle_from_gyro);
+		} else {
+			theta_k1 = ((1 - Constants.PHI) * angle_from_encoders) + (Constants.PHI * angle_from_gyro);
+		}
+		if (theta_k1 > 180) {
+			theta_k1 = -360 + theta_k1;
+		} else if (theta_k1 < -180) {
+			theta_k1 = 360 + theta_k1;
+		}
+		
 		x_k = x_k1;
 		y_k = y_k1;
 		v_k = v_k1;
