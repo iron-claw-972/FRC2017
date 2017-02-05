@@ -87,6 +87,15 @@ public class Robot extends IterativeRobot {
 
 	}
 	
+	public void testPeriodic() {
+		Tester.run();
+	}
+
+	public static void updateSmartDashboard() {
+		Autonomous.updateSmartDashboard();
+		Teleop.updateSmartDashboard();
+  }
+  
 	public void init() {
 		Drive.init();
 		Winch.init();
