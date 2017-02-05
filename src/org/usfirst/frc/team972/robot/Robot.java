@@ -93,6 +93,11 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 
 	}
+	
+	public void testPeriodic() {
+		
+		Tester.run();
+	}
 
 	public static void updateSmartDashboard() {
 		Autonomous.updateSmartDashboard();
