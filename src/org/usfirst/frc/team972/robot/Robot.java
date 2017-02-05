@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
 	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
 			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
 
-	// TODO: Deal with the PIDSource for Drive
+	// TODO: Drive isn't going to use PID
 	static PIDController leftDrivePID = new PIDController(0, 0, 0, leftDriveEncoderA, frontLeftDriveMotor);
 	static PIDController rightDrivePID = new PIDController(0, 0, 0, rightDriveEncoderA, frontRightDriveMotor);
 	static PIDController leftAzimuthPID = new PIDController(0, 0, 0, leftAzimuthMotor, leftAzimuthMotor);
