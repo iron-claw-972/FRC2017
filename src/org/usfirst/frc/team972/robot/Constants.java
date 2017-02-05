@@ -48,7 +48,7 @@ public class Constants {
 	public static final int RIGHT_JOYSTICK_INPUT_USB_PORT = 1;
 	public static final int OPERATOR_JOYSTICK_INPUT_USB_PORT = 2;
 
-	// DIO Ports
+	// DIO Ports //TODO switch to LEFT_DRIVE_ENCODER_FRONT, etc.
 	public static final int LEFT_DRIVE_ENCODER_A_PORT_A = 0;
 	public static final int LEFT_DRIVE_ENCODER_A_PORT_B = 1;
 	public static final int LEFT_DRIVE_ENCODER_B_PORT_A = 2;

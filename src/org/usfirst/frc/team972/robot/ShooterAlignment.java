@@ -2,7 +2,7 @@ package org.usfirst.frc.team972.robot;
 
 import edu.wpi.first.wpilibj.*;
 
-public class ShooterAlignment {
+public class ShooterAlignment { //TODO put this in Shooter.java
 
 	public static void init() {
 		Robot.leftAzimuthMotor.enableBrakeMode(true);
