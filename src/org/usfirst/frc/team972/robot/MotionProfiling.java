@@ -1,5 +1,7 @@
 package org.usfirst.frc.team972.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class MotionProfiling {
 	
 	/**
@@ -45,5 +47,27 @@ public class MotionProfiling {
 		LeftModel.setState(distance, 0.0, 0.0);
 		RightModel.setState(-distance, 0.0, 0.0);
 		SystemModel.setState(x_pos, y_pos, 0.0, theta);
+	}
+	
+	public static void updateSmartDashboard() {
+		SmartDashboard.putNumber("X Position", getX());
+		SmartDashboard.putNumber("Y Position", getY());
+		SmartDashboard.putNumber("Angle", getTheta());
+	}
+	
+	public static double getX() {
+		return SystemModel.x_k;
+	}
+	
+	public static double getY() {
+		return SystemModel.y_k;
+	}
+	
+	public static double getV() {
+		return SystemModel.v_k;
+	}
+	
+	public static double getTheta() {
+		return SystemModel.theta_k;
 	}
 }

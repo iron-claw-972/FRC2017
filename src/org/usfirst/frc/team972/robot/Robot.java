@@ -54,13 +54,10 @@ public class Robot extends IterativeRobot {
 
 	public void robotInit() {
 		Autonomous.createChooser();
-		updateSmartDashboard();
-
-		Drive.init();
-		Winch.init();
-		Shooter.init();
-		ShooterAlignment.init();
-		Intake.init();
+		Autonomous.updateSmartDashboard();
+		Teleop.updateSmartDashboard();
+		
+		init();
 	}
 
 	/*
@@ -72,31 +69,29 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		Autonomous.init(this);
-		updateSmartDashboard();
 	}
 
 	public void autonomousPeriodic() {
 		Autonomous.periodic(this);
-		updateSmartDashboard();
 	}
 
 	public void teleopInit() {
 		Teleop.init(this);
-		updateSmartDashboard();
 	}
 
 	public void teleopPeriodic() {
 		Teleop.periodic(this);
-		updateSmartDashboard();
 	}
 
 	public void disabledInit() {
 
 	}
-
-	public static void updateSmartDashboard() {
-		Autonomous.updateSmartDashboard();
-		Teleop.updateSmartDashboard();
+	
+	public void init() {
+		Drive.init();
+		Winch.init();
+		Shooter.init();
+		ShooterAlignment.init();
+		Intake.init();
 	}
-
 }

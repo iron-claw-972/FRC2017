@@ -18,17 +18,11 @@ public class Teleop {
 	static boolean intakeButtonPressedLastTime = false;
 
 	public static void init(Robot r) {
-		Drive.init();
-		Winch.init();
-		Shooter.init();
-		ShooterAlignment.init();
-		Intake.init();
-			
-		Robot.updateSmartDashboard();
+		r.init();
+		updateSmartDashboard();
 	}
 
 	public static void periodic(Robot r) {
-
 		// Winch
 		boolean winchMotorButton = Robot.operatorJoystick.getRawButton(Constants.WINCH_MOTOR_TOGGLE_BUTTON);
 		if (winchMotorButton && !winchButtonPressedLastTime) {
@@ -48,7 +42,7 @@ public class Teleop {
 		intakeButtonPressedLastTime = intakeMotorButton;
 
 		Drive.updateModel();
-		Robot.updateSmartDashboard();
+		updateSmartDashboard();
 	}
 
 	public static void updateSmartDashboard() {
@@ -56,6 +50,7 @@ public class Teleop {
 		Shooter.updateSmartDashboard();
 		Winch.updateSmartDashboard();
 		Intake.updateSmartDashboard();
+		MotionProfiling.updateSmartDashboard();
 	}
 
 }

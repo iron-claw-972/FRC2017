@@ -23,15 +23,22 @@ public class Autonomous {
 	}
 
 	public static void init(Robot r) {
-		Robot.updateSmartDashboard();
+		r.init();
+//		MotionProfiling.init(x_init, y_init); //TODO figure out what these inits
+		updateSmartDashboard();
 	}
 
 	public static void periodic(Robot r) {
 		Drive.updateModel();
-		Robot.updateSmartDashboard();
+		updateSmartDashboard();
 	}
 
 	public static void updateSmartDashboard() {
 		SmartDashboard.putString("Autonomous Routine", autoChooser.getSelected().toString());
+		Drive.updateSmartDashboard();
+		Shooter.updateSmartDashboard();
+		Winch.updateSmartDashboard();
+		Intake.updateSmartDashboard();
+		MotionProfiling.updateSmartDashboard();
 	}
 }
