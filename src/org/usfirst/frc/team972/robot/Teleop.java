@@ -45,7 +45,6 @@ public class Teleop {
 
 		Drive.teleopDrive();
 		
-		
 		double currTime = Time.get();
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
