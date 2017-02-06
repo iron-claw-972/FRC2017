@@ -90,11 +90,6 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		Tester.run();
 	}
-
-	public static void updateSmartDashboard() {
-		Autonomous.updateSmartDashboard();
-		Teleop.updateSmartDashboard();
-  }
   
 	public void init() {
 		Drive.init();
@@ -102,5 +97,7 @@ public class Robot extends IterativeRobot {
 		Shooter.init();
 		ShooterAlignment.init();
 		Intake.init();
+		GearMechanism.init();
+		Time.init();
 	}
 }

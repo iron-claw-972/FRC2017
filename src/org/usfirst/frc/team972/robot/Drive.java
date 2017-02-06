@@ -174,8 +174,8 @@ public class Drive {
 		}
 	}
 	
-	public static void updateModel() { //TODO put values
-		//MotionProfiling.update(dT, gyro, frontLeftEncoderDistance, backLeftEncoderDistance, frontRightEncoderDistance, backRightEncoderDistance, powerToLeft, powerToRight);
+	public static void updateModel(double dT) { //TODO put values
+		//MotionProfiling.update(dT, IMU.getAngle(), frontLeftEncoderDistance, backLeftEncoderDistance, frontRightEncoderDistance, backRightEncoderDistance, powerToLeft, powerToRight);
 	}
 
 	public static void updateSmartDashboard() {
