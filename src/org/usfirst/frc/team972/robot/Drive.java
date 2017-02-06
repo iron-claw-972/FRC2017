@@ -181,9 +181,9 @@ public class Drive {
 	public static void updateSmartDashboard() {
 		SmartDashboard.putNumber("Left Drive Speed", leftDriveSpeed);
 		SmartDashboard.putNumber("Right Drive Speed", rightDriveSpeed);
-		SmartDashboard.putNumber("Left Encoder A", Robot.leftDriveEncoderA.get()); //TODO change to Left Encoder Front, etc.
-		SmartDashboard.putNumber("Right Encoder A", Robot.rightDriveEncoderA.get());
-		SmartDashboard.putNumber("Left Encoder B", Robot.leftDriveEncoderB.get());
-		SmartDashboard.putNumber("Right Encoder B", Robot.rightDriveEncoderB.get());
+		SmartDashboard.putNumber("Left Encoder Front", Robot.leftDriveEncoderFront.get());
+		SmartDashboard.putNumber("Right Encoder Front", Robot.rightDriveEncoderFront.get());
+		SmartDashboard.putNumber("Left Encoder Back", Robot.leftDriveEncoderBack.get());
+		SmartDashboard.putNumber("Right Encoder Back", Robot.rightDriveEncoderBack.get());
 	}
 }

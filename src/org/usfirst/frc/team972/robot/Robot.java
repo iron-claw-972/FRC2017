@@ -29,14 +29,14 @@ public class Robot extends IterativeRobot {
 	static Joystick rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_INPUT_USB_PORT);
 	static Joystick operatorJoystick = new Joystick(Constants.OPERATOR_JOYSTICK_INPUT_USB_PORT);
 
-	static Encoder leftDriveEncoderA = new Encoder(Constants.LEFT_DRIVE_ENCODER_A_PORT_A,
-			Constants.LEFT_DRIVE_ENCODER_A_PORT_B);
-	static Encoder rightDriveEncoderA = new Encoder(Constants.RIGHT_DRIVE_ENCODER_A_PORT_A,
-			Constants.RIGHT_DRIVE_ENCODER_A_PORT_B);
-	static Encoder leftDriveEncoderB = new Encoder(Constants.LEFT_DRIVE_ENCODER_B_PORT_A,
-			Constants.LEFT_DRIVE_ENCODER_B_PORT_B);
-	static Encoder rightDriveEncoderB = new Encoder(Constants.RIGHT_DRIVE_ENCODER_B_PORT_A,
-			Constants.RIGHT_DRIVE_ENCODER_B_PORT_B);
+	static Encoder leftDriveEncoderFront = new Encoder(Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_A,
+			Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_B);
+	static Encoder rightDriveEncoderFront = new Encoder(Constants.RIGHT_DRIVE_ENCODER_FRONT_PORT_A,
+			Constants.RIGHT_DRIVE_ENCODER_FRONT_PORT_B);
+	static Encoder leftDriveEncoderBack = new Encoder(Constants.LEFT_DRIVE_ENCODER_BACK_PORT_A,
+			Constants.LEFT_DRIVE_ENCODER_BACK_PORT_B);
+	static Encoder rightDriveEncoderBack = new Encoder(Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_A,
+			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B);
 
 	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
 	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
@@ -45,8 +45,8 @@ public class Robot extends IterativeRobot {
 			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
 
 	// TODO: Drive isn't going to use PID
-	static PIDController leftDrivePID = new PIDController(0, 0, 0, leftDriveEncoderA, frontLeftDriveMotor);
-	static PIDController rightDrivePID = new PIDController(0, 0, 0, rightDriveEncoderA, frontRightDriveMotor);
+	static PIDController leftDrivePID = new PIDController(0, 0, 0, leftDriveEncoderFront, frontLeftDriveMotor);
+	static PIDController rightDrivePID = new PIDController(0, 0, 0, rightDriveEncoderFront, frontRightDriveMotor);
 	static PIDController leftAzimuthPID = new PIDController(0, 0, 0, leftAzimuthMotor, leftAzimuthMotor);
 	static PIDController rightAzimuthPID = new PIDController(0, 0, 0, rightAzimuthMotor, rightAzimuthMotor);
 	static PIDController leftShooterPID = new PIDController(0, 0, 0, leftShooterMotorA, leftShooterMotorA);
