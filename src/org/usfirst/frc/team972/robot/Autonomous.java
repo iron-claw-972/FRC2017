@@ -14,6 +14,8 @@ public class Autonomous {
 	 * object. Example: if(r.isEnabled())
 	 */
 
+	private static double prevTime = 0.0;
+	
 	static SendableChooser autoChooser = new SendableChooser();
 
 	public static void createChooser() {
@@ -29,8 +31,11 @@ public class Autonomous {
 	}
 
 	public static void periodic(Robot r) {
-		Drive.updateModel();
+		double currTime = Time.get();
+		double loopTime = currTime - prevTime;
+		Drive.updateModel(loopTime);
 		updateSmartDashboard();
+		prevTime = currTime;
 	}
 
 	public static void updateSmartDashboard() {
@@ -40,5 +45,6 @@ public class Autonomous {
 		Winch.updateSmartDashboard();
 		Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
+		Time.updateSmartDashboard();
 	}
 }

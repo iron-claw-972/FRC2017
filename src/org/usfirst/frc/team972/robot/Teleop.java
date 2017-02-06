@@ -16,6 +16,8 @@ public class Teleop {
 
 	static boolean winchButtonPressedLastTime = false;
 	static boolean intakeButtonPressedLastTime = false;
+	
+	private static double prevTime = 0.0;
 
 	public static void init(Robot r) {
 		r.init();
@@ -43,8 +45,12 @@ public class Teleop {
 
 		Drive.teleopDrive();
 		
-		Drive.updateModel();
+		
+		double currTime = Time.get();
+		double loopTime = currTime - prevTime;
+		Drive.updateModel(loopTime);
 		updateSmartDashboard();
+		prevTime = currTime;
 	}
 
 	public static void updateSmartDashboard() {
@@ -53,6 +59,7 @@ public class Teleop {
 		Winch.updateSmartDashboard();
 		Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
+		Time.updateSmartDashboard();
 	}
 
 }
