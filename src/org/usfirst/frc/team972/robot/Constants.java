@@ -76,6 +76,9 @@ public class Constants {
 	public static final double ROBOT_WIDTH = 1; // TODO: determine all these
 	public static final double ROBOT_LENGTH = 1;
 	public static final double ROBOT_MAX_VELOCITY = 5; //m/s
+	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.317; //meters
+	public static final double ENCODER_CLICKS_PER_ROTATION = 360; //TODO: test
+	public static final double MOTOR_POWER_COEFFICIENT = 1.0; //TODO: determine
 	
 	// System Model
 	public static final double ALPHA = 0.5; //TODO: determine (all between 0 and 1)
