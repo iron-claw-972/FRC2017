@@ -165,17 +165,25 @@ public class Drive {
 		double dThetadT = (curr_theta - prev_theta) / dT;
 		
 		double power_for_velocity = Constants.AUTON_DRIVE_RATIO * ((Constants.AUTON_DRIVE_VP * v_error) - (Constants.AUTON_DRIVE_VD * dVdT));
-		double power_for_turning = (1 - Constants.AUTON_DRIVE_RATIO) * (Constants.AUTON_DRIVE_AP * Math.abs(theta_error) * theta_error) - (Constants.AUTON_DRIVE_AD * dThetadT);
+		double power_for_turning = (1 - Constants.AUTON_DRIVE_RATIO) * (Constants.AUTON_DRIVE_AP * Math.abs(theta_error) * theta_error) - 
+				(Constants.AUTON_DRIVE_AD * dThetadT);
+		
+		leftDriveSpeed = power_for_velocity + power_for_turning;
+		rightDriveSpeed = power_for_velocity - power_for_turning;
 		
 		if (isReverseDrive) {
-			inverseDrive(power_for_velocity + power_for_turning, power_for_velocity - power_for_turning);
+			inverseDrive(leftDriveSpeed, rightDriveSpeed);
 		} else {
-			tankDrive(power_for_velocity + power_for_turning, power_for_velocity - power_for_turning);
+			tankDrive(leftDriveSpeed, rightDriveSpeed);
 		}
 	}
 	
 	public static void updateModel(double dT) { //TODO put values
-		//MotionProfiling.update(dT, IMU.getAngle(), frontLeftEncoderDistance, backLeftEncoderDistance, frontRightEncoderDistance, backRightEncoderDistance, powerToLeft, powerToRight);
+		MotionProfiling.update(dT, IMU.getAngle(), Robot.leftDriveEncoderFront.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / 
+				Constants.ENCODER_CLICKS_PER_ROTATION, Robot.leftDriveEncoderBack.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / 
+				Constants.ENCODER_CLICKS_PER_ROTATION, Robot.rightDriveEncoderFront.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / 
+				Constants.ENCODER_CLICKS_PER_ROTATION, Robot.rightDriveEncoderBack.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / 
+				Constants.ENCODER_CLICKS_PER_ROTATION, leftDriveSpeed * Constants.MOTOR_POWER_COEFFICIENT, rightDriveSpeed * Constants.MOTOR_POWER_COEFFICIENT);
 	}
 
 	public static void updateSmartDashboard() {
