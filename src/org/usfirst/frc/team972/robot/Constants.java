@@ -20,6 +20,7 @@ public class Constants {
 	// Operator Joystick
 	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 1;
 	public static final int INTAKE_MOTOR_TOGGLE_BUTTON = 2;
+	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 3;
 
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
@@ -93,7 +94,13 @@ public class Constants {
 	public static final double AUTON_DRIVE_AP = 0.0; //proportion of angle error
 	public static final double AUTON_DRIVE_AD = 0.0; //proportion of angle change (should be small)
 
+	// Test Switches
+	public static final boolean USE_LEFT_SHOOTER = true;
+	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
+	
 	// Constants
+	public static final int DIVISION_FACTOR = 10000;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
+	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 10000.0;
 }
