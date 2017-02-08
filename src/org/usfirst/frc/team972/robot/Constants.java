@@ -2,9 +2,7 @@ package org.usfirst.frc.team972.robot;
 
 public class Constants {
 	/*
-	 * All constants should be placed in this class. Constants should be named
-	 * in all caps with underscores. All constants should be public, static, and
-	 * final.
+	 * All constants should be placed in this class. Constants should be named in all caps with underscores. All constants should be public, static, and final.
 	 * 
 	 * Example: public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
 	 */
@@ -65,39 +63,41 @@ public class Constants {
 	public static final int GEAR_PUSHER_PISTON_FORWARD_PCM_PORT = 3;
 	public static final int GEAR_PUSHER_PISTON_REVERSE_PCM_PORT = 4;
 
-	// PID Constants
-	public static final int LEFT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
-	public static final int RIGHT_SHOOTER_FLYWHEEL_TOLERANCE = 5;
-	public static final int LEFT_SHOOTER_FLYWHEEL_SETPOINT = 500;
-	public static final int RIGHT_SHOOTER_FLYWHEEL_SETPOINT = 500;
-
 	// Robot Information
 	public static final double ROBOT_WIDTH = 1; // TODO: determine all these
 	public static final double ROBOT_LENGTH = 1;
-	public static final double ROBOT_MAX_VELOCITY = 5; //m/s
-	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.317; //meters (diameter 0.101 meters)
-	public static final double ENCODER_CLICKS_PER_ROTATION = 2048; //TODO: make sure this is right
-	public static final double ROBOT_MASS = 1; //TODO: calculate (in kg)
-	
+	public static final double ROBOT_MAX_VELOCITY = 5; // m/s
+	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.317; // meters (diameter 0.101 meters)
+	public static final double ENCODER_CLICKS_PER_ROTATION = 2048; // TODO: make sure this is right
+	public static final double ROBOT_MASS = 1; // TODO: calculate (in kg)
+
 	// System Model
-	public static final double ALPHA = 0.5; //TODO: determine (all between 0 and 1)
+	public static final double ALPHA = 0.5; // TODO: determine (all between 0 and 1)
 	public static final double BETA = 0.5;
 	public static final double PHI = 0.5;
-	
+
 	// Auton Drive
-	public static final double AUTON_DRIVE_RATIO = 0.8; //TODO: determine (needs to be between 0 and 1)
-	public static final double AUTON_STOPPING_DISTANCE_1 = 1.0; //distance in meters to start stopping (sharp deceleration)
-	public static final double AUTON_STOPPING_DISTANCE_2 = 0.3; //distance in meters to finish stopping (lower deceleration) (less than distance 1)
-	public static final double AUTON_VELOCITY_STOPPING_PROPORTION = 0.33; //proportion of max velocity city that should be reached after first stopping
-	public static final double AUTON_DRIVE_VP = 0.0; //proportion of velocity error //TODO determine all these
-	public static final double AUTON_DRIVE_VD = 0.0; //proportion of acceleration (should be small)
-	public static final double AUTON_DRIVE_AP = 0.0; //proportion of angle error
-	public static final double AUTON_DRIVE_AD = 0.0; //proportion of angle change (should be small)
+	public static final double AUTON_DRIVE_RATIO = 0.8;
+	// TODO: determine (needs to be between 0 and 1)
+	public static final double AUTON_STOPPING_DISTANCE_1 = 1.0;
+	// distance in meters to start stopping (sharp deceleration)
+	public static final double AUTON_STOPPING_DISTANCE_2 = 0.3;
+	// distance in meters to finish stopping (lower deceleration) (less than distance 1)
+	public static final double AUTON_VELOCITY_STOPPING_PROPORTION = 0.33;
+	// proportion of max velocity city that should be reached after first stopping
+	public static final double AUTON_DRIVE_VP = 0.0;
+	// proportion of velocity error //TODO determine all these
+	public static final double AUTON_DRIVE_VD = 0.0;
+	// proportion of acceleration (should be small)
+	public static final double AUTON_DRIVE_AP = 0.0;
+	// proportion of angle error
+	public static final double AUTON_DRIVE_AD = 0.0;
+	// proportion of angle change (should be small)
 
 	// Test Switches
 	public static final boolean USE_LEFT_SHOOTER = true;
 	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
-	
+
 	// Constants
 	public static final int DIVISION_FACTOR = 10000;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
