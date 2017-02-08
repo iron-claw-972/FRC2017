@@ -32,7 +32,11 @@ public class Shooter {
 		kD = Constants.FLYWHEEL_D;
 	}
 
-	public static void run() {
+	public static void align() {
+		ShooterAlignment.align();
+	}
+	
+	public static void shoot() {
 		if (Constants.CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS) {
 			getPIDFromJoystick();
 		}

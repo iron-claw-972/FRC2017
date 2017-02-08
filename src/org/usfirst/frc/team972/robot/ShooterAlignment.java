@@ -24,7 +24,7 @@ public class ShooterAlignment {
 		kD = Constants.AZIMUTH_D;
 	}
 
-	public static void run() {
+	public static void align() {
 		if (Constants.CHANGE_AZIMUTH_PID_WITH_JOYSTICKS) {
 			getPIDFromJoystick();
 		}
