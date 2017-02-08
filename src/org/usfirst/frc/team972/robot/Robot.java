@@ -42,12 +42,6 @@ public class Robot extends IterativeRobot {
 	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
 			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
 
-	// TODO: Drive isn't going to use PID
-	static PIDController leftAzimuthPID = new PIDController(0, 0, 0, leftAzimuthMotor, leftAzimuthMotor);
-	static PIDController rightAzimuthPID = new PIDController(0, 0, 0, rightAzimuthMotor, rightAzimuthMotor);
-	static PIDController leftShooterPID = new PIDController(0, 0, 0, leftShooterMotorA, leftShooterMotorA);
-	static PIDController rightShooterPID = new PIDController(0, 0, 0, rightShooterMotorA, rightShooterMotorA);
-
 	public void robotInit() {
 		Autonomous.createChooser();
 		Autonomous.updateSmartDashboard();
