@@ -19,6 +19,7 @@ public class Constants {
 	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 1;
 	public static final int INTAKE_MOTOR_TOGGLE_BUTTON = 2;
 	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 3;
+	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
 
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
@@ -97,10 +98,13 @@ public class Constants {
 	// Test Switches
 	public static final boolean USE_LEFT_SHOOTER = true;
 	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
+	public static final boolean USE_LEFT_AZIMUTH = true;
+	public static final boolean USE_RIGHT_AZIMUTH = false; // TODO: Revert
 
 	// Constants
-	public static final int DIVISION_FACTOR = 10000;
+	public static final int PID_DIVISION_FACTOR = 10000;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
 	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 10000.0;
+	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 1000.0;
 }
