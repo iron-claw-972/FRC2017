@@ -7,8 +7,6 @@ public class Robot extends IterativeRobot {
 
 	static CANTalon frontLeftDriveMotor = new CANTalon(Constants.FRONT_LEFT_DRIVE_MOTOR_CAN_ID);
 	static CANTalon frontRightDriveMotor = new CANTalon(Constants.FRONT_RIGHT_DRIVE_MOTOR_CAN_ID);
-	static CANTalon centerLeftDriveMotor = new CANTalon(Constants.CENTER_LEFT_DRIVE_MOTOR_CAN_ID);
-	static CANTalon centerRightDriveMotor = new CANTalon(Constants.CENTER_RIGHT_DRIVE_MOTOR_CAN_ID);
 	static CANTalon backLeftDriveMotor = new CANTalon(Constants.BACK_LEFT_DRIVE_MOTOR_CAN_ID);
 	static CANTalon backRightDriveMotor = new CANTalon(Constants.BACK_RIGHT_DRIVE_MOTOR_CAN_ID);
 	static CANTalon winchMotor = new CANTalon(Constants.WINCH_MOTOR_CAN_ID);
@@ -45,8 +43,6 @@ public class Robot extends IterativeRobot {
 			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
 
 	// TODO: Drive isn't going to use PID
-	static PIDController leftDrivePID = new PIDController(0, 0, 0, leftDriveEncoderFront, frontLeftDriveMotor);
-	static PIDController rightDrivePID = new PIDController(0, 0, 0, rightDriveEncoderFront, frontRightDriveMotor);
 	static PIDController leftAzimuthPID = new PIDController(0, 0, 0, leftAzimuthMotor, leftAzimuthMotor);
 	static PIDController rightAzimuthPID = new PIDController(0, 0, 0, rightAzimuthMotor, rightAzimuthMotor);
 	static PIDController leftShooterPID = new PIDController(0, 0, 0, leftShooterMotorA, leftShooterMotorA);
