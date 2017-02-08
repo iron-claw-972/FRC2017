@@ -18,15 +18,21 @@ public class ShooterAlignment {
 	public static void init() {
 		Robot.leftAzimuthMotor.enableBrakeMode(true);
 		Robot.rightAzimuthMotor.enableBrakeMode(true);
+		
+		kP = Constants.AZIMUTH_P;
+		kI = Constants.AZIMUTH_I;
+		kD = Constants.AZIMUTH_D;
 	}
 
 	public static void run() {
-		getPIDFromJoystick();
+		if (Constants.CHANGE_AZIMUTH_PID_WITH_JOYSTICKS) {
+			getPIDFromJoystick();
+		}
 
 		runPID = Robot.operatorJoystick.getRawButton(Constants.SHOOTER_AZIMUTH_MOTOR_BUTTON);
 
 		// TODO: Add Azimuth calculations
-		if (Constants.USE_LEFT_AZIMUTH) {
+		if (Constants.USE_LEFT_SHOOTER) {
 			moveAzimuth(Robot.leftAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, runPID);
 		}
 		if (Constants.USE_RIGHT_SHOOTER) {
@@ -54,28 +60,28 @@ public class ShooterAlignment {
 	}
 
 	public static void printToDashboard() {
-		SmartDashboard.putBoolean("pidRunning", pidRunning);
-		SmartDashboard.putNumber("Target Position", Constants.SHOOTER_AZIMUTH_MOTOR_POSITION);
+		SmartDashboard.putBoolean("Azimuth pidRunning", pidRunning);
+		SmartDashboard.putNumber("Azimuth Target Position", Constants.SHOOTER_AZIMUTH_MOTOR_POSITION);
 		// TODO: Use real target position from CANTalon
-		if (Constants.USE_LEFT_AZIMUTH) {
-			SmartDashboard.putNumber("Left Position", Robot.leftAzimuthMotor.getPosition());
-			SmartDashboard.putNumber("Left Closed Loop Error", Robot.leftAzimuthMotor.getClosedLoopError());
-			SmartDashboard.putNumber("Left P", Robot.leftAzimuthMotor.getP());
-			SmartDashboard.putNumber("Left I", Robot.leftAzimuthMotor.getI());
-			SmartDashboard.putNumber("Left D", Robot.leftAzimuthMotor.getD());
-			SmartDashboard.putNumber("Left I Accum", Robot.leftAzimuthMotor.GetIaccum());
+		if (Constants.USE_LEFT_SHOOTER) {
+			SmartDashboard.putNumber("Azimuth Left Position", Robot.leftAzimuthMotor.getPosition());
+			SmartDashboard.putNumber("Azimuth Left Closed Loop Error", Robot.leftAzimuthMotor.getClosedLoopError());
+			SmartDashboard.putNumber("Azimuth Left P", Robot.leftAzimuthMotor.getP());
+			SmartDashboard.putNumber("Azimuth Left I", Robot.leftAzimuthMotor.getI());
+			SmartDashboard.putNumber("Azimuth Left D", Robot.leftAzimuthMotor.getD());
+			SmartDashboard.putNumber("Azimuth Left I Accum", Robot.leftAzimuthMotor.GetIaccum());
 		}
-		if (Constants.USE_RIGHT_AZIMUTH) {
-			SmartDashboard.putNumber("Right Position", Robot.rightAzimuthMotor.getPosition());
-			SmartDashboard.putNumber("Right Closed Loop Error", Robot.rightAzimuthMotor.getClosedLoopError());
-			SmartDashboard.putNumber("Right P", Robot.rightAzimuthMotor.getP());
-			SmartDashboard.putNumber("Right I", Robot.rightAzimuthMotor.getI());
-			SmartDashboard.putNumber("Right D", Robot.rightAzimuthMotor.getD());
-			SmartDashboard.putNumber("Right I Accum", Robot.rightAzimuthMotor.GetIaccum());
+		if (Constants.USE_RIGHT_SHOOTER) {
+			SmartDashboard.putNumber("Azimuth Right Position", Robot.rightAzimuthMotor.getPosition());
+			SmartDashboard.putNumber("Azimuth Right Closed Loop Error", Robot.rightAzimuthMotor.getClosedLoopError());
+			SmartDashboard.putNumber("Azimuth Right P", Robot.rightAzimuthMotor.getP());
+			SmartDashboard.putNumber("Azimuth Right I", Robot.rightAzimuthMotor.getI());
+			SmartDashboard.putNumber("Azimuth Right D", Robot.rightAzimuthMotor.getD());
+			SmartDashboard.putNumber("Azimuth Right I Accum", Robot.rightAzimuthMotor.GetIaccum());
 		}
-		SmartDashboard.putNumber("kP", kP);
-		SmartDashboard.putNumber("kI", kI);
-		SmartDashboard.putNumber("kD", kD);
+		SmartDashboard.putNumber("Azimuth kP", kP);
+		SmartDashboard.putNumber("Azimuth kI", kI);
+		SmartDashboard.putNumber("Azimuth kD", kD);
 
 	}
 

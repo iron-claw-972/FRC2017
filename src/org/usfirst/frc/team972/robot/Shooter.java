@@ -26,10 +26,16 @@ public class Shooter {
 
 		Robot.leftShooterMotorB.set(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
 		Robot.rightShooterMotorB.set(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
+		
+		kP = Constants.FLYWHEEL_P;
+		kI = Constants.FLYWHEEL_I;
+		kD = Constants.FLYWHEEL_D;
 	}
 
 	public static void run() {
-		getPIDFromJoystick();
+		if (Constants.CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS) {
+			getPIDFromJoystick();
+		}
 
 		runPID = Robot.operatorJoystick.getRawButton(Constants.SHOOTER_FLYWHEEL_MOTOR_BUTTON);
 
@@ -61,28 +67,28 @@ public class Shooter {
 	}
 
 	public static void printToDashboard() {
-		SmartDashboard.putBoolean("pidRunning", pidRunning);
-		SmartDashboard.putNumber("Target Speed", Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
+		SmartDashboard.putBoolean("Flywheel pidRunning", pidRunning);
+		SmartDashboard.putNumber("Flywheel Target Speed", Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
 		// TODO: Use real target speed from CANTalon
 		if (Constants.USE_LEFT_SHOOTER) {
-			SmartDashboard.putNumber("Left Speed", Robot.leftShooterMotorA.getSpeed());
-			SmartDashboard.putNumber("Left Closed Loop Error", Robot.leftShooterMotorA.getClosedLoopError());
-			SmartDashboard.putNumber("Left P", Robot.leftShooterMotorA.getP());
-			SmartDashboard.putNumber("Left I", Robot.leftShooterMotorA.getI());
-			SmartDashboard.putNumber("Left D", Robot.leftShooterMotorA.getD());
-			SmartDashboard.putNumber("Left I Accum", Robot.leftShooterMotorA.GetIaccum());
+			SmartDashboard.putNumber("Flywheel Left Speed", Robot.leftShooterMotorA.getSpeed());
+			SmartDashboard.putNumber("Flywheel Left Closed Loop Error", Robot.leftShooterMotorA.getClosedLoopError());
+			SmartDashboard.putNumber("Flywheel Left P", Robot.leftShooterMotorA.getP());
+			SmartDashboard.putNumber("Flywheel Left I", Robot.leftShooterMotorA.getI());
+			SmartDashboard.putNumber("Flywheel Left D", Robot.leftShooterMotorA.getD());
+			SmartDashboard.putNumber("Flywheel Left I Accum", Robot.leftShooterMotorA.GetIaccum());
 		}
 		if (Constants.USE_RIGHT_SHOOTER) {
-			SmartDashboard.putNumber("Right Speed", Robot.leftShooterMotorA.getSpeed());
-			SmartDashboard.putNumber("Right Closed Loop Error", Robot.leftShooterMotorA.getClosedLoopError());
-			SmartDashboard.putNumber("Right P", Robot.rightShooterMotorA.getP());
-			SmartDashboard.putNumber("Right I", Robot.rightShooterMotorA.getI());
-			SmartDashboard.putNumber("Right D", Robot.rightShooterMotorA.getD());
-			SmartDashboard.putNumber("Right I Accum", Robot.rightShooterMotorA.GetIaccum());
+			SmartDashboard.putNumber("Flywheel Right Speed", Robot.leftShooterMotorA.getSpeed());
+			SmartDashboard.putNumber("Flywheel Right Closed Loop Error", Robot.leftShooterMotorA.getClosedLoopError());
+			SmartDashboard.putNumber("Flywheel Right P", Robot.rightShooterMotorA.getP());
+			SmartDashboard.putNumber("Flywheel Right I", Robot.rightShooterMotorA.getI());
+			SmartDashboard.putNumber("Flywheel Right D", Robot.rightShooterMotorA.getD());
+			SmartDashboard.putNumber("Flywheel Right I Accum", Robot.rightShooterMotorA.GetIaccum());
 		}
-		SmartDashboard.putNumber("kP", kP);
-		SmartDashboard.putNumber("kI", kI);
-		SmartDashboard.putNumber("kD", kD);
+		SmartDashboard.putNumber("Flywheel kP", kP);
+		SmartDashboard.putNumber("Flywheel kI", kI);
+		SmartDashboard.putNumber("Flywheel kD", kD);
 
 	}
 
