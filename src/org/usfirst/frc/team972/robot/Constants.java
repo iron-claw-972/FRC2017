@@ -24,20 +24,18 @@ public class Constants {
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
 	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
-	public static final int CENTER_LEFT_DRIVE_MOTOR_CAN_ID = 3;
-	public static final int CENTER_RIGHT_DRIVE_MOTOR_CAN_ID = 4;
-	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 5;
-	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 6;
-	public static final int WINCH_MOTOR_CAN_ID = 7;
-	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 8;
-	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 9;
-	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 10;
-	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 11;
-	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 12;
-	public static final int RIGHT_AZIMUTH_MOTOR_CAN_ID = 13;
-	public static final int INTAKE_MOTOR_CAN_ID = 14;
-	public static final int LEFT_LOADER_MOTOR_CAN_ID = 15;
-	public static final int RIGHT_LOADER_MOTOR_CAN_ID = 16;
+	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 3;
+	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 4;
+	public static final int WINCH_MOTOR_CAN_ID = 5;
+	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 6;
+	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 7;
+	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 8;
+	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 9;
+	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 10;
+	public static final int RIGHT_AZIMUTH_MOTOR_CAN_ID = 11;
+	public static final int INTAKE_MOTOR_CAN_ID = 12;
+	public static final int LEFT_LOADER_MOTOR_CAN_ID = 13;
+	public static final int RIGHT_LOADER_MOTOR_CAN_ID = 14;
 
 	// PWM IDs
 	public static final int LEFT_HOOD_LINEAR_ACTUATOR_PWM_PORT = 0;
@@ -48,7 +46,7 @@ public class Constants {
 	public static final int RIGHT_JOYSTICK_INPUT_USB_PORT = 1;
 	public static final int OPERATOR_JOYSTICK_INPUT_USB_PORT = 2;
 
-	// DIO Ports //TODO switch to LEFT_DRIVE_ENCODER_FRONT, etc.
+	// DIO Ports
 	public static final int LEFT_DRIVE_ENCODER_FRONT_PORT_A = 0;
 	public static final int LEFT_DRIVE_ENCODER_FRONT_PORT_B = 1;
 	public static final int LEFT_DRIVE_ENCODER_BACK_PORT_A = 2;
@@ -76,9 +74,9 @@ public class Constants {
 	public static final double ROBOT_WIDTH = 1; // TODO: determine all these
 	public static final double ROBOT_LENGTH = 1;
 	public static final double ROBOT_MAX_VELOCITY = 5; //m/s
-	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.317; //meters
-	public static final double ENCODER_CLICKS_PER_ROTATION = 360; //TODO: test
-	public static final double MOTOR_POWER_COEFFICIENT = 1.0; //TODO: determine
+	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.317; //meters (diameter 0.101 meters)
+	public static final double ENCODER_CLICKS_PER_ROTATION = 2048; //TODO: make sure this is right
+	public static final double ROBOT_MASS = 1; //TODO: calculate (in kg)
 	
 	// System Model
 	public static final double ALPHA = 0.5; //TODO: determine (all between 0 and 1)

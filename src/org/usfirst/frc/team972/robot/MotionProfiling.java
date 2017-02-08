@@ -9,17 +9,19 @@ public class MotionProfiling {
 	 *
 	 * @param dT						Loop time (change in time) in seconds
 	 * @param gyro						Gyro angle in degrees
-	 * @param frontLeftEncoderDistance	Front left encoder distance
-	 * @param backLeftEncoderDistance	Back left encoder distance
-	 * @param frontRightEncoderDistance	Front right encoder distance
-	 * @param backRightEncoderDistance	Back right encoder distance
-	 * @param powerToLeft				Power to left motors
-	 * @param powerToRight				Power to right motors
+	 * @param frontLeftEncoderValue		Front left encoder distance
+	 * @param backLeftEncoderValue		Back left encoder distance
+	 * @param frontRightEncoderValue	Front right encoder distance
+	 * @param backRightEncoderValue		Back right encoder distance
+	 * @param LeftAccel					Left side acceleration (m/s^2)
+	 * @param rightAccel				Right side acceleration (m/s^2)
 	 */
-	public static void update(double dT, double gyro, double frontLeftEncoderDistance, double backLeftEncoderDistance,
-			double frontRightEncoderDistance, double backRightEncoderDistance, double powerToLeft, double powerToRight) { //TODO fix encoder click distance to meters
-		LeftModel.update(powerToLeft, dT, frontLeftEncoderDistance, backLeftEncoderDistance); //TODO solve power to motors
-		RightModel.update(powerToRight, dT, frontRightEncoderDistance, backRightEncoderDistance);
+	public static void update(double dT, double gyro, double frontLeftEncoderValue, double backLeftEncoderValue,
+			double frontRightEncoderValue, double backRightEncoderValue, double leftAccel, double rightAccel) { //TODO Power Coefficient is incorrect according to physics
+		LeftModel.update(leftAccel, dT, frontLeftEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION, 
+				backLeftEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
+		RightModel.update(rightAccel, dT, frontRightEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION,
+				backRightEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
 		SystemModel.update(gyro, dT);
 	}
 	
