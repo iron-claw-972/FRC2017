@@ -39,7 +39,7 @@ public class ShooterAlignment {
 			moveAzimuth(Robot.rightAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, runPID);
 		}
 
-		printToDashboard();
+		updateSmartDashboard();
 	}
 
 	public static void moveAzimuth(CANTalon motor, double position, boolean runPID) {
@@ -59,7 +59,7 @@ public class ShooterAlignment {
 		}
 	}
 
-	public static void printToDashboard() {
+	public static void updateSmartDashboard() {
 		SmartDashboard.putBoolean("Azimuth pidRunning", pidRunning);
 		SmartDashboard.putNumber("Azimuth Target Position", Constants.SHOOTER_AZIMUTH_MOTOR_POSITION);
 		// TODO: Use real target position from CANTalon

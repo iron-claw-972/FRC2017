@@ -46,7 +46,7 @@ public class Shooter {
 			runShooter(Robot.rightShooterMotorA, runPID);
 		}
 
-		printToDashboard();
+		updateSmartDashboard();
 	}
 
 	public static void runShooter(CANTalon motor, boolean runPID) {
@@ -66,7 +66,7 @@ public class Shooter {
 		}
 	}
 
-	public static void printToDashboard() {
+	public static void updateSmartDashboard() {
 		SmartDashboard.putBoolean("Flywheel pidRunning", pidRunning);
 		SmartDashboard.putNumber("Flywheel Target Speed", Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
 		// TODO: Use real target speed from CANTalon
