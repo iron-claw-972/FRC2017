@@ -96,11 +96,19 @@ public class Constants {
 	// proportion of angle change (should be small)
 
 	// Test Switches
+	public static final boolean CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS = true;
+	public static final boolean CHANGE_AZIMUTH_PID_WITH_JOYSTICKS = true;
 	public static final boolean USE_LEFT_SHOOTER = true;
 	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
-	public static final boolean USE_LEFT_AZIMUTH = true;
-	public static final boolean USE_RIGHT_AZIMUTH = false; // TODO: Revert
 
+	// PID Values
+	public static final int FLYWHEEL_P = 0;
+	public static final int FLYWHEEL_I = 0;
+	public static final int FLYWHEEL_D = 0;
+	public static final int AZIMUTH_P = 0;
+	public static final int AZIMUTH_I = 0;
+	public static final int AZIMUTH_D = 0;
+	
 	// Constants
 	public static final int PID_DIVISION_FACTOR = 10000;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
