@@ -44,9 +44,9 @@ public class Shooter {
 	}
 
 	public static void runShooter(CANTalon motor, boolean runPID) {
-		motor.setP((double) kP / (double) Constants.DIVISION_FACTOR);
-		motor.setI((double) kI / (double) Constants.DIVISION_FACTOR);
-		motor.setD((double) kD / (double) Constants.DIVISION_FACTOR);
+		motor.setP((double) kP / (double) Constants.PID_DIVISION_FACTOR);
+		motor.setI((double) kI / (double) Constants.PID_DIVISION_FACTOR);
+		motor.setD((double) kD / (double) Constants.PID_DIVISION_FACTOR);
 
 		if (runPID) {
 			motor.changeControlMode(TalonControlMode.Speed);
