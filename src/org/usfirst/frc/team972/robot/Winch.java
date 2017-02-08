@@ -5,9 +5,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Winch {
 
 	static boolean winchMotorOn = false;
+	static boolean winchButtonPressedLastTime = false;
 	
 	public static void init() {
 		Robot.winchMotor.enableBrakeMode(true);
+	}
+	
+	public static void manage() {
+		boolean winchMotorButton = Robot.operatorJoystick.getRawButton(Constants.WINCH_MOTOR_TOGGLE_BUTTON);
+		if (winchMotorButton && !winchButtonPressedLastTime) {
+			Winch.start();
+		} else {
+			Winch.stop();
+		}
+		winchButtonPressedLastTime = winchMotorButton;
 	}
 
 	public static void start() {

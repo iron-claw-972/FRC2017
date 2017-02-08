@@ -14,9 +14,6 @@ public class Teleop {
 	 * object. Example: if(r.isEnabled())
 	 */
 
-	static boolean winchButtonPressedLastTime = false;
-	static boolean intakeButtonPressedLastTime = false;
-	
 	private static double prevTime = 0.0;
 
 	public static void init(Robot r) {
@@ -25,24 +22,8 @@ public class Teleop {
 	}
 
 	public static void periodic(Robot r) {
-		// Winch
-		boolean winchMotorButton = Robot.operatorJoystick.getRawButton(Constants.WINCH_MOTOR_TOGGLE_BUTTON);
-		if (winchMotorButton && !winchButtonPressedLastTime) {
-			Winch.start();
-		} else {
-			Winch.stop();
-		}
-		winchButtonPressedLastTime = winchMotorButton;
-
-		// Intake
-		boolean intakeMotorButton = Robot.operatorJoystick.getRawButton(Constants.INTAKE_MOTOR_TOGGLE_BUTTON);
-		if (intakeMotorButton && !intakeButtonPressedLastTime) {
-			Intake.start();
-		} else {
-			Intake.stop();
-		}
-		intakeButtonPressedLastTime = intakeMotorButton;
-
+		Winch.manage();
+		Intake.manage();
 		Drive.teleopDrive();
 		
 		double currTime = Time.get();
