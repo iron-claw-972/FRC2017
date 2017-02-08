@@ -24,26 +24,18 @@ public class Drive {
 	public static void init() {
 		Robot.frontLeftDriveMotor.setInverted(true);
 		Robot.frontRightDriveMotor.setInverted(true);
-		Robot.centerLeftDriveMotor.setInverted(true);
-		Robot.centerRightDriveMotor.setInverted(true);
 		Robot.backLeftDriveMotor.setInverted(true);
 		Robot.backRightDriveMotor.setInverted(true);
 
 		Robot.frontLeftDriveMotor.enableBrakeMode(true);
 		Robot.frontRightDriveMotor.enableBrakeMode(true);
-		Robot.centerLeftDriveMotor.enableBrakeMode(true);
-		Robot.centerRightDriveMotor.enableBrakeMode(true);
 		Robot.backLeftDriveMotor.enableBrakeMode(true);
 		Robot.backRightDriveMotor.enableBrakeMode(true);
 
-		Robot.centerLeftDriveMotor.changeControlMode(TalonControlMode.Follower);
-		Robot.centerRightDriveMotor.changeControlMode(TalonControlMode.Follower);
 		Robot.backLeftDriveMotor.changeControlMode(TalonControlMode.Follower);
 		Robot.backRightDriveMotor.changeControlMode(TalonControlMode.Follower);
 
-		Robot.centerLeftDriveMotor.set(Constants.FRONT_LEFT_DRIVE_MOTOR_CAN_ID);
 		Robot.backLeftDriveMotor.set(Constants.FRONT_LEFT_DRIVE_MOTOR_CAN_ID);
-		Robot.centerRightDriveMotor.set(Constants.FRONT_RIGHT_DRIVE_MOTOR_CAN_ID);
 		Robot.backRightDriveMotor.set(Constants.FRONT_RIGHT_DRIVE_MOTOR_CAN_ID);
 	}
 
