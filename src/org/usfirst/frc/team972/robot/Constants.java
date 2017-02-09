@@ -115,4 +115,5 @@ public class Constants {
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
 	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 10000.0;
 	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 1000.0;
+	public static final double SHOOTER_HOOD_POSITION = 0.7;
 }

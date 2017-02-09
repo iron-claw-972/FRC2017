@@ -32,13 +32,16 @@ public class ShooterAlignment {
 		runPID = Robot.operatorJoystick.getRawButton(Constants.SHOOTER_AZIMUTH_MOTOR_BUTTON);
 
 		// TODO: Add Azimuth calculations
+		// TODO: Add Hood calculations
 		if (Constants.USE_LEFT_SHOOTER) {
 			moveAzimuth(Robot.leftAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, runPID);
+			moveHood(Robot.leftHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
 		}
 		if (Constants.USE_RIGHT_SHOOTER) {
 			moveAzimuth(Robot.rightAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, runPID);
+			moveHood(Robot.rightHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
 		}
-
+		
 		updateSmartDashboard();
 	}
 
@@ -53,10 +56,14 @@ public class ShooterAlignment {
 			pidRunning = true;
 		} else {
 			motor.changeControlMode(TalonControlMode.PercentVbus);
-			motor.set(0);
+			motor.set(Robot.operatorJoystick.getY());
 			motor.clearIAccum();
 			pidRunning = false;
 		}
+	}
+	
+	public static void moveHood(Servo linearActuator, double position) {
+		linearActuator.set(position);
 	}
 
 	public static void updateSmartDashboard() {
