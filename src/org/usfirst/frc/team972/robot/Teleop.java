@@ -20,7 +20,7 @@ public class Teleop {
 	 * Initialization code for teleop mode. This method for initialization code will be called each
 	 * time the robot enters teleop mode.
 	 * 
-	 * @see Robot.init()
+	 * @see Robot.teleopInit()
 	 */
 	public static void init(Robot r) {
 		r.init();
