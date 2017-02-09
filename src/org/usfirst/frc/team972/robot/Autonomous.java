@@ -26,7 +26,7 @@ public class Autonomous {
 
 	public static void init(Robot r) {
 		r.init();
-//		MotionProfiling.init(x_init, y_init); //TODO figure out what these inits
+//		MotionProfiling.init(x_init, y_init); // TODO: figure out what these inits
 		updateSmartDashboard();
 	}
 
