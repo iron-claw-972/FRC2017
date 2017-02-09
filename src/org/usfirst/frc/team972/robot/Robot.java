@@ -37,50 +37,91 @@ public class Robot extends IterativeRobot {
 			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B);
 
 	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
-	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
-			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
-	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
+	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(
+			Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT, Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
+	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(
+			Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
 			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
 
+	/**
+	 * Robot-wide initialization code. This method is for default Robot-wide initialization and will
+	 * be called when the robot is first powered on. It will be called exactly one time.
+	 * <p>
+	 * Warning: the Driver Station "Robot Code" light and FMS "Robot Ready" indicators will be off
+	 * until robotInit() exits. Code in robotInit() that waits for enable will cause the robot to
+	 * never indicate that the code is ready, causing the robot to be bypassed in a match.
+	 */
 	public void robotInit() {
 		Autonomous.createChooser();
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
-		
+
 		init();
 	}
 
 	/*
-	 * The four primary functions below (autonomousInit(), autonomousPeriodic(),
-	 * teleopInit(), and teleopPeriodic()) should not be altered. Code should be
-	 * altered in its respective class (Autonomous or Teleop). This change will
-	 * help shorten the Robot class and make it easier to navigate.
+	 * The four primary functions below (autonomousInit(), autonomousPeriodic(), teleopInit(), and
+	 * teleopPeriodic()) should not be altered. Code should be altered in its respective class
+	 * (Autonomous or Teleop). This change will help shorten the Robot class and make it easier to
+	 * navigate.
 	 */
 
+	/**
+	 * Initialization code for autonomous mode. This method for initialization code will be called
+	 * each time the robot enters autonomous mode.
+	 */
 	public void autonomousInit() {
 		Autonomous.init(this);
 	}
 
+	/**
+	 * Periodic code for autonomous mode. This method will be called each time a new packet is
+	 * received from the driver station and the robot is in autonomous mode.
+	 * <p>
+	 * Packets are received approximately every 20ms. Fixed loop timing is not guaranteed due to
+	 * network timing variability and the function may not be called at all if the Driver Station is
+	 * disconnected. For most use cases the variable timing will not be an issue.
+	 */
 	public void autonomousPeriodic() {
 		Autonomous.periodic(this);
 	}
 
+	/**
+	 * Initialization code for teleop mode. This method for initialization code will be called each
+	 * time the robot enters teleop mode.
+	 */
 	public void teleopInit() {
 		Teleop.init(this);
 	}
 
+	/**
+	 * Periodic code for teleop mode. This method will be called each time a new packet is received
+	 * from the driver station and the robot is in teleop mode.
+	 * <p>
+	 * Packets are received approximately every 20ms. Fixed loop timing is not guaranteed due to
+	 * network timing variability and the function may not be called at all if the Driver Station is
+	 * disconnected. For most use cases the variable timing will not be an issue.
+	 */
 	public void teleopPeriodic() {
 		Teleop.periodic(this);
 	}
 
-	public void disabledInit() {
-
-	}
-	
+	/**
+	 * Periodic code for test mode. This method will be called each time a new packet is received
+	 * from the driver station and the robot is in test mode.
+	 * <p>
+	 * Packets are received approximately every 20ms. Fixed loop timing is not guaranteed due to
+	 * network timing variability and the function may not be called at all if the Driver Station is
+	 * disconnected. For most use cases the variable timing will not be an issue.
+	 */
 	public void testPeriodic() {
 		Tester.run();
 	}
-  
+
+	/**
+	 * Initialization code. This method for initialization code will be called each time the robot
+	 * enters autonomous or teleop mode.
+	 */
 	public void init() {
 		Drive.init();
 		Winch.init();
