@@ -38,12 +38,12 @@ public class Shooter {
 		Robot.rightShooterMotorB.enableBrakeMode(true);
 
 		// TODO: Uncomment this
-//		Robot.leftShooterMotorB.changeControlMode(TalonControlMode.Follower);
-//		Robot.rightShooterMotorB.changeControlMode(TalonControlMode.Follower);
-//
-//		Robot.leftShooterMotorB.set(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
-//		Robot.rightShooterMotorB.set(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
-		
+		// Robot.leftShooterMotorB.changeControlMode(TalonControlMode.Follower);
+		// Robot.rightShooterMotorB.changeControlMode(TalonControlMode.Follower);
+		//
+		// Robot.leftShooterMotorB.set(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
+		// Robot.rightShooterMotorB.set(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
+
 		kP = Constants.FLYWHEEL_P;
 		kI = Constants.FLYWHEEL_I;
 		kD = Constants.FLYWHEEL_D;
@@ -57,7 +57,7 @@ public class Shooter {
 	public static void align() {
 		ShooterAlignment.align();
 	}
-	
+
 	/**
 	 * Manages the shooter flywheels.
 	 * 
@@ -79,12 +79,14 @@ public class Shooter {
 
 		updateSmartDashboard();
 	}
-	
+
 	/**
 	 * Powers a single shooter.
 	 * 
-	 * @param motor		shooter motor controller
-	 * @param runPID	run PID on motor
+	 * @param motor
+	 *            shooter motor controller
+	 * @param runPID
+	 *            run PID on motor
 	 */
 	public static void runShooter(CANTalon motor, boolean runPID) {
 		motor.setP((double) kP / (double) Constants.PID_DIVISION_FACTOR);
@@ -107,6 +109,7 @@ public class Shooter {
 	 * Updates SmartDashboard values for Shooter.
 	 */
 	public static void updateSmartDashboard() {
+		// @formatter:off
 		SmartDashboard.putBoolean("Flywheel pidRunning", pidRunning);
 		SmartDashboard.putNumber("Flywheel Target Speed", Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
 		// TODO: Use real target speed from CANTalon
@@ -129,7 +132,7 @@ public class Shooter {
 		SmartDashboard.putNumber("Flywheel kP", kP);
 		SmartDashboard.putNumber("Flywheel kI", kI);
 		SmartDashboard.putNumber("Flywheel kD", kD);
-
+		// @formatter:on
 	}
 
 	/**
