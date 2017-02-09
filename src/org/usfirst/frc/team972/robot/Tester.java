@@ -1,6 +1,8 @@
 package org.usfirst.frc.team972.robot;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.*;
 
 public class Tester {
@@ -22,104 +24,47 @@ public class Tester {
 	static CANTalon fifteen = new CANTalon(15);
 	static CANTalon sixteen = new CANTalon(16);
 
-	static Joystick leftJoy = new Joystick(0);
-	static Joystick rightJoy = new Joystick(1);
-	static Joystick operatorJoy = new Joystick(2);
+	static Joystick leftJoystick = new Joystick(0);
+	static Joystick rightJoystick = new Joystick(1);
+	static Joystick operatorJoystick = new Joystick(2);
 
-	public static void run() {		if (leftJoy.getRawButton(1)) {
-		double throttle = leftJoy.getThrottle();
-		one.set(throttle);
-		System.out.println("1 " + throttle);
-	}
-	
-	if (leftJoy.getRawButton(2)) {
-		double throttle = leftJoy.getThrottle();
-		two.set(throttle);
-		System.out.println("2 " + throttle);
-	}
-
-	if (leftJoy.getRawButton(3)) {
-		double throttle = leftJoy.getThrottle();
-		three.set(throttle);
-		System.out.println("3 " + throttle);
-	}
-
-	if (leftJoy.getRawButton(4)) {
-		double throttle = leftJoy.getThrottle();
-		four.set(throttle);
-		System.out.println("4 " + throttle);
-	}
-
-	if (leftJoy.getRawButton(5)) {
-		double throttle = leftJoy.getThrottle();
-		five.set(throttle);
-		System.out.println("5 " + throttle);
+	/**
+	 * Manages motor testing.
+	 * 
+	 * @see runMotor()
+	 */
+	public static void run() {
+		runMotor(one, operatorJoystick, 1);
+		runMotor(two, operatorJoystick, 2);
+		runMotor(three, operatorJoystick, 3);
+		runMotor(four, operatorJoystick, 4);
+		runMotor(five, leftJoystick, 1);
+		runMotor(six, leftJoystick, 2);
+		runMotor(seven, leftJoystick, 3);
+		runMotor(eight, leftJoystick, 4);
+		runMotor(nine, leftJoystick, 5);
+		runMotor(ten, leftJoystick, 6);
+		runMotor(eleven, rightJoystick, 1);
+		runMotor(twelve, rightJoystick, 2);
+		runMotor(thirteen, rightJoystick, 3);
+		runMotor(fourteen, rightJoystick, 4);
+		runMotor(fifteen, rightJoystick, 5);
+		runMotor(sixteen, rightJoystick, 6);
 	}
 
-	if (leftJoy.getRawButton(6)) {
-		double throttle = leftJoy.getThrottle();
-		six.set(throttle);
-		System.out.println("6 " + throttle);
-	}
-
-	if (rightJoy.getRawButton(1)) {
-		double throttle = rightJoy.getThrottle();
-		seven.set(throttle);
-		System.out.println("7 " + throttle);
-	}
-
-	if (rightJoy.getRawButton(2)) {
-		double throttle = rightJoy.getThrottle();
-		eight.set(throttle);
-		System.out.println("8 " + throttle);
-	}
-
-	if (rightJoy.getRawButton(3)) {
-		double throttle = rightJoy.getThrottle();
-		nine.set(throttle);
-		System.out.println("9 " + throttle);
-	}
-	
-	if (rightJoy.getRawButton(4)) {
-		double throttle = rightJoy.getThrottle();
-		ten.set(throttle);
-		System.out.println("10 " + throttle);
-	}
-
-	if (rightJoy.getRawButton(5)) {
-		double throttle = rightJoy.getThrottle();
-		eleven.set(throttle);
-		System.out.println("11 " + throttle);
-	}
-
-	if (rightJoy.getRawButton(6)) {
-		double throttle = rightJoy.getThrottle();
-		twelve.set(throttle);
-		System.out.println("12 " + throttle);
-	}
-
-	if (operatorJoy.getRawButton(1)) {
-		double throttle = operatorJoy.getThrottle();
-		thirteen.set(throttle);
-		System.out.println("13 " + throttle);
-	}
-
-	if (operatorJoy.getRawButton(2)) {
-		double throttle = operatorJoy.getThrottle();
-		fourteen.set(throttle);
-		System.out.println("14 " + throttle);
-	}
-
-	if (operatorJoy.getRawButton(3)) {
-		double throttle = operatorJoy.getThrottle();
-		fifteen.set(throttle);
-		System.out.println("15 " + throttle);
-	}
-
-	if (operatorJoy.getRawButton(4)) {
-		double throttle = operatorJoy.getThrottle();
-		sixteen.set(throttle);
-		System.out.println("16 " + throttle);
-	}
+	/**
+	 * Runs a given motor depending on joystick input.
+	 * 
+	 * @param motor		motor to test
+	 * @param joy		joystick to check
+	 * @param button	button on joystick to check
+	 */
+	public static void runMotor(CANTalon motor, Joystick joy, int button) {
+		double speed = 0;
+		if (joy.getRawButton(button)) {
+			speed = joy.getY();
+			motor.set(speed);
+		}
+		SmartDashboard.putNumber("Motor #" + motor.getDeviceID() + " Test Speed", speed);
 	}
 }
