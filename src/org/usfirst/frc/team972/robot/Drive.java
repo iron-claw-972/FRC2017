@@ -93,7 +93,7 @@ public class Drive {
 		if (Robot.leftJoystick.getRawButton(Constants.STOP_DRIVE_BUTTON)) {
 			stopDrive();
 		} else {
-			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) { //TODO Squared drive is the worst
+			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) {
 				// Taking absolute value of one preserves the positive or negative result (normally squaring makes it positive)
 				leftDriveInput = Math.abs(leftDriveInput) * leftDriveInput;
 				rightDriveInput = Math.abs(rightDriveInput) * rightDriveInput;
@@ -120,10 +120,10 @@ public class Drive {
 		
 		setBrakeMode(true);
 		
-		//distance from robot to desired point using Pythagorean theorem
+		// distance from robot to desired point using Pythagorean theorem
 		double distance = Math.pow((Math.pow((x_desired - curr_x), 2) + Math.pow((y_desired - curr_y), 2)), 0.5);
 		if (distance > 0.02) {
-			//get desired angle of robot to get to in degrees using arctan from -180 to +180
+			// get desired angle of robot to get to in degrees using arctan from -180 to +180
 			double trajectory_angle = Math.atan2((x_desired - curr_x), (y_desired - curr_y)) + (Math.PI / 2);
 			if (trajectory_angle > Math.PI) {
 				trajectory_angle = Math.toDegrees(trajectory_angle - (2 * Math.PI));
@@ -133,7 +133,7 @@ public class Drive {
 				trajectory_angle = Math.toDegrees(trajectory_angle);
 			}
 		
-			//determine which direction the robot needs to turn
+			// determine which direction the robot needs to turn
 			boolean isReverseDrive = false;
 			theta_error = trajectory_angle - curr_theta;
 			if (theta_error > 90.0) {
@@ -229,6 +229,7 @@ public class Drive {
 		SmartDashboard.putNumber("Right Encoder Back", Robot.rightDriveEncoderBack.get());
 	}
 	
+	// TODO: Magic Numbers
 	public static double getAccel(String robotSide) { //TODO: make sure this is actually the right equation
 		if (robotSide == "left") {
 			return 0.4448 * ((Robot.frontLeftDriveMotor.getOutputCurrent() + Robot.backLeftDriveMotor.getOutputCurrent()) / 2) * (1 - 0.0356 * LeftModel.v_k) / Constants.ROBOT_MASS;
