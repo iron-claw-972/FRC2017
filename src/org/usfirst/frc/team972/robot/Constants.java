@@ -26,8 +26,8 @@ public class Constants {
 	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
 	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 3;
 	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 4;
-	public static final int WINCH_MOTOR_CAN_ID = 5;
-	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 6;
+	public static final int WINCH_MOTOR_CAN_ID = 6; // TODO: Revert to 5 for real robot
+	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 5; // TODO: Revert to 6 for real robot
 	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 7;
 	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 8;
 	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 9;

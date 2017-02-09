@@ -26,6 +26,8 @@ public class Teleop {
 		Intake.manage();
 		Drive.teleopDrive();
 		
+		Shooter.shoot();
+		
 		double currTime = Time.get();
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);

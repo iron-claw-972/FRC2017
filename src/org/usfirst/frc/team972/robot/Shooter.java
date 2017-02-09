@@ -21,11 +21,11 @@ public class Shooter {
 		Robot.rightShooterMotorA.enableBrakeMode(true);
 		Robot.rightShooterMotorB.enableBrakeMode(true);
 
-		Robot.leftShooterMotorB.changeControlMode(TalonControlMode.Follower);
-		Robot.rightShooterMotorB.changeControlMode(TalonControlMode.Follower);
-
-		Robot.leftShooterMotorB.set(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
-		Robot.rightShooterMotorB.set(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
+//		Robot.leftShooterMotorB.changeControlMode(TalonControlMode.Follower);
+//		Robot.rightShooterMotorB.changeControlMode(TalonControlMode.Follower);
+//
+//		Robot.leftShooterMotorB.set(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
+//		Robot.rightShooterMotorB.set(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
 		
 		kP = Constants.FLYWHEEL_P;
 		kI = Constants.FLYWHEEL_I;
@@ -64,7 +64,7 @@ public class Shooter {
 			pidRunning = true;
 		} else {
 			motor.changeControlMode(TalonControlMode.PercentVbus);
-			motor.set(0);
+			motor.set(Robot.operatorJoystick.getY());
 			motor.clearIAccum();
 			pidRunning = false;
 		}
