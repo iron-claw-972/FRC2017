@@ -50,6 +50,8 @@ public class Robot extends IterativeRobot {
 	 * Warning: the Driver Station "Robot Code" light and FMS "Robot Ready" indicators will be off
 	 * until robotInit() exits. Code in robotInit() that waits for enable will cause the robot to
 	 * never indicate that the code is ready, causing the robot to be bypassed in a match.
+	 * 
+	 * @see init()
 	 */
 	public void robotInit() {
 		Autonomous.createChooser();
@@ -69,6 +71,8 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Initialization code for autonomous mode. This method for initialization code will be called
 	 * each time the robot enters autonomous mode.
+	 * 
+	 * @see Autonomous.init()
 	 */
 	public void autonomousInit() {
 		Autonomous.init(this);
@@ -81,6 +85,8 @@ public class Robot extends IterativeRobot {
 	 * Packets are received approximately every 20ms. Fixed loop timing is not guaranteed due to
 	 * network timing variability and the function may not be called at all if the Driver Station is
 	 * disconnected. For most use cases the variable timing will not be an issue.
+	 * 
+	 * @see Autonomous.periodic()
 	 */
 	public void autonomousPeriodic() {
 		Autonomous.periodic(this);
@@ -89,6 +95,8 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Initialization code for teleop mode. This method for initialization code will be called each
 	 * time the robot enters teleop mode.
+	 * 
+	 * @see Teleop.init()
 	 */
 	public void teleopInit() {
 		Teleop.init(this);
@@ -101,6 +109,8 @@ public class Robot extends IterativeRobot {
 	 * Packets are received approximately every 20ms. Fixed loop timing is not guaranteed due to
 	 * network timing variability and the function may not be called at all if the Driver Station is
 	 * disconnected. For most use cases the variable timing will not be an issue.
+	 * 
+	 * @see Teleop.teleopPeriodic()
 	 */
 	public void teleopPeriodic() {
 		Teleop.periodic(this);
@@ -113,6 +123,8 @@ public class Robot extends IterativeRobot {
 	 * Packets are received approximately every 20ms. Fixed loop timing is not guaranteed due to
 	 * network timing variability and the function may not be called at all if the Driver Station is
 	 * disconnected. For most use cases the variable timing will not be an issue.
+	 * 
+	 * @see Tester.run()
 	 */
 	public void testPeriodic() {
 		Tester.run();
