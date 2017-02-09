@@ -9,7 +9,7 @@ public class Drive {
 
 	static double leftDriveSpeed = 0;
 	static double rightDriveSpeed = 0;
-	
+
 	static double prev_v_error = 0.0;
 	static double prev_theta_error = 0.0;
 
@@ -20,7 +20,10 @@ public class Drive {
 	static boolean brakeMode = false;
 	static boolean brakeModeButtonPressed = false;
 	static boolean brakeModeButtonLastPressed = false;
-	
+
+	/**
+	 * Drive initiation sequence.
+	 */
 	public static void init() {
 		Robot.frontLeftDriveMotor.setInverted(true);
 		Robot.frontRightDriveMotor.setInverted(true);
@@ -39,25 +42,51 @@ public class Drive {
 		Robot.backRightDriveMotor.set(Constants.FRONT_RIGHT_DRIVE_MOTOR_CAN_ID);
 	}
 
-	public static void tankDrive(double driveSpeedLeft, double driveSpeedRight) {
-		leftDriveSpeed = driveSpeedLeft;
-		rightDriveSpeed = driveSpeedRight;
+	/**
+	 * Drives robot using standard tank drive.
+	 * 
+	 * @param leftDriveSpeed
+	 *            speed of left wheels
+	 * @param rightDriveSpeed
+	 *            speed of right wheels
+	 */
+	public static void tankDrive(double leftDriveSpeed, double rightDriveSpeed) {
+		Drive.leftDriveSpeed = leftDriveSpeed;
+		Drive.rightDriveSpeed = rightDriveSpeed;
 		Robot.frontLeftDriveMotor.set(leftDriveSpeed);
 		Robot.frontRightDriveMotor.set(rightDriveSpeed);
 	}
 
-	public static void inverseDrive(double driveSpeedLeft, double driveSpeedRight) {
-		leftDriveSpeed = -driveSpeedLeft;
-		rightDriveSpeed = -driveSpeedRight;
+	/**
+	 * Drives robot using the original "back" as the new front.
+	 * 
+	 * @param leftDriveSpeed
+	 *            speed of new left wheels
+	 * @param rightDriveSpeed
+	 *            speed of new right wheels
+	 */
+	public static void inverseDrive(double leftDriveSpeed, double rightDriveSpeed) {
+		// Intentional, used for propery inverse drive
+		Drive.leftDriveSpeed = -rightDriveSpeed;
+		Drive.rightDriveSpeed = -leftDriveSpeed;
 		tankDrive(leftDriveSpeed, rightDriveSpeed);
 	}
 
+	/**
+	 * Stops the robot (no PID).
+	 */
 	public static void stopDrive() {
 		leftDriveSpeed = 0;
 		rightDriveSpeed = 0;
 		tankDrive(leftDriveSpeed, rightDriveSpeed);
 	}
 
+	/**
+	 * Switches between CANTalon brake and coast mode for all drive motors.
+	 * 
+	 * @param brakeStatus
+	 *            should brake mode be enabled
+	 */
 	public static void setBrakeMode(boolean brakeStatus) {
 		Robot.frontLeftDriveMotor.enableBrakeMode(brakeStatus);
 		Robot.frontRightDriveMotor.enableBrakeMode(brakeStatus);
@@ -65,6 +94,9 @@ public class Drive {
 		Robot.backRightDriveMotor.enableBrakeMode(brakeStatus);
 	}
 
+	/**
+	 * Checks inverse drive mode toggle.
+	 */
 	public static void checkInverseToggle() {
 		inverseDriveButtonPressed = Robot.leftJoystick.getRawButton(Constants.INVERSE_DRIVE_TOGGLE_BUTTON);
 		if (inverseDriveButtonPressed && !inverseDriveButtonLastPressed) {
@@ -73,6 +105,9 @@ public class Drive {
 		inverseDriveButtonLastPressed = inverseDriveButtonPressed;
 	}
 
+	/**
+	 * Checks brake vs coast drive mode toggle.
+	 */
 	public static void checkBrakeToggle() {
 		brakeModeButtonPressed = Robot.rightJoystick.getRawButton(Constants.BRAKE_MODE_TOGGLE_BUTTON);
 		if (brakeModeButtonPressed && !brakeModeButtonLastPressed) {
@@ -83,6 +118,9 @@ public class Drive {
 		setBrakeMode(brakeMode);
 	}
 
+	/**
+	 * Drive control in teleop.
+	 */
 	public static void teleopDrive() {
 		double leftDriveInput = Robot.leftJoystick.getY();
 		double rightDriveInput = Robot.rightJoystick.getY();
@@ -94,7 +132,7 @@ public class Drive {
 			stopDrive();
 		} else {
 			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) {
-				// Taking absolute value of one preserves the positive or negative result (normally squaring makes it positive)
+				// Square inputs + keep +/- sign
 				leftDriveInput = Math.abs(leftDriveInput) * leftDriveInput;
 				rightDriveInput = Math.abs(rightDriveInput) * rightDriveInput;
 			}
@@ -106,7 +144,8 @@ public class Drive {
 			}
 		}
 	}
-	
+
+	// @formatter:off
 	public static boolean autoDrive(double x_desired, double y_desired, double theta_desired, double dT) {
 		double curr_x = MotionProfiling.getX();
 		double curr_y = MotionProfiling.getY();
@@ -220,17 +259,16 @@ public class Drive {
 				Robot.rightDriveEncoderBack.get(), getAccel("left"), getAccel("right"));
 	}
 
-	public static void updateSmartDashboard() {
-		SmartDashboard.putNumber("Left Drive Speed", leftDriveSpeed);
-		SmartDashboard.putNumber("Right Drive Speed", rightDriveSpeed);
-		SmartDashboard.putNumber("Left Encoder Front", Robot.leftDriveEncoderFront.get());
-		SmartDashboard.putNumber("Right Encoder Front", Robot.rightDriveEncoderFront.get());
-		SmartDashboard.putNumber("Left Encoder Back", Robot.leftDriveEncoderBack.get());
-		SmartDashboard.putNumber("Right Encoder Back", Robot.rightDriveEncoderBack.get());
-	}
-	
-	// TODO: Magic Numbers
-	public static double getAccel(String robotSide) { //TODO: make sure this is actually the right equation
+	/**
+	 * Gets acceleration of a robot side.
+	 * 
+	 * @param robotSide
+	 *            the side to get acceleration of ("left" or "right")
+	 * @return acceleration of the side using system model
+	 */
+	public static double getAccel(String robotSide) {
+		// TODO: make sure this is actually the right equation
+		// TODO: magic numbers
 		if (robotSide == "left") {
 			return 0.4448 * ((Robot.frontLeftDriveMotor.getOutputCurrent() + Robot.backLeftDriveMotor.getOutputCurrent()) / 2) * (1 - 0.0356 * LeftModel.v_k) / Constants.ROBOT_MASS;
 		} else if (robotSide == "right") {
@@ -238,5 +276,18 @@ public class Drive {
 		} else {
 			return -9001.0;
 		}
+	}
+	// @formatter:on
+
+	/**
+	 * Updates SmartDashboard values for Drive.
+	 */
+	public static void updateSmartDashboard() {
+		SmartDashboard.putNumber("Left Drive Speed", leftDriveSpeed);
+		SmartDashboard.putNumber("Right Drive Speed", rightDriveSpeed);
+		SmartDashboard.putNumber("Left Encoder Front", Robot.leftDriveEncoderFront.get());
+		SmartDashboard.putNumber("Right Encoder Front", Robot.rightDriveEncoderFront.get());
+		SmartDashboard.putNumber("Left Encoder Back", Robot.leftDriveEncoderBack.get());
+		SmartDashboard.putNumber("Right Encoder Back", Robot.rightDriveEncoderBack.get());
 	}
 }
