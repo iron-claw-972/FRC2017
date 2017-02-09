@@ -4,19 +4,33 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 
 public class IMU {
 	private static ADIS16448_IMU imu = new ADIS16448_IMU();
-	
-	private static double calibAngle = 0.0;
-	
+
+	private static double calibrationAngle = 0.0;
+
+	/**
+	 * IMU initiation sequence. Calibrates the IMU.
+	 */
 	public static void init() {
 		imu.calibrate();
-		calibAngle = 0.0;
+		calibrationAngle = 0.0;
 	}
-	
+
+	/**
+	 * Recalibrates the calibration angle.
+	 * 
+	 * @param curr_angle
+	 *            current angle
+	 */
 	public static void recalibrate(double curr_angle) {
-		calibAngle = curr_angle + (imu.getAngleZ() / 4);
+		calibrationAngle = curr_angle + (imu.getAngleZ() / 4);
 	}
-	
+
+	/**
+	 * Get current angle.
+	 * 
+	 * @return current angle
+	 */
 	public static double getAngle() {
-		return (-(imu.getAngleZ() / 4) - calibAngle);
+		return (-(imu.getAngleZ() / 4) - calibrationAngle);
 	}
 }
