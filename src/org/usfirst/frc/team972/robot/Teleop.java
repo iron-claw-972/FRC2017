@@ -16,16 +16,32 @@ public class Teleop {
 
 	private static double prevTime = 0.0;
 
+	/**
+	 * Initialization code for teleop mode. This method for initialization code will be called each
+	 * time the robot enters teleop mode.
+	 * 
+	 * @see Robot.init()
+	 */
 	public static void init(Robot r) {
 		r.init();
 		updateSmartDashboard();
 	}
 
+	/**
+	 * Periodic code for teleop mode. This method will be called each time a new packet is received
+	 * from the driver station and the robot is in teleop mode.
+	 * <p>
+	 * Packets are received approximately every 20ms. Fixed loop timing is not guaranteed due to
+	 * network timing variability and the function may not be called at all if the Driver Station is
+	 * disconnected. For most use cases the variable timing will not be an issue.
+	 * 
+	 * @see Robot.teleopPeriodic()
+	 */
 	public static void periodic(Robot r) {
 		Winch.manage();
 		Intake.manage();
 		Drive.teleopDrive();
-		
+		Shooter.align();
 		Shooter.shoot();
 		
 		double currTime = Time.get();
@@ -35,6 +51,9 @@ public class Teleop {
 		prevTime = currTime;
 	}
 
+	/**
+	 * Updates SmartDashboard values for Teleop by calling other update functions.
+	 */
 	public static void updateSmartDashboard() {
 		Drive.updateSmartDashboard();
 		Shooter.updateSmartDashboard();
