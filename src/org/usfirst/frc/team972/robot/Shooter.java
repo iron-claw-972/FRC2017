@@ -7,20 +7,37 @@ import com.ctre.CANTalon.TalonControlMode;
 
 public class Shooter {
 
+	/**
+	 * PID values.
+	 */
 	static int kP = 0, kI = 0, kD = 0;
+	/**
+	 * How much to increase/decrease PID values using joystick POV.
+	 */
 	static int dP = 100, dI = 10, dD = 10;
+	/**
+	 * If P/I/D was just changed (used in updatePIDValues())
+	 */
 	static boolean lastP = false, lastI = false, lastD = false;
+	/**
+	 * If you are currently running PID.
+	 */
 	static boolean pidRunning = false;
-	// pidRunning = if you are running PID
+	/**
+	 * If you are trying to run PID (as determined by joystick inputs)
+	 */
 	static boolean runPID = false;
-	// runPID = if you are trying to run PID (from joystick inputs)
 
+	/**
+	 * Shooter initiation sequence.
+	 */
 	public static void init() {
 		Robot.leftShooterMotorA.enableBrakeMode(true);
 		Robot.leftShooterMotorB.enableBrakeMode(true);
 		Robot.rightShooterMotorA.enableBrakeMode(true);
 		Robot.rightShooterMotorB.enableBrakeMode(true);
 
+		// TODO: Uncomment this
 //		Robot.leftShooterMotorB.changeControlMode(TalonControlMode.Follower);
 //		Robot.rightShooterMotorB.changeControlMode(TalonControlMode.Follower);
 //
@@ -32,13 +49,23 @@ public class Shooter {
 		kD = Constants.FLYWHEEL_D;
 	}
 
+	/**
+	 * Wrapper method for shooter alignment.
+	 * 
+	 * @see ShooterAlignment.align()
+	 */
 	public static void align() {
 		ShooterAlignment.align();
 	}
 	
+	/**
+	 * Manages the shooter flywheels.
+	 * 
+	 * @see runShooter()
+	 */
 	public static void shoot() {
 		if (Constants.CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS) {
-			getPIDFromJoystick();
+			updatePIDValues();
 		}
 
 		runPID = Robot.operatorJoystick.getRawButton(Constants.SHOOTER_FLYWHEEL_MOTOR_BUTTON);
@@ -52,7 +79,13 @@ public class Shooter {
 
 		updateSmartDashboard();
 	}
-
+	
+	/**
+	 * Powers a single shooter.
+	 * 
+	 * @param motor		shooter motor controller
+	 * @param runPID	run PID on motor
+	 */
 	public static void runShooter(CANTalon motor, boolean runPID) {
 		motor.setP((double) kP / (double) Constants.PID_DIVISION_FACTOR);
 		motor.setI((double) kI / (double) Constants.PID_DIVISION_FACTOR);
@@ -70,6 +103,9 @@ public class Shooter {
 		}
 	}
 
+	/**
+	 * Updates SmartDashboard values for Shooter.
+	 */
 	public static void updateSmartDashboard() {
 		SmartDashboard.putBoolean("Flywheel pidRunning", pidRunning);
 		SmartDashboard.putNumber("Flywheel Target Speed", Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
@@ -96,7 +132,10 @@ public class Shooter {
 
 	}
 
-	public static void getPIDFromJoystick() {
+	/**
+	 * Changes kP, kI, and kD values using joystick POV values.
+	 */
+	public static void updatePIDValues() {
 		int leftJoystickPInput = Robot.leftJoystick.getPOV();
 		int rightJoystickIInput = Robot.rightJoystick.getPOV();
 		int operatorJoystickDInput = Robot.operatorJoystick.getPOV();
