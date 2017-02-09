@@ -55,9 +55,12 @@ public class Tester {
 	/**
 	 * Runs a given motor depending on joystick input.
 	 * 
-	 * @param motor		motor to test
-	 * @param joy		joystick to check
-	 * @param button	button on joystick to check
+	 * @param motor
+	 *            motor to test
+	 * @param joy
+	 *            joystick to check
+	 * @param button
+	 *            button on joystick to check
 	 */
 	public static void runMotor(CANTalon motor, Joystick joy, int button) {
 		double speed = 0;
