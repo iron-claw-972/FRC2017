@@ -3,7 +3,7 @@ package org.usfirst.frc.team972.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Time {
-	private static double initTimeMillis = 0.0;
+	private static long initTimeMillis = 0;
 	
 	public static void init() {
 		initTimeMillis = System.currentTimeMillis();
