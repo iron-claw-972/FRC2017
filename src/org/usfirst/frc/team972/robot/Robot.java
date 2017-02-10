@@ -1,6 +1,8 @@
 package org.usfirst.frc.team972.robot;
 
 import edu.wpi.first.wpilibj.*;
+import java.text.*;
+import java.util.*;
 import com.ctre.*;
 
 public class Robot extends IterativeRobot {
@@ -37,10 +39,9 @@ public class Robot extends IterativeRobot {
 			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B);
 
 	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
-	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(
-			Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT, Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
-	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(
-			Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
+	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
+			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
+	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
 			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
 
 	/**
@@ -113,6 +114,7 @@ public class Robot extends IterativeRobot {
 	 * @see Teleop.teleopPeriodic()
 	 */
 	public void teleopPeriodic() {
+		Logger.log("Meme", true);
 		Teleop.periodic(this);
 	}
 
@@ -131,10 +133,20 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
+	 * Gets current date and time with the format dd-MM-yy=HH-mm-ss.
+	 * 
+	 * @return current date and time as dd-MM-yy=HH-mm-ss
+	 */
+	public static String getTime() {
+		return new SimpleDateFormat("MM-dd-yy_HH:mm:ss").format(Calendar.getInstance().getTime());
+	}
+
+	/**
 	 * Initialization code. This method for initialization code will be called each time the robot
 	 * enters autonomous or teleop mode.
 	 */
-	public void init() {
+	public static void init() {
+		Logger.setFileName();
 		Drive.init();
 		Winch.init();
 		Shooter.init();
