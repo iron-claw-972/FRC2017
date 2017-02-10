@@ -34,18 +34,24 @@ public class LeftModel {
 		v_k1 = v_k + (dT * a_k);
 		a_k1 = powerToLeft;
 
-		if (Math.abs(x_k1 - frontEncoderDistance) / x_k1 < 0.02 && Math.abs(x_k1 - backEncoderDistance) / x_k1 > 0.10) {
-			useBackEncoder = false;
-			r_k = frontEncoderDistance - x_k1;
-			System.out.println("Not using back encoder");
-		} else if (Math.abs(x_k1 - backEncoderDistance) / x_k1 < 0.02 && Math.abs(x_k1 - frontEncoderDistance) / x_k1 > 0.10) {
-			useFrontEncoder = false;
-			r_k = backEncoderDistance - x_k1;
-			System.out.println("Not using front encoder");
-		} else {
+		if (useBackEncoder && useFrontEncoder) {
+			if (Math.abs(x_k1 - frontEncoderDistance) / x_k1 < 0.02 && Math.abs(x_k1 - backEncoderDistance) / x_k1 > 0.10) {
+				useBackEncoder = false;
+				System.out.println("Not using back encoder");
+			} else if (Math.abs(x_k1 - backEncoderDistance) / x_k1 < 0.02 && Math.abs(x_k1 - frontEncoderDistance) / x_k1 > 0.10) {
+				useFrontEncoder = false;
+				System.out.println("Not using front encoder");
+			} 
+		}
+
+		if (useBackEncoder && useFrontEncoder) {
 			r_k = ((frontEncoderDistance + backEncoderDistance) / 2) - x_k1;
-		} // TODO check Albert's code
-		
+		} else if (useFrontEncoder && !useBackEncoder) {
+			r_k = frontEncoderDistance - x_k1;
+		} else if (useBackEncoder && !useFrontEncoder) {
+			r_k = backEncoderDistance - x_k1;
+		}
+
 		x_k1 = x_k1 + (ALPHA * r_k);
 		v_k1 = v_k1 + ((BETA / dT) * r_k);
 
