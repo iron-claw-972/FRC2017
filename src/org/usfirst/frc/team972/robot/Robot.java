@@ -114,7 +114,6 @@ public class Robot extends IterativeRobot {
 	 * @see Teleop.teleopPeriodic()
 	 */
 	public void teleopPeriodic() {
-		Logger.log("Meme", true);
 		Teleop.periodic(this);
 	}
 
@@ -150,7 +149,6 @@ public class Robot extends IterativeRobot {
 		Drive.init();
 		Winch.init();
 		Shooter.init();
-		ShooterAlignment.init();
 		Intake.init();
 		GearMechanism.init();
 		Time.init();
