@@ -11,7 +11,8 @@ public class Logger {
 	}
 	
 	public static void setNewDirectory(String directoryName) {
-		new File(Constants.LOGGER_LOCATION + directoryName).mkdir();
+		new File(Constants.LOGGER_LOCATION).mkdir();
+		new File(Constants.LOGGER_LOCATION + "/" + directoryName).mkdir();
 		directory = directoryName;
 	}
 
