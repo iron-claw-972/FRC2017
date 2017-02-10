@@ -18,14 +18,10 @@ public class LeftModel {
 	/**
 	 * Updates left model.
 	 *
-	 * @param powerToLeft
-	 *            Power to the left motors
-	 * @param dT
-	 *            Loop time (change in time) in seconds
-	 * @param frontEncoderDistance
-	 *            Front left encoder distance
-	 * @param backEncoderDistance
-	 *            Back left encoder distance
+	 * @param powerToLeft			Power to the left motors
+	 * @param dT				Loop time (change in time) in seconds
+	 * @param frontEncoderDistance		Front left encoder distance
+	 * @param backEncoderDistance		Back left encoder distance
 	 */
 	public static void update(double powerToLeft, double dT, double frontEncoderDistance, double backEncoderDistance) { // TODO convert
 																														// encoder clicks to
@@ -63,12 +59,9 @@ public class LeftModel {
 	/**
 	 * Set to a new state
 	 * 
-	 * @param x_state
-	 *            New distance traveled in meters
-	 * @param v_state
-	 *            New velocity in m/s
-	 * @param a_state
-	 *            New acceleration in m/s^2
+	 * @param x_state	New distance traveled in meters
+	 * @param v_state	New velocity in m/s
+	 * @param a_state	New acceleration in m/s^2
 	 */
 	public static void setState(double x_state, double v_state, double a_state) {
 		x_k = x_state;
