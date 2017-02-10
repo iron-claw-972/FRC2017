@@ -18,14 +18,10 @@ public class RightModel {
 	/**
 	 * Updates right model.
 	 *
-	 * @param powerToRight
-	 *            Power to the right motors
-	 * @param dT
-	 *            Loop time (change in time) in seconds
-	 * @param frontEncoderDistance
-	 *            Front right encoder distance
-	 * @param backEncoderDistance
-	 *            Back right encoder distance
+	 * @param powerToRight		Power to the right motors
+	 * @param dT			Loop time (change in time) in seconds
+	 * @param frontEncoderDistance	Front right encoder distance
+	 * @param backEncoderDistance	Back right encoder distance
 	 */
 	public static void update(double powerToRight, double dT, double frontEncoderDistance, double backEncoderDistance) { // TODO convert
 																															// encoder
@@ -66,12 +62,9 @@ public class RightModel {
 	/**
 	 * Set to a new state
 	 * 
-	 * @param x_state
-	 *            New distance traveled in meters
-	 * @param v_state
-	 *            New velocity in m/s
-	 * @param a_state
-	 *            New acceleration in m/s^2
+	 * @param x_state	New distance traveled in meters
+	 * @param v_state	New velocity in m/s
+	 * @param a_state	New acceleration in m/s^2
 	 */
 	public static void setState(double x_state, double v_state, double a_state) {
 		x_k = x_state;
