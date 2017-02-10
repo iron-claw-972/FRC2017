@@ -232,7 +232,7 @@ public class Drive {
 			if (prev_theta_error != 0.0) {
 				dThetadT = (theta_error - prev_theta_error) / dT;
 			}
-			double turn_power = (Constants.AUTON_DRIVE_TURNP * theta_error) - (Constants.AUTON_DRIVE_TURND * dThetadT); //TODO: change constants
+			double turn_power = (Constants.AUTON_DRIVE_TURNP * theta_error) - (Constants.AUTON_DRIVE_TURND * dThetadT);
 			
 			double leftDriveInput = turn_power;
 			double rightDriveInput = turn_power;

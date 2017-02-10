@@ -9,25 +9,18 @@ public class RightModel {
 	private static double x_k1, v_k1, a_k1; // at t=k+1
 	private static double r_k;
 
-	private static double ALPHA = Constants.ALPHA;
-	private static double BETA = Constants.BETA;
-
 	private static boolean useFrontEncoder = true;
 	private static boolean useBackEncoder = true;
 
 	/**
 	 * Updates right model.
 	 *
-	 * @param powerToRight		Power to the right motors
-	 * @param dT			Loop time (change in time) in seconds
-	 * @param frontEncoderDistance	Front right encoder distance
-	 * @param backEncoderDistance	Back right encoder distance
+	 * @param powerToRight          Power to the right motors
+	 * @param dT                    Loop time (change in time) in seconds
+	 * @param frontEncoderDistance  Front right encoder distance
+	 * @param backEncoderDistance   Back right encoder distance
 	 */
-	public static void update(double powerToRight, double dT, double frontEncoderDistance, double backEncoderDistance) { // TODO convert
-																															// encoder
-																															// clicks to
-																															// actual
-																															// distance
+	public static void update(double powerToRight, double dT, double frontEncoderDistance, double backEncoderDistance) {
 		x_k1 = x_k + (dT * v_k) + ((Math.pow(dT, 2) * a_k) / 2);
 		v_k1 = v_k + (dT * a_k);
 		a_k1 = powerToRight;
@@ -50,8 +43,8 @@ public class RightModel {
 			r_k = backEncoderDistance - x_k1;
 		}
 
-		x_k1 = x_k1 + (ALPHA * r_k);
-		v_k1 = v_k1 + ((BETA / dT) * r_k);
+		x_k1 = x_k1 + (Constants.ALPHA * r_k);
+		v_k1 = v_k1 + ((Constants.BETA / dT) * r_k);
 
 		x_k = x_k1;
 		v_k = v_k1;
