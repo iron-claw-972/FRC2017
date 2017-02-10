@@ -64,7 +64,6 @@ public class Autonomous {
 		SmartDashboard.putString("Autonomous Routine", autoChooser.getSelected().toString());
 		Drive.updateSmartDashboard();
 		Shooter.updateSmartDashboard();
-		ShooterAlignment.updateSmartDashboard();
 		Winch.updateSmartDashboard();
 		Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
