@@ -86,9 +86,9 @@ public class Constants {
 	public static final double AUTON_DRIVE_VP = 0.3; // proportion of velocity error //TODO determine all these
 	public static final double AUTON_DRIVE_VD = 0.1; // proportion of acceleration (should be small)
 	public static final double AUTON_DRIVE_AP = 0.0003; // proportion of angle error (during motion)
-	public static final double AUTON_DRIVE_AD = 0.005; // proportion of angle change (during motion) (should be small)
-	public static final double AUTON_DRIVE_TURNP = 0.0; // proportion of angle (during turn)
-	public static final double AUTON_DRIVE_TURND = 0.0; // proportion of angle change (during turn)
+	public static final double AUTON_DRIVE_AD = 0.004; // proportion of angle change (during motion) (should be small)
+	public static final double AUTON_DRIVE_TURNP = 0.006; // proportion of angle (during turn)
+	public static final double AUTON_DRIVE_TURND = 0.004; // proportion of angle change (during turn)
 
 	// Test Switches
 	public static final boolean CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS = true;

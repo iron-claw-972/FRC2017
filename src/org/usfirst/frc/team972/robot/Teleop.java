@@ -57,7 +57,6 @@ public class Teleop {
 	public static void updateSmartDashboard() {
 		Drive.updateSmartDashboard();
 		Shooter.updateSmartDashboard();
-		ShooterAlignment.updateSmartDashboard();
 		Winch.updateSmartDashboard();
 		Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
