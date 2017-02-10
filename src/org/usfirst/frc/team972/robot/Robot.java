@@ -146,7 +146,7 @@ public class Robot extends IterativeRobot {
 	 * enters autonomous or teleop mode.
 	 */
 	public static void init() {
-		Logger.setFileName();
+		Logger.init();
 		Drive.init();
 		Winch.init();
 		Shooter.init();
