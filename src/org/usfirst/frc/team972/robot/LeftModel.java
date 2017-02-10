@@ -9,8 +9,8 @@ public class LeftModel {
 	private static double x_k1, v_k1, a_k1; // at t=k+1
 	private static double r_k;
 
-	private static boolean useFrontEncoder = true;
-	private static boolean useBackEncoder = true;
+	static boolean useFrontEncoder = true;
+	static boolean useBackEncoder = true;
 
 	/**
 	 * Updates left model.
