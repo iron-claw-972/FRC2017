@@ -22,7 +22,6 @@ public class Autonomous {
 	 * Create Autonomous chooser for SmartDashboard.
 	 */
 	public static void createChooser() {
-		// TODO: Update to reflect Motion Profiling
 		autoChooser.addDefault("Do Nothing", AutonomousRoutine.DO_NOTHING);
 		autoChooser.addObject("Cross Baseline", AutonomousRoutine.CROSS_BASELINE);
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);

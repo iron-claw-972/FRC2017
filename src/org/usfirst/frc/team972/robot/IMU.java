@@ -16,21 +16,20 @@ public class IMU {
 	}
 
 	/**
-	 * Recalibrates the calibration angle.
+	 * Recalibrates the gyro with a given current angle.
 	 * 
-	 * @param curr_angle
-	 *            current angle
+	 * @param curr_angle	current angle
 	 */
 	public static void recalibrate(double curr_angle) {
-		calibrationAngle = curr_angle + (imu.getAngleZ() / 4);
+		calibrationAngle = curr_angle + (imu.getAngleZ() / 4.0);
 	}
 
 	/**
 	 * Get current angle.
 	 * 
-	 * @return current angle
+	 * @return current angle from IMU
 	 */
 	public static double getAngle() {
-		return (-(imu.getAngleZ() / 4) - calibrationAngle);
+		return (-(imu.getAngleZ() / 4.0) - calibrationAngle);
 	}
 }

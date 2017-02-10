@@ -145,7 +145,7 @@ public class Drive {
 		}
 	}
 
-	// @formatter:off
+	// @formatter:off //TODO: thank Andy
 	public static boolean autoDrive(double x_desired, double y_desired, double theta_desired, double dT) {
 		double curr_x = MotionProfiling.getX();
 		double curr_y = MotionProfiling.getY();
@@ -232,14 +232,14 @@ public class Drive {
 			if (prev_theta_error != 0.0) {
 				dThetadT = (theta_error - prev_theta_error) / dT;
 			}
-			double turn_power = (Constants.AUTON_DRIVE_AP * theta_error) - (Constants.AUTON_DRIVE_AD * dThetadT);
+			double turn_power = (Constants.AUTON_DRIVE_TURNP * theta_error) - (Constants.AUTON_DRIVE_TURND * dThetadT); //TODO: change constants
 			
 			double leftDriveInput = turn_power;
 			double rightDriveInput = turn_power;
 			
 			tankDrive(leftDriveInput, rightDriveInput);
 			
-			if (theta_error < 10) {
+			if (theta_error < 5) {
 				done = true;
 			}
 		}
@@ -268,7 +268,7 @@ public class Drive {
 	 */
 	public static double getAccel(String robotSide) {
 		// TODO: make sure this is actually the right equation
-		// TODO: magic numbers
+		// TODO: magic numbers lel Andy
 		if (robotSide == "left") {
 			return 0.4448 * ((Robot.frontLeftDriveMotor.getOutputCurrent() + Robot.backLeftDriveMotor.getOutputCurrent()) / 2) * (1 - 0.0356 * LeftModel.v_k) / Constants.ROBOT_MASS;
 		} else if (robotSide == "right") {
