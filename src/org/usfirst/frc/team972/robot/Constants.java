@@ -105,7 +105,7 @@ public class Constants {
 	public static final int AZIMUTH_D = 0;
 	
 	// Constants
-	public static final String LOGGER_LOCATION = "FRC2017Logs";
+	public static final String LOGGER_LOCATION = "home/admin/FRC2017Logs";
 	public static final int PID_DIVISION_FACTOR = 10000;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
