@@ -8,8 +8,6 @@ public class SystemModel {
 	// The following variables are private to make it less confusing to use
 	private static double x_k1, y_k1, v_k1, theta_k1; // at t=k+1
 
-	private static double PHI = Constants.PHI;
-
 	/**
 	 * Updates system model.
 	 *
