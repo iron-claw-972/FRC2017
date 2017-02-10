@@ -9,9 +9,6 @@ public class RightModel {
 	private static double x_k1, v_k1, a_k1; // at t=k+1
 	private static double r_k;
 	
-	private static double ALPHA = Constants.ALPHA;
-	private static double BETA = Constants.BETA;
-	
 	/**
 	 * Updates right model.
 	 *
@@ -26,8 +23,8 @@ public class RightModel {
 		a_k1 = powerToRight;
 
 		r_k = ((frontEncoderDistance + backEncoderDistance) / 2) - x_k1; //TODO make it remove an encoder if it is off from the other and system
-		x_k1 = x_k1 + (ALPHA * r_k);
-		v_k1 = v_k1 + ((BETA / dT) * r_k);
+		x_k1 = x_k1 + (Constants.ALPHA * r_k);
+		v_k1 = v_k1 + ((Constants.BETA / dT) * r_k);
 		
 		x_k = x_k1;
 		v_k = v_k1;
