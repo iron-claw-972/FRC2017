@@ -19,7 +19,7 @@ public class CameraStreaming {
 	public static void init() {
 		usbCamera1 = new UsbCamera("Cam 1", 0);
 		usbCamera2 = new UsbCamera("Cam 2", 1);
-		usbCamera3 = new UsbCamera("Cam 2", 1);
+		usbCamera3 = new UsbCamera("Cam 3", 2);
 
 		(new  Thread(){
 			cameraSink = CameraStreamingServer.getInstance().startAutomaticCapture(usbCamera1);
