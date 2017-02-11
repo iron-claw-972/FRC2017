@@ -55,8 +55,8 @@ public class Robot extends IterativeRobot {
 	 * @see init()
 	 */
 	public void robotInit() {
-		Autonomous.createChooser();
-		Autonomous.updateSmartDashboard();
+		//Autonomous.createChooser();
+		//Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
 		CameraStreaming.init();
 

@@ -57,12 +57,12 @@ public class Teleop {
 	 * Updates SmartDashboard values for Teleop by calling other update functions.
 	 */
 	public static void updateSmartDashboard() {
-		Drive.updateSmartDashboard();
+		//Drive.updateSmartDashboard();
 		Shooter.updateSmartDashboard();
-		Winch.updateSmartDashboard();
-		Intake.updateSmartDashboard();
-		MotionProfiling.updateSmartDashboard();
-		Time.updateSmartDashboard();
+		//Winch.updateSmartDashboard();
+		//Intake.updateSmartDashboard();
+		//MotionProfiling.updateSmartDashboard();
+		//Time.updateSmartDashboard();
 	}
 
 }
