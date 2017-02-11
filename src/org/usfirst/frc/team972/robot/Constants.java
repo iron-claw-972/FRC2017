@@ -97,9 +97,9 @@ public class Constants {
 	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
 
 	// PID Values
-	public static final int FLYWHEEL_P = 1000;
-	public static final int FLYWHEEL_I = 5;
-	public static final int FLYWHEEL_D = 0;
+	public static final int FLYWHEEL_P = 600;
+	public static final int FLYWHEEL_I = 150;
+	public static final int FLYWHEEL_D = 5;
 	public static final int AZIMUTH_P = 0;
 	public static final int AZIMUTH_I = 0;
 	public static final int AZIMUTH_D = 0;
