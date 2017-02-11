@@ -27,7 +27,11 @@ public class Shooter {
 	 * If you are trying to run PID (as determined by joystick inputs)
 	 */
 	static boolean shooter_runPID = false;
-	
+	static double shooter_percentError = -1;
+	static boolean shooter_onTarget = false;
+	static long shooter_lastOnTarget = -1;
+	static long shooter_pidStart = -1;
+
 	static int alignment_kP = 0, alignment_kI = 0, alignment_kD = 0;
 	static int alignment_dP = 100, alignment_dI = 10, alignment_dD = 10;
 	static boolean alignment_lastP = false, alignment_lastI = false, alignment_lastD = false;
@@ -55,13 +59,15 @@ public class Shooter {
 		shooter_kP = Constants.FLYWHEEL_P;
 		shooter_kI = Constants.FLYWHEEL_I;
 		shooter_kD = Constants.FLYWHEEL_D;
-		
+
 		Robot.leftAzimuthMotor.enableBrakeMode(true);
 		Robot.rightAzimuthMotor.enableBrakeMode(true);
-		
+
 		alignment_kP = Constants.AZIMUTH_P;
 		alignment_kI = Constants.AZIMUTH_I;
 		alignment_kD = Constants.AZIMUTH_D;
+
+		SmartDashboard.putNumber("Left Shooter Target Time", 0);
 	}
 
 	/**
@@ -103,11 +109,31 @@ public class Shooter {
 			motor.changeControlMode(TalonControlMode.Speed);
 			motor.set(Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
 			shooter_pidRunning = true;
+			shooter_percentError = (motor.getSpeed() - Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED)
+					/ Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED;
+			shooter_onTarget = Math.abs(shooter_percentError) < 0.01;
+			if (shooter_pidStart < 0) {
+				shooter_pidStart = System.currentTimeMillis();
+			}
+			if (shooter_onTarget) {
+				if (shooter_lastOnTarget < 0) {
+					shooter_lastOnTarget = System.currentTimeMillis();
+				}
+				if (System.currentTimeMillis() - shooter_lastOnTarget >= 1000 && shooter_lastOnTarget > 0) {
+					SmartDashboard.putNumber("Left Shooter Target Time",
+							System.currentTimeMillis() - shooter_pidStart - 1000);
+					shooter_lastOnTarget = 0;
+					shooter_pidStart = 0;
+				}
+			}
 		} else {
 			motor.changeControlMode(TalonControlMode.PercentVbus);
 			motor.set(Robot.operatorJoystick.getY());
 			motor.clearIAccum();
 			shooter_pidRunning = false;
+			shooter_onTarget = false;
+			shooter_lastOnTarget = -1;
+			shooter_pidStart = -1;
 		}
 	}
 
@@ -171,7 +197,7 @@ public class Shooter {
 			moveAzimuth(Robot.rightAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, alignment_runPID);
 			moveHood(Robot.rightHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
 		}
-		
+
 		updateSmartDashboard();
 	}
 
@@ -191,7 +217,7 @@ public class Shooter {
 			alignment_pidRunning = false;
 		}
 	}
-	
+
 	public static void moveHood(Servo linearActuator, double position) {
 		linearActuator.set(position);
 	}
@@ -235,7 +261,7 @@ public class Shooter {
 			alignment_kD = 0;
 		}
 	}
-	
+
 	/**
 	 * Updates SmartDashboard values for Shooter.
 	 */
@@ -251,6 +277,9 @@ public class Shooter {
 			SmartDashboard.putNumber("Flywheel Left I", Robot.leftShooterMotorA.getI());
 			SmartDashboard.putNumber("Flywheel Left D", Robot.leftShooterMotorA.getD());
 			SmartDashboard.putNumber("Flywheel Left I Accum", Robot.leftShooterMotorA.GetIaccum());
+			SmartDashboard.putNumber("Flywheel Left Percent Error", shooter_percentError);
+			SmartDashboard.putBoolean("Flywheel Left On Target", shooter_onTarget);
+			SmartDashboard.putNumber("Flywheel Not On Target", shooter_lastOnTarget);
 		}
 		if (Constants.USE_RIGHT_SHOOTER) {
 			SmartDashboard.putNumber("Flywheel Right Speed", Robot.leftShooterMotorA.getSpeed());
