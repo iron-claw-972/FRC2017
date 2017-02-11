@@ -1,7 +1,6 @@
 package org.usfirst.frc.team972.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoSink;
+import edu.wpi.cscore.*;
 
 public class CameraStreaming {
 	private static boolean pressed;
@@ -17,7 +16,7 @@ public class CameraStreaming {
 	public static void init() {
 		usbCamera1 = new UsbCamera("Cam 1", 0);
 		usbCamera2 = new UsbCamera("Cam 2", 1);
-		cameraSink = CustomCameraServer.getInstance().startAutomaticCapture(usbCamera1);
+		cameraSink = CameraStreamingServer.getInstance().startAutomaticCapture(usbCamera1);
 	}
 	
 	
