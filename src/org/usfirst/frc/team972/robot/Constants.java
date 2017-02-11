@@ -97,8 +97,8 @@ public class Constants {
 	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
 
 	// PID Values
-	public static final int FLYWHEEL_P = 0;
-	public static final int FLYWHEEL_I = 0;
+	public static final int FLYWHEEL_P = 1000;
+	public static final int FLYWHEEL_I = 5;
 	public static final int FLYWHEEL_D = 0;
 	public static final int AZIMUTH_P = 0;
 	public static final int AZIMUTH_I = 0;
@@ -109,7 +109,7 @@ public class Constants {
 	public static final int PID_DIVISION_FACTOR = 10000;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
-	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 10000.0;
+	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 30000.0;
 	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 1000.0;
 	public static final double SHOOTER_HOOD_POSITION = 0.7;
 }

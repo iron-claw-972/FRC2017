@@ -6,7 +6,9 @@ import com.ctre.*;
 import com.ctre.CANTalon.TalonControlMode;
 
 public class Shooter {
-
+	static long pidTimer = -1;
+	static long sincePerfect = -1;
+	
 	/**
 	 * PID values.
 	 */
@@ -14,7 +16,7 @@ public class Shooter {
 	/**
 	 * How much to increase/decrease PID values using joystick POV.
 	 */
-	static int shooter_dP = 100, shooter_dI = 10, shooter_dD = 10;
+	static int shooter_dP = 100, shooter_dI = 1, shooter_dD = 100;
 	/**
 	 * If P/I/D was just changed (used in updatePIDValues())
 	 */
@@ -100,13 +102,36 @@ public class Shooter {
 		motor.setD((double) shooter_kD / (double) Constants.PID_DIVISION_FACTOR);
 
 		if (runPID) {
+			if (Math.floor(pidTimer) == -1){
+				pidTimer = System.currentTimeMillis();
+			}
+			
+			double error = Math.abs(1 - (Robot.leftShooterMotorA.getSpeed()/Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED));
+			if (error <= 0.01) {
+				if (sincePerfect == -1) {
+					sincePerfect = System.currentTimeMillis();
+				}
+			} else if (sincePerfect != 0) {
+				sincePerfect = -1;
+			}
+			
+			if (sincePerfect > 0 && System.currentTimeMillis() - sincePerfect > 1000) {
+				SmartDashboard.putNumber("Flywheel Left 1%", Math.floor(sincePerfect - pidTimer)/1000);
+				sincePerfect = 0;
+			}
+			
+
 			motor.changeControlMode(TalonControlMode.Speed);
 			motor.set(Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
 			shooter_pidRunning = true;
 		} else {
+			pidTimer = -1;
+			sincePerfect = -1;
+			
 			motor.changeControlMode(TalonControlMode.PercentVbus);
 			motor.set(Robot.operatorJoystick.getY());
 			motor.clearIAccum();
+			motor.ClearIaccum();
 			shooter_pidRunning = false;
 		}
 	}
@@ -247,9 +272,9 @@ public class Shooter {
 		if (Constants.USE_LEFT_SHOOTER) {
 			SmartDashboard.putNumber("Flywheel Left Speed", Robot.leftShooterMotorA.getSpeed());
 			SmartDashboard.putNumber("Flywheel Left Closed Loop Error", Robot.leftShooterMotorA.getClosedLoopError());
-			SmartDashboard.putNumber("Flywheel Left P", Robot.leftShooterMotorA.getP());
-			SmartDashboard.putNumber("Flywheel Left I", Robot.leftShooterMotorA.getI());
-			SmartDashboard.putNumber("Flywheel Left D", Robot.leftShooterMotorA.getD());
+			SmartDashboard.putNumber("Flywheel Left P", Math.ceil(Robot.leftShooterMotorA.getP()*100)/100);
+			SmartDashboard.putNumber("Flywheel Left I", Math.ceil(Robot.leftShooterMotorA.getI()*10000)/10000);
+			SmartDashboard.putNumber("Flywheel Left D", Math.ceil(Robot.leftShooterMotorA.getD()*100)/100);
 			SmartDashboard.putNumber("Flywheel Left I Accum", Robot.leftShooterMotorA.GetIaccum());
 		}
 		if (Constants.USE_RIGHT_SHOOTER) {
@@ -260,9 +285,9 @@ public class Shooter {
 			SmartDashboard.putNumber("Flywheel Right D", Robot.rightShooterMotorA.getD());
 			SmartDashboard.putNumber("Flywheel Right I Accum", Robot.rightShooterMotorA.GetIaccum());
 		}
-		SmartDashboard.putNumber("Flywheel kP", shooter_kP);
-		SmartDashboard.putNumber("Flywheel kI", shooter_kI);
-		SmartDashboard.putNumber("Flywheel kD", shooter_kD);
+		SmartDashboard.putNumber("Flywheel kP", Math.ceil(shooter_kP*100)/100);
+		SmartDashboard.putNumber("Flywheel kI", Math.ceil(shooter_kI*100)/100);
+		SmartDashboard.putNumber("Flywheel kD", Math.ceil(shooter_kD*100)/100);
 		
 		SmartDashboard.putBoolean("Azimuth pidRunning", alignment_pidRunning);
 		SmartDashboard.putNumber("Azimuth Target Position", Constants.SHOOTER_AZIMUTH_MOTOR_POSITION);
