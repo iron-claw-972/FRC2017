@@ -96,7 +96,7 @@ public class Shooter {
 	 */
 	public static void runShooter(CANTalon motor, boolean runPID) {
 		motor.setP((double) shooter_kP / (double) Constants.PID_DIVISION_FACTOR);
-		motor.setI((double) shooter_kI / (double) Constants.PID_DIVISION_FACTOR);
+		motor.setI((double) shooter_kI / (double) (Constants.PID_DIVISION_FACTOR * 100));
 		motor.setD((double) shooter_kD / (double) Constants.PID_DIVISION_FACTOR);
 
 		if (runPID) {
@@ -105,7 +105,7 @@ public class Shooter {
 			shooter_pidRunning = true;
 		} else {
 			motor.changeControlMode(TalonControlMode.PercentVbus);
-			motor.set(Robot.operatorJoystick.getY());
+			//motor.set(Robot.operatorJoystick.getY());
 			motor.clearIAccum();
 			shooter_pidRunning = false;
 		}
@@ -115,6 +115,7 @@ public class Shooter {
 	 * Changes kP, kI, and kD values using joystick POV values.
 	 */
 	public static void updateShooterPIDValues() {
+		
 		int leftJoystickPInput = Robot.leftJoystick.getPOV();
 		int rightJoystickIInput = Robot.rightJoystick.getPOV();
 		int operatorJoystickDInput = Robot.operatorJoystick.getPOV();
@@ -152,6 +153,7 @@ public class Shooter {
 		if (shooter_kD < 0) {
 			shooter_kD = 0;
 		}
+		
 	}
 
 	public static void align() {
@@ -165,12 +167,15 @@ public class Shooter {
 		// TODO: Add Hood calculations
 		if (Constants.USE_LEFT_SHOOTER) {
 			moveAzimuth(Robot.leftAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, alignment_runPID);
-			moveHood(Robot.leftHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
+			//moveHood(Robot.leftHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
 		}
+		
+		/*
 		if (Constants.USE_RIGHT_SHOOTER) {
 			moveAzimuth(Robot.rightAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, alignment_runPID);
 			moveHood(Robot.rightHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
 		}
+		*/
 		
 		updateSmartDashboard();
 	}
@@ -241,6 +246,7 @@ public class Shooter {
 	 */
 	public static void updateSmartDashboard() {
 		// @formatter:off
+		
 		SmartDashboard.putBoolean("Flywheel pidRunning", shooter_pidRunning);
 		SmartDashboard.putNumber("Flywheel Target Speed", Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
 		// TODO: Use real target speed from CANTalon
@@ -250,7 +256,7 @@ public class Shooter {
 			SmartDashboard.putNumber("Flywheel Left P", Robot.leftShooterMotorA.getP());
 			SmartDashboard.putNumber("Flywheel Left I", Robot.leftShooterMotorA.getI());
 			SmartDashboard.putNumber("Flywheel Left D", Robot.leftShooterMotorA.getD());
-			SmartDashboard.putNumber("Flywheel Left I Accum", Robot.leftShooterMotorA.GetIaccum());
+			SmartDashboard.putNumber("Flywheel Left I Accum", Robot.leftShooterMotorA.GetIaccum()/1000);
 		}
 		if (Constants.USE_RIGHT_SHOOTER) {
 			SmartDashboard.putNumber("Flywheel Right Speed", Robot.leftShooterMotorA.getSpeed());
@@ -264,9 +270,11 @@ public class Shooter {
 		SmartDashboard.putNumber("Flywheel kI", shooter_kI);
 		SmartDashboard.putNumber("Flywheel kD", shooter_kD);
 		
+		
 		SmartDashboard.putBoolean("Azimuth pidRunning", alignment_pidRunning);
 		SmartDashboard.putNumber("Azimuth Target Position", Constants.SHOOTER_AZIMUTH_MOTOR_POSITION);
 		// TODO: Use real target position from CANTalon
+		
 		if (Constants.USE_LEFT_SHOOTER) {
 			SmartDashboard.putNumber("Azimuth Left Position", Robot.leftAzimuthMotor.getPosition());
 			SmartDashboard.putNumber("Azimuth Left Closed Loop Error", Robot.leftAzimuthMotor.getClosedLoopError());
@@ -283,6 +291,7 @@ public class Shooter {
 			SmartDashboard.putNumber("Azimuth Right D", Robot.rightAzimuthMotor.getD());
 			SmartDashboard.putNumber("Azimuth Right I Accum", Robot.rightAzimuthMotor.GetIaccum());
 		}
+		
 		SmartDashboard.putNumber("Azimuth kP", alignment_kP);
 		SmartDashboard.putNumber("Azimuth kI", alignment_kI);
 		SmartDashboard.putNumber("Azimuth kD", alignment_kD);
