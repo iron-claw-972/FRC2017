@@ -25,9 +25,9 @@ public class Drive {
 	 * Drive initiation sequence.
 	 */
 	public static void init() {
-		Robot.frontLeftDriveMotor.setInverted(true);
+		Robot.frontLeftDriveMotor.setInverted(false);
 		Robot.frontRightDriveMotor.setInverted(true);
-		Robot.backLeftDriveMotor.setInverted(true);
+		Robot.backLeftDriveMotor.setInverted(false);
 		Robot.backRightDriveMotor.setInverted(true);
 
 		Robot.frontLeftDriveMotor.enableBrakeMode(true);
