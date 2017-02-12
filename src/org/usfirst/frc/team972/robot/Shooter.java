@@ -219,12 +219,14 @@ public class Shooter {
 		if (Constants.USE_LEFT_SHOOTER) {
 			moveAzimuth(Robot.leftAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, alignment_runPID);
 			//moveHood(Robot.leftHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
+			Robot.feederPiston.set(true);
 		}
 		
 		/*
 		if (Constants.USE_RIGHT_SHOOTER) {
 			moveAzimuth(Robot.rightAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, alignment_runPID);
 			moveHood(Robot.rightHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
+			Robot.feederPiston.set(true);
 		}
 		*/
 		updateSmartDashboard();

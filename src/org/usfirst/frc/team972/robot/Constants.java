@@ -20,6 +20,7 @@ public class Constants {
 	public static final int INTAKE_MOTOR_TOGGLE_BUTTON = 2;
 	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 3;
 	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
+	public static final int HOPPER_INTAKE_RAMP_TOGGLE_BUTTON = 5;
 
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
@@ -57,12 +58,12 @@ public class Constants {
 	public static final int RIGHT_DRIVE_ENCODER_BACK_PORT_B = 7;
 
 	// PCM Ports
-	// TODO: Change to the port of the PCM
-	public static final int COMPRESSOR_PCM_PORT = 0;
-	public static final int GEAR_PEG_PISTON_FORWARD_PCM_PORT = 1;
-	public static final int GEAR_PEG_PISTON_REVERSE_PCM_PORT = 2;
-	public static final int GEAR_PUSHER_PISTON_FORWARD_PCM_PORT = 3;
-	public static final int GEAR_PUSHER_PISTON_REVERSE_PCM_PORT = 4;
+	// TODO: Change to the port of the actual PCM
+	public static final int COMPRESSOR_PCM_PORT = 11;
+	public static final int GEAR_PEG_PISTON_PCM_PORT = 0;
+	public static final int GEAR_PUSHER_PISTON_PCM_PORT = 1;
+	public static final int HOPPER_INTAKE_PISTON_PCM_PORT = 2;	
+	public static final int SHOOTER_FEEDER_PISTON_PCM_PORT = 3;
 
 	// Robot Information
 	public static final double ROBOT_WIDTH = 0.74714; // in meters

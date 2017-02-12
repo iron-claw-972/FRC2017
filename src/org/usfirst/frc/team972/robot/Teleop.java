@@ -24,6 +24,8 @@ public class Teleop {
 	 */
 	public static void init(Robot r) {
 		r.init();
+		Robot.gearPegPiston.set(false);
+		Robot.gearPusherPiston.set(false);
 		updateSmartDashboard();
 	}
 
@@ -43,8 +45,8 @@ public class Teleop {
 		Drive.teleopDrive();
 		Shooter.align();
 		Shooter.shoot();
-		
 		CameraStreaming.periodic();
+		Intake.hopperIntake();
 		
 		double currTime = Time.get();
 		double loopTime = currTime - prevTime;
@@ -57,12 +59,12 @@ public class Teleop {
 	 * Updates SmartDashboard values for Teleop by calling other update functions.
 	 */
 	public static void updateSmartDashboard() {
-		//Drive.updateSmartDashboard();
+		Drive.updateSmartDashboard();
 		Shooter.updateSmartDashboard();
-		//Winch.updateSmartDashboard();
-		//Intake.updateSmartDashboard();
-		//MotionProfiling.updateSmartDashboard();
-		//Time.updateSmartDashboard();
+		Winch.updateSmartDashboard();
+		Intake.updateSmartDashboard();
+		MotionProfiling.updateSmartDashboard();
+		Time.updateSmartDashboard();
 	}
 
 }
