@@ -39,10 +39,10 @@ public class Robot extends IterativeRobot {
 			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B);
 
 	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
-	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
-			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
-	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
-			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
+	static Solenoid gearPegPiston = new Solenoid(Constants.GEAR_PEG_PISTON_PCM_PORT);
+	static Solenoid gearPusherPiston = new Solenoid(Constants.GEAR_PUSHER_PISTON_PCM_PORT);
+	static Solenoid hopperIntakePiston = new Solenoid(Constants.HOPPER_INTAKE_PISTON_PCM_PORT);	
+	static Solenoid feederPiston = new Solenoid(Constants.SHOOTER_FEEDER_PISTON_PCM_PORT);
 
 	/**
 	 * Robot-wide initialization code. This method is for default Robot-wide initialization and will
@@ -58,7 +58,8 @@ public class Robot extends IterativeRobot {
 		//Autonomous.createChooser();
 		//Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
-
+		CameraStreaming.init();
+		
 		init();
 	}
 
@@ -152,5 +153,6 @@ public class Robot extends IterativeRobot {
 		Intake.init();
 		GearMechanism.init();
 		Time.init();
+		compressor.start();
 	}
 }

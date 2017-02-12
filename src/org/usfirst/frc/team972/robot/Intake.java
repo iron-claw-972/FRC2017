@@ -6,6 +6,8 @@ public class Intake {
 
 	static boolean intakeMotorOn = false;
 	static boolean intakeButtonPressedLastTime = false;
+	static boolean hopperRampButtonPressedLastTime = false;
+	static boolean hopperPistonBoolean = true; // Starts at true because you want it to go forward the first time
 	
 	/**
 	 * Intake initiation sequence.
@@ -32,6 +34,7 @@ public class Intake {
 	 */
 	public static void start() {
 		Robot.intakeMotor.set(Constants.INTAKE_MOTOR_SPEED);
+		Robot.feederPiston.set(false);
 		intakeMotorOn = true;
 	}
 
@@ -41,6 +44,15 @@ public class Intake {
 	public static void stop() {
 		Robot.intakeMotor.set(0);
 		intakeMotorOn = false;
+	}
+	
+	public static void hopperIntake() {
+		boolean hopperRampButtonPressed = Robot.operatorJoystick.getRawButton(Constants.HOPPER_INTAKE_RAMP_TOGGLE_BUTTON); 
+		if (hopperRampButtonPressed && !hopperRampButtonPressedLastTime) {
+			Robot.hopperIntakePiston.set(hopperPistonBoolean);
+			hopperPistonBoolean = !hopperPistonBoolean;
+		}
+		hopperRampButtonPressedLastTime = hopperRampButtonPressed;
 	}
 
 	/**
