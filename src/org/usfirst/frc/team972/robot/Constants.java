@@ -22,10 +22,10 @@ public class Constants {
 	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
 
 	// Motor IDs
-	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
-	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
-	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 3;
-	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 4;
+	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 3;
+	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 1;
+	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 4;
+	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
 	public static final int WINCH_MOTOR_CAN_ID = 6; // TODO: Revert to 5 for real robot
 	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 5; // TODO: Revert to 6 for real robot
 	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 7;
