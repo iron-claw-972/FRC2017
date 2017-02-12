@@ -146,7 +146,7 @@ public class Drive {
 		}
 	}
 
-	// @formatter:off //TODO: thank Andy
+	// @formatter:off
 	public static boolean autonDrive(double x_desired, double y_desired, double theta_desired, double dT) {
 		double curr_x = MotionProfiling.getX();
 		double curr_y = MotionProfiling.getY();
