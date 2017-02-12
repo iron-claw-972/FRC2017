@@ -30,6 +30,7 @@ public class Drive {
 		Robot.backLeftDriveMotor.setInverted(false);
 		Robot.backRightDriveMotor.setInverted(true);
 
+		// TODO: Robot starts on COAST for some reason.
 		Robot.frontLeftDriveMotor.enableBrakeMode(true);
 		Robot.frontRightDriveMotor.enableBrakeMode(true);
 		Robot.backLeftDriveMotor.enableBrakeMode(true);
