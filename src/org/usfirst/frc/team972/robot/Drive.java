@@ -268,7 +268,7 @@ public class Drive {
 	 * @return acceleration of the side using system model
 	 */
 	public static double getAccel(String robotSide) {
-		// TODO: make sure this is actually the right equation
+	/*	// TODO: make sure this is actually the right equation
 		// TODO: magic numbers lel Andy
 		if (robotSide == "left") {
 			return 0.4448 * ((Robot.frontLeftDriveMotor.getOutputCurrent() + Robot.backLeftDriveMotor.getOutputCurrent()) / 2) * (1 - 0.0356 * LeftModel.v_k) / Constants.ROBOT_MASS;
@@ -276,7 +276,8 @@ public class Drive {
 			return 0.4448 * ((Robot.frontRightDriveMotor.getOutputCurrent() + Robot.backRightDriveMotor.getOutputCurrent()) / 2) * (1 - 0.0356 * RightModel.v_k) / Constants.ROBOT_MASS;
 		} else {
 			return -9001.0;
-		}
+		} */
+	return 0.0; //temporary fix
 	}
 	// @formatter:on
 

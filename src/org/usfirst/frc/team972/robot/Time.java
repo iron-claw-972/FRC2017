@@ -19,7 +19,7 @@ public class Time {
 	 * @return Time in seconds since init() was called
 	 */
 	public static double get() {
-		return ((System.currentTimeMillis() - initTimeMillis) / 1000);
+		return ((double) (System.currentTimeMillis() - initTimeMillis) / 1000.0);
 	}
 	
 	/**

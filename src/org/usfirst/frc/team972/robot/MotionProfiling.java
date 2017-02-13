@@ -34,6 +34,7 @@ public class MotionProfiling {
 	 * @param y_init	Initial y position in meters
 	 */
 	public static void init(double x_init, double y_init) {
+		IMU.init();
 		LeftModel.setState(0.0, 0.0, 0.0);
 		RightModel.setState(0.0, 0.0, 0.0);
 		SystemModel.setState(x_init, y_init, 0.0, 0.0);
@@ -84,6 +85,12 @@ public class MotionProfiling {
 		SmartDashboard.putNumber("X Position", getX());
 		SmartDashboard.putNumber("Y Position", getY());
 		SmartDashboard.putNumber("Angle", getTheta());
+		SmartDashboard.putNumber("Left X", LeftModel.x_k);
+		SmartDashboard.putNumber("Right X", RightModel.x_k);
+		SmartDashboard.putNumber("Gyro", IMU.getAngle());
+		SmartDashboard.putNumber("PHI", Constants.PHI);
+		SmartDashboard.putNumber("ALPHA", Constants.ALPHA);
+		SmartDashboard.putNumber("BETA", Constants.BETA);
 	}
 
 	public static double getX() {
