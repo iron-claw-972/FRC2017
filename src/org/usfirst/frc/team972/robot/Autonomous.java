@@ -128,11 +128,11 @@ public class Autonomous {
 	 */
 	public static void updateSmartDashboard() {
 //		SmartDashboard.putString("Autonomous Routine", selectedAutoRoutine.toString());
-//		Drive.updateSmartDashboard();
+		Drive.updateSmartDashboard();
 //		Shooter.updateSmartDashboard();
 //		Winch.updateSmartDashboard();
 //		Intake.updateSmartDashboard();
-//		MotionProfiling.updateSmartDashboard();
-//		Time.updateSmartDashboard();
+		MotionProfiling.updateSmartDashboard();
+		Time.updateSmartDashboard();
 	}
 }
