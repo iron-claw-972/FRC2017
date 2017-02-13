@@ -3,10 +3,16 @@ package org.usfirst.frc.team972.robot;
 public class SystemModel {
 
 	//x is m, y is m, v is m/s, theta is degrees
-	static double x_k, y_k, v_k, theta_k; // at t=k
+	static double x_k = 0.0;
+	static double y_k = 0.0;
+	static double v_k = 0.0;
+	static double theta_k = 0.0; // at t=k
 	
 	// The following variables are private to make it less confusing to use
-	private static double x_k1, y_k1, v_k1, theta_k1; // at t=k+1
+	private static double x_k1 = 0.0;
+	private static double y_k1 = 0.0;
+	private static double v_k1 = 0.0;
+	private static double theta_k1 = 0.0; // at t=k+1
 
 	/**
 	 * Updates system model.
@@ -19,7 +25,7 @@ public class SystemModel {
 		y_k1 = y_k + (dT * v_k * Math.cos(theta_k));
 		v_k1 = (LeftModel.v_k + RightModel.v_k) / 2;
 		
-		double angle_from_encoders = ((360 / (Math.PI * Constants.ROBOT_WIDTH)) * (LeftModel.x_k - RightModel.x_k)) % 360.0;
+		double angle_from_encoders = ((180 / (Math.PI * Constants.ROBOT_WIDTH)) * (LeftModel.x_k - RightModel.x_k)) % 360.0;
 		if (angle_from_encoders > 180) {
 			angle_from_encoders = -360 + angle_from_encoders;
 		} else if (angle_from_encoders < -180) {

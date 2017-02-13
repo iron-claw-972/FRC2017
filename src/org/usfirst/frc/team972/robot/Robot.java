@@ -30,13 +30,13 @@ public class Robot extends IterativeRobot {
 	static Joystick operatorJoystick = new Joystick(Constants.OPERATOR_JOYSTICK_INPUT_USB_PORT);
 
 	static Encoder leftDriveEncoderFront = new Encoder(Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_A,
-			Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_B);
+			Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_B, true, Encoder.EncodingType.k2X);
 	static Encoder rightDriveEncoderFront = new Encoder(Constants.RIGHT_DRIVE_ENCODER_FRONT_PORT_A,
-			Constants.RIGHT_DRIVE_ENCODER_FRONT_PORT_B);
+			Constants.RIGHT_DRIVE_ENCODER_FRONT_PORT_B, false, Encoder.EncodingType.k2X);
 	static Encoder leftDriveEncoderBack = new Encoder(Constants.LEFT_DRIVE_ENCODER_BACK_PORT_A,
-			Constants.LEFT_DRIVE_ENCODER_BACK_PORT_B);
+			Constants.LEFT_DRIVE_ENCODER_BACK_PORT_B, true, Encoder.EncodingType.k2X);
 	static Encoder rightDriveEncoderBack = new Encoder(Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_A,
-			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B);
+			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B, false, Encoder.EncodingType.k2X);
 
 	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
 	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
@@ -55,10 +55,10 @@ public class Robot extends IterativeRobot {
 	 * @see init()
 	 */
 	public void robotInit() {
-		//Autonomous.createChooser();
-		//Autonomous.updateSmartDashboard();
+		IMU.init();
+		Autonomous.createChooser();
+		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
-
 		init();
 	}
 
@@ -145,12 +145,16 @@ public class Robot extends IterativeRobot {
 	 * enters autonomous or teleop mode.
 	 */
 	public static void init() {
-		Logger.init();
+//		Logger.init();
 		Drive.init();
-		Winch.init();
-		Shooter.init();
-		Intake.init();
-		GearMechanism.init();
+//		Winch.init();
+//		Shooter.init();
+//		Intake.init();
+//		GearMechanism.init();
 		Time.init();
+		leftDriveEncoderFront.reset();
+		leftDriveEncoderBack.reset();
+		rightDriveEncoderFront.reset();
+		rightDriveEncoderBack.reset();
 	}
 }
