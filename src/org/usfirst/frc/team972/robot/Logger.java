@@ -56,4 +56,25 @@ public class Logger {
 			e.printStackTrace();
 		}
 	}
+	
+	public static String[] readLog(String fileName, String time) {
+		try {
+			String[] tokens;
+			String line;
+			@SuppressWarnings("resource")
+			BufferedReader fileReader = 
+	                new BufferedReader(new FileReader(Constants.LOGGER_LOCATION + "/" + directory + "/" + fileName + ".txt"));
+			while((line = fileReader.readLine()) != null) {
+				tokens = line.split("x=");
+				if(tokens[0].equals("t=" + time)) {
+					tokens = tokens[1].split("y=");
+					return tokens;
+				}
+			}
+			fileReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
