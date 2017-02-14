@@ -87,6 +87,10 @@ public class MotionProfiling {
 		SmartDashboard.putNumber("Angle", getTheta());
 		SmartDashboard.putNumber("Left X", LeftModel.x_k);
 		SmartDashboard.putNumber("Right X", RightModel.x_k);
+		SmartDashboard.putNumber("Left V", LeftModel.v_k);
+		SmartDashboard.putNumber("Right V", RightModel.v_k);
+		SmartDashboard.putNumber("Left A", LeftModel.a_k);
+		SmartDashboard.putNumber("Right A", RightModel.a_k);
 		SmartDashboard.putNumber("Gyro", IMU.getAngle());
 		SmartDashboard.putNumber("PHI", Constants.PHI);
 		SmartDashboard.putNumber("ALPHA", Constants.ALPHA);
