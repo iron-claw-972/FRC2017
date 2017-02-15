@@ -63,6 +63,10 @@ public class Constants {
 	public static final int GEAR_PEG_PISTON_REVERSE_PCM_PORT = 2;
 	public static final int GEAR_PUSHER_PISTON_FORWARD_PCM_PORT = 3;
 	public static final int GEAR_PUSHER_PISTON_REVERSE_PCM_PORT = 4;
+	public static final int LOADER_DOOR_PISTON_FORWARD_PCM_PORT = 5;
+	public static final int LOADER_DOOR_PISTON_REVERSE_PCM_PORT = 6;
+	public static final int FIELD_HOPPER_PISTON_FOWARD_PCM_PORT = 7;
+	public static final int FIELD_HOPPER_PISTON_REVERSE_PCM_PORT = 8;
 
 	// Robot Information
 	public static final double ROBOT_WIDTH = 0.751; // in meters
