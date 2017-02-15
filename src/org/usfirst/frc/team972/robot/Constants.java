@@ -69,14 +69,14 @@ public class Constants {
 	public static final double ROBOT_LENGTH = 0.9017; // in meters
 	public static final double GEAR_INSET_FROM_BUMPERS = 0.03175; // in meters
 	public static final double ROBOT_MAX_VELOCITY = 5; // m/s
-	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.317; // meters (diameter 0.101 meters)
+	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.320; // meters (diameter 0.101 meters)
 	public static final double ENCODER_CLICKS_PER_ROTATION = 2048;
 	public static final double ROBOT_MASS = 29.484; // TODO: calculate (in kg) (current weight is weight of drive base with battery but no bumpers) (estimated that the robot is 135lbs = 61.235 with batteries and bumpers)
 
 	// System Model
 	public static final double ALPHA = 1.0; // TODO: determine (all between 0 and 1)
 	public static final double BETA = 0.55;
-	public static final double PHI = 1.0;
+	public static final double PHI = 0.98;
 
 	// Auton Drive
 	public static final double AUTON_DRIVE_RATIO = 0.7; // TODO: determine (needs to be between 0 and 1)

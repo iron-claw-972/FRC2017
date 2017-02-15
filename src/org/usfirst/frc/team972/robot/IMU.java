@@ -12,7 +12,7 @@ public class IMU {
 	 */
 	public static void init() {
 		imu.calibrate();
-		calibrationAngle = 0.0;
+		recalibrate(0.0);
 	}
 
 	/**

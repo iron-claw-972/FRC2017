@@ -25,10 +25,10 @@ public class Drive {
 	 * Drive initiation sequence.
 	 */
 	public static void init() {
-		Robot.frontLeftDriveMotor.setInverted(false);
-		Robot.frontRightDriveMotor.setInverted(true);
-		Robot.backLeftDriveMotor.setInverted(false);
-		Robot.backRightDriveMotor.setInverted(true);
+		Robot.frontLeftDriveMotor.setInverted(true);
+		Robot.frontRightDriveMotor.setInverted(false);
+		Robot.backLeftDriveMotor.setInverted(true);
+		Robot.backRightDriveMotor.setInverted(false);
 
 		// TODO: Robot starts on COAST for some reason.
 		Robot.frontLeftDriveMotor.enableBrakeMode(true);

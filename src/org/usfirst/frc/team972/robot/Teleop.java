@@ -39,11 +39,11 @@ public class Teleop {
 	 * @see Robot.teleopPeriodic()
 	 */
 	public static void periodic(Robot r) {
-		/*Winch.manage();
-		Intake.manage();
+		//Winch.manage();
+		//Intake.manage();
 		Drive.teleopDrive();
-		Shooter.align();
-		Shooter.shoot();*/
+		//Shooter.align();
+		//Shooter.shoot();
 		
 		double currTime = Time.get();
 		double loopTime = currTime - prevTime;
