@@ -12,7 +12,7 @@ public class IMU {
 	 */
 	public static void init() {
 		imu.calibrate();
-		calibrationAngle = 0.0;
+		recalibrate(0.0);
 	}
 
 	/**
@@ -21,7 +21,7 @@ public class IMU {
 	 * @param curr_angle	current angle
 	 */
 	public static void recalibrate(double curr_angle) {
-		calibrationAngle = curr_angle + (imu.getAngleZ() / 4.0);
+		calibrationAngle = curr_angle - (imu.getAngleZ() / 4.0);
 	}
 
 	/**
@@ -30,6 +30,6 @@ public class IMU {
 	 * @return current angle from IMU
 	 */
 	public static double getAngle() {
-		return (-(imu.getAngleZ() / 4.0) - calibrationAngle);
+		return ((imu.getAngleZ() / 4.0) + calibrationAngle);
 	}
 }

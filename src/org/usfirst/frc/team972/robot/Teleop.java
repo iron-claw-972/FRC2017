@@ -24,6 +24,7 @@ public class Teleop {
 	 */
 	public static void init(Robot r) {
 		r.init();
+		MotionProfiling.init(0.0, 0.0);
 		updateSmartDashboard();
 	}
 
@@ -38,11 +39,11 @@ public class Teleop {
 	 * @see Robot.teleopPeriodic()
 	 */
 	public static void periodic(Robot r) {
-		Winch.manage();
-		Intake.manage();
+		//Winch.manage();
+		//Intake.manage();
 		Drive.teleopDrive();
-		Shooter.align();
-		Shooter.shoot();
+		//Shooter.align();
+		//Shooter.shoot();
 		
 		CameraStreaming.periodic();
 		
@@ -51,6 +52,7 @@ public class Teleop {
 		Drive.updateModel(loopTime);
 		updateSmartDashboard();
 		prevTime = currTime;
+		SmartDashboard.putNumber("Loop Time", loopTime);
 	}
 
 	/**
@@ -58,9 +60,9 @@ public class Teleop {
 	 */
 	public static void updateSmartDashboard() {
 		Drive.updateSmartDashboard();
-		Shooter.updateSmartDashboard();
-		Winch.updateSmartDashboard();
-		Intake.updateSmartDashboard();
+//		Shooter.updateSmartDashboard();
+//		Winch.updateSmartDashboard();
+//		Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
 		Time.updateSmartDashboard();
 	}

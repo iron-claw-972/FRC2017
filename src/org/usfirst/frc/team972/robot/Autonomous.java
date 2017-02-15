@@ -127,11 +127,11 @@ public class Autonomous {
 	 * Updates SmartDashboard values for Autonomous by calling other update functions.
 	 */
 	public static void updateSmartDashboard() {
-		SmartDashboard.putString("Autonomous Routine", selectedAutoRoutine.toString());
+//		SmartDashboard.putString("Autonomous Routine", selectedAutoRoutine.toString());
 		Drive.updateSmartDashboard();
-		Shooter.updateSmartDashboard();
-		Winch.updateSmartDashboard();
-		Intake.updateSmartDashboard();
+//		Shooter.updateSmartDashboard();
+//		Winch.updateSmartDashboard();
+//		Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
 		Time.updateSmartDashboard();
 	}
