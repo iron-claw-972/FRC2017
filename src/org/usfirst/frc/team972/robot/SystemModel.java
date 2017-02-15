@@ -1,5 +1,7 @@
 package org.usfirst.frc.team972.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class SystemModel {
 
 	//x is m, y is m, v is m/s, theta is degrees
@@ -13,6 +15,9 @@ public class SystemModel {
 	private static double y_k1 = 0.0;
 	private static double v_k1 = 0.0;
 	private static double theta_k1 = 0.0; // at t=k+1
+	
+	private static double leftx_k = 0.0;
+	private static double rightx_k = 0.0;
 
 	/**
 	 * Updates system model.
@@ -21,8 +26,14 @@ public class SystemModel {
 	 * @param dT	Loop time (change in time) in seconds
 	 */
 	public static void update(double gyro, double dT) {
-		x_k1 = x_k + (dT * v_k * Math.sin(theta_k));
-		y_k1 = y_k + (dT * v_k * Math.cos(theta_k));
+		double average_dist_change = (((LeftModel.x_k - leftx_k) + (RightModel.x_k - rightx_k)) / 2);
+		x_k1 = x_k + (average_dist_change * Math.sin(theta_k * Math.PI / 180));
+		y_k1 = y_k + (average_dist_change * Math.cos(theta_k * Math.PI / 180));
+		
+		leftx_k = LeftModel.x_k;
+		rightx_k = RightModel.x_k;
+		SmartDashboard.putNumber("position change", average_dist_change);
+		
 		v_k1 = (LeftModel.v_k + RightModel.v_k) / 2;
 		
 		double angle_from_encoders = ((180 / (Math.PI * Constants.ROBOT_WIDTH)) * (LeftModel.x_k - RightModel.x_k)) % 360.0;

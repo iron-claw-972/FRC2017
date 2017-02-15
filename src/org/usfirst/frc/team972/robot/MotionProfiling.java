@@ -85,6 +85,7 @@ public class MotionProfiling {
 		SmartDashboard.putNumber("X Position", getX());
 		SmartDashboard.putNumber("Y Position", getY());
 		SmartDashboard.putNumber("Angle", getTheta());
+		SmartDashboard.putNumber("Velocity", getV());
 		SmartDashboard.putNumber("Left X", LeftModel.x_k);
 		SmartDashboard.putNumber("Right X", RightModel.x_k);
 		SmartDashboard.putNumber("Left V", LeftModel.v_k);
