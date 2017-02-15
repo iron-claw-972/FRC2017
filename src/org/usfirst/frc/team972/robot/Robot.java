@@ -43,6 +43,10 @@ public class Robot extends IterativeRobot {
 			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
 	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
 			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
+	static DoubleSolenoid loaderDoorPiston = new DoubleSolenoid(Constants.LOADER_DOOR_PISTON_FORWARD_PCM_PORT,
+			Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
+	static DoubleSolenoid fieldHopperPiston = new DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
+			Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
 
 	/**
 	 * Robot-wide initialization code. This method is for default Robot-wide initialization and will
@@ -145,12 +149,12 @@ public class Robot extends IterativeRobot {
 	 * enters autonomous or teleop mode.
 	 */
 	public static void init() {
-//		Logger.init();
+		// Logger.init();
 		Drive.init();
-//		Winch.init();
-//		Shooter.init();
-//		Intake.init();
-//		GearMechanism.init();
+		// Winch.init();
+		// Shooter.init();
+		// Intake.init();
+		// GearMechanism.init();
 		Time.init();
 		leftDriveEncoderFront.reset();
 		leftDriveEncoderBack.reset();
