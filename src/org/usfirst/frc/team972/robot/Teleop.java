@@ -45,6 +45,8 @@ public class Teleop {
 		//Shooter.align();
 		//Shooter.shoot();
 		
+		CameraStreaming.periodic();
+		
 		double currTime = Time.get();
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
