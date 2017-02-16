@@ -211,6 +211,9 @@ public class Shooter {
 		if (Constants.CHANGE_AZIMUTH_PID_WITH_JOYSTICKS) {
 			getAlignmentPIDFromJoystick();
 		}
+		if(Constants.CHANGE_AZIMUTH_WITH_VISION) {
+			getAlignmentFromVision(0, 0/* TODO: Add values d and thetaC from vision*/);
+		}
 
 		alignment_runPID = Robot.operatorJoystick.getRawButton(Constants.SHOOTER_AZIMUTH_MOTOR_BUTTON);
 
@@ -289,6 +292,28 @@ public class Shooter {
 		if (alignment_kD < 0) {
 			alignment_kD = 0;
 		}
+	}
+	
+	public static void getAlignmentFromVision(double d, double theta) {
+		double xL = -13.875; // Note: These values are from the CAD (x = distance between shooters, y = distance between camera and shooters)
+		double yL = -18.146;
+		double xR = 13.875;
+		double yR = -18.146;
+		
+		double xB = d * Math.sin(Math.toRadians(theta));
+		double yB = d * Math.cos(Math.toRadians(theta));
+		
+		double leftShooterAngle = Math.atan((yB - yL) / (xB - xL));
+		double rightShooterAngle = Math.atan((yB - yR) / (xB - xR));
+		
+		if(Robot.leftAzimuthMotor.getPosition() < leftShooterAngle) {
+			moveAzimuth(Robot.leftAzimuthMotor, 0, true); // Note: find actual position
+		}
+		if(Robot.rightAzimuthMotor.getPosition() < rightShooterAngle) {
+			moveAzimuth(Robot.rightAzimuthMotor, 0, true); // Note: find actual position
+		}
+		
+		
 	}
 
 	/**

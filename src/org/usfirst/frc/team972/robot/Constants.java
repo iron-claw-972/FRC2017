@@ -97,6 +97,7 @@ public class Constants {
 	// Test Switches
 	public static final boolean CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS = true;
 	public static final boolean CHANGE_AZIMUTH_PID_WITH_JOYSTICKS = true;
+	public static final boolean CHANGE_AZIMUTH_WITH_VISION = false; // TODO: change to true when vision is ready
 	public static final boolean USE_LEFT_SHOOTER = true;
 	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
 
