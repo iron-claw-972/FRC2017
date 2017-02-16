@@ -62,7 +62,6 @@ public class Logger {
 			String[] tokens;
 			String line;
 			double[] values = { 0, 0 };
-			@SuppressWarnings("resource")
 			BufferedReader fileReader = 
 	                new BufferedReader(new FileReader(Constants.LOGGER_LOCATION + "/" + directory + "/" + fileName + ".txt"));
 			while((line = fileReader.readLine()) != null) {
@@ -71,6 +70,7 @@ public class Logger {
 					tokens = tokens[1].split("y=");
 					values[0] = Double.parseDouble(tokens[0]);
 					values[1] = Double.parseDouble(tokens[1]);
+					fileReader.close();
 					return values;
 				}
 			}
