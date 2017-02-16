@@ -15,7 +15,8 @@ public class Teleop {
 	 */
 
 	private static double prevTime = 0.0;
-
+	static TeleopState selectedTeleopState;
+	
 	/**
 	 * Initialization code for teleop mode. This method for initialization code
 	 * will be called each time the robot enters teleop mode.
@@ -41,12 +42,33 @@ public class Teleop {
 	 * @see Robot.teleopPeriodic()
 	 */
 	public static void periodic(Robot r) {
-		// Winch.manage();
-		// Intake.manage();
 		Drive.teleopDrive();
-		// Shooter.align();
-		// Shooter.shoot();
-
+		
+		 switch (selectedTeleopState) {
+			case INTAKE:
+				Drive.intakeModeCurrent();
+				Intake.manage();
+				Winch.stop();
+				Robot.leftShooterMotorA.set(0);
+				Robot.rightShooterMotorA.set(0);
+				break;
+			case SHOOTING:
+				Drive.shootingModeCurrent();
+				Shooter.align();
+				Shooter.shoot();
+				Intake.stop();
+				Winch.stop();
+				break;
+			case CLIMBING:
+				Drive.climbingModeCurrent();
+				Winch.manage();
+				Intake.stop();
+				Robot.leftShooterMotorA.set(0);
+				Robot.rightShooterMotorA.set(0);
+				break;
+			
+		}
+		 
 		double currTime = Time.get();
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);

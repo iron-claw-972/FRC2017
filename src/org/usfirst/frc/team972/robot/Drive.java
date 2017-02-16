@@ -290,4 +290,82 @@ public class Drive {
 		SmartDashboard.putNumber("Left Encoder Back", Robot.leftDriveEncoderBack.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
 		SmartDashboard.putNumber("Right Encoder Back", Robot.rightDriveEncoderBack.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
 	}
+	
+	public static void intakeModeCurrent(){
+		Robot.frontLeftDriveMotor.setCurrentLimit(44);
+		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
+
+		Robot.backLeftDriveMotor.setCurrentLimit(44);
+		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
+
+		Robot.frontRightDriveMotor.setCurrentLimit(44);
+		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
+		
+		Robot.backRightDriveMotor.setCurrentLimit(44);
+		Robot.backRightDriveMotor.EnableCurrentLimit(true);
+
+		Robot.intakeMotor.setCurrentLimit(19);
+		Robot.intakeMotor.EnableCurrentLimit(true);
+	}
+	
+	public static void shootingModeCurrent(){
+		Robot.frontLeftDriveMotor.setCurrentLimit(25);
+		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
+
+		Robot.backLeftDriveMotor.setCurrentLimit(25);
+		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
+
+		Robot.frontRightDriveMotor.setCurrentLimit(25);
+		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
+		
+		Robot.backRightDriveMotor.setCurrentLimit(25);
+		Robot.backRightDriveMotor.EnableCurrentLimit(true);
+		
+		Robot.leftShooterMotorA.setCurrentLimit(15);
+		Robot.leftShooterMotorA.EnableCurrentLimit(true);
+		
+		Robot.leftShooterMotorB.setCurrentLimit(15);
+		Robot.leftShooterMotorB.EnableCurrentLimit(true);
+		
+		Robot.rightShooterMotorA.setCurrentLimit(15);
+		Robot.rightShooterMotorA.EnableCurrentLimit(true);
+		
+		Robot.rightShooterMotorB.setCurrentLimit(15);
+		Robot.rightShooterMotorB.EnableCurrentLimit(true);
+		
+		Robot.leftLoaderMotor.setCurrentLimit(15);
+		Robot.leftLoaderMotor.EnableCurrentLimit(true);
+		
+		Robot.rightLoaderMotor.setCurrentLimit(15);
+		Robot.rightLoaderMotor.EnableCurrentLimit(true);
+		
+		Robot.leftAzimuthMotor.setCurrentLimit(3);
+		Robot.leftAzimuthMotor.EnableCurrentLimit(true);
+
+		Robot.rightAzimuthMotor.setCurrentLimit(3);
+		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
+		
+		Robot.leftAzimuthMotor.setCurrentLimit(3);
+		Robot.leftAzimuthMotor.EnableCurrentLimit(true);
+
+		Robot.rightAzimuthMotor.setCurrentLimit(3);
+		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
+	}
+	
+	public static void climbingModeCurrent(){
+		Robot.frontLeftDriveMotor.setCurrentLimit(46);
+		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
+
+		Robot.backLeftDriveMotor.setCurrentLimit(46);
+		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
+
+		Robot.frontRightDriveMotor.setCurrentLimit(46);
+		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
+		
+		Robot.backRightDriveMotor.setCurrentLimit(46);
+		Robot.backRightDriveMotor.EnableCurrentLimit(true);
+		
+		Robot.winchMotor.setCurrentLimit(8);
+		Robot.winchMotor.EnableCurrentLimit(true);
+	}
 }
