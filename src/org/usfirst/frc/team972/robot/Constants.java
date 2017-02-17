@@ -78,9 +78,11 @@ public class Constants {
 	public static final double ROBOT_MASS = 29.484; // TODO: calculate (in kg) (current weight is weight of drive base with battery but no bumpers) (estimated that the robot is 135lbs = 61.235 with batteries and bumpers)
 
 	// System Model
-	public static final double ALPHA = 1.0; // TODO: determine (all between 0 and 1)
+	public static final double ALPHA = 1.0;
 	public static final double BETA = 0.55;
 	public static final double PHI = 0.98;
+	public static final double SYSVEL = 0.5; //TODO determine
+	public static final double SYSACC = 0.5; //TODO determine
 
 	// Auton Drive
 	public static final double AUTON_DRIVE_RATIO = 0.7; // TODO: determine (needs to be between 0 and 1)
