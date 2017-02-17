@@ -78,6 +78,7 @@ public class Teleop {
 	}
 
 	public void intakeModeCurrentLimit() {
+		// Based on Power Budget
 		Robot.frontLeftDriveMotor.setCurrentLimit(43);
 		Robot.frontRightDriveMotor.setCurrentLimit(43);
 		Robot.backLeftDriveMotor.setCurrentLimit(43);
@@ -110,6 +111,7 @@ public class Teleop {
 	}
 
 	public void shooterCurrentLimit() {
+		// Based on Power Budget
 		Robot.frontLeftDriveMotor.setCurrentLimit(23);
 		Robot.frontRightDriveMotor.setCurrentLimit(23);
 		Robot.backLeftDriveMotor.setCurrentLimit(23);
@@ -141,53 +143,21 @@ public class Teleop {
 		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
 	}
 
-	public void alignmentCurrentLimit() {
-		// TODO: CHANGE TO CORRECT LIMITS
-		Robot.frontLeftDriveMotor.setCurrentLimit(43);
-		Robot.frontRightDriveMotor.setCurrentLimit(43);
-		Robot.backLeftDriveMotor.setCurrentLimit(43);
-		Robot.backRightDriveMotor.setCurrentLimit(43);
-		Robot.leftShooterMotorA.setCurrentLimit(0);
-		Robot.leftShooterMotorB.setCurrentLimit(0);
-		Robot.rightShooterMotorA.setCurrentLimit(0);
-		Robot.rightShooterMotorB.setCurrentLimit(0);
-		Robot.leftLoaderMotor.setCurrentLimit(0);
-		Robot.rightLoaderMotor.setCurrentLimit(0);
-		Robot.intakeMotor.setCurrentLimit(21);
-		Robot.winchMotor.setCurrentLimit(0);
-		Robot.leftAzimuthMotor.setCurrentLimit(0);
-		Robot.rightAzimuthMotor.setCurrentLimit(0);
-
-		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
-		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
-		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
-		Robot.backRightDriveMotor.EnableCurrentLimit(true);
-		Robot.leftShooterMotorA.EnableCurrentLimit(true);
-		Robot.leftShooterMotorB.EnableCurrentLimit(true);
-		Robot.rightShooterMotorA.EnableCurrentLimit(true);
-		Robot.rightShooterMotorB.EnableCurrentLimit(true);
-		Robot.leftLoaderMotor.EnableCurrentLimit(true);
-		Robot.rightLoaderMotor.EnableCurrentLimit(true);
-		Robot.intakeMotor.EnableCurrentLimit(true);
-		Robot.winchMotor.EnableCurrentLimit(true);
-		Robot.leftAzimuthMotor.EnableCurrentLimit(true);
-		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
-	}
-
+	
 	public void climberCurrentLimit() {
-		// TODO: CHANGE TO CORRECT LIMITS
-		Robot.frontLeftDriveMotor.setCurrentLimit(43);
-		Robot.frontRightDriveMotor.setCurrentLimit(43);
-		Robot.backLeftDriveMotor.setCurrentLimit(43);
-		Robot.backRightDriveMotor.setCurrentLimit(43);
+		// Based on Power Budget
+		Robot.frontLeftDriveMotor.setCurrentLimit(46);
+		Robot.frontRightDriveMotor.setCurrentLimit(46);
+		Robot.backLeftDriveMotor.setCurrentLimit(46);
+		Robot.backRightDriveMotor.setCurrentLimit(46);
 		Robot.leftShooterMotorA.setCurrentLimit(0);
 		Robot.leftShooterMotorB.setCurrentLimit(0);
 		Robot.rightShooterMotorA.setCurrentLimit(0);
 		Robot.rightShooterMotorB.setCurrentLimit(0);
 		Robot.leftLoaderMotor.setCurrentLimit(0);
 		Robot.rightLoaderMotor.setCurrentLimit(0);
-		Robot.intakeMotor.setCurrentLimit(21);
-		Robot.winchMotor.setCurrentLimit(0);
+		Robot.intakeMotor.setCurrentLimit(0);
+		Robot.winchMotor.setCurrentLimit(9);
 		Robot.leftAzimuthMotor.setCurrentLimit(0);
 		Robot.rightAzimuthMotor.setCurrentLimit(0);
 
