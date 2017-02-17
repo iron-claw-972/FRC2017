@@ -9,6 +9,8 @@ public class MotionProfiling {
 	 *
 	 * @param dT						Loop time (change in time) in seconds
 	 * @param gyro						Gyro angle in degrees
+	 * @param x_accel					IMU x accel
+	 * @param y_accel					IMU y accel
 	 * @param frontLeftEncoderValue		Front left encoder distance
 	 * @param backLeftEncoderValue		Back left encoder distance
 	 * @param frontRightEncoderValue	Front right encoder distance
@@ -16,14 +18,14 @@ public class MotionProfiling {
 	 * @param LeftAccel					Left side acceleration (m/s^2)
 	 * @param rightAccel				Right side acceleration (m/s^2)
 	 */
-	public static void update(double dT, double gyro, double frontLeftEncoderValue, double backLeftEncoderValue,
+	public static void update(double dT, double gyro, double x_accel, double y_accel, double frontLeftEncoderValue, double backLeftEncoderValue,
 			double frontRightEncoderValue, double backRightEncoderValue, double leftAccel, double rightAccel) {
 		// @formatter:off
 		LeftModel.update(leftAccel, dT, frontLeftEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION, 
 				backLeftEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
 		RightModel.update(rightAccel, dT, frontRightEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION,
 				backRightEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
-		SystemModel.update(gyro, dT);
+		SystemModel.update(gyro, x_accel, y_accel, dT);
 		// @formatter:on
 	}
 

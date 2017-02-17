@@ -255,7 +255,7 @@ public class Drive {
 	}
 	
 	public static void updateModel(double dT) {
-		MotionProfiling.update(dT, IMU.getAngle(), Robot.leftDriveEncoderFront.get(), Robot.leftDriveEncoderBack.get(), Robot.rightDriveEncoderFront.get(), 
+		MotionProfiling.update(dT, IMU.getAngle(), IMU.getAccelX(), IMU.getAccelY(), Robot.leftDriveEncoderFront.get(), Robot.leftDriveEncoderBack.get(), Robot.rightDriveEncoderFront.get(), 
 				Robot.rightDriveEncoderBack.get(), getAccel("left"), getAccel("right"));
 	}
 
