@@ -26,10 +26,11 @@ public class Drive {
 	 */
 	public static void init() {
 		Robot.frontLeftDriveMotor.setInverted(true);
-		Robot.frontRightDriveMotor.setInverted(true);
+		Robot.frontRightDriveMotor.setInverted(false);
 		Robot.backLeftDriveMotor.setInverted(true);
-		Robot.backRightDriveMotor.setInverted(true);
+		Robot.backRightDriveMotor.setInverted(false);
 
+		// TODO: Robot starts on COAST for some reason.
 		Robot.frontLeftDriveMotor.enableBrakeMode(true);
 		Robot.frontRightDriveMotor.enableBrakeMode(true);
 		Robot.backLeftDriveMotor.enableBrakeMode(true);
@@ -66,7 +67,6 @@ public class Drive {
 	 *            speed of new right wheels
 	 */
 	public static void inverseDrive(double leftDriveSpeed, double rightDriveSpeed) {
-		// Intentional, used for propery inverse drive
 		Drive.leftDriveSpeed = -rightDriveSpeed;
 		Drive.rightDriveSpeed = -leftDriveSpeed;
 		tankDrive(leftDriveSpeed, rightDriveSpeed);
@@ -145,7 +145,7 @@ public class Drive {
 		}
 	}
 
-	// @formatter:off //TODO: thank Andy
+	// @formatter:off
 	public static boolean autonDrive(double x_desired, double y_desired, double theta_desired, double dT) {
 		double curr_x = MotionProfiling.getX();
 		double curr_y = MotionProfiling.getY();
@@ -255,7 +255,7 @@ public class Drive {
 	}
 	
 	public static void updateModel(double dT) {
-		MotionProfiling.update(dT, IMU.getAngle(), Robot.leftDriveEncoderFront.get(), Robot.leftDriveEncoderBack.get(), Robot.rightDriveEncoderFront.get(), 
+		MotionProfiling.update(dT, IMU.getAngle(), IMU.getAccelX(), IMU.getAccelY(), Robot.leftDriveEncoderFront.get(), Robot.leftDriveEncoderBack.get(), Robot.rightDriveEncoderFront.get(), 
 				Robot.rightDriveEncoderBack.get(), getAccel("left"), getAccel("right"));
 	}
 
@@ -285,9 +285,9 @@ public class Drive {
 	public static void updateSmartDashboard() {
 		SmartDashboard.putNumber("Left Drive Speed", leftDriveSpeed);
 		SmartDashboard.putNumber("Right Drive Speed", rightDriveSpeed);
-		SmartDashboard.putNumber("Left Encoder Front", Robot.leftDriveEncoderFront.get());
-		SmartDashboard.putNumber("Right Encoder Front", Robot.rightDriveEncoderFront.get());
-		SmartDashboard.putNumber("Left Encoder Back", Robot.leftDriveEncoderBack.get());
-		SmartDashboard.putNumber("Right Encoder Back", Robot.rightDriveEncoderBack.get());
+		SmartDashboard.putNumber("Left Encoder Front", Robot.leftDriveEncoderFront.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
+		SmartDashboard.putNumber("Right Encoder Front", Robot.rightDriveEncoderFront.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
+		SmartDashboard.putNumber("Left Encoder Back", Robot.leftDriveEncoderBack.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
+		SmartDashboard.putNumber("Right Encoder Back", Robot.rightDriveEncoderBack.get() * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
 	}
 }

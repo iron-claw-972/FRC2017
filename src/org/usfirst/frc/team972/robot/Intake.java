@@ -13,8 +13,8 @@ public class Intake {
 	public static void init() {
 		Robot.intakeMotor.enableBrakeMode(true);
 	}
-
 	/**
+
 	 * Manages the Intake using joystick toggle input.
 	 */
 	public static void manage() {

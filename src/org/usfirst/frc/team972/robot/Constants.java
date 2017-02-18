@@ -22,16 +22,16 @@ public class Constants {
 	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
 
 	// Motor IDs
-	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
-	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
-	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 3;
-	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 4;
+	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 3;
+	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 5;
+	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 4;
+	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
 	public static final int WINCH_MOTOR_CAN_ID = 6; // TODO: Revert to 5 for real robot
 	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 5; // TODO: Revert to 6 for real robot
 	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 7;
 	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 8;
 	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 9;
-	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 10;
+	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 1;
 	public static final int RIGHT_AZIMUTH_MOTOR_CAN_ID = 11;
 	public static final int INTAKE_MOTOR_CAN_ID = 12;
 	public static final int LEFT_LOADER_MOTOR_CAN_ID = 13;
@@ -49,10 +49,10 @@ public class Constants {
 	// DIO Ports
 	public static final int LEFT_DRIVE_ENCODER_FRONT_PORT_A = 0;
 	public static final int LEFT_DRIVE_ENCODER_FRONT_PORT_B = 1;
-	public static final int LEFT_DRIVE_ENCODER_BACK_PORT_A = 2;
-	public static final int LEFT_DRIVE_ENCODER_BACK_PORT_B = 3;
-	public static final int RIGHT_DRIVE_ENCODER_FRONT_PORT_A = 4;
-	public static final int RIGHT_DRIVE_ENCODER_FRONT_PORT_B = 5;
+	public static final int LEFT_DRIVE_ENCODER_BACK_PORT_A = 4;
+	public static final int LEFT_DRIVE_ENCODER_BACK_PORT_B = 5;
+	public static final int RIGHT_DRIVE_ENCODER_FRONT_PORT_A = 2;
+	public static final int RIGHT_DRIVE_ENCODER_FRONT_PORT_B = 3;
 	public static final int RIGHT_DRIVE_ENCODER_BACK_PORT_A = 6;
 	public static final int RIGHT_DRIVE_ENCODER_BACK_PORT_B = 7;
 
@@ -63,20 +63,26 @@ public class Constants {
 	public static final int GEAR_PEG_PISTON_REVERSE_PCM_PORT = 2;
 	public static final int GEAR_PUSHER_PISTON_FORWARD_PCM_PORT = 3;
 	public static final int GEAR_PUSHER_PISTON_REVERSE_PCM_PORT = 4;
+	public static final int LOADER_DOOR_PISTON_FORWARD_PCM_PORT = 5;
+	public static final int LOADER_DOOR_PISTON_REVERSE_PCM_PORT = 6;
+	public static final int FIELD_HOPPER_PISTON_FOWARD_PCM_PORT = 7;
+	public static final int FIELD_HOPPER_PISTON_REVERSE_PCM_PORT = 8;
 
 	// Robot Information
-	public static final double ROBOT_WIDTH = 0.74714; // in meters
+	public static final double ROBOT_WIDTH = 0.751; // in meters
 	public static final double ROBOT_LENGTH = 0.9017; // in meters
 	public static final double GEAR_INSET_FROM_BUMPERS = 0.03175; // in meters
 	public static final double ROBOT_MAX_VELOCITY = 5; // m/s
-	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.317; // meters (diameter 0.101 meters)
+	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.320; // meters (diameter 0.101 meters)
 	public static final double ENCODER_CLICKS_PER_ROTATION = 2048;
-	public static final double ROBOT_MASS = 61.235; // TODO: calculate (in kg) (currently an estimate that the robot is 135lbs with batteries and bumpers)
+	public static final double ROBOT_MASS = 29.484; // TODO: calculate (in kg) (current weight is weight of drive base with battery but no bumpers) (estimated that the robot is 135lbs = 61.235 with batteries and bumpers)
 
 	// System Model
-	public static final double ALPHA = 0.6; // TODO: determine (all between 0 and 1)
-	public static final double BETA = 0.8;
-	public static final double PHI = 0.6;
+	public static final double ALPHA = 1.0;
+	public static final double BETA = 0.55;
+	public static final double PHI = 0.98;
+	public static final double SYSVEL = 0.5; //TODO determine
+	public static final double SYSACC = 0.5; //TODO determine
 
 	// Auton Drive
 	public static final double AUTON_DRIVE_RATIO = 0.7; // TODO: determine (needs to be between 0 and 1)
@@ -97,9 +103,9 @@ public class Constants {
 	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
 
 	// PID Values
-	public static final int FLYWHEEL_P = 0;
-	public static final int FLYWHEEL_I = 0;
-	public static final int FLYWHEEL_D = 0;
+	public static final int FLYWHEEL_P = 600;
+	public static final int FLYWHEEL_I = 150;
+	public static final int FLYWHEEL_D = 5;
 	public static final int AZIMUTH_P = 0;
 	public static final int AZIMUTH_I = 0;
 	public static final int AZIMUTH_D = 0;
@@ -109,7 +115,7 @@ public class Constants {
 	public static final int PID_DIVISION_FACTOR = 10000;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
-	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 10000.0;
-	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 1000.0;
+	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 30000.0;
+	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 0.0;
 	public static final double SHOOTER_HOOD_POSITION = 0.7;
 }

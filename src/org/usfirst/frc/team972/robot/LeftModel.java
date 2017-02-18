@@ -3,11 +3,15 @@ package org.usfirst.frc.team972.robot;
 public class LeftModel {
 
 	// x is m, v is m/s, a is m/s^2
-	static double x_k, v_k, a_k; // at t=k
+	static double x_k = 0.0;
+	static double v_k = 0.0;
+	static double a_k = 0.0; // at t=k
 
 	// The following variables are private to make it less confusing to use
-	private static double x_k1, v_k1, a_k1; // at t=k+1
-	private static double r_k;
+	private static double x_k1 = 0.0;
+	private static double v_k1 = 0.0;
+	private static double a_k1 = 0.0; // at t=k+1
+	private static double r_k = 0.0;
 
 	static boolean useFrontEncoder = true;
 	static boolean useBackEncoder = true;

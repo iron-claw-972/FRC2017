@@ -67,6 +67,9 @@ public class Tester {
 		if (joy.getRawButton(button)) {
 			speed = joy.getY();
 			motor.set(speed);
+			System.out.println("Motor #" + motor.getDeviceID() + " Test Speed" + speed);
+		} else {
+			motor.set(0);
 		}
 		SmartDashboard.putNumber("Motor #" + motor.getDeviceID() + " Test Speed", speed);
 	}
