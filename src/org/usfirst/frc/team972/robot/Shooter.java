@@ -95,6 +95,20 @@ public class Shooter {
 
 		updateSmartDashboard();
 	}
+	
+	public static void stopShooter() {
+		Robot.leftShooterMotorA.changeControlMode(TalonControlMode.PercentVbus);
+		Robot.leftShooterMotorA.set(0);
+		
+		Robot.leftShooterMotorB.changeControlMode(TalonControlMode.PercentVbus);
+		Robot.leftShooterMotorB.set(0);
+		
+		Robot.rightShooterMotorA.changeControlMode(TalonControlMode.PercentVbus);
+		Robot.rightShooterMotorA.set(0);
+		
+		Robot.rightShooterMotorB.changeControlMode(TalonControlMode.PercentVbus);
+		Robot.rightShooterMotorB.set(0);
+	}
 
 	/**
 	 * Powers a single shooter.
@@ -230,6 +244,14 @@ public class Shooter {
 		}
 		*/
 		updateSmartDashboard();
+	}
+	
+	public static void stopAlign() {
+		Robot.leftAzimuthMotor.changeControlMode(TalonControlMode.PercentVbus);
+		Robot.leftAzimuthMotor.set(0);
+		
+		Robot.rightAzimuthMotor.changeControlMode(TalonControlMode.PercentVbus);
+		Robot.rightAzimuthMotor.set(0);
 	}
 	
 	public static void moveAzimuth(CANTalon motor, double position, boolean runPID) {
