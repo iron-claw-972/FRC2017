@@ -23,7 +23,7 @@ public class Constants {
 
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 3;
-	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 1;
+	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 5;
 	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 4;
 	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 2;
 	public static final int WINCH_MOTOR_CAN_ID = 6; // TODO: Revert to 5 for real robot
@@ -31,7 +31,7 @@ public class Constants {
 	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 7;
 	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 8;
 	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 9;
-	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 10;
+	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 1;
 	public static final int RIGHT_AZIMUTH_MOTOR_CAN_ID = 11;
 	public static final int INTAKE_MOTOR_CAN_ID = 12;
 	public static final int LEFT_LOADER_MOTOR_CAN_ID = 13;
@@ -116,6 +116,6 @@ public class Constants {
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
 	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 30000.0;
-	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 1000.0;
+	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 0.0;
 	public static final double SHOOTER_HOOD_POSITION = 0.7;
 }

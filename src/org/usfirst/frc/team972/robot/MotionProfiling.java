@@ -109,7 +109,8 @@ public class MotionProfiling {
 	}
 
 	public static double getV() {
-		return SystemModel.v_k;
+		//return SystemModel.v_k;
+		return 0.0; //TODO remove
 	}
 
 	public static double getTheta() {

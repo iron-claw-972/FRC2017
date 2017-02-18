@@ -53,6 +53,8 @@ public class Teleop {
 		updateSmartDashboard();
 		prevTime = currTime;
 		SmartDashboard.putNumber("Loop Time", loopTime);
+		
+		Shooter.align();
 	}
 
 	public void intakeModeCurrentLimit() {

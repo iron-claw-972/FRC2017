@@ -86,7 +86,7 @@ public class SystemModel {
 	public static void setState(double x_state, double y_state, double v_state, double theta_state) {
 		x_k = x_state;
 		y_k = y_state;
-		v_k = v_state;
+//		v_k = v_state;
 		theta_k = theta_state;
 	}
 }
