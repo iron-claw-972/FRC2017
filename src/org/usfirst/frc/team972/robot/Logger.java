@@ -1,10 +1,12 @@
 package org.usfirst.frc.team972.robot;
 
 import java.io.*;
+import java.util.*;
 
 public class Logger {
 
 	static String directory = "";
+	static Scanner scanner;
 
 	public static void init() {
 		setNewDirectory();
@@ -55,5 +57,40 @@ public class Logger {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static double[] getLocationAtTime(String fileName, int time) {
+		String x_String = "", y_String = "";
+		double x, y;
+		try {
+			scanner = new Scanner(new File(Constants.LOGGER_LOCATION + "/" + directory + "/" + fileName + ".txt"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		while (scanner.hasNext() && x_String.equals("") && y_String.equals("")) {
+			String next = scanner.nextLine();
+			String t = next.substring(next.indexOf("t=") + 2, next.indexOf("x="));
+			if (t.equals(String.valueOf(time))) {
+				x_String = next.substring(next.indexOf("x=") + 2, next.indexOf("y="));
+				y_String = next.substring(next.indexOf("y=") + 2);
+				System.out.println(x_String + "," + y_String);
+				// TODO: Comment out print after testing
+			} else {
+			}
+		}
+		try {
+			x = Double.parseDouble(x_String);
+		} catch (Exception e) {
+			x = -1;
+			System.out.println("X is not a double");
+		}
+		try {
+			y = Double.parseDouble(y_String);
+		} catch (Exception e) {
+			y = -1;
+			System.out.println("Y is not a double");
+		}
+		double[] location = {x,y};
+		return location;
 	}
 }
