@@ -15,6 +15,7 @@ public class Teleop {
 	 */
 
 	private static double prevTime = 0.0;
+	static TeleopState teleopState = TeleopState.INTAKE;
 
 	/**
 	 * Initialization code for teleop mode. This method for initialization code
@@ -51,13 +52,35 @@ public class Teleop {
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
 		updateSmartDashboard();
+		updateCurrentLimit();
 		prevTime = currTime;
 		SmartDashboard.putNumber("Loop Time", loopTime);
-		
+
 		Shooter.align();
 	}
 
-	public void intakeModeCurrentLimit() {
+	public static void updateCurrentLimit() {
+		switch (teleopState) {
+			case INTAKE:
+				intakeStateCurrentLimit();
+				break;
+			case ALIGN:
+				alignStateCurrentLimit();
+				break;
+			case SHOOT:
+				shootStateCurrentLimit();
+				break;
+			case CLIMB:
+				climbStateCurrentLimit();
+				break;
+			default:
+				Logger.logError("TeleopState switch statement reached default!");
+				System.out.println("TeleopState switch statement reached default!");
+				break;
+		}
+	}
+
+	public static void intakeStateCurrentLimit() {
 		Robot.frontLeftDriveMotor.setCurrentLimit(43);
 		Robot.frontRightDriveMotor.setCurrentLimit(43);
 		Robot.backLeftDriveMotor.setCurrentLimit(43);
@@ -89,7 +112,7 @@ public class Teleop {
 		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
 	}
 
-	public void shooterCurrentLimit() {
+	public static void shootStateCurrentLimit() {
 		Robot.frontLeftDriveMotor.setCurrentLimit(23);
 		Robot.frontRightDriveMotor.setCurrentLimit(23);
 		Robot.backLeftDriveMotor.setCurrentLimit(23);
@@ -121,7 +144,7 @@ public class Teleop {
 		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
 	}
 
-	public void alignmentCurrentLimit() {
+	public static void alignStateCurrentLimit() {
 		// TODO: CHANGE TO CORRECT LIMITS
 		Robot.frontLeftDriveMotor.setCurrentLimit(43);
 		Robot.frontRightDriveMotor.setCurrentLimit(43);
@@ -154,7 +177,7 @@ public class Teleop {
 		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
 	}
 
-	public void climberCurrentLimit() {
+	public static void climbStateCurrentLimit() {
 		// TODO: CHANGE TO CORRECT LIMITS
 		Robot.frontLeftDriveMotor.setCurrentLimit(43);
 		Robot.frontRightDriveMotor.setCurrentLimit(43);
@@ -198,6 +221,7 @@ public class Teleop {
 		// Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
 		Time.updateSmartDashboard();
+		SmartDashboard.putString("Teleop State", teleopState.toString());
 	}
 
 }

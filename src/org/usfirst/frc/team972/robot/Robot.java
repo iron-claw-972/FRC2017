@@ -64,6 +64,7 @@ public class Robot extends IterativeRobot {
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
 		init();
+		Teleop.intakeStateCurrentLimit();
 	}
 
 	/*
