@@ -42,36 +42,52 @@ public class Teleop {
 	 * @see Robot.teleopPeriodic()
 	 */
 	public static void periodic(Robot r) {
-		// Winch.manage();
-		// Intake.manage();
 		Drive.teleopDrive();
-		// Shooter.align();
-		// Shooter.shoot();
 
 		double currTime = Time.get();
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
 		updateSmartDashboard();
-		updateCurrentLimit();
+		teleopStateMachine();
 		prevTime = currTime;
 		SmartDashboard.putNumber("Loop Time", loopTime);
-
-		Shooter.align();
 	}
 
-	public static void updateCurrentLimit() {
+	public static void teleopStateMachine() {
 		switch (teleopState) {
 			case INTAKE:
+				Shooter.stopAlign();
+				Shooter.stopShooter();
+				Winch.stop();
 				intakeStateCurrentLimit();
+				Intake.manage();
 				break;
 			case ALIGN:
+				Shooter.stopShooter();
+				Intake.stop();
+				Winch.stop();
 				alignStateCurrentLimit();
+				Shooter.align();
 				break;
 			case SHOOT:
+				Shooter.stopAlign();
+				Winch.stop();
+				Intake.stop();
 				shootStateCurrentLimit();
+				Shooter.shoot();
 				break;
 			case CLIMB:
+				Shooter.stopAlign();
+				Shooter.stopShooter();
+				Intake.stop();
 				climbStateCurrentLimit();
+				Winch.manage();
+				break;
+			case MANUAL_OVERRIDE:
+				Intake.manage();
+				Shooter.align();
+				Shooter.shoot();
+				Winch.manage();
 				break;
 			default:
 				Logger.logError("TeleopState switch statement reached default!");
