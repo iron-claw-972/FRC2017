@@ -38,16 +38,16 @@ public class Robot extends IterativeRobot {
 	static Encoder rightDriveEncoderBack = new Encoder(Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_A,
 			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B, false, Encoder.EncodingType.k2X);
 
-	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
-	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
-			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
-	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
-			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
-	static DoubleSolenoid loaderDoorPiston = new DoubleSolenoid(Constants.LOADER_DOOR_PISTON_FORWARD_PCM_PORT,
-			Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
-	static DoubleSolenoid fieldHopperPiston = new DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
-			Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
-
+//	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
+//	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
+//			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
+//	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
+//			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
+//	static DoubleSolenoid loaderDoorPiston = new DoubleSolenoid(Constants.LOADER_DOOR_PISTON_FORWARD_PCM_PORT,
+//			Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
+//	static DoubleSolenoid fieldHopperPiston = new DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
+//			Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
+//
 	/**
 	 * Robot-wide initialization code. This method is for default Robot-wide initialization and will
 	 * be called when the robot is first powered on. It will be called exactly one time.

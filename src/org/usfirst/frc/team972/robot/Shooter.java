@@ -34,8 +34,8 @@ public class Shooter {
 	static long shooter_lastOnTarget = -1;
 	static long shooter_pidStart = -1;
 
-	static int alignment_kP = 0, alignment_kI = 0, alignment_kD = 0;
-	static int alignment_dP = 100, alignment_dI = 10, alignment_dD = 10;
+	static int alignment_kP = 0, alignment_kI = 0, alignment_kD = 0; //kP 0.01 too violent, 0.004 gud
+	static int alignment_dP = 10, alignment_dI = 1, alignment_dD = 1;
 	static boolean alignment_lastP = false, alignment_lastI = false, alignment_lastD = false;
 	static boolean alignment_pidRunning = false;
 	// pidRunning = if you are running PID
@@ -50,13 +50,15 @@ public class Shooter {
 		Robot.leftShooterMotorB.enableBrakeMode(true);
 		Robot.rightShooterMotorA.enableBrakeMode(true);
 		Robot.rightShooterMotorB.enableBrakeMode(true);
-
+		
 		// TODO: Uncomment this
 		// Robot.leftShooterMotorB.changeControlMode(TalonControlMode.Follower);
 		// Robot.rightShooterMotorB.changeControlMode(TalonControlMode.Follower);
 		//
 		// Robot.leftShooterMotorB.set(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
 		// Robot.rightShooterMotorB.set(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
+		
+		Robot.leftAzimuthMotor.setPosition(0);
 
 		shooter_kP = Constants.FLYWHEEL_P;
 		shooter_kI = Constants.FLYWHEEL_I;
@@ -105,7 +107,7 @@ public class Shooter {
 	public static void runShooter(CANTalon motor, boolean runPID) {
 		motor.setP((double) shooter_kP / (double) Constants.PID_DIVISION_FACTOR);
 		motor.setI((double) shooter_kI / (double) (Constants.PID_DIVISION_FACTOR * 100));
-		motor.setD((double) shooter_kD / (double) Constants.PID_DIVISION_FACTOR);
+		motor.setD((double) shooter_kD / (double) Constants.PID_DIVISION_FACTOR * 10);
 
 		if (runPID) {
 			if (Math.floor(pidTimer) == -1){
@@ -229,21 +231,35 @@ public class Shooter {
 		*/
 		updateSmartDashboard();
 	}
-
+	
 	public static void moveAzimuth(CANTalon motor, double position, boolean runPID) {
 		motor.setP((double) alignment_kP / (double) Constants.PID_DIVISION_FACTOR);
 		motor.setI((double) alignment_kI / (double) Constants.PID_DIVISION_FACTOR);
 		motor.setD((double) alignment_kD / (double) Constants.PID_DIVISION_FACTOR);
+//		0.004 for p and nothing else. It works well
+		
+		if (motor.getPosition() > 40000) {
+			motor.setPosition(0);
+		} else if (motor.getPosition() < -40000) {
+			motor.setPosition(0);
+		} 
+		/* untested - Error of -10000 encoder position found, 
+		 * this should allow the motor to only go one rotation so it can't accelerate too fast,
+		 *   effectively limiting the speed
+		 */
 
 		if (runPID) {
 			motor.changeControlMode(TalonControlMode.Position);
 			motor.set(position);
 			alignment_pidRunning = true;
-		} else {
+		} else if (Robot.operatorJoystick.getRawButton(1)) {
 			motor.changeControlMode(TalonControlMode.PercentVbus);
 			motor.set(Robot.operatorJoystick.getY());
 			motor.clearIAccum();
 			alignment_pidRunning = false;
+		} else {
+			motor.changeControlMode(TalonControlMode.PercentVbus);
+			motor.set(0);
 		}
 	}
 
