@@ -1,6 +1,9 @@
 package org.usfirst.frc.team972.robot;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.text.*;
 import java.util.*;
 import com.ctre.*;
@@ -60,6 +63,10 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		IMU.init();
+		SendableChooser autoChooser = new SendableChooser();
+		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
+		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
+		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 		Autonomous.createChooser();
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
