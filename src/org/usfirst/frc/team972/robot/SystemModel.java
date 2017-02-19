@@ -38,8 +38,11 @@ public class SystemModel {
 		v_xk1 = (1 - Constants.SYSVEL) * Math.sin(theta_k * Math.PI / 180) * ((LeftModel.v_k + RightModel.v_k) / 2) + Constants.SYSVEL * v_xk1;
 		v_yk1 = (1 - Constants.SYSVEL) * Math.cos(theta_k * Math.PI / 180) * ((LeftModel.v_k + RightModel.v_k) / 2) + Constants.SYSVEL * v_yk1;
 		
-		a_xk1 = (1 - Constants.SYSACC) * Math.sin(theta_k * Math.PI / 180) * ((LeftModel.a_k + RightModel.a_k) / 2) + Constants.SYSACC * a_xk1;
-		a_xk1 = (1 - Constants.SYSACC) * Math.cos(theta_k * Math.PI / 180) * ((LeftModel.a_k + RightModel.a_k) / 2) + Constants.SYSACC * a_yk1;
+		double accel_X_IMU =  (IMU.getAccelX() * Math.cos(theta_k * Math.PI / 180) + IMU.getAccelY() * Math.sin(theta_k * Math.PI / 180));
+		double accel_Y_IMU =  (IMU.getAccelX() * Math.sin(theta_k * Math.PI / 180) + IMU.getAccelY() * Math.cos(theta_k * Math.PI / 180));
+		
+		a_xk1 = (1 - Constants.SYSACC) * Math.sin(theta_k * Math.PI / 180) * ((LeftModel.a_k + RightModel.a_k) / 2) + Constants.SYSACC * accel_X_IMU;
+		a_xk1 = (1 - Constants.SYSACC) * Math.cos(theta_k * Math.PI / 180) * ((LeftModel.a_k + RightModel.a_k) / 2) + Constants.SYSACC * accel_Y_IMU;
 		
 		double angle_from_encoders = ((180 / (Math.PI * Constants.ROBOT_WIDTH)) * (LeftModel.x_k - RightModel.x_k)) % 360.0;
 		if (angle_from_encoders > 180) {

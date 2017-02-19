@@ -48,7 +48,7 @@ public class Teleop {
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
 		updateSmartDashboard();
-		teleopStateMachine();
+		//teleopStateMachine();
 		prevTime = currTime;
 		SmartDashboard.putNumber("Loop Time", loopTime);
 	}
