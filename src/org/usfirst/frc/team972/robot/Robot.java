@@ -40,6 +40,8 @@ public class Robot extends IterativeRobot {
 			Constants.LEFT_DRIVE_ENCODER_BACK_PORT_B, true, Encoder.EncodingType.k2X);
 	static Encoder rightDriveEncoderBack = new Encoder(Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_A,
 			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B, false, Encoder.EncodingType.k2X);
+	
+	static PowerDistributionPanel pdp = new PowerDistributionPanel(Constants.PDP_CAN_ID);
 
 //	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
 //	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
@@ -71,7 +73,6 @@ public class Robot extends IterativeRobot {
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
 		init();
-		Teleop.intakeStateCurrentLimit();
 	}
 
 	/*
@@ -168,5 +169,20 @@ public class Robot extends IterativeRobot {
 		leftDriveEncoderBack.reset();
 		rightDriveEncoderFront.reset();
 		rightDriveEncoderBack.reset();
+
+		Robot.frontLeftDriveMotor.EnableCurrentLimit(false);
+		Robot.frontRightDriveMotor.EnableCurrentLimit(false);
+		Robot.backLeftDriveMotor.EnableCurrentLimit(false);
+		Robot.backRightDriveMotor.EnableCurrentLimit(false);
+		Robot.leftShooterMotorA.EnableCurrentLimit(false);
+		Robot.leftShooterMotorB.EnableCurrentLimit(false);
+		Robot.rightShooterMotorA.EnableCurrentLimit(false);
+		Robot.rightShooterMotorB.EnableCurrentLimit(false);
+		Robot.leftLoaderMotor.EnableCurrentLimit(false);
+		Robot.rightLoaderMotor.EnableCurrentLimit(false);
+		Robot.intakeMotor.EnableCurrentLimit(false);
+		Robot.winchMotor.EnableCurrentLimit(false);
+		Robot.leftAzimuthMotor.EnableCurrentLimit(false);
+		Robot.rightAzimuthMotor.EnableCurrentLimit(false);
 	}
 }
