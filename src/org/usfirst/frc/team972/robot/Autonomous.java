@@ -45,7 +45,7 @@ public class Autonomous {
 	public static void init(Robot r) {
 		r.init();
 		//selectedAutoRoutine = (AutonomousRoutine) autoChooser.getSelected(); //TODO fix auton chooser
-		selectedAutoRoutine = AutonomousRoutine.TEST_0;
+		selectedAutoRoutine = AutonomousRoutine.TEST_3;
 		switch (selectedAutoRoutine) {
 			case DO_NOTHING:
 				MotionProfiling.init(0.0, 0.0); //TODO: set all of these for actual competition
