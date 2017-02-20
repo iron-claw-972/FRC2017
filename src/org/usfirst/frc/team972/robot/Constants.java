@@ -21,6 +21,8 @@ public class Constants {
 	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 3;
 	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
 
+	public static final int PDP_CAN_ID = 20;
+	 
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
 	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 3;
@@ -110,40 +112,10 @@ public class Constants {
 	public static final int AZIMUTH_I = 0;
 	public static final int AZIMUTH_D = 0;
 	
-	// Current Limits
-	public static final int INTAKE_DRIVE_CURRENT_LIMIT = 44;
-	public static final int INTAKE_SHOOTER_CURRENT_LIMIT = 0;
-	public static final int INTAKE_LOADER_CURRENT_LIMIT = 0;
-	public static final int INTAKE_INTAKE_CURRENT_LIMIT = 19;
-	public static final int INTAKE_WINCH_CURRENT_LIMIT = 0;
-	public static final int INTAKE_AZIMUTH_CURRENT_LIMIT = 0;
-	
-	public static final int SHOOT_DRIVE_CURRENT_LIMIT = 25;
-	public static final int SHOOT_SHOOTER_CURRENT_LIMIT = 15;
-	public static final int SHOOT_LOADER_CURRENT_LIMIT = 15;
-	public static final int SHOOT_INTAKE_CURRENT_LIMIT = 0;
-	public static final int SHOOT_WINCH_CURRENT_LIMIT = 0;
-	public static final int SHOOT_AZIMUTH_CURRENT_LIMIT = 3;
-	
-	public static final int CLIMB_DRIVE_CURRENT_LIMIT = 46;
-	public static final int CLIMB_SHOOTER_CURRENT_LIMIT = 0;
-	public static final int CLIMB_LOADER_CURRENT_LIMIT = 0;
-	public static final int CLIMB_INTAKE_CURRENT_LIMIT = 0;
-	public static final int CLIMB_WINCH_CURRENT_LIMIT = 8;
-	public static final int CLIMB_AZIMUTH_CURRENT_LIMIT = 0;
-	
-	// -1 just removes limit
-	// TODO: Decide
-	public static final int MANUAL_DRIVE_CURRENT_LIMIT = -1;
-	public static final int MANUAL_SHOOTER_CURRENT_LIMIT = -1;
-	public static final int MANUAL_LOADER_CURRENT_LIMIT = -1;
-	public static final int MANUAL_INTAKE_CURRENT_LIMIT = -1;
-	public static final int MANUAL_WINCH_CURRENT_LIMIT = -1;
-	public static final int MANUAL_AZIMUTH_CURRENT_LIMIT = -1;
-	
 	// Constants
 	public static final String LOGGER_LOCATION = "home/admin/FRC2017Logs";
 	public static final int PID_DIVISION_FACTOR = 10000;
+	public static final int CURRENT_LIMIT = 200;
 	public static final double WINCH_MOTOR_SPEED = 1.0;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
 	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 30000.0;

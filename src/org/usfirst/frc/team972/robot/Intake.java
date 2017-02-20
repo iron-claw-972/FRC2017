@@ -19,7 +19,7 @@ public class Intake {
 	 */
 	public static void manage() {
 		boolean intakeMotorButton = Robot.operatorJoystick.getRawButton(Constants.INTAKE_MOTOR_TOGGLE_BUTTON);
-		if (intakeMotorButton && !intakeButtonPressedLastTime) {
+		if (intakeMotorButton) {
 			Intake.start();
 		} else {
 			Intake.stop();
