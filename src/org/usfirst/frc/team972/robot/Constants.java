@@ -2,8 +2,7 @@ package org.usfirst.frc.team972.robot;
 
 public class Constants {
 	/*
-	 * All constants should be placed in this class. Constants should be named in all caps with
-	 * underscores. All constants should be public, static, and final.
+	 * All constants should be placed in this class. Constants should be named in all caps with underscores. All constants should be public, static, and final.
 	 * 
 	 * Example: public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
 	 */
@@ -23,7 +22,7 @@ public class Constants {
 	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
 
 	public static final int PDP_CAN_ID = 20;
-
+	 
 	// Motor IDs
 	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
 	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 3;
@@ -76,46 +75,28 @@ public class Constants {
 	public static final double ROBOT_LENGTH = 0.9017; // in meters
 	public static final double GEAR_INSET_FROM_BUMPERS = 0.03175; // in meters
 	public static final double ROBOT_MAX_VELOCITY = 5; // m/s
-	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.320; // meters (diameter 0.101
-																		// meters)
+	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.320; // meters (diameter 0.101 meters)
 	public static final double ENCODER_CLICKS_PER_ROTATION = 2048;
-	public static final double ROBOT_MASS = 33.8; // TODO: calculate (in kg) (current weight is
-													// weight of drive base and hopper frame with
-													// battery but no bumpers) (estimated that the
-													// robot is 135lbs = 61.235 with batteries and
-													// bumpers)
+	public static final double ROBOT_MASS = 33.8; // TODO: calculate (in kg) (current weight is weight of drive base and hopper frame with battery but no bumpers) (estimated that the robot is 135lbs = 61.235 with batteries and bumpers)
 
 	// System Model
-	public static final double ALPHA = 1.0; // TODO I think these are good but needs more testing
+	public static final double ALPHA = 1.0; //TODO I think these are good but needs more testing
 	public static final double BETA = 0.6;
 	public static final double PHI = 0.98;
 	public static final double SYSVEL = 0.6;
 	public static final double SYSACC = 0.75;
 
 	// Auton Drive
-	public static final double AUTON_DRIVE_RATIO = 0.7; // TODO: determine (needs to be between 0
-														// and 1)
-	public static final double AUTON_STOPPING_DISTANCE_1 = 1.0; // distance in meters to start
-																// stopping (sharp deceleration)
-	public static final double AUTON_STOPPING_DISTANCE_2 = 0.3; // distance in meters to finish
-																// stopping (lower deceleration)
-																// (less than distance 1)
-	public static final double AUTON_VELOCITY_STOPPING_PROPORTION = 0.5; // proportion of max
-																			// velocity city that
-																			// should be reached
-																			// after first stopping
-	public static final double AUTON_DRIVE_VP = 0.0; // 0.3; // proportion of velocity error //TODO
-														// determine all these
-	public static final double AUTON_DRIVE_VD = 0.0; // 0.1; // proportion of acceleration (should
-														// be small)
-	public static final double AUTON_DRIVE_AP = 0.0000; // 0.0003; // proportion of angle error
-														// (during motion)
-	public static final double AUTON_DRIVE_AD = 0.00; // 0.004; // proportion of angle change
-														// (during motion) (should be small)
-	public static final double AUTON_DRIVE_TURNP = 0.01; // 0.006; // proportion of angle (during
-															// turn)
-	public static final double AUTON_DRIVE_TURND = 0.0; // 0.004; // proportion of angle change
-														// (during turn)
+	public static final double AUTON_DRIVE_RATIO = 0.7; // TODO: determine (needs to be between 0 and 1)
+	public static final double AUTON_STOPPING_DISTANCE_1 = 1.0; // distance in meters to start stopping (sharp deceleration)
+	public static final double AUTON_STOPPING_DISTANCE_2 = 0.3; // distance in meters to finish stopping (lower deceleration) (less than distance 1)
+	public static final double AUTON_VELOCITY_STOPPING_PROPORTION = 0.5; // proportion of max velocity city that should be reached after first stopping
+	public static final double AUTON_DRIVE_VP = 0.0; //0.3; // proportion of velocity error //TODO determine all these
+	public static final double AUTON_DRIVE_VD = 0.0; //0.1; // proportion of acceleration (should be small)
+	public static final double AUTON_DRIVE_AP = 0.0000; //0.0003; // proportion of angle error (during motion)
+	public static final double AUTON_DRIVE_AD = 0.00; //0.004; // proportion of angle change (during motion) (should be small)
+	public static final double AUTON_DRIVE_TURNP = 0.01; //0.006; // proportion of angle (during turn)
+	public static final double AUTON_DRIVE_TURND = 0.0; //0.004; // proportion of angle change (during turn)
 
 	// Test Switches
 	public static final boolean CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS = true;
@@ -130,11 +111,11 @@ public class Constants {
 	public static final int AZIMUTH_P = 0;
 	public static final int AZIMUTH_I = 0;
 	public static final int AZIMUTH_D = 0;
-
+	
 	// Constants
 	public static final String LOGGER_LOCATION = "home/admin/FRC2017Logs";
-	public static final int CURRENT_LIMIT = 200;
 	public static final int PID_DIVISION_FACTOR = 10000;
+	public static final int CURRENT_LIMIT = 200;
 	public static final double WINCH_MOTOR_SPEED = 0.7;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
 	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 30000.0;
