@@ -48,7 +48,7 @@ public class Teleop {
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
 		updateSmartDashboard();
-		//teleopStateMachine();
+		teleopStateMachine();
 		prevTime = currTime;
 		SmartDashboard.putNumber("Loop Time", loopTime);
 	}
@@ -148,6 +148,7 @@ public class Teleop {
 	}
 	
 	public static void enableCurrentLimit(boolean flag) {
+		flag = false;
 		Robot.frontLeftDriveMotor.EnableCurrentLimit(flag);
 		Robot.frontRightDriveMotor.EnableCurrentLimit(flag);
 		Robot.backLeftDriveMotor.EnableCurrentLimit(flag);
