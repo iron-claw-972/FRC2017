@@ -15,7 +15,6 @@ public class Teleop {
 	 */
 
 	private static double prevTime = 0.0;
-	static TeleopState teleopState = TeleopState.INTAKE;
 
 	/**
 	 * Initialization code for teleop mode. This method for initialization code
@@ -27,6 +26,11 @@ public class Teleop {
 		r.init();
 		MotionProfiling.init(0.0, 0.0);
 		updateSmartDashboard();
+		
+		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
+		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
+		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
+		Robot.backRightDriveMotor.EnableCurrentLimit(true);
 	}
 
 	/**
@@ -48,122 +52,31 @@ public class Teleop {
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
 		updateSmartDashboard();
-		//teleopStateMachine();
 		prevTime = currTime;
 		SmartDashboard.putNumber("Loop Time", loopTime);
-	}
-
-	public static void teleopStateMachine() {
-		switch (teleopState) {
-			case INTAKE:
-				intakeStateCurrentLimit();
-				break;
-			case SHOOT:
-				shootStateCurrentLimit();
-				break;
-			case CLIMB:
-				climbStateCurrentLimit();
-				break;
-			case MANUAL_OVERRIDE:
-				manualOverrideCurrentLimit();
-				break;
-			default:
-				Logger.logError("Teleop State switch statement reached default!");
-				System.out.println("Teleop State switch statement reached default!");
-				break;
-		}
 		
-		// Manage calls will switch states
+		double currentLimit = Constants.CURRENT_LIMIT;
+		for(int i = 5; i < 15; i++) {
+			currentLimit -= Robot.pdp.getCurrent(i);
+		}
+		int currentLimitPerDriveMotor = (int) (currentLimit / 4); // rounds down because Java
+		// 4 is the number of drive motors
+		
+		Robot.frontLeftDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
+		Robot.backLeftDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
+		Robot.frontRightDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
+		Robot.backRightDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
+		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
+		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
+		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
+		Robot.backRightDriveMotor.EnableCurrentLimit(true);
+		
 		Intake.manage();
 		Shooter.shoot();
 		Shooter.align();
 		Winch.manage();
 		Drive.teleopDrive();
 	}
-
-	public static void intakeStateCurrentLimit() {
-		driveCurrentLimit(Constants.INTAKE_DRIVE_CURRENT_LIMIT);
-		shooterCurrentLimit(Constants.INTAKE_SHOOTER_CURRENT_LIMIT);
-		loaderCurrentLimit(Constants.INTAKE_LOADER_CURRENT_LIMIT);
-		intakeCurrentLimit(Constants.INTAKE_INTAKE_CURRENT_LIMIT);
-		winchCurrentLimit(Constants.INTAKE_WINCH_CURRENT_LIMIT);
-		azimuthCurrentLimit(Constants.INTAKE_AZIMUTH_CURRENT_LIMIT);
-		enableCurrentLimit(true);
-	}
-
-	public static void shootStateCurrentLimit() {
-		driveCurrentLimit(Constants.SHOOT_DRIVE_CURRENT_LIMIT);
-		shooterCurrentLimit(Constants.SHOOT_SHOOTER_CURRENT_LIMIT);
-		loaderCurrentLimit(Constants.SHOOT_LOADER_CURRENT_LIMIT);
-		intakeCurrentLimit(Constants.SHOOT_INTAKE_CURRENT_LIMIT);
-		winchCurrentLimit(Constants.SHOOT_WINCH_CURRENT_LIMIT);
-		azimuthCurrentLimit(Constants.SHOOT_AZIMUTH_CURRENT_LIMIT);
-		enableCurrentLimit(true);
-	}
-
-	public static void climbStateCurrentLimit() {
-		driveCurrentLimit(Constants.CLIMB_DRIVE_CURRENT_LIMIT);
-		shooterCurrentLimit(Constants.CLIMB_SHOOTER_CURRENT_LIMIT);
-		loaderCurrentLimit(Constants.CLIMB_LOADER_CURRENT_LIMIT);
-		intakeCurrentLimit(Constants.CLIMB_INTAKE_CURRENT_LIMIT);
-		winchCurrentLimit(Constants.CLIMB_WINCH_CURRENT_LIMIT);
-		azimuthCurrentLimit(Constants.CLIMB_AZIMUTH_CURRENT_LIMIT);
-		enableCurrentLimit(true);
-	}
-	
-	public static void manualOverrideCurrentLimit() {
-		enableCurrentLimit(false);
-	}
-	
-	public static void driveCurrentLimit(int amps) {
-		Robot.frontLeftDriveMotor.setCurrentLimit(amps);
-		Robot.frontRightDriveMotor.setCurrentLimit(amps);
-		Robot.backLeftDriveMotor.setCurrentLimit(amps);
-		Robot.backRightDriveMotor.setCurrentLimit(amps);
-	}
-	
-	public static void shooterCurrentLimit(int amps) {
-		Robot.leftShooterMotorA.setCurrentLimit(amps);
-		Robot.leftShooterMotorB.setCurrentLimit(amps);
-		Robot.rightShooterMotorA.setCurrentLimit(amps);
-		Robot.rightShooterMotorB.setCurrentLimit(amps);
-	}
-	
-	public static void loaderCurrentLimit(int amps) {
-		Robot.leftLoaderMotor.setCurrentLimit(amps);
-		Robot.rightLoaderMotor.setCurrentLimit(amps);
-	}
-	
-	public static void intakeCurrentLimit(int amps) {
-		Robot.intakeMotor.setCurrentLimit(amps);
-	}
-	
-	public static void winchCurrentLimit(int amps) {
-		Robot.winchMotor.setCurrentLimit(amps);
-	}
-	
-	public static void azimuthCurrentLimit(int amps) {
-		Robot.leftAzimuthMotor.setCurrentLimit(amps);
-		Robot.rightAzimuthMotor.setCurrentLimit(amps);
-	}
-	
-	public static void enableCurrentLimit(boolean flag) {
-		Robot.frontLeftDriveMotor.EnableCurrentLimit(flag);
-		Robot.frontRightDriveMotor.EnableCurrentLimit(flag);
-		Robot.backLeftDriveMotor.EnableCurrentLimit(flag);
-		Robot.backRightDriveMotor.EnableCurrentLimit(flag);
-		Robot.leftShooterMotorA.EnableCurrentLimit(flag);
-		Robot.leftShooterMotorB.EnableCurrentLimit(flag);
-		Robot.rightShooterMotorA.EnableCurrentLimit(flag);
-		Robot.rightShooterMotorB.EnableCurrentLimit(flag);
-		Robot.leftLoaderMotor.EnableCurrentLimit(flag);
-		Robot.rightLoaderMotor.EnableCurrentLimit(flag);
-		Robot.intakeMotor.EnableCurrentLimit(flag);
-		Robot.winchMotor.EnableCurrentLimit(flag);
-		Robot.leftAzimuthMotor.EnableCurrentLimit(flag);
-		Robot.rightAzimuthMotor.EnableCurrentLimit(flag);
-	}
-
 	/**
 	 * Updates SmartDashboard values for Teleop by calling other update
 	 * functions.
@@ -175,7 +88,6 @@ public class Teleop {
 		// Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
 		Time.updateSmartDashboard();
-		SmartDashboard.putString("Teleop State", teleopState.toString());
 	}
 
 }

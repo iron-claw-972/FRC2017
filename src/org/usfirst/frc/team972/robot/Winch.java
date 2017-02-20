@@ -19,7 +19,7 @@ public class Winch {
 	 */
 	public static void manage() {
 		boolean winchMotorButton = Robot.operatorJoystick.getRawButton(Constants.WINCH_MOTOR_TOGGLE_BUTTON);
-		if (winchMotorButton && !winchButtonPressedLastTime) {
+		if (winchMotorButton) {
 			Winch.start();
 		} else {
 			Winch.stop();
