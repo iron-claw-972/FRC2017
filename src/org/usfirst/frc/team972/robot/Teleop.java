@@ -52,12 +52,16 @@ public class Teleop {
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
 		updateSmartDashboard();
+		prevTime = currTime;
+		SmartDashboard.putNumber("Loop Time", loopTime);
 		
 		double currentLimit = Constants.CURRENT_LIMIT;
 		for(int i = 5; i < 15; i++) {
 			currentLimit -= Robot.pdp.getCurrent(i);
 		}
-		int currentLimitPerDriveMotor = (int) (currentLimit/4); // rounds down because Java
+		int currentLimitPerDriveMotor = (int) (currentLimit / 4); // rounds down because Java
+		// 4 is the number of drive motors
+		
 		Robot.frontLeftDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
 		Robot.backLeftDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
 		Robot.frontRightDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
@@ -72,9 +76,6 @@ public class Teleop {
 		Shooter.align();
 		Winch.manage();
 		Drive.teleopDrive();
-		
-		prevTime = currTime;
-		SmartDashboard.putNumber("Loop Time", loopTime);
 	}
 	/**
 	 * Updates SmartDashboard values for Teleop by calling other update
