@@ -53,9 +53,9 @@ public class Drive {
 	 * @param rightDriveSpeed
 	 *            speed of right wheels
 	 */
-	public static void tankDrive(double leftDriveSpeed, double rightDriveSpeed) {
-		Drive.leftDriveSpeed = leftDriveSpeed;
-		Drive.rightDriveSpeed = rightDriveSpeed;
+	public static void tankDrive(double leftSpeed, double rightSpeed) {
+		leftDriveSpeed = leftSpeed;
+		rightDriveSpeed = rightSpeed;
 		Robot.frontLeftDriveMotor.set(leftDriveSpeed);
 		Robot.frontRightDriveMotor.set(rightDriveSpeed);
 	}
@@ -68,9 +68,9 @@ public class Drive {
 	 * @param rightDriveSpeed
 	 *            speed of new right wheels
 	 */
-	public static void inverseDrive(double leftDriveSpeed, double rightDriveSpeed) {
-		Drive.leftDriveSpeed = -rightDriveSpeed;
-		Drive.rightDriveSpeed = -leftDriveSpeed;
+	public static void inverseDrive(double leftSpeed, double rightSpeed) {
+		leftDriveSpeed = -leftSpeed;
+		rightDriveSpeed = -rightSpeed;
 		tankDrive(leftDriveSpeed, rightDriveSpeed);
 	}
 
@@ -163,28 +163,30 @@ public class Drive {
 		
 		// distance from robot to desired point using Pythagorean theorem
 		double distance = Math.pow((Math.pow((x_desired - curr_x), 2) + Math.pow((y_desired - curr_y), 2)), 0.5);
-		if (distance > 0.2) { //maybe less
+		if (distance > 0.02) { //maybe more
 			//get trajectory angle from -pi to pi but with 0 on the x axis
 			double trajectory_angle = 0.0;
 			if (x_desired >= curr_x && y_desired >= curr_y) {
-				 trajectory_angle = Math.abs(Math.atan2((x_desired - curr_x), (y_desired - curr_y)));
+				 trajectory_angle = Math.abs(Math.atan((y_desired - curr_y) / (x_desired - curr_x)));
 			} else if (x_desired <= curr_x && y_desired >= curr_y) {
-				 trajectory_angle = (Math.PI/2) + Math.abs(Math.atan2((x_desired - curr_x), (y_desired - curr_y)));
+				 trajectory_angle = Math.PI - Math.abs(Math.atan((y_desired - curr_y) / (x_desired - curr_x)));
 			} else if (x_desired >= curr_x && y_desired <= curr_y) {
-				trajectory_angle = - Math.abs(Math.atan2((x_desired - curr_x), (y_desired - curr_y)));
+				trajectory_angle = - Math.abs(Math.atan((y_desired - curr_y) / (x_desired - curr_x)));
 			} else if (x_desired <= curr_x && y_desired <= curr_y) {
-				trajectory_angle = Math.PI - Math.abs(Math.atan2((x_desired - curr_x), (y_desired - curr_y)));
+				trajectory_angle = - Math.PI + Math.abs(Math.atan((y_desired - curr_y) / (x_desired - curr_x)));
 			}
 			
 			//convert angle to degrees in the -180 to 180 scheme used everywhere
 			if (trajectory_angle > Math.PI / 2) {
-				trajectory_angle = 90 - (180 * trajectory_angle / Math.PI);
+				trajectory_angle = (180 * trajectory_angle / Math.PI) - 90;
 			} else if (trajectory_angle <  - Math.PI / 2) {
 				trajectory_angle = - 270 - (180 * trajectory_angle / Math.PI);
 			} else {
 				trajectory_angle = 90 - (180 * trajectory_angle / Math.PI);
 			}
-		
+			SmartDashboard.putNumber("traj_angle", trajectory_angle);
+			SmartDashboard.putNumber("dist", distance);
+			
 			// determine which direction the robot needs to turn
 			boolean isReverseDrive = false;
 			theta_error = trajectory_angle - curr_theta;
@@ -196,7 +198,7 @@ public class Drive {
 				theta_error = 180 + theta_error;
 			}
 		
-			if (isReverseDrive) {
+			/*if (isReverseDrive) { //I think this was the actual problem
 				v_error = -Constants.ROBOT_MAX_VELOCITY - curr_v;
 				if (distance < Constants.AUTON_STOPPING_DISTANCE_2) {
 					v_error = - ((Constants.AUTON_STOPPING_DISTANCE_2 - distance) *
@@ -206,7 +208,7 @@ public class Drive {
 							(((1 - Constants.AUTON_VELOCITY_STOPPING_PROPORTION) * Constants.ROBOT_MAX_VELOCITY) / 
 									(Constants.AUTON_STOPPING_DISTANCE_1 - Constants.AUTON_STOPPING_DISTANCE_2))) - curr_v;
 				}
-			} else {
+			} else {*/
 				v_error = Constants.ROBOT_MAX_VELOCITY - curr_v;
 				if (distance < Constants.AUTON_STOPPING_DISTANCE_2) {
 					v_error = ((Constants.AUTON_STOPPING_DISTANCE_2 - distance) *
@@ -216,7 +218,7 @@ public class Drive {
 							(((1 - Constants.AUTON_VELOCITY_STOPPING_PROPORTION) * Constants.ROBOT_MAX_VELOCITY) / 
 									(Constants.AUTON_STOPPING_DISTANCE_1 - Constants.AUTON_STOPPING_DISTANCE_2))) - curr_v;
 				}
-			}
+			//}
 			
 			double dVdT = 0.0;
 			if (prev_v_error != 0.0) {
@@ -235,8 +237,8 @@ public class Drive {
 			double rightDriveInput = power_for_velocity - power_for_turning;
 		
 			if (isReverseDrive) {
-				//inverseDrive(leftDriveInput, rightDriveInput);
-				tankDrive(leftDriveInput, rightDriveInput);
+				inverseDrive(leftDriveInput, rightDriveInput);
+				//tankDrive(leftDriveInput, rightDriveInput);
 				System.out.println("Memes"); //TODO fix this code
 			} else {
 				tankDrive(leftDriveInput, rightDriveInput);

@@ -68,6 +68,7 @@ public class Tester {
 			speed = joy.getY();
 			motor.set(speed);
 			System.out.println("Motor #" + motor.getDeviceID() + " Test Speed" + speed);
+			System.out.println("Motor Current Draw: " + motor.getOutputCurrent());
 		} else {
 			motor.set(0);
 		}
