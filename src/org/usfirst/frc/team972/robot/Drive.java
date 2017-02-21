@@ -41,6 +41,8 @@ public class Drive {
 
 		Robot.backLeftDriveMotor.set(Constants.FRONT_LEFT_DRIVE_MOTOR_CAN_ID);
 		Robot.backRightDriveMotor.set(Constants.FRONT_RIGHT_DRIVE_MOTOR_CAN_ID);
+		
+		stopDrive();
 	}
 
 	/**
@@ -149,7 +151,7 @@ public class Drive {
 	public static boolean autonDrive(double x_desired, double y_desired, double theta_desired, double dT) {
 		double curr_x = MotionProfiling.getX();
 		double curr_y = MotionProfiling.getY();
-		double curr_v = MotionProfiling.getV();
+		double curr_v = Math.pow((Math.pow(MotionProfiling.getV_X(), 2) + Math.pow(MotionProfiling.getV_Y(), 2)), 0.5);
 		double curr_theta = MotionProfiling.getTheta();
 		
 		double v_error = 0.0;
@@ -161,15 +163,26 @@ public class Drive {
 		
 		// distance from robot to desired point using Pythagorean theorem
 		double distance = Math.pow((Math.pow((x_desired - curr_x), 2) + Math.pow((y_desired - curr_y), 2)), 0.5);
-		if (distance > 0.02) {
-			// get desired angle of robot to get to in degrees using arctan from -180 to +180
-			double trajectory_angle = Math.atan2((x_desired - curr_x), (y_desired - curr_y)) + (Math.PI / 2);
-			if (trajectory_angle > Math.PI) {
-				trajectory_angle = Math.toDegrees(trajectory_angle - (2 * Math.PI));
-			} else if (trajectory_angle < -Math.PI) {
-				trajectory_angle = Math.toDegrees((2 * Math.PI) + trajectory_angle);
+		if (distance > 0.2) { //maybe less
+			//get trajectory angle from -pi to pi but with 0 on the x axis
+			double trajectory_angle = 0.0;
+			if (x_desired >= curr_x && y_desired >= curr_y) {
+				 trajectory_angle = Math.abs(Math.atan2((x_desired - curr_x), (y_desired - curr_y)));
+			} else if (x_desired <= curr_x && y_desired >= curr_y) {
+				 trajectory_angle = (Math.PI/2) + Math.abs(Math.atan2((x_desired - curr_x), (y_desired - curr_y)));
+			} else if (x_desired >= curr_x && y_desired <= curr_y) {
+				trajectory_angle = - Math.abs(Math.atan2((x_desired - curr_x), (y_desired - curr_y)));
+			} else if (x_desired <= curr_x && y_desired <= curr_y) {
+				trajectory_angle = Math.PI - Math.abs(Math.atan2((x_desired - curr_x), (y_desired - curr_y)));
+			}
+			
+			//convert angle to degrees in the -180 to 180 scheme used everywhere
+			if (trajectory_angle > Math.PI / 2) {
+				trajectory_angle = 90 - (180 * trajectory_angle / Math.PI);
+			} else if (trajectory_angle <  - Math.PI / 2) {
+				trajectory_angle = - 270 - (180 * trajectory_angle / Math.PI);
 			} else {
-				trajectory_angle = Math.toDegrees(trajectory_angle);
+				trajectory_angle = 90 - (180 * trajectory_angle / Math.PI);
 			}
 		
 			// determine which direction the robot needs to turn
@@ -222,27 +235,37 @@ public class Drive {
 			double rightDriveInput = power_for_velocity - power_for_turning;
 		
 			if (isReverseDrive) {
-				inverseDrive(leftDriveInput, rightDriveInput);
+				//inverseDrive(leftDriveInput, rightDriveInput);
+				tankDrive(leftDriveInput, rightDriveInput);
+				System.out.println("Memes"); //TODO fix this code
 			} else {
 				tankDrive(leftDriveInput, rightDriveInput);
 			}
 		} else {
-			theta_error = theta_desired - curr_theta;
+			theta_error = - theta_desired + curr_theta;
+			if (theta_desired > 90 && curr_theta < -90) {
+				theta_error = theta_error + 360; 
+			} else if (theta_desired < -90 && curr_theta > 90) {
+				theta_error = theta_error - 360;
+			}
 			double dThetadT = 0.0;
 			if (prev_theta_error != 0.0) {
-				dThetadT = (theta_error - prev_theta_error) / dT;
+				dThetadT = ( - theta_error + prev_theta_error) / dT;
 			}
 			double turn_power = (Constants.AUTON_DRIVE_TURNP * theta_error) - (Constants.AUTON_DRIVE_TURND * dThetadT);
 			
 			double leftDriveInput = turn_power;
-			double rightDriveInput = turn_power;
+			double rightDriveInput = - turn_power;
 			
-			tankDrive(leftDriveInput, rightDriveInput);
-			
-			if (theta_error < 5) {
+			if (Math.abs(theta_error) < 2 && Math.abs(dThetadT) < 2) {
 				done = true;
+			} else {			
+				tankDrive(leftDriveInput, rightDriveInput);
 			}
 		}
+		
+		SmartDashboard.putNumber("V Error", v_error);
+		SmartDashboard.putNumber("Theta Error", theta_error);
 		
 		prev_v_error = v_error;
 		prev_theta_error = theta_error;
@@ -257,6 +280,9 @@ public class Drive {
 	public static void updateModel(double dT) {
 		MotionProfiling.update(dT, IMU.getAngle(), IMU.getAccelX(), IMU.getAccelY(), Robot.leftDriveEncoderFront.get(), Robot.leftDriveEncoderBack.get(), Robot.rightDriveEncoderFront.get(), 
 				Robot.rightDriveEncoderBack.get(), getAccel("left"), getAccel("right"));
+		if (Robot.leftJoystick.getRawButton(1)) {
+			MotionProfiling.reset(0.0, 0.0, 0.0);
+		}
 	}
 
 	/**

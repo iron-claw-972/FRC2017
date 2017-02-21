@@ -1,6 +1,9 @@
 package org.usfirst.frc.team972.robot;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.text.*;
 import java.util.*;
 import com.ctre.*;
@@ -37,6 +40,8 @@ public class Robot extends IterativeRobot {
 			Constants.LEFT_DRIVE_ENCODER_BACK_PORT_B, true, Encoder.EncodingType.k2X);
 	static Encoder rightDriveEncoderBack = new Encoder(Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_A,
 			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B, false, Encoder.EncodingType.k2X);
+	
+	static PowerDistributionPanel pdp = new PowerDistributionPanel(Constants.PDP_CAN_ID);
 
 //	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
 //	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
@@ -60,14 +65,18 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		IMU.init();
+		SendableChooser autoChooser = new SendableChooser();
+		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
+		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
+		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 		Autonomous.createChooser();
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
-
 		CameraStreaming.init();
+    
+		(new Thread(new Jetson())).start(); //start networking to Jetson
 
 		init();
-		Teleop.intakeStateCurrentLimit();
 	}
 
 	/*
@@ -164,5 +173,20 @@ public class Robot extends IterativeRobot {
 		leftDriveEncoderBack.reset();
 		rightDriveEncoderFront.reset();
 		rightDriveEncoderBack.reset();
+
+		Robot.frontLeftDriveMotor.EnableCurrentLimit(false);
+		Robot.frontRightDriveMotor.EnableCurrentLimit(false);
+		Robot.backLeftDriveMotor.EnableCurrentLimit(false);
+		Robot.backRightDriveMotor.EnableCurrentLimit(false);
+		Robot.leftShooterMotorA.EnableCurrentLimit(false);
+		Robot.leftShooterMotorB.EnableCurrentLimit(false);
+		Robot.rightShooterMotorA.EnableCurrentLimit(false);
+		Robot.rightShooterMotorB.EnableCurrentLimit(false);
+		Robot.leftLoaderMotor.EnableCurrentLimit(false);
+		Robot.rightLoaderMotor.EnableCurrentLimit(false);
+		Robot.intakeMotor.EnableCurrentLimit(false);
+		Robot.winchMotor.EnableCurrentLimit(false);
+		Robot.leftAzimuthMotor.EnableCurrentLimit(false);
+		Robot.rightAzimuthMotor.EnableCurrentLimit(false);
 	}
 }

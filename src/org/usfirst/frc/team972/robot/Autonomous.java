@@ -15,6 +15,7 @@ public class Autonomous {
 	 */
 
 	private static double prevTime = 0.0;
+	private static boolean autonDone = false;
 	
 	static SendableChooser autoChooser = new SendableChooser();
 	static AutonomousRoutine selectedAutoRoutine;
@@ -43,7 +44,8 @@ public class Autonomous {
 	 */
 	public static void init(Robot r) {
 		r.init();
-		selectedAutoRoutine = (AutonomousRoutine) autoChooser.getSelected();
+		//selectedAutoRoutine = (AutonomousRoutine) autoChooser.getSelected(); //TODO fix auton chooser
+		selectedAutoRoutine = AutonomousRoutine.TEST_3;
 		switch (selectedAutoRoutine) {
 			case DO_NOTHING:
 				MotionProfiling.init(0.0, 0.0); //TODO: set all of these for actual competition
@@ -103,19 +105,27 @@ public class Autonomous {
 				Drive.autonDrive(0.0, 0.0, 90, loopTime);
 				break;
 			case TEST_2:
-				Drive.autonDrive(0.0, 0.0, 180, loopTime);
+				if (!autonDone) {
+					autonDone = Drive.autonDrive(0.0, 0.0, 180, loopTime);
+				}
 				break;
 			case TEST_3:
 				Drive.autonDrive(0.0, 3.0, 0.0, loopTime);
 				break;
 			case TEST_4:
-				Drive.autonDrive(0.0, 3.0, 90.0, loopTime);
+				if (!autonDone) {
+					autonDone = Drive.autonDrive(0.0, 3.0, 90.0, loopTime);
+				}
 				break;
 			case TEST_5:
-				Drive.autonDrive(3.0, 0.0, 90.0, loopTime);
+				if (!autonDone) {
+					autonDone = Drive.autonDrive(3.0, 0.0, 90.0, loopTime);
+				}
 				break;
 			case TEST_6:
-				Drive.autonDrive(-1.0, -2.0, 0.0, loopTime);
+				if (!autonDone) {
+					autonDone = Drive.autonDrive(-1.0, -2.0, 0.0, loopTime);
+				}
 				break;
 		}
 		Drive.updateModel(loopTime);

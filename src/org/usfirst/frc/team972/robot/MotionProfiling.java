@@ -81,13 +81,15 @@ public class MotionProfiling {
 		LeftModel.setState(average_encoder_value + distance, 0.0, 0.0);
 		RightModel.setState(average_encoder_value - distance, 0.0, 0.0);
 		SystemModel.setState(x_pos, y_pos, 0.0, theta);
+		IMU.recalibrate(0.0);
 	}
 
 	public static void updateSmartDashboard() {
 		SmartDashboard.putNumber("X Position", getX());
 		SmartDashboard.putNumber("Y Position", getY());
 		SmartDashboard.putNumber("Angle", getTheta());
-		SmartDashboard.putNumber("Velocity", getV());
+		SmartDashboard.putNumber("Velocity", Math.pow((Math.pow(getV_X(), 2) + Math.pow(getV_Y(), 2)), 0.5));
+		SmartDashboard.putNumber("Accel", Math.pow((Math.pow(getA_X(), 2) + Math.pow(getA_Y(), 2)), 0.5));
 		SmartDashboard.putNumber("Left X", LeftModel.x_k);
 		SmartDashboard.putNumber("Right X", RightModel.x_k);
 		SmartDashboard.putNumber("Left V", LeftModel.v_k);
@@ -98,6 +100,10 @@ public class MotionProfiling {
 		SmartDashboard.putNumber("PHI", Constants.PHI);
 		SmartDashboard.putNumber("ALPHA", Constants.ALPHA);
 		SmartDashboard.putNumber("BETA", Constants.BETA);
+		SmartDashboard.putNumber("SYSVEL", Constants.SYSVEL);
+		SmartDashboard.putNumber("SYSACC", Constants.SYSACC);
+		SmartDashboard.putNumber("IMU Acc X", IMU.getAccelX());
+		SmartDashboard.putNumber("IMU Acc Y", IMU.getAccelY());
 	}
 
 	public static double getX() {
@@ -108,9 +114,20 @@ public class MotionProfiling {
 		return SystemModel.y_k;
 	}
 
-	public static double getV() {
-		//return SystemModel.v_k;
-		return 0.0; //TODO remove
+	public static double getV_X() {
+		return SystemModel.v_xk;
+	}
+	
+	public static double getV_Y() {
+		return SystemModel.v_yk;
+	}
+	
+	public static double getA_X() {
+		return SystemModel.a_xk;	
+	}
+	
+	public static double getA_Y() {
+		return SystemModel.a_yk;
 	}
 
 	public static double getTheta() {

@@ -13,7 +13,7 @@ public class RightModel {
 	private static double a_k1 = 0.0; // at t=k+1
 	private static double r_k = 0.0;
 
-	static boolean useFrontEncoder = true;
+	static boolean useFrontEncoder = false; //TODO replace broken encoder
 	static boolean useBackEncoder = true;
 
 	/**

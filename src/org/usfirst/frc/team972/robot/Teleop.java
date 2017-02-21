@@ -15,7 +15,6 @@ public class Teleop {
 	 */
 
 	private static double prevTime = 0.0;
-	static TeleopState teleopState = TeleopState.INTAKE;
 
 	/**
 	 * Initialization code for teleop mode. This method for initialization code
@@ -27,6 +26,11 @@ public class Teleop {
 		r.init();
 		MotionProfiling.init(0.0, 0.0);
 		updateSmartDashboard();
+		
+		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
+		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
+		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
+		Robot.backRightDriveMotor.EnableCurrentLimit(true);
 	}
 
 	/**
@@ -52,184 +56,32 @@ public class Teleop {
 		double loopTime = currTime - prevTime;
 		Drive.updateModel(loopTime);
 		updateSmartDashboard();
-		teleopStateMachine();
 		prevTime = currTime;
 		SmartDashboard.putNumber("Loop Time", loopTime);
-	}
-
-	public static void teleopStateMachine() {
-		switch (teleopState) {
-			case INTAKE:
-				Shooter.stopAlign();
-				Shooter.stopShooter();
-				Winch.stop();
-				intakeStateCurrentLimit();
-				Intake.manage();
-				break;
-			case ALIGN:
-				Shooter.stopShooter();
-				Intake.stop();
-				Winch.stop();
-				alignStateCurrentLimit();
-				Shooter.align();
-				break;
-			case SHOOT:
-				Shooter.stopAlign();
-				Winch.stop();
-				Intake.stop();
-				shootStateCurrentLimit();
-				Shooter.shoot();
-				break;
-			case CLIMB:
-				Shooter.stopAlign();
-				Shooter.stopShooter();
-				Intake.stop();
-				climbStateCurrentLimit();
-				Winch.manage();
-				break;
-			case MANUAL_OVERRIDE:
-				Intake.manage();
-				Shooter.align();
-				Shooter.shoot();
-				Winch.manage();
-				break;
-			default:
-				Logger.logError("TeleopState switch statement reached default!");
-				System.out.println("TeleopState switch statement reached default!");
-				break;
+		
+		double currentLimit = Constants.CURRENT_LIMIT;
+		for(int i = 5; i < 15; i++) {
+			currentLimit -= Robot.pdp.getCurrent(i);
 		}
-	}
-
-	public static void intakeStateCurrentLimit() {
-		Robot.frontLeftDriveMotor.setCurrentLimit(43);
-		Robot.frontRightDriveMotor.setCurrentLimit(43);
-		Robot.backLeftDriveMotor.setCurrentLimit(43);
-		Robot.backRightDriveMotor.setCurrentLimit(43);
-		Robot.leftShooterMotorA.setCurrentLimit(0);
-		Robot.leftShooterMotorB.setCurrentLimit(0);
-		Robot.rightShooterMotorA.setCurrentLimit(0);
-		Robot.rightShooterMotorB.setCurrentLimit(0);
-		Robot.leftLoaderMotor.setCurrentLimit(0);
-		Robot.rightLoaderMotor.setCurrentLimit(0);
-		Robot.intakeMotor.setCurrentLimit(21);
-		Robot.winchMotor.setCurrentLimit(0);
-		Robot.leftAzimuthMotor.setCurrentLimit(0);
-		Robot.rightAzimuthMotor.setCurrentLimit(0);
-
+		int currentLimitPerDriveMotor = (int) (currentLimit / 4); // rounds down because Java
+		// 4 is the number of drive motors
+		
+		Robot.frontLeftDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
+		Robot.backLeftDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
+		Robot.frontRightDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
+		Robot.backRightDriveMotor.setCurrentLimit(currentLimitPerDriveMotor);
 		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
 		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
 		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
 		Robot.backRightDriveMotor.EnableCurrentLimit(true);
-		Robot.leftShooterMotorA.EnableCurrentLimit(true);
-		Robot.leftShooterMotorB.EnableCurrentLimit(true);
-		Robot.rightShooterMotorA.EnableCurrentLimit(true);
-		Robot.rightShooterMotorB.EnableCurrentLimit(true);
-		Robot.leftLoaderMotor.EnableCurrentLimit(true);
-		Robot.rightLoaderMotor.EnableCurrentLimit(true);
-		Robot.intakeMotor.EnableCurrentLimit(true);
-		Robot.winchMotor.EnableCurrentLimit(true);
-		Robot.leftAzimuthMotor.EnableCurrentLimit(true);
-		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
+		
+		Intake.manage();
+		Shooter.shoot();
+		Shooter.align();
+		Winch.manage();
+		Drive.teleopDrive();
 	}
-
-	public static void shootStateCurrentLimit() {
-		Robot.frontLeftDriveMotor.setCurrentLimit(23);
-		Robot.frontRightDriveMotor.setCurrentLimit(23);
-		Robot.backLeftDriveMotor.setCurrentLimit(23);
-		Robot.backRightDriveMotor.setCurrentLimit(23);
-		Robot.leftShooterMotorA.setCurrentLimit(14);
-		Robot.leftShooterMotorB.setCurrentLimit(14);
-		Robot.rightShooterMotorA.setCurrentLimit(14);
-		Robot.rightShooterMotorB.setCurrentLimit(14);
-		Robot.leftLoaderMotor.setCurrentLimit(15);
-		Robot.rightLoaderMotor.setCurrentLimit(15);
-		Robot.intakeMotor.setCurrentLimit(0);
-		Robot.winchMotor.setCurrentLimit(0);
-		Robot.leftAzimuthMotor.setCurrentLimit(2);
-		Robot.rightAzimuthMotor.setCurrentLimit(2);
-
-		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
-		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
-		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
-		Robot.backRightDriveMotor.EnableCurrentLimit(true);
-		Robot.leftShooterMotorA.EnableCurrentLimit(true);
-		Robot.leftShooterMotorB.EnableCurrentLimit(true);
-		Robot.rightShooterMotorA.EnableCurrentLimit(true);
-		Robot.rightShooterMotorB.EnableCurrentLimit(true);
-		Robot.leftLoaderMotor.EnableCurrentLimit(true);
-		Robot.rightLoaderMotor.EnableCurrentLimit(true);
-		Robot.intakeMotor.EnableCurrentLimit(true);
-		Robot.winchMotor.EnableCurrentLimit(true);
-		Robot.leftAzimuthMotor.EnableCurrentLimit(true);
-		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
-	}
-
-	public static void alignStateCurrentLimit() {
-		// TODO: CHANGE TO CORRECT LIMITS
-		Robot.frontLeftDriveMotor.setCurrentLimit(43);
-		Robot.frontRightDriveMotor.setCurrentLimit(43);
-		Robot.backLeftDriveMotor.setCurrentLimit(43);
-		Robot.backRightDriveMotor.setCurrentLimit(43);
-		Robot.leftShooterMotorA.setCurrentLimit(0);
-		Robot.leftShooterMotorB.setCurrentLimit(0);
-		Robot.rightShooterMotorA.setCurrentLimit(0);
-		Robot.rightShooterMotorB.setCurrentLimit(0);
-		Robot.leftLoaderMotor.setCurrentLimit(0);
-		Robot.rightLoaderMotor.setCurrentLimit(0);
-		Robot.intakeMotor.setCurrentLimit(21);
-		Robot.winchMotor.setCurrentLimit(0);
-		Robot.leftAzimuthMotor.setCurrentLimit(0);
-		Robot.rightAzimuthMotor.setCurrentLimit(0);
-
-		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
-		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
-		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
-		Robot.backRightDriveMotor.EnableCurrentLimit(true);
-		Robot.leftShooterMotorA.EnableCurrentLimit(true);
-		Robot.leftShooterMotorB.EnableCurrentLimit(true);
-		Robot.rightShooterMotorA.EnableCurrentLimit(true);
-		Robot.rightShooterMotorB.EnableCurrentLimit(true);
-		Robot.leftLoaderMotor.EnableCurrentLimit(true);
-		Robot.rightLoaderMotor.EnableCurrentLimit(true);
-		Robot.intakeMotor.EnableCurrentLimit(true);
-		Robot.winchMotor.EnableCurrentLimit(true);
-		Robot.leftAzimuthMotor.EnableCurrentLimit(true);
-		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
-	}
-
-	public static void climbStateCurrentLimit() {
-		// TODO: CHANGE TO CORRECT LIMITS
-		Robot.frontLeftDriveMotor.setCurrentLimit(43);
-		Robot.frontRightDriveMotor.setCurrentLimit(43);
-		Robot.backLeftDriveMotor.setCurrentLimit(43);
-		Robot.backRightDriveMotor.setCurrentLimit(43);
-		Robot.leftShooterMotorA.setCurrentLimit(0);
-		Robot.leftShooterMotorB.setCurrentLimit(0);
-		Robot.rightShooterMotorA.setCurrentLimit(0);
-		Robot.rightShooterMotorB.setCurrentLimit(0);
-		Robot.leftLoaderMotor.setCurrentLimit(0);
-		Robot.rightLoaderMotor.setCurrentLimit(0);
-		Robot.intakeMotor.setCurrentLimit(21);
-		Robot.winchMotor.setCurrentLimit(0);
-		Robot.leftAzimuthMotor.setCurrentLimit(0);
-		Robot.rightAzimuthMotor.setCurrentLimit(0);
-
-		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
-		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
-		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
-		Robot.backRightDriveMotor.EnableCurrentLimit(true);
-		Robot.leftShooterMotorA.EnableCurrentLimit(true);
-		Robot.leftShooterMotorB.EnableCurrentLimit(true);
-		Robot.rightShooterMotorA.EnableCurrentLimit(true);
-		Robot.rightShooterMotorB.EnableCurrentLimit(true);
-		Robot.leftLoaderMotor.EnableCurrentLimit(true);
-		Robot.rightLoaderMotor.EnableCurrentLimit(true);
-		Robot.intakeMotor.EnableCurrentLimit(true);
-		Robot.winchMotor.EnableCurrentLimit(true);
-		Robot.leftAzimuthMotor.EnableCurrentLimit(true);
-		Robot.rightAzimuthMotor.EnableCurrentLimit(true);
-	}
-
+  
 	/**
 	 * Updates SmartDashboard values for Teleop by calling other update
 	 * functions.
@@ -241,7 +93,6 @@ public class Teleop {
 		// Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
 		Time.updateSmartDashboard();
-		SmartDashboard.putString("Teleop State", teleopState.toString());
 	}
 
 }
