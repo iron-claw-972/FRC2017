@@ -339,28 +339,14 @@ public class Shooter {
 		double R_i = 0.5; // Input crank radius
 		double R_o = 2.5; // Output crank radius
 
-		System.out.println("D " + D);
-		System.out.println("L " + L);
-		System.out.println("R_i " + R_i);
-		System.out.println("R_o " + R_o);
-
 		double x_i = -D + (R_i * Math.cos(theta_i));
 		double y_i = R_i * Math.sin(theta_i);
 
-		System.out.println("x_i " + x_i);
-		System.out.println("y_i " + y_i);
-
 		double a = (Math.pow(x_i, 2) + Math.pow(y_i, 2) + Math.pow(R_o, 2) - Math.pow(L, 2)) / 2;
-
-		System.out.println("a " + a);
 
 		double A = Math.pow(x_i, 2) + Math.pow(y_i, 2);
 		double B = -2 * a * x_i;
 		double C = Math.pow(a, 2) - (Math.pow(R_o, 2) * Math.pow(y_i, 2));
-
-		System.out.println("A " + A);
-		System.out.println("B " + B);
-		System.out.println("C " + C);
 
 		double x_o_1, x_o_2;
 
@@ -376,14 +362,8 @@ public class Shooter {
 			x_o_2 = 0.0;
 		}
 
-		System.out.println("x_o_1 " + x_o_1);
-		System.out.println("x_o_2 " + x_o_2);
-
 		double y_o_1 = (a - (x_i * x_o_1)) / y_i;
 		double y_o_2 = (a - (x_i * x_o_2)) / y_i;
-
-		System.out.println("y_o_1 " + y_o_1);
-		System.out.println("y_o_2 " + y_o_2);
 
 		double theta_o_1 = Math.atan2(x_o_1, y_o_1);
 		double theta_o_2 = Math.atan2(x_o_2, y_o_2);
@@ -397,9 +377,6 @@ public class Shooter {
 		if (theta_o_2 > 90 && theta_o_2 < 270) {
 			theta_o_2 = theta_o_2 - 360;
 		}
-
-		System.out.println("theta_o_1 " + theta_o_1);
-		System.out.println("theta_o_2 " + theta_o_2);
 
 		// TODO: Figure out which theta_o to use
 		return theta_o_1;
