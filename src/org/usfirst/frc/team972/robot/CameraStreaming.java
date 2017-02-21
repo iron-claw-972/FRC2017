@@ -3,9 +3,11 @@ package org.usfirst.frc.team972.robot;
 import edu.wpi.cscore.*;
 
 public class CameraStreaming {
-	private static boolean pressed;
+	private static boolean camTogglePressed;
 	private static boolean pressedLastTime = false;
-	public static int whichCam = 1; // true = cam1, false = cam2
+	public static boolean useCam1 = true;
+	public static boolean useCam3 = false; // HOPPER CAM
+	public static int currentCamNum = 1, newCamNum = 1;;
 	int x = 0;
 
 	public static UsbCamera usbCamera1;
@@ -25,23 +27,38 @@ public class CameraStreaming {
 	}
 
 	public static void periodic() {
-		pressed = Robot.leftJoystick.getRawButton(Constants.INVERSE_DRIVE_TOGGLE_BUTTON);
-		if (pressed && !pressedLastTime) {
-			switch (whichCam) {
-				case 1:
-					cameraSink.setSource(usbCamera1);
-					break;
-				case 2:
-					cameraSink.setSource(usbCamera2);
-					break;
-				case 3:
-					cameraSink.setSource(usbCamera3);
-					break;
-			}
-			whichCam++;
-			if (whichCam > NumberOfCameras)
-				whichCam = 1;
+		useCam3 = Robot.operatorJoystick.getRawButton(Constants.HOPPER_CAM_BUTTON);
+		camTogglePressed = Robot.leftJoystick.getRawButton(Constants.INVERSE_DRIVE_TOGGLE_BUTTON);
+		if (camTogglePressed && !pressedLastTime) {
+			useCam1 = !useCam1;
 		}
-		pressedLastTime = pressed;
+		pressedLastTime = camTogglePressed;
+
+		if (useCam3) {
+			newCamNum = 3;
+		} else {
+			if (useCam1) {
+				newCamNum = 1;
+			} else {
+				newCamNum = 2;
+			}
+		}
+
+		currentCamNum = newCamNum;
+		switch (currentCamNum) {
+			case 1:
+				cameraSink.setSource(usbCamera1);
+				break;
+			case 2:
+				cameraSink.setSource(usbCamera2);
+				break;
+			case 3:
+				cameraSink.setSource(usbCamera3);
+				break;
+			default:
+				System.out.println("CAMERA DEFAULTING ERROR!!!");
+				break;
+		}
+		System.out.println("Current CAM: " + currentCamNum);
 	}
 }

@@ -20,6 +20,7 @@ public class Constants {
 	public static final int INTAKE_MOTOR_TOGGLE_BUTTON = 2;
 	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 3;
 	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
+	public static final int HOPPER_CAM_BUTTON = 5;
 
 	public static final int PDP_CAN_ID = 20;
 	 
