@@ -25,6 +25,9 @@ public class Robot extends IterativeRobot {
 	static CANTalon leftLoaderMotor = new CANTalon(Constants.LEFT_LOADER_MOTOR_CAN_ID);
 	static CANTalon rightLoaderMotor = new CANTalon(Constants.RIGHT_LOADER_MOTOR_CAN_ID);
 
+	static PIDController leftShooterPID = new PIDController(0.0, 0.0, 0.0, leftShooterMotorA, leftShooterMotorA);
+	static PIDController rightShooterPID = new PIDController(0.0, 0.0, 0.0, rightShooterMotorA, rightShooterMotorA);
+	
 	static Servo leftHoodLinearActuator = new Servo(Constants.LEFT_HOOD_LINEAR_ACTUATOR_PWM_PORT);
 	static Servo rightHoodLinearActuator = new Servo(Constants.RIGHT_HOOD_LINEAR_ACTUATOR_PWM_PORT);
 
