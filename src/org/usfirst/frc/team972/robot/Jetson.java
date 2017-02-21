@@ -71,6 +71,16 @@ public class Jetson implements Runnable {
 		newData = false;
 		return angle;
 	}
+	
+	/**
+	 * Gets the time.
+	 *
+	 * @return the time at which the frame was captured
+	 */
+	public static double getTime() {
+		newData = false;
+		return frameCaptureTime;
+	}
 
 	/**
 	 * Checks if the roboRio is connected to the Jetson.
