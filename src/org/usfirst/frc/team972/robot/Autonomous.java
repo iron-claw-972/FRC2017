@@ -26,6 +26,7 @@ public class Autonomous {
 	public static void createChooser() {
 		autoChooser.addDefault("Do Nothing", AutonomousRoutine.DO_NOTHING);
 		autoChooser.addObject("Cross Baseline", AutonomousRoutine.CROSS_BASELINE);
+		autoChooser.addObject("Middle Gear", AutonomousRoutine.MIDDLE_GEAR);
 		autoChooser.addObject("Test 0 - stay in place", AutonomousRoutine.TEST_0);
 		autoChooser.addObject("Test 1 - rotate 90 degrees", AutonomousRoutine.TEST_1);
 		autoChooser.addObject("Test 2 - rotate 180 degrees", AutonomousRoutine.TEST_2);
@@ -97,6 +98,9 @@ public class Autonomous {
 				break;
 			case CROSS_BASELINE:
 				Drive.tankDrive(0.5, 0.5); //eventually will change to autonDrive
+				break;
+			case MIDDLE_GEAR:
+				
 				break;
 			case TEST_0:
 				Drive.autonDrive(0.0, 0.0, 0.0, loopTime);

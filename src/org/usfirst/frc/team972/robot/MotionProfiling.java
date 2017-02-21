@@ -22,11 +22,12 @@ public class MotionProfiling {
 			double frontRightEncoderValue, double backRightEncoderValue, double leftAccel, double rightAccel) {
 		// @formatter:off
 		LeftModel.update(leftAccel, dT, frontLeftEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION, 
-				backLeftEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
+				- backLeftEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION); //back left counts backwards
 		RightModel.update(rightAccel, dT, frontRightEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION,
 				backRightEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
 		SystemModel.update(gyro, x_accel, y_accel, dT);
 		// @formatter:on
+		Logger.log("Motion_Profiling_Data", "t=" + Time.get() + " x=" + getX() + " y=" + getY());
 	}
 
 	/**
@@ -40,6 +41,7 @@ public class MotionProfiling {
 		LeftModel.setState(0.0, 0.0, 0.0);
 		RightModel.setState(0.0, 0.0, 0.0);
 		SystemModel.setState(x_init, y_init, 0.0, 0.0);
+		Logger.log("Motion_Profiling_Data", "Initializing motion profiling...");
 	}
 
 	/**
@@ -82,6 +84,7 @@ public class MotionProfiling {
 		RightModel.setState(average_encoder_value - distance, 0.0, 0.0);
 		SystemModel.setState(x_pos, y_pos, 0.0, theta);
 		IMU.recalibrate(0.0);
+		Logger.log("Motion_Profiling_Data", "Resetting motion profiling...");
 	}
 
 	public static void updateSmartDashboard() {

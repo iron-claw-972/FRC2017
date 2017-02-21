@@ -87,16 +87,16 @@ public class Constants {
 	public static final double SYSACC = 0.75;
 
 	// Auton Drive
-	public static final double AUTON_DRIVE_RATIO = 0.7; // TODO: determine (needs to be between 0 and 1)
-	public static final double AUTON_STOPPING_DISTANCE_1 = 1.0; // distance in meters to start stopping (sharp deceleration)
+	public static final double AUTON_DRIVE_RATIO = 0.6; // TODO: determine (needs to be between 0 and 1)
+	public static final double AUTON_STOPPING_DISTANCE_1 = 1.25; // distance in meters to start stopping (sharp deceleration)
 	public static final double AUTON_STOPPING_DISTANCE_2 = 0.5; // distance in meters to finish stopping (lower deceleration) (less than distance 1)
-	public static final double AUTON_VELOCITY_STOPPING_PROPORTION = 0.3; // proportion of max velocity city that should be reached after first stopping
-	public static final double AUTON_DRIVE_VP = 0.7; //0.3; // proportion of velocity error //TODO determine all these
-	public static final double AUTON_DRIVE_VD = 0.05; //0.1; // proportion of acceleration (should be small)
-	public static final double AUTON_DRIVE_AP = 0.000; //0.0003; // proportion of angle error (during motion)
-	public static final double AUTON_DRIVE_AD = 0.00; //0.004; // proportion of angle change (during motion) (should be small)
-	public static final double AUTON_DRIVE_TURNP = 0.0155; //0.006; // proportion of angle (during turn)
-	public static final double AUTON_DRIVE_TURND = 0.004; //0.004; // proportion of angle change (during turn)
+	public static final double AUTON_VELOCITY_STOPPING_PROPORTION = 0.25; // proportion of max velocity city that should be reached after first stopping
+	public static final double AUTON_DRIVE_VP = 0.6; //0.3; // proportion of velocity error //TODO determine all these
+	public static final double AUTON_DRIVE_VD = 0.12; //0.1; // proportion of acceleration (should be small)
+	public static final double AUTON_DRIVE_AP = 0.025; // proportion of angle error (during motion)
+	public static final double AUTON_DRIVE_AD = 0.01; // proportion of angle change (during motion) (should be small)
+	public static final double AUTON_DRIVE_TURNP = 0.0155; // proportion of angle error (during motion)
+	public static final double AUTON_DRIVE_TURND = 0.004; // proportion of angle change (during motion) (should be small)
 
 	// Test Switches
 	public static final boolean CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS = true;
