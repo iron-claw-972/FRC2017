@@ -15,10 +15,10 @@ public class Robot extends IterativeRobot {
 	static CANTalon backLeftDriveMotor = new CANTalon(Constants.BACK_LEFT_DRIVE_MOTOR_CAN_ID);
 	static CANTalon backRightDriveMotor = new CANTalon(Constants.BACK_RIGHT_DRIVE_MOTOR_CAN_ID);
 	static CANTalon winchMotor = new CANTalon(Constants.WINCH_MOTOR_CAN_ID);
-	static CANTalon leftShooterMotorA = new CANTalon(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
-	static CANTalon leftShooterMotorB = new CANTalon(Constants.LEFT_SHOOTER_MOTOR_B_CAN_ID);
-	static CANTalon rightShooterMotorA = new CANTalon(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
-	static CANTalon rightShooterMotorB = new CANTalon(Constants.RIGHT_SHOOTER_MOTOR_B_CAN_ID);
+	static ETalon leftShooterMotorA = new ETalon(Constants.LEFT_SHOOTER_MOTOR_A_CAN_ID);
+	static ETalon leftShooterMotorB = new ETalon(Constants.LEFT_SHOOTER_MOTOR_B_CAN_ID);
+	static ETalon rightShooterMotorA = new ETalon(Constants.RIGHT_SHOOTER_MOTOR_A_CAN_ID);
+	static ETalon rightShooterMotorB = new ETalon(Constants.RIGHT_SHOOTER_MOTOR_B_CAN_ID);
 	static CANTalon leftAzimuthMotor = new CANTalon(Constants.LEFT_AZIMUTH_MOTOR_CAN_ID);
 	static CANTalon rightAzimuthMotor = new CANTalon(Constants.RIGHT_AZIMUTH_MOTOR_CAN_ID);
 	static CANTalon intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_CAN_ID);
