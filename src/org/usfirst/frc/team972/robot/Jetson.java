@@ -20,6 +20,12 @@ public class Jetson implements Runnable {
 	/** The latest angle calculation from the Jetson. */
 	private static double angle;
 	
+	/** The Time class equivalent for when the frame was captured. */
+	private static double frameCaptureTime;
+	
+	/** The robot time when the server sent and received the confirmation byte; */
+	private static long serverStartTime;
+	
 	/**  Has the new data been read?. */
 	private static boolean newData = false;
 	
@@ -250,6 +256,7 @@ public class Jetson implements Runnable {
 				String received;
 				toServer.writeBytes(confirmationToken + '\n');
 				received = fromServer.readLine();
+				serverStartTime = System.currentTimeMillis();
 				System.out.println("We received " + received + " back from the server.");
 				if (confirmationToken.equals(received)) {
 					connected = true;
@@ -288,7 +295,9 @@ public class Jetson implements Runnable {
 					int colon = received.indexOf(':');
 					if (comma != -1 && colon != -1) {
 						distance = Double.parseDouble(received.substring(0, comma));
-						angle = Double.parseDouble(received.substring(comma + 1, received.length()));
+						angle = Double.parseDouble(received.substring(comma + 1, colon));
+						long frameProcessingTime = (System.currentTimeMillis() - serverStartTime) - Long.parseLong(received.substring(colon + 1, received.length()));
+						frameCaptureTime = Time.get() - (frameProcessingTime*1000);
 						newData = true;
 						System.out.println("d: " + distance + ", a: " + angle);
 					} else {
