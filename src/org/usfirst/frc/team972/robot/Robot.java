@@ -40,19 +40,23 @@ public class Robot extends IterativeRobot {
 			Constants.LEFT_DRIVE_ENCODER_BACK_PORT_B, true, Encoder.EncodingType.k2X);
 	static Encoder rightDriveEncoderBack = new Encoder(Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_A,
 			Constants.RIGHT_DRIVE_ENCODER_BACK_PORT_B, false, Encoder.EncodingType.k2X);
-	
+
 	static PowerDistributionPanel pdp = new PowerDistributionPanel(Constants.PDP_CAN_ID);
 
-//	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
-//	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
-//			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
-//	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
-//			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
-//	static DoubleSolenoid loaderDoorPiston = new DoubleSolenoid(Constants.LOADER_DOOR_PISTON_FORWARD_PCM_PORT,
-//			Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
-//	static DoubleSolenoid fieldHopperPiston = new DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
-//			Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
-//
+	// static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
+	// static DoubleSolenoid gearPegPiston = new
+	// DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
+	// Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
+	// static DoubleSolenoid gearPusherPiston = new
+	// DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
+	// Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
+	// static DoubleSolenoid loaderDoorPiston = new
+	// DoubleSolenoid(Constants.LOADER_DOOR_PISTON_FORWARD_PCM_PORT,
+	// Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
+	// static DoubleSolenoid fieldHopperPiston = new
+	// DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
+	// Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
+	//
 	/**
 	 * Robot-wide initialization code. This method is for default Robot-wide initialization and will
 	 * be called when the robot is first powered on. It will be called exactly one time.
@@ -64,15 +68,15 @@ public class Robot extends IterativeRobot {
 	 * @see init()
 	 */
 	public void robotInit() {
-		IMU.init();
-		SendableChooser autoChooser = new SendableChooser();
-		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
-		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
-		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
-		Autonomous.createChooser();
-		Autonomous.updateSmartDashboard();
-		Teleop.updateSmartDashboard();
-		(new Thread(new Jetson())).start(); //start networking to Jetson
+		// IMU.init();
+		// SendableChooser autoChooser = new SendableChooser();
+		// autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
+		// autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
+		// SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
+		// Autonomous.createChooser();
+		// Autonomous.updateSmartDashboard();
+		// Teleop.updateSmartDashboard();
+		// (new Thread(new Jetson())).start(); // start networking to Jetson
 		init();
 	}
 
@@ -114,7 +118,28 @@ public class Robot extends IterativeRobot {
 	 * @see Teleop.init()
 	 */
 	public void teleopInit() {
-		Teleop.init(this);
+		// Teleop.init(this);
+		Logger.init();
+		System.out.println("RUNNING!");
+		SmartDashboard.putBoolean("Running", true);
+		for (int i = 0; i < 1000; i++) {
+			if (randomInt() > 300) {
+				Logger.log("Testing", "t=" + i + "x=" + randomInt() + "y=" + randomInt());
+			}
+		}
+		for (int i = 0; i < 5; i++) {
+			int randomInt = randomInt();
+			double[] array = Logger.readLog("Testing", Integer.toString(randomInt));
+			if (array != null) {
+				System.out.println(randomInt + " " + array[0] + " " + array[1]);
+			} else {
+				System.out.println("NULL");
+			}
+		}
+	}
+
+	public int randomInt() {
+		return (int) (Math.random() * 1000);
 	}
 
 	/**
@@ -128,7 +153,7 @@ public class Robot extends IterativeRobot {
 	 * @see Teleop.teleopPeriodic()
 	 */
 	public void teleopPeriodic() {
-		Teleop.periodic(this);
+		// Teleop.periodic(this);
 	}
 
 	/**
