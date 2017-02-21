@@ -228,7 +228,8 @@ public class Shooter {
 			getAlignmentPIDFromJoystick();
 		}
 		if(Constants.CHANGE_AZIMUTH_WITH_VISION) {
-			getAlignmentFromVision(0, 0/* TODO: Add values d and thetaC from vision*/);
+			// TODO: Add values d and thetaC from vision
+			getAlignmentFromVision(0, 0);
 		}
 
 		alignment_runPID = Robot.operatorJoystick.getRawButton(Constants.SHOOTER_AZIMUTH_MOTOR_BUTTON);
@@ -350,8 +351,82 @@ public class Shooter {
 		if(Robot.rightAzimuthMotor.getPosition() < rightShooterAngle) {
 			moveAzimuth(Robot.rightAzimuthMotor, 0, true); // Note: find actual position
 		}
+	}
+	
+	public static double getAzimuthAngle(double theta_i) {
+
+		theta_i = Math.toRadians(theta_i);
+
+		double D = 1; // Distance between axles
+		double L = 1; // Length of coupler bar
+		double R_i = 0.49; // Input crank radius
+		double R_o = 0.5; // Output crank radius
+
+		System.out.println("D " + D);
+		System.out.println("L " + L);
+		System.out.println("R_i " + R_i);
+		System.out.println("R_o " + R_o);
+
+		double x_i = -D + (R_i * Math.cos(theta_i));
+		double y_i = R_i * Math.sin(theta_i);
+
+		System.out.println("x_i " + x_i);
+		System.out.println("y_i " + y_i);
+
+		double a = (Math.pow(x_i, 2) + Math.pow(y_i, 2) + Math.pow(R_o, 2) - Math.pow(L, 2)) / 2;
+
+		System.out.println("a " + a);
+
+		double A = Math.pow(x_i, 2) + Math.pow(y_i, 2);
+		double B = -2 * a * x_i;
+		double C = Math.pow(a, 2) - (Math.pow(R_o, 2) * Math.pow(y_i, 2));
+
+		System.out.println("A " + A);
+		System.out.println("B " + B);
+		System.out.println("C " + C);
+
+		double x_o_1, x_o_2;
+
+		if (theta_i > Math.toRadians(0) && theta_i <= Math.toRadians(180)) {
+			x_o_1 = (-B + Math.sqrt(Math.pow(B, 2) - (4 * A * C))) / (2 * A);
+			x_o_2 = (-B - Math.sqrt(Math.pow(B, 2) - (4 * A * C))) / (2 * A);
+		} else if (theta_i > Math.toRadians(180) && theta_i <= Math.toRadians(360)) {
+			x_o_1 = (-B - Math.sqrt(Math.pow(B, 2) - (4 * A * C))) / (2 * A);
+			x_o_2 = (-B + Math.sqrt(Math.pow(B, 2) - (4 * A * C))) / (2 * A);
+		} else {
+			System.out.println("ERROR!!!");
+			x_o_1 = 0.0;
+			x_o_2 = 0.0;
+		}
+
+		System.out.println("x_o_1 " + x_o_1);
+		System.out.println("x_o_2 " + x_o_2);
+
+		double y_o_1 = (a - (x_i * x_o_1)) / y_i;
+		double y_o_2 = (a - (x_i * x_o_2)) / y_i;
+
+		System.out.println("y_o_1 " + y_o_1);
+		System.out.println("y_o_2 " + y_o_2);
+
+		double theta_o_1 = Math.atan2(x_o_1, y_o_1);
+		double theta_o_2 = Math.atan2(x_o_2, y_o_2);
+
+		theta_o_1 = Math.toDegrees(theta_o_1);
+		theta_o_2 = Math.toDegrees(theta_o_2);
 		
+		theta_o_1 = 90 - theta_o_1;
+		theta_o_2 = 90 - theta_o_2;
 		
+		if (theta_o_2 > 90 && theta_o_2 < 270) {
+			theta_o_2 = theta_o_2 - 360;
+		}
+		
+		// Theta_o_1 always corrects
+		
+		System.out.println("theta_o_1 " + theta_o_1);
+		System.out.println("theta_o_2 " + theta_o_2);
+
+		return theta_o_1;
 	}
 
 	/**
