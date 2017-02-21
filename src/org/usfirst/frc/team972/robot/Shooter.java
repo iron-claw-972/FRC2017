@@ -421,11 +421,10 @@ public class Shooter {
 			theta_o_2 = theta_o_2 - 360;
 		}
 		
-		// Theta_o_1 always corrects
-		
 		System.out.println("theta_o_1 " + theta_o_1);
 		System.out.println("theta_o_2 " + theta_o_2);
 
+		// TODO: Figure out which theta_o to use
 		return theta_o_1;
 	}
 
