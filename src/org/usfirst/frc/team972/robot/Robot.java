@@ -64,15 +64,18 @@ public class Robot extends IterativeRobot {
 	 * @see init()
 	 */
 	public void robotInit() {
-		IMU.init();
-		SendableChooser autoChooser = new SendableChooser();
-		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
-		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
-		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
-		Autonomous.createChooser();
-		Autonomous.updateSmartDashboard();
-		Teleop.updateSmartDashboard();
-		(new Thread(new Jetson())).start(); //start networking to Jetson
+//		IMU.init();
+//		SendableChooser autoChooser = new SendableChooser();
+//		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
+//		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
+//		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
+//		Autonomous.createChooser();
+//		Autonomous.updateSmartDashboard();
+//		Teleop.updateSmartDashboard();
+//		(new Thread(new Jetson())).start(); //start networking to Jetson
+		
+//		CameraStreaming.init();
+		
 		init();
 	}
 
@@ -115,6 +118,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopInit() {
 		Teleop.init(this);
+		CameraStreaming.init();
 	}
 
 	/**
@@ -129,6 +133,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Teleop.periodic(this);
+		CameraStreaming.periodic();
 	}
 
 	/**
