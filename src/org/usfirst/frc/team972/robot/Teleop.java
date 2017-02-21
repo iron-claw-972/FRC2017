@@ -47,6 +47,10 @@ public class Teleop {
 	 */
 	public static void periodic(Robot r) {
 		Drive.teleopDrive();
+		Shooter.align();
+		Shooter.shoot();
+		
+		CameraStreaming.periodic();
 
 		double currTime = Time.get();
 		double loopTime = currTime - prevTime;

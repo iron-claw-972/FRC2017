@@ -72,7 +72,10 @@ public class Robot extends IterativeRobot {
 		Autonomous.createChooser();
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
+		CameraStreaming.init();
+    
 		(new Thread(new Jetson())).start(); //start networking to Jetson
+
 		init();
 	}
 
