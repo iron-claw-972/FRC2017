@@ -106,7 +106,7 @@ public class Constants {
 	public static final boolean USE_LEFT_SHOOTER = true;
 	public static final boolean USE_RIGHT_SHOOTER = false; // TODO: Revert
 
-	// PID Values
+	// PID Values -- CURRENTLY NOT USED -- TODO
 	public static final int FLYWHEEL_P = 600;
 	public static final int FLYWHEEL_I = 150;
 	public static final int FLYWHEEL_D = 5;
