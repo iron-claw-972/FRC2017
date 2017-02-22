@@ -1,5 +1,6 @@
 package org.usfirst.frc.team972.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake {
@@ -41,6 +42,10 @@ public class Intake {
 	public static void stop() {
 		Robot.intakeMotor.set(0);
 		intakeMotorOn = false;
+	}
+	
+	public static void hopperIntake() {
+		Robot.fieldHopperPiston.set(DoubleSolenoid.Value.kForward);
 	}
 
 	/**

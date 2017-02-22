@@ -25,6 +25,7 @@ public class Teleop {
 	public static void init(Robot r) {
 		r.init();
 		MotionProfiling.init(0.0, 0.0);
+		Intake.hopperIntake();
 		updateSmartDashboard();
 		
 		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
@@ -84,9 +85,9 @@ public class Teleop {
 	 */
 	public static void updateSmartDashboard() {
 		Drive.updateSmartDashboard();
-		// Shooter.updateSmartDashboard();
-		// Winch.updateSmartDashboard();
-		// Intake.updateSmartDashboard();
+		Shooter.updateSmartDashboard();
+		Winch.updateSmartDashboard();
+		Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
 		Time.updateSmartDashboard();
 	}
