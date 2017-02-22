@@ -15,7 +15,8 @@ public class Autonomous {
 	 */
 
 	private static double prevTime = 0.0;
-	private static boolean autonDone = false;
+	
+	private static boolean visionData = false;
 	
 	private static boolean auton7step1done = false;
 	private static boolean auton7step2done = false;
@@ -30,13 +31,7 @@ public class Autonomous {
 		autoChooser.addDefault("Do Nothing", AutonomousRoutine.DO_NOTHING);
 		autoChooser.addObject("Cross Baseline", AutonomousRoutine.CROSS_BASELINE);
 		autoChooser.addObject("Middle Gear", AutonomousRoutine.MIDDLE_GEAR);
-		autoChooser.addObject("Test 0 - stay in place", AutonomousRoutine.TEST_0);
-		autoChooser.addObject("Test 1 - rotate 90 degrees", AutonomousRoutine.TEST_1);
-		autoChooser.addObject("Test 2 - rotate 180 degrees", AutonomousRoutine.TEST_2);
-		autoChooser.addObject("Test 3 - move forward 3 meters", AutonomousRoutine.TEST_3);
-		autoChooser.addObject("Test 4 - move forward 3 meters and turn 90 degrees", AutonomousRoutine.TEST_4);
-		autoChooser.addObject("Test 5 - move to the right 3 meters and end up turned 90 degrees", AutonomousRoutine.TEST_5);
-		autoChooser.addObject("Test 6 - move backwards to x=-1, y=-2", AutonomousRoutine.TEST_6);
+		autoChooser.addObject("Test 7 - Move back and forward continuously", AutonomousRoutine.TEST_7);
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 	}
 	
@@ -57,27 +52,9 @@ public class Autonomous {
 			case CROSS_BASELINE:
 				MotionProfiling.init(0.0, 0.0);
 				break;
-			case TEST_0:
-				MotionProfiling.init(0.0, 0.0);
-				break;
-			case TEST_1:
-				MotionProfiling.init(0.0, 0.0);
-				break;
-			case TEST_2:
-				MotionProfiling.init(0.0, 0.0);
-				break;
-			case TEST_3:
-				MotionProfiling.init(0.0, 0.0);
-				break;
-			case TEST_4:
-				MotionProfiling.init(0.0, 0.0);
-				break;
-			case TEST_5:
-				MotionProfiling.init(0.0, 0.0);
-				break;
-			case TEST_6:
-				MotionProfiling.init(0.0, 0.0);
-				break;
+			case MIDDLE_GEAR:
+				MotionProfiling.init(Constants.MIDDLE_GEAR_START_X, Constants.MIDDLE_GEAR_START_Y);
+				Jetson.startGearVision();
 			case TEST_7:
 				MotionProfiling.init(0.0, 0.0);
 				break;
@@ -106,35 +83,16 @@ public class Autonomous {
 				Drive.tankDrive(0.5, 0.5); //eventually will change to autonDrive
 				break;
 			case MIDDLE_GEAR:
-				
-				break;
-			case TEST_0:
-				Drive.autonDrive(0.0, 0.0, 0.0, loopTime);
-				break;
-			case TEST_1:
-				Drive.autonDrive(0.0, 0.0, 90, loopTime);
-				break;
-			case TEST_2:
-				if (!autonDone) {
-					autonDone = Drive.autonDrive(0.0, 0.0, 180, loopTime);
-				}
-				break;
-			case TEST_3:
-				Drive.autonDrive(0.0, 3.0, 0.0, loopTime);
-				break;
-			case TEST_4:
-				if (!autonDone) {
-					autonDone = Drive.autonDrive(0.0, 3.0, 90.0, loopTime);
-				}
-				break;
-			case TEST_5:
-				if (!autonDone) {
-					autonDone = Drive.autonDrive(3.0, 0.5, 90.0, loopTime);
-				}
-				break;
-			case TEST_6:
-				if (!autonDone) {
-					autonDone = Drive.autonDrive(-1.0, -2.0, 0.0, loopTime);
+				if (visionData) {
+					double gear_x;
+					double gear_y;
+					if (Jetson.newData()) {
+						double distance = Jetson.getDistance();
+						double angle = Jetson.getAngle();
+						double data_time = Jetson.getTime();
+						double[] framePostition = Logger.readLog("Motion_Profiling_Data", data_time);
+						gear_x = Math.sin(angle) * distance;
+					}
 				}
 				break;
 			case TEST_7:
