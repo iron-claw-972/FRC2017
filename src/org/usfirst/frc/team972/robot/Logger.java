@@ -57,7 +57,7 @@ public class Logger {
 		}
 	}
 	
-	public static double[] readLog(String fileName, String time) {
+	public static double[] readLog(String fileName, double time) {
 		try {
 			String[] tokens;
 			String line;
@@ -66,7 +66,8 @@ public class Logger {
 	                new BufferedReader(new FileReader(Constants.LOGGER_LOCATION + "/" + directory + "/" + fileName + ".txt"));
 			while((line = fileReader.readLine()) != null) {
 				tokens = line.split("x=");
-				if(tokens[0].equals("t=" + time)) {
+				double line_time = Double.parseDouble(tokens[0].substring(2));
+				if(Math.abs(line_time - time) < 0.020) {
 					tokens = tokens[1].split("y=");
 					values[0] = Double.parseDouble(tokens[0]);
 					values[1] = Double.parseDouble(tokens[1]);
