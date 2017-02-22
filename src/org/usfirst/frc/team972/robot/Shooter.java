@@ -353,9 +353,9 @@ public class Shooter {
 
 		theta_i = Math.toRadians(theta_i);
 
-		double D = 4; // Distance between axles
-		double L = 5; // Length of coupler bar
-		double R_i = 0.5; // Input crank radius
+		double D = 4.322; // Distance between axles
+		double L = 4.889; // Length of coupler bar
+		double R_i = 0.425; // Input crank radius
 		double R_o = 2.5; // Output crank radius
 
 		double x_i = -D + (R_i * Math.cos(theta_i));
