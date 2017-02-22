@@ -17,6 +17,9 @@ public class Autonomous {
 	private static double prevTime = 0.0;
 	private static boolean autonDone = false;
 	
+	private static boolean auton7step1done = false;
+	private static boolean auton7step2done = false;
+	
 	static SendableChooser autoChooser = new SendableChooser();
 	static AutonomousRoutine selectedAutoRoutine;
 
@@ -46,7 +49,7 @@ public class Autonomous {
 	public static void init(Robot r) {
 		r.init();
 		//selectedAutoRoutine = (AutonomousRoutine) autoChooser.getSelected(); //TODO fix auton chooser
-		selectedAutoRoutine = AutonomousRoutine.TEST_3;
+		selectedAutoRoutine = AutonomousRoutine.TEST_7;
 		switch (selectedAutoRoutine) {
 			case DO_NOTHING:
 				MotionProfiling.init(0.0, 0.0); //TODO: set all of these for actual competition
@@ -73,6 +76,9 @@ public class Autonomous {
 				MotionProfiling.init(0.0, 0.0);
 				break;
 			case TEST_6:
+				MotionProfiling.init(0.0, 0.0);
+				break;
+			case TEST_7:
 				MotionProfiling.init(0.0, 0.0);
 				break;
 		}
@@ -123,12 +129,22 @@ public class Autonomous {
 				break;
 			case TEST_5:
 				if (!autonDone) {
-					autonDone = Drive.autonDrive(3.0, 0.0, 90.0, loopTime);
+					autonDone = Drive.autonDrive(3.0, 0.5, 90.0, loopTime);
 				}
 				break;
 			case TEST_6:
 				if (!autonDone) {
 					autonDone = Drive.autonDrive(-1.0, -2.0, 0.0, loopTime);
+				}
+				break;
+			case TEST_7:
+				if (!auton7step1done) {
+					auton7step1done = Drive.autonDrive(0.0, 2.5, 180, loopTime);
+				} else if (!auton7step2done) {
+					auton7step2done = Drive.autonDrive(0.0, 0.0, 0.0, loopTime);
+				} else {
+					auton7step1done = false;
+					auton7step2done = false;
 				}
 				break;
 		}
