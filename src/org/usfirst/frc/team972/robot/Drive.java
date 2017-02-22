@@ -159,11 +159,11 @@ public class Drive {
 		
 		boolean done = false;
 		
-		setBrakeMode(true);
+		setBrakeMode(false); //testing out coast?
 		
 		// distance from robot to desired point using Pythagorean theorem
 		double distance = Math.pow((Math.pow((x_desired - curr_x), 2) + Math.pow((y_desired - curr_y), 2)), 0.5);
-		if (distance > 0.02) { //maybe more
+		if (distance > 0.12) { //maybe more
 			//get trajectory angle from -pi to pi but with 0 on the x axis
 			double trajectory_angle = 0.0;
 			if (x_desired >= curr_x && y_desired >= curr_y) {
@@ -187,38 +187,31 @@ public class Drive {
 			SmartDashboard.putNumber("traj_angle", trajectory_angle);
 			SmartDashboard.putNumber("dist", distance);
 			
-			// determine which direction the robot needs to turn
+			theta_error = - trajectory_angle + curr_theta;
+			if (trajectory_angle > 90 && curr_theta < -90) {
+				theta_error = theta_error + 360; 
+			} else if (trajectory_angle < -90 && curr_theta > 90) {
+				theta_error = theta_error - 360;
+			}
+			
 			boolean isReverseDrive = false;
-			theta_error = trajectory_angle - curr_theta;
 			if (theta_error > 90.0) {
 				isReverseDrive = true;
-				theta_error = theta_error - 180;
+				theta_error = 180 - theta_error;
 			} else if (theta_error < -90.0) {
 				isReverseDrive = true;
-				theta_error = 180 + theta_error;
+				theta_error = -theta_error - 180;
 			}
-		
-			/*if (isReverseDrive) { //I think this was the actual problem
-				v_error = -Constants.ROBOT_MAX_VELOCITY - curr_v;
-				if (distance < Constants.AUTON_STOPPING_DISTANCE_2) {
-					v_error = - ((Constants.AUTON_STOPPING_DISTANCE_2 - distance) *
-							((Constants.ROBOT_MAX_VELOCITY * Constants.AUTON_VELOCITY_STOPPING_PROPORTION) / Constants.AUTON_STOPPING_DISTANCE_2)) - curr_v;
-				} else if (distance < Constants.AUTON_STOPPING_DISTANCE_1) {
-					v_error = - ((Constants.AUTON_STOPPING_DISTANCE_1 - distance) * 
-							(((1 - Constants.AUTON_VELOCITY_STOPPING_PROPORTION) * Constants.ROBOT_MAX_VELOCITY) / 
-									(Constants.AUTON_STOPPING_DISTANCE_1 - Constants.AUTON_STOPPING_DISTANCE_2))) - curr_v;
-				}
-			} else {*/
-				v_error = Constants.ROBOT_MAX_VELOCITY - curr_v;
-				if (distance < Constants.AUTON_STOPPING_DISTANCE_2) {
-					v_error = ((Constants.AUTON_STOPPING_DISTANCE_2 - distance) *
-							((Constants.ROBOT_MAX_VELOCITY * Constants.AUTON_VELOCITY_STOPPING_PROPORTION) / Constants.AUTON_STOPPING_DISTANCE_2)) - curr_v;
-				} else if (distance < Constants.AUTON_STOPPING_DISTANCE_1) {
-					v_error = ((Constants.AUTON_STOPPING_DISTANCE_1 - distance) * 
-							(((1 - Constants.AUTON_VELOCITY_STOPPING_PROPORTION) * Constants.ROBOT_MAX_VELOCITY) / 
-									(Constants.AUTON_STOPPING_DISTANCE_1 - Constants.AUTON_STOPPING_DISTANCE_2))) - curr_v;
-				}
-			//}
+			
+			v_error = Constants.ROBOT_MAX_VELOCITY - curr_v;
+			if (distance < Constants.AUTON_STOPPING_DISTANCE_2) {
+				v_error = ((Constants.AUTON_STOPPING_DISTANCE_2 - distance) *
+						((Constants.ROBOT_MAX_VELOCITY * Constants.AUTON_VELOCITY_STOPPING_PROPORTION) / Constants.AUTON_STOPPING_DISTANCE_2)) - curr_v;
+			} else if (distance < Constants.AUTON_STOPPING_DISTANCE_1) {
+				v_error = ((Constants.AUTON_STOPPING_DISTANCE_1 - distance) * 
+						(((1 - Constants.AUTON_VELOCITY_STOPPING_PROPORTION) * Constants.ROBOT_MAX_VELOCITY) / 
+								(Constants.AUTON_STOPPING_DISTANCE_1 - Constants.AUTON_STOPPING_DISTANCE_2))) - curr_v;
+			}
 			
 			double dVdT = 0.0;
 			if (prev_v_error != 0.0) {
@@ -229,40 +222,53 @@ public class Drive {
 				dThetadT = (theta_error - prev_theta_error) / dT;
 			}
 			
-			double power_for_velocity = Constants.AUTON_DRIVE_RATIO * ((Constants.AUTON_DRIVE_VP * v_error) - (Constants.AUTON_DRIVE_VD * dVdT));
-			double power_for_turning = (1 - Constants.AUTON_DRIVE_RATIO) * (Constants.AUTON_DRIVE_AP * Math.abs(theta_error) * theta_error) - 
-					(Constants.AUTON_DRIVE_AD * dThetadT);
-		
-			double leftDriveInput = power_for_velocity + power_for_turning;
-			double rightDriveInput = power_for_velocity - power_for_turning;
+			double power_for_velocity = (Constants.AUTON_DRIVE_RATIO - Constants.AUTON_DRIVE_F) * ((Constants.AUTON_DRIVE_VP * v_error) - (Constants.AUTON_DRIVE_VD * dVdT));
+			double power_for_turning = (1 - Constants.AUTON_DRIVE_RATIO) * ((Constants.AUTON_DRIVE_AP * theta_error) - 
+					(Constants.AUTON_DRIVE_AD * dThetadT));
+			
+			double leftDriveInput = power_for_velocity + power_for_turning + Constants.AUTON_DRIVE_F;
+			double rightDriveInput = power_for_velocity - power_for_turning + Constants.AUTON_DRIVE_F;
+			/*if (Math.abs(theta_error) > 40) {
+				leftDriveInput = 0.75 * power_for_velocity + power_for_turning + Constants.AUTON_DRIVE_F;
+				rightDriveInput = 0.75 * power_for_velocity - power_for_turning + Constants.AUTON_DRIVE_F;
+			}*/
 		
 			if (isReverseDrive) {
 				inverseDrive(leftDriveInput, rightDriveInput);
-				//tankDrive(leftDriveInput, rightDriveInput);
-				System.out.println("Memes"); //TODO fix this code
 			} else {
 				tankDrive(leftDriveInput, rightDriveInput);
 			}
 		} else {
-			theta_error = - theta_desired + curr_theta;
-			if (theta_desired > 90 && curr_theta < -90) {
-				theta_error = theta_error + 360; 
-			} else if (theta_desired < -90 && curr_theta > 90) {
-				theta_error = theta_error - 360;
-			}
-			double dThetadT = 0.0;
-			if (prev_theta_error != 0.0) {
-				dThetadT = ( - theta_error + prev_theta_error) / dT;
-			}
-			double turn_power = (Constants.AUTON_DRIVE_TURNP * theta_error) - (Constants.AUTON_DRIVE_TURND * dThetadT);
-			
-			double leftDriveInput = turn_power;
-			double rightDriveInput = - turn_power;
-			
-			if (Math.abs(theta_error) < 2 && Math.abs(dThetadT) < 2) {
-				done = true;
-			} else {			
-				tankDrive(leftDriveInput, rightDriveInput);
+			if (curr_v > 0.15) {
+				tankDrive(curr_v / 15, curr_v / 15);
+			} else {
+				theta_error = - theta_desired + curr_theta;
+				if (theta_desired > 90 && curr_theta < -90) {
+					theta_error = theta_error + 360; 
+				} else if (theta_desired < -90 && curr_theta > 90) {
+					theta_error = theta_error - 360;
+				}
+				double dThetadT = 0.0;
+				if (prev_theta_error != 0.0) {
+						dThetadT = ( - theta_error + prev_theta_error) / dT;
+				}
+				double turn_power = (Constants.AUTON_DRIVE_TURNP * theta_error) - (Constants.AUTON_DRIVE_TURND * dThetadT);
+				
+				double leftDriveInput = turn_power;
+				double rightDriveInput = - turn_power;
+				if (turn_power > 0) {
+					leftDriveInput = leftDriveInput + Constants.AUTON_DRIVE_TURNF;
+					rightDriveInput = rightDriveInput - Constants.AUTON_DRIVE_TURNF;
+				} else {
+					leftDriveInput = leftDriveInput - Constants.AUTON_DRIVE_TURNF;
+					rightDriveInput = rightDriveInput + Constants.AUTON_DRIVE_TURNF;
+				}
+				
+				if (Math.abs(theta_error) < 7 && Math.abs(dThetadT) < 2) {
+					done = true;
+				} else {			
+					tankDrive(leftDriveInput, rightDriveInput);
+				}
 			}
 		}
 		
@@ -282,9 +288,6 @@ public class Drive {
 	public static void updateModel(double dT) {
 		MotionProfiling.update(dT, IMU.getAngle(), IMU.getAccelX(), IMU.getAccelY(), Robot.leftDriveEncoderFront.get(), Robot.leftDriveEncoderBack.get(), Robot.rightDriveEncoderFront.get(), 
 				Robot.rightDriveEncoderBack.get(), getAccel("left"), getAccel("right"));
-		if (Robot.leftJoystick.getRawButton(1)) {
-			MotionProfiling.reset(0.0, 0.0, 0.0);
-		}
 	}
 
 	/**

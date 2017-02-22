@@ -17,6 +17,9 @@ public class Autonomous {
 	private static double prevTime = 0.0;
 	private static boolean autonDone = false;
 	
+	private static boolean auton7step1done = false;
+	private static boolean auton7step2done = false;
+	
 	static SendableChooser autoChooser = new SendableChooser();
 	static AutonomousRoutine selectedAutoRoutine;
 
@@ -26,6 +29,7 @@ public class Autonomous {
 	public static void createChooser() {
 		autoChooser.addDefault("Do Nothing", AutonomousRoutine.DO_NOTHING);
 		autoChooser.addObject("Cross Baseline", AutonomousRoutine.CROSS_BASELINE);
+		autoChooser.addObject("Middle Gear", AutonomousRoutine.MIDDLE_GEAR);
 		autoChooser.addObject("Test 0 - stay in place", AutonomousRoutine.TEST_0);
 		autoChooser.addObject("Test 1 - rotate 90 degrees", AutonomousRoutine.TEST_1);
 		autoChooser.addObject("Test 2 - rotate 180 degrees", AutonomousRoutine.TEST_2);
@@ -45,7 +49,7 @@ public class Autonomous {
 	public static void init(Robot r) {
 		r.init();
 		//selectedAutoRoutine = (AutonomousRoutine) autoChooser.getSelected(); //TODO fix auton chooser
-		selectedAutoRoutine = AutonomousRoutine.TEST_3;
+		selectedAutoRoutine = AutonomousRoutine.TEST_7;
 		switch (selectedAutoRoutine) {
 			case DO_NOTHING:
 				MotionProfiling.init(0.0, 0.0); //TODO: set all of these for actual competition
@@ -74,6 +78,9 @@ public class Autonomous {
 			case TEST_6:
 				MotionProfiling.init(0.0, 0.0);
 				break;
+			case TEST_7:
+				MotionProfiling.init(0.0, 0.0);
+				break;
 		}
 		updateSmartDashboard();
 	}
@@ -98,6 +105,9 @@ public class Autonomous {
 			case CROSS_BASELINE:
 				Drive.tankDrive(0.5, 0.5); //eventually will change to autonDrive
 				break;
+			case MIDDLE_GEAR:
+				
+				break;
 			case TEST_0:
 				Drive.autonDrive(0.0, 0.0, 0.0, loopTime);
 				break;
@@ -119,12 +129,22 @@ public class Autonomous {
 				break;
 			case TEST_5:
 				if (!autonDone) {
-					autonDone = Drive.autonDrive(3.0, 0.0, 90.0, loopTime);
+					autonDone = Drive.autonDrive(3.0, 0.5, 90.0, loopTime);
 				}
 				break;
 			case TEST_6:
 				if (!autonDone) {
 					autonDone = Drive.autonDrive(-1.0, -2.0, 0.0, loopTime);
+				}
+				break;
+			case TEST_7:
+				if (!auton7step1done) {
+					auton7step1done = Drive.autonDrive(0.0, 2.5, 180, loopTime);
+				} else if (!auton7step2done) {
+					auton7step2done = Drive.autonDrive(0.0, 0.0, 0.0, loopTime);
+				} else {
+					auton7step1done = false;
+					auton7step2done = false;
 				}
 				break;
 		}

@@ -75,10 +75,10 @@ public class Constants {
 	public static final double ROBOT_WIDTH = 0.751; // in meters
 	public static final double ROBOT_LENGTH = 0.9017; // in meters
 	public static final double GEAR_INSET_FROM_BUMPERS = 0.03175; // in meters
-	public static final double ROBOT_MAX_VELOCITY = 5; // should be 5 probably m/s
+	public static final double ROBOT_MAX_VELOCITY = 3.5; // m/s
 	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.320; // meters (diameter 0.101 meters)
 	public static final double ENCODER_CLICKS_PER_ROTATION = 2048;
-	public static final double ROBOT_MASS = 39.3; // TODO: calculate (in kg) (current weight is weight of drive base and hopper frame and winch with battery and bumpers) (estimated that the robot is 135lbs = 61.235 with batteries and bumpers)
+	public static final double ROBOT_MASS = 45; // TODO: calculate (in kg) (current weight is not the full weight) (estimated that the robot is 135lbs = 61.235 with batteries and bumpers)
 
 	// System Model
 	public static final double ALPHA = 1.0; //TODO I think these are good but needs more testing
@@ -89,15 +89,17 @@ public class Constants {
 
 	// Auton Drive
 	public static final double AUTON_DRIVE_RATIO = 0.7; // TODO: determine (needs to be between 0 and 1)
-	public static final double AUTON_STOPPING_DISTANCE_1 = 1.0; // distance in meters to start stopping (sharp deceleration)
+	public static final double AUTON_STOPPING_DISTANCE_1 = 1.5; // distance in meters to start stopping (sharp deceleration)
 	public static final double AUTON_STOPPING_DISTANCE_2 = 0.5; // distance in meters to finish stopping (lower deceleration) (less than distance 1)
-	public static final double AUTON_VELOCITY_STOPPING_PROPORTION = 0.3; // proportion of max velocity city that should be reached after first stopping
-	public static final double AUTON_DRIVE_VP = 0.7; //0.3; // proportion of velocity error //TODO determine all these
-	public static final double AUTON_DRIVE_VD = 0.05; //0.1; // proportion of acceleration (should be small)
-	public static final double AUTON_DRIVE_AP = 0.000; //0.0003; // proportion of angle error (during motion)
-	public static final double AUTON_DRIVE_AD = 0.00; //0.004; // proportion of angle change (during motion) (should be small)
-	public static final double AUTON_DRIVE_TURNP = 0.0155; //0.006; // proportion of angle (during turn)
-	public static final double AUTON_DRIVE_TURND = 0.004; //0.004; // proportion of angle change (during turn)
+	public static final double AUTON_VELOCITY_STOPPING_PROPORTION = 0.35; // proportion of max velocity city that should be reached after first stopping
+	public static final double AUTON_DRIVE_VP = 0.08; // proportion of velocity error //TODO determine all these
+	public static final double AUTON_DRIVE_VD = 0.016; // proportion of acceleration (should be small)
+	public static final double AUTON_DRIVE_AP = 0.01; // proportion of angle error (during motion)
+	public static final double AUTON_DRIVE_AD = 0.0005; // proportion of angle change (during motion) (should be small)
+	public static final double AUTON_DRIVE_F = 0.13; //feed forward
+	public static final double AUTON_DRIVE_TURNP = 0.005; // proportion of angle error (during motion)
+	public static final double AUTON_DRIVE_TURND = 0.0012; // proportion of angle change (during motion) (should be small)
+	public static final double AUTON_DRIVE_TURNF = 0.05; //feed forward
 
 	// Test Switches
 	public static final boolean CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS = true;
