@@ -4,7 +4,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MotionProfiling {
 
-	/**
+	private static int resetCounter = 0;
+
+	/*
 	 * Updates robot model.
 	 *
 	 * @param dT						Loop time (change in time) in seconds
@@ -27,7 +29,7 @@ public class MotionProfiling {
 				backRightEncoderValue * Constants.ROBOT_DRIVE_WHEEL_CIRCUMFERENCE / Constants.ENCODER_CLICKS_PER_ROTATION);
 		SystemModel.update(gyro, x_accel, y_accel, dT);
 		// @formatter:on
-		Logger.log("Motion_Profiling_Data", "t=" + Time.get() + " x=" + getX() + " y=" + getY());
+		Logger.log("Motion_Profiling_Data", "t=" + Time.get() + " x=" + getX() + " y=" + getY() + " theta=" + getTheta());
 	}
 
 	/**
@@ -42,6 +44,7 @@ public class MotionProfiling {
 		RightModel.setState(0.0, 0.0, 0.0);
 		SystemModel.setState(x_init, y_init, 0.0, 0.0);
 		Logger.log("Motion_Profiling_Data", "Initializing motion profiling...");
+		Logger.log("Motion_Profiling_Data", "t=" + Time.get() + " x=" + getX() + " y=" + getY() + " theta=" + getTheta());
 	}
 
 	/**
@@ -84,7 +87,10 @@ public class MotionProfiling {
 		RightModel.setState(average_encoder_value - distance, 0.0, 0.0);
 		SystemModel.setState(x_pos, y_pos, 0.0, theta);
 		IMU.recalibrate(0.0);
+		resetCounter++;
+		Logger.renameFile("Motion_Profiling_Data", "Motion_Profiling_Data_ResetNum" + resetCounter);
 		Logger.log("Motion_Profiling_Data", "Resetting motion profiling...");
+		Logger.log("Motion_Profiling_Data", "t=" + Time.get() + " x=" + getX() + " y=" + getY() + " theta=" + getTheta());
 	}
 
 	public static void updateSmartDashboard() {

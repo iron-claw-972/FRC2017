@@ -17,6 +17,9 @@ public class Autonomous {
 	private static double prevTime = 0.0;
 	
 	private static boolean visionData = false;
+	private static double gear_x;
+	private static double gear_y;
+	private static double gear_theta;
 	
 	private static boolean auton7step1done = false;
 	private static boolean auton7step2done = false;
@@ -47,13 +50,13 @@ public class Autonomous {
 		selectedAutoRoutine = AutonomousRoutine.TEST_7;
 		switch (selectedAutoRoutine) {
 			case DO_NOTHING:
-				MotionProfiling.init(0.0, 0.0); //TODO: set all of these for actual competition
+				MotionProfiling.init(Constants.DO_NOTHING_AUTO_STARTX, Constants.DO_NOTHING_AUTO_STARTY);
 				break;
 			case CROSS_BASELINE:
-				MotionProfiling.init(0.0, 0.0);
+				MotionProfiling.init(Constants.CROSS_BASELINE_AUTO_STARTX, Constants.DO_NOTHING_AUTO_STARTY);
 				break;
 			case MIDDLE_GEAR:
-				MotionProfiling.init(Constants.MIDDLE_GEAR_START_X, Constants.MIDDLE_GEAR_START_Y);
+				MotionProfiling.init(Constants.MIDDLE_GEAR_AUTO_STARTX, Constants.MIDDLE_GEAR_AUTO_STARTY);
 				Jetson.startGearVision();
 			case TEST_7:
 				MotionProfiling.init(0.0, 0.0);
@@ -77,22 +80,39 @@ public class Autonomous {
 		double loopTime = currTime - prevTime;
 		switch (selectedAutoRoutine) {
 			case DO_NOTHING:
-				Drive.stopDrive(); //TODO: set all of these for actual competition
+				Drive.stopDrive();
 				break;
 			case CROSS_BASELINE:
-				Drive.tankDrive(0.5, 0.5); //eventually will change to autonDrive
+				Drive.autonDrive(Constants.CROSS_BASELINE_AUTO_X, Constants.CROSS_BASELINE_AUTO_Y, Constants.CROSS_BASELINE_AUTO_THETA, loopTime);
 				break;
 			case MIDDLE_GEAR:
+				boolean done = false;
 				if (visionData) {
-					double gear_x;
-					double gear_y;
 					if (Jetson.newData()) {
 						double distance = Jetson.getDistance();
 						double angle = Jetson.getAngle();
 						double data_time = Jetson.getTime();
-						double[] framePostition = Logger.readLog("Motion_Profiling_Data", data_time);
-						gear_x = Math.sin(angle) * distance;
+						double[] framePosition = Logger.readLog("Motion_Profiling_Data", data_time);
+						if (framePosition.length == 3) {
+							gear_x = Math.sin(angle) * distance + Math.sin(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[0];
+							gear_y = Math.cos(angle) * distance + Math.cos(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[1];
+							gear_theta = framePosition[2] + angle;
+							if (framePosition[2] > 90 && angle > 90) {
+								gear_theta = gear_theta - 360; 
+							} else if (framePosition[2] < -90 && angle < -90) {
+								gear_theta = gear_theta + 360;
+							}
+						} else {
+							Logger.logError("Failed to determine the position of the robot from the logs.");
+						}
 					}
+					done = Drive.autonDrive(gear_x, gear_y - Constants.LENGTH_GEAR_PEG - (Constants.ROBOT_LENGTH / 2), gear_theta, loopTime);
+				} else {
+					visionData = Jetson.newData();
+					done = Drive.autonDrive(Constants.MIDDLE_GEAR_AUTO_X, Constants.MIDDLE_GEAR_AUTO_Y - (Constants.ROBOT_LENGTH / 2), Constants.MIDDLE_GEAR_AUTO_THETA, loopTime);
+				}
+				if (done) {
+					MotionProfiling.reset(Constants.MIDDLE_GEAR_AUTO_X, Constants.MIDDLE_GEAR_AUTO_Y - (Constants.ROBOT_LENGTH / 2), Constants.MIDDLE_GEAR_AUTO_THETA);
 				}
 				break;
 			case TEST_7:

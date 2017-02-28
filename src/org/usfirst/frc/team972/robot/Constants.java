@@ -74,8 +74,8 @@ public class Constants {
 
 	// Robot Information
 	public static final double ROBOT_WIDTH = 0.751; // in meters
-	public static final double ROBOT_LENGTH = 0.9017; // in meters
-	public static final double GEAR_INSET_FROM_BUMPERS = 0.03175; // in meters
+	public static final double ROBOT_LENGTH = 0.737; // in meters
+	public static final double LENGTH_GEAR_PEG = 0.203; // in meters distance from the plane which includes the gear vision tape 
 	public static final double ROBOT_MAX_VELOCITY = 3.5; // m/s
 	public static final double ROBOT_DRIVE_WHEEL_CIRCUMFERENCE = 0.320; // meters (diameter 0.101 meters)
 	public static final double ENCODER_CLICKS_PER_ROTATION = 2048;
@@ -126,5 +126,23 @@ public class Constants {
 	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 30000.0;
 	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 0.0;
 	public static final double SHOOTER_HOOD_POSITION = 0.7;
-	public static final double LOADER_MOTOR_SPEED = 0.5;
+  public static final double LOADER_MOTOR_SPEED = 0.5;
+	
+	// Do Nothing Auton defaults
+	public static final double DO_NOTHING_AUTO_STARTX = 4.112; //maybe make this able to be edited by the driver? TODO check
+	public static final double DO_NOTHING_AUTO_STARTY = 0.502;
+	
+	// Cross Baseline Auton defaults
+	public static final double CROSS_BASELINE_AUTO_STARTX = 2.0; // TODO make Albert do math
+	public static final double CROSS_BASELINE_AUTO_STARTY = 0.502;
+	public static final double CROSS_BASELINE_AUTO_X = 2.0;
+	public static final double CROSS_BASELINE_AUTO_Y = 3.0;
+	public static final double CROSS_BASELINE_AUTO_THETA = 0.0;
+	
+	// Middle Gear Auton defaults
+	public static final double MIDDLE_GEAR_AUTO_STARTX = 4.112;
+	public static final double MIDDLE_GEAR_AUTO_STARTY = 0.502;
+	public static final double MIDDLE_GEAR_AUTO_X = 4.112;
+	public static final double MIDDLE_GEAR_AUTO_Y = 2.105;
+	public static final double MIDDLE_GEAR_AUTO_THETA = 0.0;
 }
