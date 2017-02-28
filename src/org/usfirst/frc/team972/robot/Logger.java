@@ -67,10 +67,15 @@ public class Logger {
 			while((line = fileReader.readLine()) != null) {
 				tokens = line.split("x=");
 				double line_time = Double.parseDouble(tokens[0].substring(2));
-				if(Math.abs(line_time - time) < 0.020) {
+				if (Math.abs(line_time - time) < 0.011) {
 					tokens = tokens[1].split("y=");
-					values[0] = Double.parseDouble(tokens[0]);
-					values[1] = Double.parseDouble(tokens[1]);
+					String x_str = tokens[0];
+					String y_str = tokens[1];
+					tokens = tokens[1].split("theta=");
+					String theta_str = tokens[1];
+					values[0] = Double.parseDouble(x_str);
+					values[1] = Double.parseDouble(y_str);
+					values[2] = Double.parseDouble(theta_str);
 					fileReader.close();
 					return values;
 				}
@@ -80,5 +85,27 @@ public class Logger {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static void deleteFile(String fileName) {
+		File file = new File(Constants.LOGGER_LOCATION + "/" + directory + "/" + fileName + ".txt");
+    	try {
+    		file.delete();
+    		logError("Deleted file with name: " + fileName);
+		} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+	}
+	
+	public static void renameFile(String fileName, String newFileName) {
+		File oldFile = new File(Constants.LOGGER_LOCATION + "/" + directory + "/" + fileName + ".txt");
+		File newFile = new File(Constants.LOGGER_LOCATION + "/" + directory + "/" + newFileName + ".txt");
+    	try {
+    		if (!oldFile.renameTo(newFile)) { //makes sure that even if it fails we at least delete the file which is necessary when logging the motionprofiling stuff
+    			deleteFile(fileName);
+    		}
+		} catch (Exception e) {
+    		e.printStackTrace();
+    	}
 	}
 }
