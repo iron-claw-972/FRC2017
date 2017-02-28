@@ -27,7 +27,7 @@ public class ETalon extends CANTalon {
 //				System.out.println("Position " + position);
 				return position;
 			case kRate:
-				double speed =  getSpeed();
+				double speed = getSpeed();
 //				System.out.println("Speed " + speed);
 				return speed;
 			default:

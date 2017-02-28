@@ -35,10 +35,10 @@ public class Shooter {
 			Robot.leftShooterMotorB.changeControlMode(TalonControlMode.Follower);
 			Robot.leftShooterMotorB.set(Robot.leftShooterMotorA.getDeviceID());
 
-			Robot.leftShooterMotorA.setPIDSourceType(PIDSourceType.kRate);
+//			Robot.leftShooterMotorA.setPIDSourceType(PIDSourceType.kRate);
 			Robot.leftShooterMotorA.setPosition(0);
 
-			Robot.leftShooterPID.setSetpoint(shooter_setpoint);
+//			Robot.leftShooterPID.setSetpoint(shooter_setpoint);
 
 			Robot.leftAzimuthMotor.enableBrakeMode(true);
 			Robot.leftAzimuthMotor.setPosition(0);
@@ -71,7 +71,23 @@ public class Shooter {
 
 		SmartDashboard.putNumber("Left Shooter Target Time", 0);
 	}
-
+	
+	public static void load() {
+		
+		if (Constants.USE_LEFT_SHOOTER) {
+			if (!Constants.USE_RIGHT_SHOOTER) {
+				Robot.rightLoaderMotor.set(-Constants.LOADER_MOTOR_SPEED);
+			}
+			Robot.leftLoaderMotor.set(Constants.LOADER_MOTOR_SPEED);
+		}
+		if (Constants.USE_RIGHT_SHOOTER) {
+			if (!Constants.USE_LEFT_SHOOTER) {
+				Robot.leftLoaderMotor.set(-Constants.LOADER_MOTOR_SPEED);
+			}
+			Robot.rightLoaderMotor.set(Constants.LOADER_MOTOR_SPEED);
+		}
+	}
+	
 	/**
 	 * Manages the shooter flywheels.
 	 * 
@@ -79,7 +95,7 @@ public class Shooter {
 	 */
 	public static void shoot() {
 		if (Constants.CHANGE_FLYWHEEL_PID_WITH_JOYSTICKS) {
-			updateShooterPIDValues();
+			getShooterPIDValues();
 		}
 		
 		if (Constants.USE_LEFT_SHOOTER) {
@@ -111,21 +127,23 @@ public class Shooter {
 	}
 
 	public static void runShooter(CANTalon masterMotor, CANTalon slaveMotor) {
-		manualSpeed = (-Robot.leftJoystick.getThrottle() + 1)/2;
+		manualSpeed = (-Robot.operatorJoystick.getThrottle() + 1) / 2;
+		Robot.loaderDoorPiston.set(DoubleSolenoid.Value.kReverse);
 
-		if (Robot.leftJoystick.getRawButton(1)) {
+		if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_FLYWHEEL_MOTOR_BUTTON)) {
+			load();
 			Robot.leftShooterPID.setSetpoint(shooter_setpoint);
 			masterMotor.changeControlMode(TalonControlMode.PercentVbus);
 			slaveMotor.changeControlMode(TalonControlMode.Follower);
 			slaveMotor.set(masterMotor.getDeviceID());
 			SmartDashboard.putNumber("I Accum", masterMotor.GetIaccum());
-
 			Robot.leftShooterPID.enable();
 		} else {
 //			masterMotor.ClearIaccum();
 			Robot.leftShooterPID.reset();
 //			masterMotor.clearIAccum();
-			if (Robot.leftJoystick.getRawButton(3)) {
+			if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_FLYWHEEL_MANUAL_OVERRIDE_BUTTON)) {
+				load();
 				masterMotor.changeControlMode(TalonControlMode.PercentVbus);
 				slaveMotor.changeControlMode(TalonControlMode.Follower);
 				slaveMotor.set(masterMotor.getDeviceID());
@@ -137,6 +155,7 @@ public class Shooter {
 				masterMotor.set(0);
 				slaveMotor.changeControlMode(TalonControlMode.PercentVbus);
 				slaveMotor.set(0);
+				Robot.loaderDoorPiston.set(DoubleSolenoid.Value.kForward);
 			}
 		}
 	}
@@ -144,15 +163,15 @@ public class Shooter {
 	/**
 	 * Changes kP, kI, and kD values using joystick POV values.
 	 */
-	public static void updateShooterPIDValues() {
-		boolean pUp = Robot.leftJoystick.getRawButton(7);
-		boolean pDown = Robot.leftJoystick.getRawButton(8);
-		boolean iUp = Robot.leftJoystick.getRawButton(9);
-		boolean iDown = Robot.leftJoystick.getRawButton(10);
-		boolean dUp = Robot.leftJoystick.getRawButton(11);
-		boolean shooter_dDown = Robot.leftJoystick.getRawButton(12);
-		boolean setUp = Robot.leftJoystick.getRawButton(5);
-		boolean setDown = Robot.leftJoystick.getRawButton(3);
+	public static void getShooterPIDValues() {
+		boolean pUp = Robot.operatorJoystick.getRawButton(7);
+		boolean pDown = Robot.operatorJoystick.getRawButton(8);
+		boolean iUp = Robot.operatorJoystick.getRawButton(9);
+		boolean iDown = Robot.operatorJoystick.getRawButton(10);
+		boolean dUp = Robot.operatorJoystick.getRawButton(11);
+		boolean dDown = Robot.operatorJoystick.getRawButton(12);
+		boolean setUp = Robot.operatorJoystick.getRawButton(5);
+		boolean setDown = Robot.operatorJoystick.getRawButton(3);
 		
 		
 		if (pUp && !shooter_lastP) {
@@ -169,7 +188,7 @@ public class Shooter {
 
 		if (dUp && !shooter_lastD) {
 			shooter_kD += shooter_dD;
-		} else if (shooter_dDown && !shooter_lastD) {
+		} else if (dDown && !shooter_lastD) {
 			shooter_kD -= shooter_dD;
 		}
 
@@ -195,7 +214,7 @@ public class Shooter {
 
 		shooter_lastP = pUp || pDown;
 		shooter_lastI = iUp || iDown;
-		shooter_lastD = dUp || shooter_dDown;
+		shooter_lastD = dUp || dDown;
 		shooter_lastSetpoint = setUp || setDown;
 		
 	}
@@ -334,9 +353,9 @@ public class Shooter {
 
 		theta_i = Math.toRadians(theta_i);
 
-		double D = 4; // Distance between axles
-		double L = 5; // Length of coupler bar
-		double R_i = 0.5; // Input crank radius
+		double D = 4.322; // Distance between axles
+		double L = 4.889; // Length of coupler bar
+		double R_i = 0.425; // Input crank radius
 		double R_o = 2.5; // Output crank radius
 
 		double x_i = -D + (R_i * Math.cos(theta_i));

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.text.*;
 import java.util.*;
 import com.ctre.*;
+import com.ctre.CANTalon.TalonControlMode;
 
 public class Robot extends IterativeRobot {
 
@@ -46,16 +47,16 @@ public class Robot extends IterativeRobot {
 	
 	static PowerDistributionPanel pdp = new PowerDistributionPanel(Constants.PDP_CAN_ID);
 
-//	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
-//	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
-//			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
-//	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
-//			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
-//	static DoubleSolenoid loaderDoorPiston = new DoubleSolenoid(Constants.LOADER_DOOR_PISTON_FORWARD_PCM_PORT,
-//			Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
-//	static DoubleSolenoid fieldHopperPiston = new DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
-//			Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
-//
+	static Compressor compressor = new Compressor(Constants.COMPRESSOR_PCM_PORT);
+	static DoubleSolenoid gearPegPiston = new DoubleSolenoid(Constants.GEAR_PEG_PISTON_FORWARD_PCM_PORT,
+			Constants.GEAR_PEG_PISTON_REVERSE_PCM_PORT);
+	static DoubleSolenoid gearPusherPiston = new DoubleSolenoid(Constants.GEAR_PUSHER_PISTON_FORWARD_PCM_PORT,
+			Constants.GEAR_PUSHER_PISTON_REVERSE_PCM_PORT);
+	static DoubleSolenoid loaderDoorPiston = new DoubleSolenoid(Constants.LOADER_DOOR_PISTON_FORWARD_PCM_PORT,
+			Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
+	static DoubleSolenoid fieldHopperPiston = new DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
+			Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
+
 	/**
 	 * Robot-wide initialization code. This method is for default Robot-wide initialization and will
 	 * be called when the robot is first powered on. It will be called exactly one time.
@@ -67,17 +68,17 @@ public class Robot extends IterativeRobot {
 	 * @see init()
 	 */
 	public void robotInit() {
-//		IMU.init();
-//		SendableChooser autoChooser = new SendableChooser();
-//		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
-//		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
-//		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
-//		Autonomous.createChooser();
-//		Autonomous.updateSmartDashboard();
-//		Teleop.updateSmartDashboard();
-//		(new Thread(new Jetson())).start(); //start networking to Jetson
+		IMU.init();
+		SendableChooser autoChooser = new SendableChooser();
+		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
+		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
+		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
+		Autonomous.createChooser();
+		Autonomous.updateSmartDashboard();
+		Teleop.updateSmartDashboard();
+		(new Thread(new Jetson())).start(); //start networking to Jetson
 		
-//		CameraStreaming.init();
+		CameraStreaming.init();
 		
 		init();
 	}
@@ -170,7 +171,7 @@ public class Robot extends IterativeRobot {
 		// Logger.init();
 		Drive.init();
 		// Winch.init();
-		// Shooter.init();
+		 Shooter.init();
 		// Intake.init();
 		// GearMechanism.init();
 		Time.init();
@@ -179,19 +180,56 @@ public class Robot extends IterativeRobot {
 		rightDriveEncoderFront.reset();
 		rightDriveEncoderBack.reset();
 
-		Robot.frontLeftDriveMotor.EnableCurrentLimit(false);
-		Robot.frontRightDriveMotor.EnableCurrentLimit(false);
-		Robot.backLeftDriveMotor.EnableCurrentLimit(false);
-		Robot.backRightDriveMotor.EnableCurrentLimit(false);
-		Robot.leftShooterMotorA.EnableCurrentLimit(false);
-		Robot.leftShooterMotorB.EnableCurrentLimit(false);
-		Robot.rightShooterMotorA.EnableCurrentLimit(false);
-		Robot.rightShooterMotorB.EnableCurrentLimit(false);
-		Robot.leftLoaderMotor.EnableCurrentLimit(false);
-		Robot.rightLoaderMotor.EnableCurrentLimit(false);
-		Robot.intakeMotor.EnableCurrentLimit(false);
-		Robot.winchMotor.EnableCurrentLimit(false);
-		Robot.leftAzimuthMotor.EnableCurrentLimit(false);
-		Robot.rightAzimuthMotor.EnableCurrentLimit(false);
+		frontLeftDriveMotor.EnableCurrentLimit(false);
+		frontRightDriveMotor.EnableCurrentLimit(false);
+		backLeftDriveMotor.EnableCurrentLimit(false);
+		backRightDriveMotor.EnableCurrentLimit(false);
+		leftShooterMotorA.EnableCurrentLimit(false);
+		leftShooterMotorB.EnableCurrentLimit(false);
+		rightShooterMotorA.EnableCurrentLimit(false);
+		rightShooterMotorB.EnableCurrentLimit(false);
+		leftLoaderMotor.EnableCurrentLimit(false);
+		rightLoaderMotor.EnableCurrentLimit(false);
+		intakeMotor.EnableCurrentLimit(false);
+		winchMotor.EnableCurrentLimit(false);
+		leftAzimuthMotor.EnableCurrentLimit(false);
+		rightAzimuthMotor.EnableCurrentLimit(false);
+	}
+	
+	public void disabledPeriodic() {
+		Shooter.stopAlign();
+		Shooter.stopShooter();
+		Intake.stop();
+		Winch.stop();
+		
+		frontLeftDriveMotor.changeControlMode(TalonControlMode.PercentVbus);
+		frontRightDriveMotor.changeControlMode(TalonControlMode.PercentVbus);
+		backLeftDriveMotor.changeControlMode(TalonControlMode.PercentVbus);
+		backRightDriveMotor.changeControlMode(TalonControlMode.PercentVbus);
+		leftShooterMotorA.changeControlMode(TalonControlMode.PercentVbus);
+		leftShooterMotorB.changeControlMode(TalonControlMode.PercentVbus);
+		rightShooterMotorA.changeControlMode(TalonControlMode.PercentVbus);
+		rightShooterMotorB.changeControlMode(TalonControlMode.PercentVbus);
+		leftLoaderMotor.changeControlMode(TalonControlMode.PercentVbus);
+		rightLoaderMotor.changeControlMode(TalonControlMode.PercentVbus);
+		intakeMotor.changeControlMode(TalonControlMode.PercentVbus);
+		winchMotor.changeControlMode(TalonControlMode.PercentVbus);
+		leftAzimuthMotor.changeControlMode(TalonControlMode.PercentVbus);
+		rightAzimuthMotor.changeControlMode(TalonControlMode.PercentVbus);
+		
+		frontLeftDriveMotor.set(0);
+		frontRightDriveMotor.set(0);
+		backLeftDriveMotor.set(0);
+		backRightDriveMotor.set(0);
+		leftShooterMotorA.set(0);
+		leftShooterMotorB.set(0);
+		rightShooterMotorA.set(0);
+		rightShooterMotorB.set(0);
+		leftLoaderMotor.set(0);
+		rightLoaderMotor.set(0);
+		intakeMotor.set(0);
+		winchMotor.set(0);
+		leftAzimuthMotor.set(0);
+		rightAzimuthMotor.set(0);
 	}
 }
