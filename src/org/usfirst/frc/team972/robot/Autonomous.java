@@ -88,10 +88,10 @@ public class Autonomous {
 			case MIDDLE_GEAR:
 				boolean done = false;
 				if (visionData) {
-					if (Jetson.newData()) {
-						double distance = Jetson.getDistance();
-						double angle = Jetson.getAngle();
-						double data_time = Jetson.getTime();
+					if (Vision.newData()) {
+						double distance = Vision.getDistance();
+						double angle = Vision.getAngle();
+						double data_time = Vision.getTime();
 						double[] framePosition = Logger.readLog("Motion_Profiling_Data", data_time);
 						if (framePosition.length == 3) {
 							gear_x = Math.sin(angle) * distance + Math.sin(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[0];
@@ -108,7 +108,7 @@ public class Autonomous {
 					}
 					done = Drive.autonDrive(gear_x, gear_y - Constants.LENGTH_GEAR_PEG - (Constants.ROBOT_LENGTH / 2), gear_theta, loopTime);
 				} else {
-					visionData = Jetson.newData();
+					visionData = Vision.newData();
 					done = Drive.autonDrive(Constants.MIDDLE_GEAR_AUTO_X, Constants.MIDDLE_GEAR_AUTO_Y - (Constants.ROBOT_LENGTH / 2), Constants.MIDDLE_GEAR_AUTO_THETA, loopTime);
 				}
 				if (done) {
