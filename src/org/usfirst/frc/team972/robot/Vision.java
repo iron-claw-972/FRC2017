@@ -9,7 +9,7 @@ import java.net.Socket;
 /**
  * The Class Jetson.
  */
-public class Jetson implements Runnable {
+public class Vision implements Runnable {
 
 	/** The main socket. */
 	private static Socket mainSocket = null;
@@ -31,7 +31,7 @@ public class Jetson implements Runnable {
 	
 	//private static double time; //use this in the future maybe?
 
-	/** The Jetson's supposed STATIC_IP. */
+	/** The Jetson's supposed STATIC_IP. */ //TODO fix for Raspberry Pi and new Jetson
 	private static final String STATIC_IP = "10.9.72.2";
 	
 	/** 
@@ -44,7 +44,7 @@ public class Jetson implements Runnable {
 	}
 
 	/**
-	 * Is there new data received from the Jetson available?
+	 * Is there new data available?
 	 *
 	 * @return true, if successful
 	 */
@@ -83,7 +83,7 @@ public class Jetson implements Runnable {
 	}
 
 	/**
-	 * Checks if the roboRio is connected to the Jetson.
+	 * Checks if the roboRio is connected to the vision processor.
 	 *
 	 * @return true, if is connected
 	 */
@@ -92,7 +92,7 @@ public class Jetson implements Runnable {
 	}
 	
 	/**
-	 * Close connection to the Jetson.
+	 * Close connection to the vision processor.
 	 *
 	 * @return true, if successful
 	 */
@@ -117,7 +117,7 @@ public class Jetson implements Runnable {
 	/**
 	 * Start gear vision.
 	 */
-	public static void startGearVision() { //start gear vision on the Jetson
+	public static void startGearVision() { //start gear vision
 		sendMessage("G");
 		newData = false;
 	}
@@ -125,13 +125,13 @@ public class Jetson implements Runnable {
 	/**
 	 * Start boiler vision.
 	 */
-	public static void startBoilerVision() { //start boiler vision on the Jetson
+	public static void startBoilerVision() { //start boiler vision
 		sendMessage("B");
 		newData = false;
 	}
 
 	/**
-	 * Send message to the Jetson.
+	 * Send message to the vision processor.
 	 *
 	 * @param message the message
 	 */
@@ -155,7 +155,7 @@ public class Jetson implements Runnable {
 		// Wait until we're connected to the network
 		waitUntilConnected(); // 45 seconds
 
-		// Attempt to connect to Jetson's Static IP
+		// Attempt to connect to vision processor's Static IP
 		boolean reachable;
 		try {
 			reachable = InetAddress.getByName(STATIC_IP).isReachable(10);
@@ -196,13 +196,13 @@ public class Jetson implements Runnable {
 	}
 
 	/**
-	 * Gets the Jetson's IP.
+	 * Gets the vision processor's IP.
 	 *
-	 * @return the Jetson's IP
+	 * @return the vision processor's IP
 	 */
 	private static String getJetsonIP() {
-		System.out.println("Finding Jetson on network...");
-		String jetsonIP = null;
+		System.out.println("Finding Vision Processor on network...");
+		String visionIP = null;
 		int n = 0;
 		do {
 			n++;
@@ -221,9 +221,9 @@ public class Jetson implements Runnable {
 							// System.out.print("(Gateway)");
 						} else if (ip.equals(localIP)) {
 							// System.out.print("(RoboRio)");
-						} else if (jetsonIP == null) {
+						} else if (visionIP == null) {
 							// System.out.print("(Jetson)");
-							jetsonIP = ip;
+							visionIP = ip;
 						} else {
 							// System.out.print("(Unknown)");
 						}
@@ -232,15 +232,15 @@ public class Jetson implements Runnable {
 				}
 			} catch (Exception e) {
 				// e.printStackTrace();
-				System.out.println("ERROR on getting Jetson: " + e.getMessage());
+				System.out.println("ERROR on getting Vision Processor: " + e.getMessage());
 				try {
 					Thread.sleep(3000);
 				} catch (Exception e2) {
 				}
 			}
-		} while (jetsonIP == null);
-		System.out.println("Found Jetson at " + jetsonIP + " in " + n + " tries!");
-		return jetsonIP;
+		} while (visionIP == null);
+		System.out.println("Found Vision Processor at " + visionIP + " in " + n + " tries!");
+		return visionIP;
 	}
 
 	/**
@@ -270,7 +270,7 @@ public class Jetson implements Runnable {
 				System.out.println("We received " + received + " back from the server.");
 				if (confirmationToken.equals(received)) {
 					connected = true;
-					System.out.println("Connected to the Jetson!");
+					System.out.println("Connected to the Vision Processor!");
 					// clientSocket.close();
 					return clientSocket;
 				}
@@ -287,7 +287,7 @@ public class Jetson implements Runnable {
 	}
 
 	/**
-	 * Connection loop for reading data coming in from the Jetson.
+	 * Connection loop for reading data coming in from the vision processor.
 	 *
 	 * @return true, if successful
 	 */
@@ -300,7 +300,7 @@ public class Jetson implements Runnable {
 			while (mainSocket != null) {
 				received = fromServer.readLine();
 				if(received != null) {
-					System.out.println("We received \"" + received+ "\" from the Jetson.");
+					System.out.println("We received \"" + received+ "\" from the Vision Processor.");
 					int comma = received.indexOf(',');
 					int colon = received.indexOf(':');
 					if (comma != -1 && colon != -1) {
@@ -319,7 +319,7 @@ public class Jetson implements Runnable {
 					mainSocket.close();
 					mainSocket = null;
 					
-					System.out.println("Socket Connection to Jetson Lost");
+					System.out.println("Socket Connection to Vision Processor Lost");
 					break;
 				}
 			}
