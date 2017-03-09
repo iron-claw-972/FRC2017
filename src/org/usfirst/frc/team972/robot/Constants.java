@@ -119,7 +119,7 @@ public class Constants {
 	
 	// Constants
 	public static final String LOGGER_LOCATION = "home/admin/FRC2017Logs";
-	public static final int PID_DIVISION_FACTOR = 10000;
+	public static final int PID_DIVISION_FACTOR = 100000;
 	public static final int CURRENT_LIMIT = 200;
 	public static final double WINCH_MOTOR_SPEED = 1.0;
 	public static final double INTAKE_MOTOR_SPEED = 0.5;
