@@ -10,6 +10,8 @@ public class Constants {
 	// Left Joystick
 	public static final int JOYSTICK_INVERSE_DRIVE_TOGGLE_BUTTON = 1;
 	public static final int JOYSTICK_STOP_DRIVE_BUTTON = 4;
+	public static final int JOYSTICK_GEAR_ALIGN_BUTTON = 2;
+
 
 	// Right Joystick
 	public static final int JOYSTICK_SQUARED_DRIVE_BUTTON = 4;
@@ -140,7 +142,6 @@ public class Constants {
 	public static final double LOADER_MOTOR_SPEED = 0.5;
 	public static final double SHOOTER_HOOD_SPEED = 0.2;
 	
-	
 	// Do Nothing Auton defaults
 	public static final double DO_NOTHING_AUTO_STARTX = 4.112; //maybe make this able to be edited by the driver? TODO check
 	public static final double DO_NOTHING_AUTO_STARTY = 0.502;
@@ -158,4 +159,6 @@ public class Constants {
 	public static final double MIDDLE_GEAR_AUTO_X = 4.112;
 	public static final double MIDDLE_GEAR_AUTO_Y = 2.105;
 	public static final double MIDDLE_GEAR_AUTO_THETA = 0.0;
+	
+	public static final double IDEAL_SHOOTING_DISTANCE = 2.0; //TODO determine
 }

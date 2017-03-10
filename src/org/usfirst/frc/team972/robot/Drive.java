@@ -276,6 +276,8 @@ public class Drive {
 				
 				if (Math.abs(theta_error) < 7 && Math.abs(dThetadT) < 2) {
 					done = true;
+					prev_v_error = 0.0;
+					prev_theta_error = 0.0;
 				} else {			
 					tankDrive(leftDriveInput, rightDriveInput);
 				}
@@ -293,6 +295,44 @@ public class Drive {
 		}
 		
 		return done;
+	}
+	/*
+	public static void boilerTeleopAlign(boolean isBlueAlliance, double dT) {
+		double curr_x = MotionProfiling.getX();
+		double curr_y = MotionProfiling.getY();
+		if (isBlueAlliance) {
+			double abs_angle = Math.atan(curr_y / curr_x);
+			
+		}
+	}
+	*/
+	public static boolean gearTeleopAlign(double dT) {
+		Vision.startGearVision();
+		boolean visionData = Vision.newData();
+		boolean done = false;
+		double gear_x;
+		double gear_y;
+		double gear_theta;
+		if (visionData) {
+			double distance = Vision.getDistance();
+			double angle = Vision.getAngle() - 90;
+			double data_time = Vision.getTime();
+			double[] framePosition = Logger.readLog("Motion_Profiling_Data", data_time);
+			if (framePosition.length == 3) {
+				gear_x = Math.sin(angle) * distance + Math.sin(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[0];
+				gear_y = Math.cos(angle) * distance + Math.cos(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[1];
+				gear_theta = framePosition[2] + angle;
+				if (framePosition[2] > 90 && angle > 90) {
+					gear_theta = gear_theta - 360; 
+				} else if (framePosition[2] < -90 && angle < -90) {
+					gear_theta = gear_theta + 360;
+				}
+			} else {
+				Logger.logError("Failed to determine the position of the robot from the logs.");
+			}
+			done = Drive.autonDrive(gear_x - Math.sin(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_y - Math.cos(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_theta, dT);
+			return done;
+		}
 	}
 	
 	public static void updateModel(double dT) {

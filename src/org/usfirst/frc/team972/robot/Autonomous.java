@@ -36,6 +36,7 @@ public class Autonomous {
 		autoChooser.addObject("Cross Baseline", AutonomousRoutine.CROSS_BASELINE);
 		autoChooser.addObject("Middle Gear", AutonomousRoutine.MIDDLE_GEAR);
 		autoChooser.addObject("Test 7 - Move back and forward continuously", AutonomousRoutine.TEST_7);
+		autoChooser.addObject("Test 0 - Hopefully move in a straight line", AutonomousRoutine.TEST_0);
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 
 		allianceChooser.addDefault("RED ALLIANCE", false);
@@ -69,6 +70,9 @@ public class Autonomous {
 			case TEST_7:
 				MotionProfiling.init(0.0, 0.0);
 				break;
+			case TEST_0:
+				MotionProfiling.init(0.0, 0.0);
+				break;
 		}
 		updateSmartDashboard();
 	}
@@ -98,7 +102,7 @@ public class Autonomous {
 				if (visionData) {
 					if (Vision.newData()) {
 						double distance = Vision.getDistance();
-						double angle = Vision.getAngle();
+						double angle = Vision.getAngle() - 90; //change from 0 to 180 to -90 to 90
 						double data_time = Vision.getTime();
 						double[] framePosition = Logger.readLog("Motion_Profiling_Data", data_time);
 						if (framePosition.length == 3) {
@@ -132,6 +136,9 @@ public class Autonomous {
 					auton7step1done = false;
 					auton7step2done = false;
 				}
+				break;
+			case TEST_0:
+				Drive.autonDrive(0.0, 2.5, 0, loopTime);
 				break;
 		}
 		Drive.updateModel(loopTime);
