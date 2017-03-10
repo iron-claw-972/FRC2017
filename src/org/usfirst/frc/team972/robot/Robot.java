@@ -56,6 +56,8 @@ public class Robot extends IterativeRobot {
 			Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
 	static DoubleSolenoid fieldHopperPiston = new DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
 			Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
+	
+	static boolean isBlueAlliance = false;
 
 	/**
 	 * Robot-wide initialization code. This method is for default Robot-wide initialization and will
@@ -69,10 +71,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		IMU.init();
-		SendableChooser autoChooser = new SendableChooser();
-		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
-		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
-		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 		Autonomous.createChooser();
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
