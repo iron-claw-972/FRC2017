@@ -16,10 +16,10 @@ public class Constants {
 	public static final int JOYSTICK_BRAKE_MODE_TOGGLE_BUTTON = 1;
 	
 	// Gamepad Joystick
-	public static final int GAMEPAD_INVERSE_DRIVE_TOGGLE_BUTTON = 1;
-	public static final int GAMEPAD_STOP_DRIVE_BUTTON = 4;
-	public static final int GAMEPAD_SQUARED_DRIVE_BUTTON = 4;
-	public static final int GAMEPAD_BRAKE_MODE_TOGGLE_BUTTON = 1;
+	public static final int GAMEPAD_INVERSE_DRIVE_TOGGLE_BUTTON = 5; // Left Top Button Thing
+	public static final int GAMEPAD_STOP_DRIVE_BUTTON = 6; // Right Top Button Thing
+	public static final int GAMEPAD_SQUARED_DRIVE_BUTTON = 2; // B Button
+	public static final int GAMEPAD_BRAKE_MODE_TOGGLE_BUTTON = 1; // A Button
 
 	// Operator Joystick
 	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 12;
