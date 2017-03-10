@@ -8,12 +8,18 @@ public class Constants {
 	 */
 
 	// Left Joystick
-	public static final int INVERSE_DRIVE_TOGGLE_BUTTON = 1;
-	public static final int STOP_DRIVE_BUTTON = 4;
+	public static final int JOYSTICK_INVERSE_DRIVE_TOGGLE_BUTTON = 1;
+	public static final int JOYSTICK_STOP_DRIVE_BUTTON = 4;
 
 	// Right Joystick
-	public static final int SQUARED_DRIVE_BUTTON = 4;
-	public static final int BRAKE_MODE_TOGGLE_BUTTON = 1;
+	public static final int JOYSTICK_SQUARED_DRIVE_BUTTON = 4;
+	public static final int JOYSTICK_BRAKE_MODE_TOGGLE_BUTTON = 1;
+	
+	// Gamepad Joystick
+	public static final int GAMEPAD_INVERSE_DRIVE_TOGGLE_BUTTON = 1;
+	public static final int GAMEPAD_STOP_DRIVE_BUTTON = 4;
+	public static final int GAMEPAD_SQUARED_DRIVE_BUTTON = 4;
+	public static final int GAMEPAD_BRAKE_MODE_TOGGLE_BUTTON = 1;
 
 	// Operator Joystick
 	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 12;
@@ -46,9 +52,10 @@ public class Constants {
 	public static final int RIGHT_HOOD_LINEAR_ACTUATOR_PWM_PORT = 1;
 
 	// USB Ports
-	public static final int LEFT_JOYSTICK_INPUT_USB_PORT = 0;
-	public static final int RIGHT_JOYSTICK_INPUT_USB_PORT = 1;
-	public static final int OPERATOR_JOYSTICK_INPUT_USB_PORT = 2;
+	public static final int LEFT_JOYSTICK_INPUT_USB_PORT = 1;
+	public static final int RIGHT_JOYSTICK_INPUT_USB_PORT = 2;
+	public static final int OPERATOR_JOYSTICK_INPUT_USB_PORT = 0;
+	public static final int GAMEPAD_JOYSTICK_INPUT_USB_PORT = 1;
 
 	// DIO Ports
 	public static final int LEFT_DRIVE_ENCODER_FRONT_PORT_A = 0;

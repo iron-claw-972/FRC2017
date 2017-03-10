@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 	static Joystick leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_INPUT_USB_PORT);
 	static Joystick rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_INPUT_USB_PORT);
 	static Joystick operatorJoystick = new Joystick(Constants.OPERATOR_JOYSTICK_INPUT_USB_PORT);
+	static Joystick gamepadJoystick = new Joystick(Constants.GAMEPAD_JOYSTICK_INPUT_USB_PORT);
 
 	static Encoder leftDriveEncoderFront = new Encoder(Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_A,
 			Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_B, true, Encoder.EncodingType.k2X);
@@ -76,7 +77,7 @@ public class Robot extends IterativeRobot {
 		Autonomous.createChooser();
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
-		(new Thread(new Jetson())).start(); //start networking to Jetson
+		(new Thread(new Vision())).start(); //start networking to Jetson
 		
 		CameraStreaming.init();
 		
