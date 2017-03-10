@@ -10,6 +10,7 @@ public class Constants {
 	// Left Joystick
 	public static final int INVERSE_DRIVE_TOGGLE_BUTTON = 1;
 	public static final int STOP_DRIVE_BUTTON = 4;
+	public static final int GEAR_ALIGN_BUTTON = 2;
 
 	// Right Joystick
 	public static final int SQUARED_DRIVE_BUTTON = 4;

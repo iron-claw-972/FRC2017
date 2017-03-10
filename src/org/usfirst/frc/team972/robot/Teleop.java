@@ -15,6 +15,7 @@ public class Teleop {
 	 */
 
 	private static double prevTime = 0.0;
+	private static boolean gearAlign = false;
 
 	/**
 	 * Initialization code for teleop mode. This method for initialization code
@@ -76,7 +77,16 @@ public class Teleop {
 		Shooter.shoot();
 		Shooter.align();
 		Winch.manage();
-		Drive.teleopDrive();
+		
+		if (Robot.leftJoystick(Constants.GEAR_ALIGN_BUTTON)) {
+			gearAlign = true;
+		}
+		
+		if (gearAlign) {
+			Drive.gearTeleopAlign(loopTime);
+		} else {
+			Drive.teleopDrive();
+		}
 	}
   
 	/**

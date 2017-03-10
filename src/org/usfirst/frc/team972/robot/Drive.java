@@ -287,7 +287,7 @@ public class Drive {
 		return done;
 	}
 	/*
-	public static void boilerAutonAlign(boolean isBlueAlliance, double dT) {
+	public static void boilerTeleopAlign(boolean isBlueAlliance, double dT) {
 		double curr_x = MotionProfiling.getX();
 		double curr_y = MotionProfiling.getY();
 		if (isBlueAlliance) {
@@ -296,7 +296,7 @@ public class Drive {
 		}
 	}
 	*/
-	public static void gearAutonAlign(double dT) {
+	public static boolean gearTeleopAlign(double dT) {
 		Vision.startGearVision();
 		boolean visionData = Vision.newData();
 		boolean done = false;
@@ -305,7 +305,7 @@ public class Drive {
 		double gear_theta;
 		if (visionData) {
 			double distance = Vision.getDistance();
-			double angle = Vision.getAngle();
+			double angle = Vision.getAngle() - 90;
 			double data_time = Vision.getTime();
 			double[] framePosition = Logger.readLog("Motion_Profiling_Data", data_time);
 			if (framePosition.length == 3) {
@@ -320,7 +320,8 @@ public class Drive {
 			} else {
 				Logger.logError("Failed to determine the position of the robot from the logs.");
 			}
-			done = Drive.autonDrive(gear_x, gear_y - (Constants.ROBOT_LENGTH / 2), gear_theta, dT);
+			done = Drive.autonDrive(gear_x - Math.sin(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_y - Math.cos(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_theta, dT);
+			return done;
 		}
 	}
 	

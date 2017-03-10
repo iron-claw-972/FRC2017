@@ -94,7 +94,7 @@ public class Autonomous {
 				if (visionData) {
 					if (Vision.newData()) {
 						double distance = Vision.getDistance();
-						double angle = Vision.getAngle();
+						double angle = Vision.getAngle() - 90; //change from 0 to 180 to -90 to 90
 						double data_time = Vision.getTime();
 						double[] framePosition = Logger.readLog("Motion_Profiling_Data", data_time);
 						if (framePosition.length == 3) {
