@@ -234,7 +234,8 @@ public class Shooter {
 		// TODO: Add Hood calculations
 		if (Constants.USE_LEFT_SHOOTER) {
 			moveAzimuth(Robot.leftAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, alignment_runPID);
-			// moveHood(Robot.leftHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
+			 
+			moveHood(Robot.leftHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
 		}
 
 		/*
@@ -273,9 +274,9 @@ public class Shooter {
 			motor.changeControlMode(TalonControlMode.Position);
 			motor.set(position);
 			alignment_pidRunning = true;
-		} else if (Robot.operatorJoystick.getRawButton(1)) {
+		} else if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_AZIMUTH_MANUAL_OVERRIDE_BUTTON)) {
 			motor.changeControlMode(TalonControlMode.PercentVbus);
-			motor.set(Robot.operatorJoystick.getY());
+			motor.set(Robot.operatorJoystick.getY()*0.01); // TODO: Test this and see how accurate you really need it.
 			motor.clearIAccum();
 			alignment_pidRunning = false;
 		} else {
@@ -285,9 +286,13 @@ public class Shooter {
 	}
 
 	public static void moveHood(Servo linearActuator, double position) {
-		linearActuator.set(position);
+		if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_HOOD_MANUAL_OVERRIDE_UP_BUTTON)) {
+			linearActuator.setSpeed(-Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED); // negative is up
+		} else if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_HOOD_MANUAL_OVERRIDE_DOWN_BUTTON)) {
+			linearActuator.setSpeed(Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
+		}	
 	}
-
+	
 	public static void getAlignmentPIDFromJoystick() {
 		int leftJoystickPInput = Robot.leftJoystick.getPOV();
 		int rightJoystickIInput = Robot.rightJoystick.getPOV();

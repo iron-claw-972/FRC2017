@@ -22,12 +22,16 @@ public class Constants {
 	public static final int GAMEPAD_BRAKE_MODE_TOGGLE_BUTTON = 1; // A Button
 
 	// Operator Joystick
-	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 12;
-	public static final int INTAKE_MOTOR_TOGGLE_BUTTON = 2;
-	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 3;
-	public static final int SHOOTER_FLYWHEEL_MANUAL_OVERRIDE_BUTTON = 6;
-	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
+	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 11;
+	public static final int INTAKE_MOTOR_TOGGLE_BUTTON = 12;
+	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 1;
+	public static final int SHOOTER_FLYWHEEL_MANUAL_OVERRIDE_BUTTON = 7;
+	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 2;
+	public static final int SHOOTER_AZIMUTH_MANUAL_OVERRIDE_BUTTON = 8;
+	public static final int SHOOTER_HOOD_MANUAL_OVERRIDE_UP_BUTTON = 3;
+	public static final int SHOOTER_HOOD_MANUAL_OVERRIDE_DOWN_BUTTON = 3;
 	public static final int HOPPER_CAM_BUTTON = 5;
+
 
 	public static final int PDP_CAN_ID = 20;
 	 
@@ -133,7 +137,9 @@ public class Constants {
 	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 30000.0;
 	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 0.0;
 	public static final double SHOOTER_HOOD_POSITION = 0.7;
-  public static final double LOADER_MOTOR_SPEED = 0.5;
+	public static final double LOADER_MOTOR_SPEED = 0.5;
+	public static final double SHOOTER_HOOD_SPEED = 0.2;
+	
 	
 	// Do Nothing Auton defaults
 	public static final double DO_NOTHING_AUTO_STARTX = 4.112; //maybe make this able to be edited by the driver? TODO check
