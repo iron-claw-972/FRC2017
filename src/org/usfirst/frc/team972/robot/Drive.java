@@ -20,7 +20,8 @@ public class Drive {
 	static boolean brakeMode = false;
 	static boolean brakeModeButtonPressed = false;
 	static boolean brakeModeButtonLastPressed = false;
-
+	
+	static boolean squaredDrivePressedLastTime = false;
 	/**
 	 * Drive initiation sequence.
 	 */
@@ -140,11 +141,13 @@ public class Drive {
 			stopDrive();
 		} else {
 //			if (Robot.leftJoystick.getRawButton(Constants.JOYSTICK_SQUARED_DRIVE_BUTTON)) {
-			if (Robot.gamepadJoystick.getRawButton(Constants.GAMEPAD_SQUARED_DRIVE_BUTTON)) {
+			boolean squaredDriveButtonPressed = Robot.gamepadJoystick.getRawButton(Constants.GAMEPAD_SQUARED_DRIVE_BUTTON);
+			if (squaredDriveButtonPressed && !squaredDrivePressedLastTime) {
 				// Square inputs + keep +/- sign
 				leftDriveInput = Math.abs(leftDriveInput) * leftDriveInput;
 				rightDriveInput = Math.abs(rightDriveInput) * rightDriveInput;
 			}
+			squaredDrivePressedLastTime = squaredDriveButtonPressed;
 
 			if (inverseDriveMode) {
 				inverseDrive(leftDriveInput, rightDriveInput);
