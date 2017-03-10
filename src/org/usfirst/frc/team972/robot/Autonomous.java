@@ -25,6 +25,7 @@ public class Autonomous {
 	private static boolean auton7step2done = false;
 	
 	static SendableChooser autoChooser = new SendableChooser();
+	static SendableChooser allianceChooser = new SendableChooser();
 	static AutonomousRoutine selectedAutoRoutine;
 
 	/**
@@ -37,6 +38,10 @@ public class Autonomous {
 		autoChooser.addObject("Test 7 - Move back and forward continuously", AutonomousRoutine.TEST_7);
 		autoChooser.addObject("Test 0 - Hopefully move in a straight line", AutonomousRoutine.TEST_0);
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
+
+		allianceChooser.addDefault("RED ALLIANCE", false);
+		allianceChooser.addObject("BLUE ALLIANCE", true);
+		SmartDashboard.putData("Alliance Chooser", allianceChooser);
 	}
 	
 	/**
@@ -47,6 +52,9 @@ public class Autonomous {
 	 */
 	public static void init(Robot r) {
 		r.init();
+		
+		Robot.isBlueAlliance = (boolean) allianceChooser.getSelected();
+		
 		//selectedAutoRoutine = (AutonomousRoutine) autoChooser.getSelected(); //TODO fix auton chooser
 		selectedAutoRoutine = AutonomousRoutine.TEST_7;
 		switch (selectedAutoRoutine) {

@@ -20,7 +20,8 @@ public class Drive {
 	static boolean brakeMode = false;
 	static boolean brakeModeButtonPressed = false;
 	static boolean brakeModeButtonLastPressed = false;
-
+	
+	static boolean squaredDrivePressedLastTime = false;
 	/**
 	 * Drive initiation sequence.
 	 */
@@ -100,7 +101,8 @@ public class Drive {
 	 * Checks inverse drive mode toggle.
 	 */
 	public static void checkInverseToggle() {
-		inverseDriveButtonPressed = Robot.leftJoystick.getRawButton(Constants.INVERSE_DRIVE_TOGGLE_BUTTON);
+//		inverseDriveButtonPressed = Robot.leftJoystick.getRawButton(Constants.JOYSTICK_INVERSE_DRIVE_TOGGLE_BUTTON);
+		inverseDriveButtonPressed = Robot.gamepadJoystick.getRawButton(Constants.GAMEPAD_INVERSE_DRIVE_TOGGLE_BUTTON);
 		if (inverseDriveButtonPressed && !inverseDriveButtonLastPressed) {
 			inverseDriveMode = !inverseDriveMode;
 		}
@@ -111,7 +113,8 @@ public class Drive {
 	 * Checks brake vs coast drive mode toggle.
 	 */
 	public static void checkBrakeToggle() {
-		brakeModeButtonPressed = Robot.rightJoystick.getRawButton(Constants.BRAKE_MODE_TOGGLE_BUTTON);
+//		brakeModeButtonPressed = Robot.rightJoystick.getRawButton(Constants.JOYSTICK_BRAKE_MODE_TOGGLE_BUTTON);
+		brakeModeButtonPressed = Robot.gamepadJoystick.getRawButton(Constants.GAMEPAD_BRAKE_MODE_TOGGLE_BUTTON);
 		if (brakeModeButtonPressed && !brakeModeButtonLastPressed) {
 			brakeMode = !brakeMode;
 		}
@@ -124,20 +127,27 @@ public class Drive {
 	 * Drive control in teleop.
 	 */
 	public static void teleopDrive() {
-		double leftDriveInput = Robot.leftJoystick.getY();
-		double rightDriveInput = Robot.rightJoystick.getY();
+//		double leftDriveInput = Robot.leftJoystick.getY();
+//		double rightDriveInput = Robot.rightJoystick.getY();
 
+		double leftDriveInput = -Robot.gamepadJoystick.getRawAxis(1);
+		double rightDriveInput = -Robot.gamepadJoystick.getRawAxis(5);
+		
 		checkInverseToggle();
 		checkBrakeToggle();
 
-		if (Robot.leftJoystick.getRawButton(Constants.STOP_DRIVE_BUTTON)) {
+//		if (Robot.leftJoystick.getRawButton(Constants.JOYSTICK_STOP_DRIVE_BUTTON)) {
+		if (Robot.gamepadJoystick.getRawButton(Constants.GAMEPAD_STOP_DRIVE_BUTTON)) {
 			stopDrive();
 		} else {
-			if (Robot.leftJoystick.getRawButton(Constants.SQUARED_DRIVE_BUTTON)) {
+//			if (Robot.leftJoystick.getRawButton(Constants.JOYSTICK_SQUARED_DRIVE_BUTTON)) {
+			boolean squaredDriveButtonPressed = Robot.gamepadJoystick.getRawButton(Constants.GAMEPAD_SQUARED_DRIVE_BUTTON);
+			if (squaredDriveButtonPressed && !squaredDrivePressedLastTime) {
 				// Square inputs + keep +/- sign
 				leftDriveInput = Math.abs(leftDriveInput) * leftDriveInput;
 				rightDriveInput = Math.abs(rightDriveInput) * rightDriveInput;
 			}
+			squaredDrivePressedLastTime = squaredDriveButtonPressed;
 
 			if (inverseDriveMode) {
 				inverseDrive(leftDriveInput, rightDriveInput);

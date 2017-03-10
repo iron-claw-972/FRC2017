@@ -234,7 +234,8 @@ public class Shooter {
 		// TODO: Add Hood calculations
 		if (Constants.USE_LEFT_SHOOTER) {
 			moveAzimuth(Robot.leftAzimuthMotor, Constants.SHOOTER_AZIMUTH_MOTOR_POSITION, alignment_runPID);
-			// moveHood(Robot.leftHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
+			 
+			moveHood(Robot.leftHoodLinearActuator, Constants.SHOOTER_HOOD_POSITION);
 		}
 
 		/*
@@ -273,9 +274,9 @@ public class Shooter {
 			motor.changeControlMode(TalonControlMode.Position);
 			motor.set(position);
 			alignment_pidRunning = true;
-		} else if (Robot.operatorJoystick.getRawButton(1)) {
+		} else if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_AZIMUTH_MANUAL_OVERRIDE_BUTTON)) {
 			motor.changeControlMode(TalonControlMode.PercentVbus);
-			motor.set(Robot.operatorJoystick.getY());
+			motor.set(Robot.operatorJoystick.getY()*0.01); // TODO: Test this and see how accurate you really need it.
 			motor.clearIAccum();
 			alignment_pidRunning = false;
 		} else {
@@ -285,9 +286,15 @@ public class Shooter {
 	}
 
 	public static void moveHood(Servo linearActuator, double position) {
-		linearActuator.set(position);
+		if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_HOOD_MANUAL_OVERRIDE_UP_BUTTON)) {
+			linearActuator.setSpeed(-Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED); // negative is up
+		} else if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_HOOD_MANUAL_OVERRIDE_DOWN_BUTTON)) {
+			linearActuator.setSpeed(Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
+		} else {
+			linearActuator.setSpeed(0);
+		}
 	}
-
+	
 	public static void getAlignmentPIDFromJoystick() {
 		int leftJoystickPInput = Robot.leftJoystick.getPOV();
 		int rightJoystickIInput = Robot.rightJoystick.getPOV();
@@ -409,25 +416,25 @@ public class Shooter {
 		
 		// TODO: Use real target speed from CANTalon
 		if (Constants.USE_LEFT_SHOOTER) {
-			SmartDashboard.putNumber("kP", Robot.leftShooterPID.getP());
-			SmartDashboard.putNumber("kI", Robot.leftShooterPID.getI());
-			SmartDashboard.putNumber("kD", Robot.leftShooterPID.getD());
-			SmartDashboard.putNumber("Setpoint", Robot.leftShooterPID.getSetpoint());
-			SmartDashboard.putBoolean("PID Enabled", Robot.leftShooterPID.isEnabled());
-			SmartDashboard.putNumber("Manual Speed", manualSpeed);
-			SmartDashboard.putNumber("Error", Robot.leftShooterPID.getError());
-			SmartDashboard.putNumber("Error", Robot.leftShooterPID.getError()); // 2nd for value, not graph
-
-			SmartDashboard.putNumber("Voltage Master", Robot.leftShooterMotorA.getOutputVoltage());
-			SmartDashboard.putNumber("Voltage Slave", Robot.leftShooterMotorB.getOutputVoltage());
-			
-			SmartDashboard.putNumber("Current Master", Robot.pdp.getCurrent(1));
-			SmartDashboard.putNumber("Current Slave", Robot.pdp.getCurrent(15));
-			
-			SmartDashboard.putNumber("PID Get", Robot.leftShooterMotorA.pidGet());
-			SmartDashboard.putNumber("Position", Robot.leftShooterMotorA.getPosition());
-			SmartDashboard.putNumber("Speed", Robot.leftShooterMotorA.getSpeed());
-			SmartDashboard.putNumber("Speed", Robot.leftShooterMotorA.getSpeed()); // 2nd for value, not graph
+//			SmartDashboard.putNumber("kP", Robot.leftShooterPID.getP());
+//			SmartDashboard.putNumber("kI", Robot.leftShooterPID.getI());
+//			SmartDashboard.putNumber("kD", Robot.leftShooterPID.getD());
+//			SmartDashboard.putNumber("Setpoint", Robot.leftShooterPID.getSetpoint());
+//			SmartDashboard.putBoolean("PID Enabled", Robot.leftShooterPID.isEnabled());
+//			SmartDashboard.putNumber("Manual Speed", manualSpeed);
+//			SmartDashboard.putNumber("Error", Robot.leftShooterPID.getError());
+//			SmartDashboard.putNumber("Error", Robot.leftShooterPID.getError()); // 2nd for value, not graph
+//
+//			SmartDashboard.putNumber("Voltage Master", Robot.leftShooterMotorA.getOutputVoltage());
+//			SmartDashboard.putNumber("Voltage Slave", Robot.leftShooterMotorB.getOutputVoltage());
+//			
+//			SmartDashboard.putNumber("Current Master", Robot.pdp.getCurrent(1));
+//			SmartDashboard.putNumber("Current Slave", Robot.pdp.getCurrent(15));
+//			
+//			SmartDashboard.putNumber("PID Get", Robot.leftShooterMotorA.pidGet());
+//			SmartDashboard.putNumber("Position", Robot.leftShooterMotorA.getPosition());
+//			SmartDashboard.putNumber("Speed", Robot.leftShooterMotorA.getSpeed());
+//			SmartDashboard.putNumber("Speed", Robot.leftShooterMotorA.getSpeed()); // 2nd for value, not graph
 		}
 //		if (Constants.USE_RIGHT_SHOOTER) {
 //			SmartDashboard.putNumber("kP", Robot.leftShooterPID.getP());

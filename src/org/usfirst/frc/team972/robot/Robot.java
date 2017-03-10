@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 	static Joystick leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_INPUT_USB_PORT);
 	static Joystick rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_INPUT_USB_PORT);
 	static Joystick operatorJoystick = new Joystick(Constants.OPERATOR_JOYSTICK_INPUT_USB_PORT);
+	static Joystick gamepadJoystick = new Joystick(Constants.GAMEPAD_JOYSTICK_INPUT_USB_PORT);
 
 	static Encoder leftDriveEncoderFront = new Encoder(Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_A,
 			Constants.LEFT_DRIVE_ENCODER_FRONT_PORT_B, true, Encoder.EncodingType.k2X);
@@ -56,6 +57,8 @@ public class Robot extends IterativeRobot {
 			Constants.LOADER_DOOR_PISTON_REVERSE_PCM_PORT);
 	static DoubleSolenoid fieldHopperPiston = new DoubleSolenoid(Constants.FIELD_HOPPER_PISTON_FOWARD_PCM_PORT,
 			Constants.FIELD_HOPPER_PISTON_REVERSE_PCM_PORT);
+	
+	static boolean isBlueAlliance = false;
 
 	/**
 	 * Robot-wide initialization code. This method is for default Robot-wide initialization and will
@@ -69,14 +72,10 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		IMU.init();
-		SendableChooser autoChooser = new SendableChooser();
-		autoChooser.addDefault("1", AutonomousRoutine.DO_NOTHING);
-		autoChooser.addObject("2", AutonomousRoutine.CROSS_BASELINE);
-		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 		Autonomous.createChooser();
 		Autonomous.updateSmartDashboard();
 		Teleop.updateSmartDashboard();
-		(new Thread(new Jetson())).start(); //start networking to Jetson
+		(new Thread(new Vision())).start(); //start networking to Jetson
 		
 		CameraStreaming.init();
 		

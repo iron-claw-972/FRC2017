@@ -8,35 +8,46 @@ public class Constants {
 	 */
 
 	// Left Joystick
-	public static final int INVERSE_DRIVE_TOGGLE_BUTTON = 1;
-	public static final int STOP_DRIVE_BUTTON = 4;
-	public static final int GEAR_ALIGN_BUTTON = 2;
+	public static final int JOYSTICK_INVERSE_DRIVE_TOGGLE_BUTTON = 1;
+	public static final int JOYSTICK_STOP_DRIVE_BUTTON = 4;
+	public static final int JOYSTICK_GEAR_ALIGN_BUTTON = 2;
+
 
 	// Right Joystick
-	public static final int SQUARED_DRIVE_BUTTON = 4;
-	public static final int BRAKE_MODE_TOGGLE_BUTTON = 1;
+	public static final int JOYSTICK_SQUARED_DRIVE_BUTTON = 4;
+	public static final int JOYSTICK_BRAKE_MODE_TOGGLE_BUTTON = 1;
+	
+	// Gamepad Joystick
+	public static final int GAMEPAD_INVERSE_DRIVE_TOGGLE_BUTTON = 5; // Left Top Button Thing
+	public static final int GAMEPAD_STOP_DRIVE_BUTTON = 6; // Right Top Button Thing
+	public static final int GAMEPAD_SQUARED_DRIVE_BUTTON = 2; // B Button
+	public static final int GAMEPAD_BRAKE_MODE_TOGGLE_BUTTON = 1; // A Button
 
 	// Operator Joystick
-	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 12;
-	public static final int INTAKE_MOTOR_TOGGLE_BUTTON = 2;
-	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 3;
-	public static final int SHOOTER_FLYWHEEL_MANUAL_OVERRIDE_BUTTON = 6;
-	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 4;
+	public static final int WINCH_MOTOR_TOGGLE_BUTTON = 11;
+	public static final int INTAKE_MOTOR_TOGGLE_BUTTON = 12;
+	public static final int SHOOTER_FLYWHEEL_MOTOR_BUTTON = 1;
+	public static final int SHOOTER_FLYWHEEL_MANUAL_OVERRIDE_BUTTON = 7;
+	public static final int SHOOTER_AZIMUTH_MOTOR_BUTTON = 2;
+	public static final int SHOOTER_AZIMUTH_MANUAL_OVERRIDE_BUTTON = 8;
+	public static final int SHOOTER_HOOD_MANUAL_OVERRIDE_UP_BUTTON = 3;
+	public static final int SHOOTER_HOOD_MANUAL_OVERRIDE_DOWN_BUTTON = 3;
 	public static final int HOPPER_CAM_BUTTON = 5;
+
 
 	public static final int PDP_CAN_ID = 20;
 	 
 	// Motor IDs
-	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 10; // 1
+	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
 	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 3;
 	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 2;
 	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 4;
-	public static final int WINCH_MOTOR_CAN_ID = 8; // TODO: Revert to 5 for real robot
-	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 1; // TODO: Revert to 6 for real robot
-	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 15; // TODO: Revert to 7
+	public static final int WINCH_MOTOR_CAN_ID = 5;
+	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 6; 
+	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 7;
 	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 6;
 	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 9;
-	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 7; // 15
+	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 15;
 	public static final int RIGHT_AZIMUTH_MOTOR_CAN_ID = 11;
 	public static final int INTAKE_MOTOR_CAN_ID = 12;
 	public static final int LEFT_LOADER_MOTOR_CAN_ID = 13;
@@ -47,9 +58,10 @@ public class Constants {
 	public static final int RIGHT_HOOD_LINEAR_ACTUATOR_PWM_PORT = 1;
 
 	// USB Ports
-	public static final int LEFT_JOYSTICK_INPUT_USB_PORT = 0;
-	public static final int RIGHT_JOYSTICK_INPUT_USB_PORT = 1;
-	public static final int OPERATOR_JOYSTICK_INPUT_USB_PORT = 2;
+	public static final int LEFT_JOYSTICK_INPUT_USB_PORT = 1;
+	public static final int RIGHT_JOYSTICK_INPUT_USB_PORT = 2;
+	public static final int OPERATOR_JOYSTICK_INPUT_USB_PORT = 0;
+	public static final int GAMEPAD_JOYSTICK_INPUT_USB_PORT = 1;
 
 	// DIO Ports
 	public static final int LEFT_DRIVE_ENCODER_FRONT_PORT_A = 0;
@@ -128,6 +140,7 @@ public class Constants {
 	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 0.0;
 	public static final double SHOOTER_HOOD_POSITION = 0.7;
 	public static final double LOADER_MOTOR_SPEED = 0.5;
+	public static final double SHOOTER_HOOD_SPEED = 0.2;
 	
 	// Do Nothing Auton defaults
 	public static final double DO_NOTHING_AUTO_STARTX = 4.112; //maybe make this able to be edited by the driver? TODO check

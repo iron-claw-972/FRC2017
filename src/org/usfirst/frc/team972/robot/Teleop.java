@@ -25,9 +25,11 @@ public class Teleop {
 	 */
 	public static void init(Robot r) {
 		r.init();
-		MotionProfiling.init(0.0, 0.0);
+		//MotionProfiling.init(0.0, 0.0); //In use only for testing!
 		Intake.hopperIntake();
 		updateSmartDashboard();
+		
+		Robot.isBlueAlliance = (boolean) Autonomous.allianceChooser.getSelected();
 		
 		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
 		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
