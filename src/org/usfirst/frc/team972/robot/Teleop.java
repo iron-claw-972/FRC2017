@@ -28,6 +28,8 @@ public class Teleop {
 		Intake.hopperIntake();
 		updateSmartDashboard();
 		
+		Robot.isBlueAlliance = (boolean) Autonomous.allianceChooser.getSelected();
+		
 		Robot.frontLeftDriveMotor.EnableCurrentLimit(true);
 		Robot.frontRightDriveMotor.EnableCurrentLimit(true);
 		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
