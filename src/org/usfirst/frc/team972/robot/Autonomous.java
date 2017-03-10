@@ -21,6 +21,8 @@ public class Autonomous {
 	private static double gear_y;
 	private static double gear_theta;
 	
+	private static boolean done1 = false;
+	
 	private static boolean auton7step1done = false;
 	private static boolean auton7step2done = false;
 	
@@ -35,6 +37,8 @@ public class Autonomous {
 		autoChooser.addDefault("Do Nothing", AutonomousRoutine.DO_NOTHING);
 		autoChooser.addObject("Cross Baseline", AutonomousRoutine.CROSS_BASELINE);
 		autoChooser.addObject("Middle Gear", AutonomousRoutine.MIDDLE_GEAR);
+		autoChooser.addObject("Left Gear", AutonomousRoutine.LEFT_GEAR);
+		autoChooser.addObject("Right Gear", AutonomousRoutine.RIGHT_GEAR);
 		autoChooser.addObject("Test 7 - Move back and forward continuously", AutonomousRoutine.TEST_7);
 		autoChooser.addObject("Test 0 - Hopefully move in a straight line", AutonomousRoutine.TEST_0);
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
@@ -67,6 +71,15 @@ public class Autonomous {
 			case MIDDLE_GEAR:
 				MotionProfiling.init(Constants.MIDDLE_GEAR_AUTO_STARTX, Constants.MIDDLE_GEAR_AUTO_STARTY);
 				Vision.startGearVision();
+				break;
+			case LEFT_GEAR:
+				MotionProfiling.init(Constants.LEFT_GEAR_AUTO_STARTX, Constants.LEFT_GEAR_AUTO_STARTY);
+				Vision.startGearVision();
+				break;
+			case RIGHT_GEAR:
+				MotionProfiling.init(Constants.RIGHT_GEAR_AUTO_STARTX, Constants.RIGHT_GEAR_AUTO_STARTY);
+				Vision.startGearVision();
+				break;
 			case TEST_7:
 				MotionProfiling.init(0.0, 0.0);
 				break;
@@ -118,13 +131,98 @@ public class Autonomous {
 							Logger.logError("Failed to determine the position of the robot from the logs.");
 						}
 					}
-					done = Drive.autonDrive(gear_x, gear_y - Constants.LENGTH_GEAR_PEG - (Constants.ROBOT_LENGTH / 2), gear_theta, loopTime);
+					if (gear_x != 0.0 && gear_y != 0.0) {
+						done = Drive.autonDrive(gear_x, gear_y - Constants.LENGTH_GEAR_PEG - (Constants.ROBOT_LENGTH / 2), gear_theta, loopTime);
+					}
 				} else {
 					visionData = Vision.newData();
 					done = Drive.autonDrive(Constants.MIDDLE_GEAR_AUTO_X, Constants.MIDDLE_GEAR_AUTO_Y - (Constants.ROBOT_LENGTH / 2), Constants.MIDDLE_GEAR_AUTO_THETA, loopTime);
 				}
 				if (done) {
 					MotionProfiling.reset(Constants.MIDDLE_GEAR_AUTO_X, Constants.MIDDLE_GEAR_AUTO_Y - (Constants.ROBOT_LENGTH / 2), Constants.MIDDLE_GEAR_AUTO_THETA);
+					gear_x = 0.0;
+					gear_y = 0.0;
+					gear_theta = 0.0;
+				}
+				break;
+			case LEFT_GEAR:
+				if (done1) {
+					boolean done2 = false;
+					if (visionData) {
+						if (Vision.newData()) {
+							double distance = Vision.getDistance();
+							double angle = Vision.getAngle() - 90; //change from 0 to 180 to -90 to 90
+							double data_time = Vision.getTime();
+							double[] framePosition = Logger.readLog("Motion_Profiling_Data", data_time);
+							if (framePosition.length == 3) {
+								gear_x = Math.sin(angle) * distance + Math.sin(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[0];
+								gear_y = Math.cos(angle) * distance + Math.cos(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[1];
+								gear_theta = framePosition[2] + angle;
+								if (framePosition[2] > 90 && angle > 90) {
+									gear_theta = gear_theta - 360; 
+								} else if (framePosition[2] < -90 && angle < -90) {
+									gear_theta = gear_theta + 360;
+								}
+							} else {
+								Logger.logError("Failed to determine the position of the robot from the logs.");
+							}
+						}
+						if (gear_x != 0.0 && gear_y != 0.0) {
+							done2 = Drive.autonDrive(gear_x - Math.sin(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_y - Math.cos(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_theta, loopTime);
+						}
+					} else {
+						visionData = Vision.newData();
+						done2 = Drive.autonDrive(Constants.LEFT_GEAR_AUTO_FINAL_X, Constants.LEFT_GEAR_AUTO_FINAL_Y, Constants.LEFT_GEAR_AUTO_THETA, loopTime);
+					}
+					if (done2) {
+						MotionProfiling.reset(Constants.LEFT_GEAR_AUTO_FINAL_X, Constants.LEFT_GEAR_AUTO_FINAL_Y, Constants.LEFT_GEAR_AUTO_THETA);
+						done1 = false;
+						gear_x = 0.0;
+						gear_y = 0.0;
+						gear_theta = 0.0;
+					}
+				} else {
+					done1 = Drive.autonDrive(Constants.LEFT_GEAR_AUTO_X, Constants.LEFT_GEAR_AUTO_Y, Constants.LEFT_GEAR_AUTO_THETA, loopTime);
+				}
+				break;
+			case RIGHT_GEAR:
+				if (done1) {
+					boolean done2 = false;
+					if (visionData) {
+						if (Vision.newData()) {
+							double distance = Vision.getDistance();
+							double angle = Vision.getAngle() - 90; //change from 0 to 180 to -90 to 90
+							double data_time = Vision.getTime();
+							double[] framePosition = Logger.readLog("Motion_Profiling_Data", data_time);
+							if (framePosition.length == 3) {
+								gear_x = Math.sin(angle) * distance + Math.sin(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[0];
+								gear_y = Math.cos(angle) * distance + Math.cos(framePosition[2]) * (Constants.ROBOT_LENGTH / 2) + framePosition[1];
+								gear_theta = framePosition[2] + angle;
+								if (framePosition[2] > 90 && angle > 90) {
+									gear_theta = gear_theta - 360; 
+								} else if (framePosition[2] < -90 && angle < -90) {
+									gear_theta = gear_theta + 360;
+								}
+							} else {
+								Logger.logError("Failed to determine the position of the robot from the logs.");
+							}
+						}
+						if (gear_x != 0.0 && gear_y != 0.0) {
+							done2 = Drive.autonDrive(gear_x - Math.sin(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_y - Math.cos(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_theta, loopTime);
+						}
+				} else {
+						visionData = Vision.newData();
+						done2 = Drive.autonDrive(Constants.RIGHT_GEAR_AUTO_FINAL_X, Constants.RIGHT_GEAR_AUTO_FINAL_Y, Constants.RIGHT_GEAR_AUTO_THETA, loopTime);
+					}
+					if (done2) {
+						MotionProfiling.reset(Constants.RIGHT_GEAR_AUTO_FINAL_X, Constants.RIGHT_GEAR_AUTO_FINAL_Y, Constants.RIGHT_GEAR_AUTO_THETA);
+						done1 = false;
+						gear_x = 0.0;
+						gear_y = 0.0;
+						gear_theta = 0.0;
+					}
+				} else {
+					done1 = Drive.autonDrive(Constants.RIGHT_GEAR_AUTO_X, Constants.RIGHT_GEAR_AUTO_Y, Constants.RIGHT_GEAR_AUTO_THETA, loopTime);
 				}
 				break;
 			case TEST_7:

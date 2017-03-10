@@ -310,9 +310,9 @@ public class Drive {
 		Vision.startGearVision();
 		boolean visionData = Vision.newData();
 		boolean done = false;
-		double gear_x;
-		double gear_y;
-		double gear_theta;
+		double gear_x = 0.0;
+		double gear_y = 0.0;
+		double gear_theta = 0.0;
 		if (visionData) {
 			double distance = Vision.getDistance();
 			double angle = Vision.getAngle() - 90;
@@ -330,9 +330,11 @@ public class Drive {
 			} else {
 				Logger.logError("Failed to determine the position of the robot from the logs.");
 			}
-			done = Drive.autonDrive(gear_x - Math.sin(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_y - Math.cos(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_theta, dT);
-			return done;
+			if (gear_x != 0.0 && gear_y != 0.0) {
+				done = Drive.autonDrive(gear_x - Math.sin(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_y - Math.cos(gear_theta) * (Constants.LENGTH_GEAR_PEG + Constants.ROBOT_LENGTH / 2), gear_theta, dT);
+			}
 		}
+		return done;
 	}
 	
 	public static void updateModel(double dT) {
