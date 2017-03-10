@@ -24,7 +24,7 @@ public class Teleop {
 	 */
 	public static void init(Robot r) {
 		r.init();
-		MotionProfiling.init(0.0, 0.0);
+		//MotionProfiling.init(0.0, 0.0); //In use only for testing!
 		Intake.hopperIntake();
 		updateSmartDashboard();
 		
