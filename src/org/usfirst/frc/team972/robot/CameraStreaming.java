@@ -28,7 +28,8 @@ public class CameraStreaming {
 
 	public static void periodic() {
 		useCam3 = Robot.operatorJoystick.getRawButton(Constants.HOPPER_CAM_BUTTON);
-		camTogglePressed = Robot.leftJoystick.getRawButton(Constants.INVERSE_DRIVE_TOGGLE_BUTTON);
+//		camTogglePressed = Robot.leftJoystick.getRawButton(Constants.JOYSTICK_INVERSE_DRIVE_TOGGLE_BUTTON);
+		camTogglePressed = Robot.gamepadJoystick.getRawButton(Constants.GAMEPAD_INVERSE_DRIVE_TOGGLE_BUTTON);
 		if (camTogglePressed && !pressedLastTime) {
 			useCam1 = !useCam1;
 		}

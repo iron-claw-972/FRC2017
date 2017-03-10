@@ -65,7 +65,7 @@ public class Autonomous {
 				break;
 			case MIDDLE_GEAR:
 				MotionProfiling.init(Constants.MIDDLE_GEAR_AUTO_STARTX, Constants.MIDDLE_GEAR_AUTO_STARTY);
-				Jetson.startGearVision();
+				Vision.startGearVision();
 			case TEST_7:
 				MotionProfiling.init(0.0, 0.0);
 				break;
