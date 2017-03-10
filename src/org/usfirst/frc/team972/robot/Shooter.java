@@ -290,7 +290,9 @@ public class Shooter {
 			linearActuator.setSpeed(-Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED); // negative is up
 		} else if (Robot.operatorJoystick.getRawButton(Constants.SHOOTER_HOOD_MANUAL_OVERRIDE_DOWN_BUTTON)) {
 			linearActuator.setSpeed(Constants.SHOOTER_FLYWHEEL_MOTOR_SPEED);
-		}	
+		} else {
+			linearActuator.setSpeed(0);
+		}
 	}
 	
 	public static void getAlignmentPIDFromJoystick() {
