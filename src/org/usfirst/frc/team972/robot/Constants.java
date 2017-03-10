@@ -147,5 +147,23 @@ public class Constants {
 	public static final double MIDDLE_GEAR_AUTO_Y = 2.105;
 	public static final double MIDDLE_GEAR_AUTO_THETA = 0.0;
 	
+	// Left Gear Auton defaults
+	public static final double LEFT_GEAR_AUTO_STARTX = 1.489;
+	public static final double LEFT_GEAR_AUTO_STARTY = 0.502;
+	public static final double LEFT_GEAR_AUTO_X = 1.489;
+	public static final double LEFT_GEAR_AUTO_Y = 1.774;
+	public static final double LEFT_GEAR_AUTO_FINAL_X = 2.521;
+	public static final double LEFT_GEAR_AUTO_FINAL_Y = 2.871;
+	public static final double LEFT_GEAR_AUTO_THETA = 60.0;
+	
+	// Right Gear Auton defaults
+	public static final double RIGHT_GEAR_AUTO_STARTX = 6.772;
+	public static final double RIGHT_GEAR_AUTO_STARTY = 0.502;
+	public static final double RIGHT_GEAR_AUTO_X = 6.772;
+	public static final double RIGHT_GEAR_AUTO_Y = 1.774;
+	public static final double RIGHT_GEAR_AUTO_FINAL_X = 5.702;
+	public static final double RIGHT_GEAR_AUTO_FINAL_Y = 2.871;
+	public static final double RIGHT_GEAR_AUTO_THETA = -60.0;
+	
 	public static final double IDEAL_SHOOTING_DISTANCE = 2.0; //TODO determine
 }
