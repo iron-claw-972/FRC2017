@@ -126,7 +126,7 @@ public class Constants {
 	public static final double SHOOTER_FLYWHEEL_MOTOR_SPEED = 30000.0;
 	public static final double SHOOTER_AZIMUTH_MOTOR_POSITION = 0.0;
 	public static final double SHOOTER_HOOD_POSITION = 0.7;
-  public static final double LOADER_MOTOR_SPEED = 0.5;
+	public static final double LOADER_MOTOR_SPEED = 0.5;
 	
 	// Do Nothing Auton defaults
 	public static final double DO_NOTHING_AUTO_STARTX = 4.112; //maybe make this able to be edited by the driver? TODO check
@@ -145,4 +145,6 @@ public class Constants {
 	public static final double MIDDLE_GEAR_AUTO_X = 4.112;
 	public static final double MIDDLE_GEAR_AUTO_Y = 2.105;
 	public static final double MIDDLE_GEAR_AUTO_THETA = 0.0;
+	
+	public static final double IDEAL_SHOOTING_DISTANCE = 2.0; //TODO determine
 }

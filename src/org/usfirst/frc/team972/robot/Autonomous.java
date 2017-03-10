@@ -35,6 +35,7 @@ public class Autonomous {
 		autoChooser.addObject("Cross Baseline", AutonomousRoutine.CROSS_BASELINE);
 		autoChooser.addObject("Middle Gear", AutonomousRoutine.MIDDLE_GEAR);
 		autoChooser.addObject("Test 7 - Move back and forward continuously", AutonomousRoutine.TEST_7);
+		autoChooser.addObject("Test 0 - Hopefully move in a straight line", AutonomousRoutine.TEST_0);
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 	}
 	
@@ -57,8 +58,11 @@ public class Autonomous {
 				break;
 			case MIDDLE_GEAR:
 				MotionProfiling.init(Constants.MIDDLE_GEAR_AUTO_STARTX, Constants.MIDDLE_GEAR_AUTO_STARTY);
-				Jetson.startGearVision();
+				Vision.startGearVision();
 			case TEST_7:
+				MotionProfiling.init(0.0, 0.0);
+				break;
+			case TEST_0:
 				MotionProfiling.init(0.0, 0.0);
 				break;
 		}
@@ -124,6 +128,9 @@ public class Autonomous {
 					auton7step1done = false;
 					auton7step2done = false;
 				}
+				break;
+			case TEST_0:
+				Drive.autonDrive(0.0, 2.5, 0, loopTime);
 				break;
 		}
 		Drive.updateModel(loopTime);
