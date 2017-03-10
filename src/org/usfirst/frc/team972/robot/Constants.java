@@ -32,16 +32,16 @@ public class Constants {
 	public static final int PDP_CAN_ID = 20;
 	 
 	// Motor IDs
-	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 10; // 1
+	public static final int FRONT_LEFT_DRIVE_MOTOR_CAN_ID = 1;
 	public static final int FRONT_RIGHT_DRIVE_MOTOR_CAN_ID = 3;
 	public static final int BACK_LEFT_DRIVE_MOTOR_CAN_ID = 2;
 	public static final int BACK_RIGHT_DRIVE_MOTOR_CAN_ID = 4;
-	public static final int WINCH_MOTOR_CAN_ID = 8; // TODO: Revert to 5 for real robot
-	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 1; // TODO: Revert to 6 for real robot
-	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 15; // TODO: Revert to 7
+	public static final int WINCH_MOTOR_CAN_ID = 5;
+	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 6; 
+	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 7;
 	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 6;
 	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 9;
-	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 7; // 15
+	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 15;
 	public static final int RIGHT_AZIMUTH_MOTOR_CAN_ID = 11;
 	public static final int INTAKE_MOTOR_CAN_ID = 12;
 	public static final int LEFT_LOADER_MOTOR_CAN_ID = 13;
