@@ -31,6 +31,9 @@ public class Robot extends IterativeRobot {
 	
 	static Servo leftHoodLinearActuator = new Servo(Constants.LEFT_HOOD_LINEAR_ACTUATOR_PWM_PORT);
 	static Servo rightHoodLinearActuator = new Servo(Constants.RIGHT_HOOD_LINEAR_ACTUATOR_PWM_PORT);
+	
+	LED leftLed = new LED(LEFT_RED_LED_PWM_PORT, LEFT_GREEN_LED_PWM_PORT, LEFT_BLUE_LED_PWM_PORT);
+	LED rightLed = new LED(RIGHT_RED_LED_PWM_PORT, RIGHT_GREEN_LED_PWM_PORT, RIGHT_BLUE_LED_PWM_PORT);
 
 	static Joystick leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_INPUT_USB_PORT);
 	static Joystick rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_INPUT_USB_PORT);
