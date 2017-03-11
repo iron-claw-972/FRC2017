@@ -80,7 +80,7 @@ public class Teleop {
 		Shooter.align();
 		Winch.manage();
 		
-		if (Robot.leftJoystick(Constants.GEAR_ALIGN_BUTTON)) {
+		if (Robot.gamepadJoystick.getRawButton(Constants.GAMEPAD_GEAR_ALIGN_BUTTON)) {
 			gearAlign = true;
 		}
 		
