@@ -45,10 +45,10 @@ public class Constants {
 	public static final int WINCH_MOTOR_CAN_ID = 5;
 	public static final int LEFT_SHOOTER_MOTOR_A_CAN_ID = 6; 
 	public static final int LEFT_SHOOTER_MOTOR_B_CAN_ID = 7;
-	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 6;
-	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 9;
+	public static final int RIGHT_SHOOTER_MOTOR_A_CAN_ID = 8; // NOT USING
+	public static final int RIGHT_SHOOTER_MOTOR_B_CAN_ID = 9; // NOT USING
 	public static final int LEFT_AZIMUTH_MOTOR_CAN_ID = 10; // was 15
-	public static final int RIGHT_AZIMUTH_MOTOR_CAN_ID = 11;
+	public static final int RIGHT_AZIMUTH_MOTOR_CAN_ID = 11; // NOT USING
 	public static final int INTAKE_MOTOR_CAN_ID = 12;
 	public static final int LEFT_LOADER_MOTOR_CAN_ID = 13;
 	public static final int RIGHT_LOADER_MOTOR_CAN_ID = 14;
