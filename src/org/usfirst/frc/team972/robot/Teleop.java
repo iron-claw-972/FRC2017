@@ -75,7 +75,7 @@ public class Teleop {
 		Robot.backLeftDriveMotor.EnableCurrentLimit(true);
 		Robot.backRightDriveMotor.EnableCurrentLimit(true);
 		
-		Intake.manage();
+//		Intake.manage();
 		Shooter.shoot();
 		Shooter.align();
 		Winch.manage();
@@ -99,7 +99,7 @@ public class Teleop {
 		Drive.updateSmartDashboard();
 		Shooter.updateSmartDashboard();
 		Winch.updateSmartDashboard();
-		Intake.updateSmartDashboard();
+//		Intake.updateSmartDashboard();
 		MotionProfiling.updateSmartDashboard();
 		Time.updateSmartDashboard();
 	}

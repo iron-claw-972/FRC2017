@@ -198,7 +198,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Shooter.stopAlign();
 		Shooter.stopShooter();
-		Intake.stop();
+//		Intake.stop();
 		Winch.stop();
 		
 		frontLeftDriveMotor.changeControlMode(TalonControlMode.PercentVbus);

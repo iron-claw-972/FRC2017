@@ -24,7 +24,7 @@ public class Winch {
 		} else {
 			Winch.stop();
 		}
-		winchButtonPressedLastTime = winchMotorButton;
+//		winchButtonPressedLastTime = winchMotorButton;
 	}
 
 	/**
